@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-06-26T19:22:39.211Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" etag="vfMTE2RCHfNbKgJDXLq_" version="21.3.4" type="device">
+<mxfile host="app.diagrams.net" modified="2023-06-26T19:58:33.362Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" etag="evASJ36s35c7cUNqjCGD" version="21.3.4" type="device">
   <diagram name="Page-1" id="XJ1ZkM-qjGJ42IzvbAsi">
     <mxGraphModel dx="936" dy="547" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -7,7 +7,7 @@
         <mxCell id="8MtfA58x22x18pHc_ZFs-1" value="&lt;span id=&quot;docs-internal-guid-e8bd23b9-7fff-a295-cead-702f7f2e3db3&quot;&gt;&lt;/span&gt;&lt;span id=&quot;docs-internal-guid-e8bd23b9-7fff-a295-cead-702f7f2e3db3&quot;&gt;&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="220" y="40" width="20" height="10" as="geometry" />
         </mxCell>
-        <mxCell id="8MtfA58x22x18pHc_ZFs-10" value="App User&lt;br&gt;&lt;br&gt;app_user_id(pk)&lt;br&gt;&lt;div style=&quot;&quot;&gt;email&lt;/div&gt;&lt;div style=&quot;&quot;&gt;password&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;div&gt;first_name&lt;/div&gt;&lt;div&gt;last_name&lt;/div&gt;&lt;div&gt;gamer_tag&lt;/div&gt;&lt;div&gt;preferences&lt;/div&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;birth_date&lt;/div&gt;&lt;div style=&quot;&quot;&gt;bio&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+        <mxCell id="8MtfA58x22x18pHc_ZFs-10" value="App User&lt;br&gt;&lt;br&gt;app_user_id(pk)&lt;br&gt;preferences_id(fk)&lt;br&gt;&lt;div style=&quot;&quot;&gt;email&lt;/div&gt;&lt;div style=&quot;&quot;&gt;password&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;div&gt;first_name&lt;/div&gt;&lt;div&gt;last_name&lt;/div&gt;&lt;div&gt;gamer_tag&lt;/div&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;birth_date&lt;/div&gt;&lt;div style=&quot;&quot;&gt;bio&lt;/div&gt;&lt;div style=&quot;&quot;&gt;enabled&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
           <mxGeometry x="240" y="50" width="160" height="190" as="geometry" />
         </mxCell>
         <mxCell id="8MtfA58x22x18pHc_ZFs-12" value="Games&lt;br&gt;&lt;br&gt;games_id(pk)&lt;br&gt;game_title" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
@@ -25,16 +25,16 @@
             <mxPoint x="240" y="180" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="8MtfA58x22x18pHc_ZFs-38" value="App Roles&lt;br&gt;&lt;br&gt;app_role_id(pk)&lt;br&gt;app_user_id(fk)&lt;br&gt;user" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="8MtfA58x22x18pHc_ZFs-38" value="App Role&lt;br&gt;&lt;br&gt;app_role_id(pk)&lt;br&gt;role_name" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="10" y="280" width="160" height="120" as="geometry" />
         </mxCell>
-        <mxCell id="8MtfA58x22x18pHc_ZFs-39" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERoneToMany;rounded=0;" edge="1" parent="1">
+        <mxCell id="8MtfA58x22x18pHc_ZFs-39" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERoneToMany;rounded=0;" edge="1" parent="1" target="8MtfA58x22x18pHc_ZFs-46">
           <mxGeometry width="100" height="100" relative="1" as="geometry">
             <mxPoint x="170" y="360" as="sourcePoint" />
             <mxPoint x="240" y="220" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="8MtfA58x22x18pHc_ZFs-40" value="Posting&lt;br&gt;&lt;br&gt;posting_id(pk)&lt;br&gt;app_user_id(fk)&lt;br&gt;games_id(pk)&lt;br&gt;discription" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="8MtfA58x22x18pHc_ZFs-40" value="Posting&lt;br&gt;&lt;br&gt;posting_id(pk)&lt;br&gt;app_user_id(fk)&lt;br&gt;games_id(pk)&lt;br&gt;header&lt;br&gt;discription" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="660" y="300" width="160" height="120" as="geometry" />
         </mxCell>
         <mxCell id="8MtfA58x22x18pHc_ZFs-41" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERoneToMany;rounded=0;exitX=0.25;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="8MtfA58x22x18pHc_ZFs-12">
@@ -59,6 +59,24 @@
           <mxGeometry width="100" height="100" relative="1" as="geometry">
             <mxPoint x="650" y="195" as="sourcePoint" />
             <mxPoint x="550" y="95" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8MtfA58x22x18pHc_ZFs-46" value="App User Role&lt;br&gt;app_user_id(fk)&lt;br&gt;app_role_id(fk)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="300" width="160" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="8MtfA58x22x18pHc_ZFs-47" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERoneToMany;rounded=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;exitX=0.25;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="8MtfA58x22x18pHc_ZFs-10" target="8MtfA58x22x18pHc_ZFs-46">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="210" y="240" as="sourcePoint" />
+            <mxPoint x="40" y="231" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8MtfA58x22x18pHc_ZFs-48" value="Preferences&lt;br&gt;&lt;br&gt;preferences_id(pk)&lt;br&gt;preferences_name" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="460" width="160" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="8MtfA58x22x18pHc_ZFs-49" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERmandOne;startArrow=ERmandOne;rounded=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="1" target="8MtfA58x22x18pHc_ZFs-48">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="400" y="120" as="sourcePoint" />
+            <mxPoint x="453" y="31" as="targetPoint" />
           </mxGeometry>
         </mxCell>
       </root>
