@@ -27,18 +27,13 @@ We all had an interest in gaming and we thought the idea of a gaming partner / g
 ## Set Up
 * Create detailed schema diagram with tables and their relationships
     * Tables:
-        * Gamer
-        * Game
-        * Matches
-        * YouLiked
-        * LikedYou
-        * User (Security)
-        * Role (Security)
+        * game
+        * matches
+        * app_user (Security)
+        * app_role (Security)
     * Relationships:
-        * Gamer-Game = Many-Many
-        * Gamer-Match = One-Many
-        * Gamer-YouLiked = One-Many
-        * Gamer-LikedYou = One-Many
+        * app_user-game = Many-Many
+        * app_user-match = One-Many
 * Create file tree diagram with classes and methods that we might need
 * Create Maven Project and set up pom.xml
 * Create basic packages following 3-layer architecture
@@ -47,17 +42,90 @@ We all had an interest in gaming and we thought the idea of a gaming partner / g
 ## Database
 ### MySQL
 * Create database and tables for Production and Test
+
+    * app_user 
+        * pk app_user_id (int)
+        * email (varchar)
+        * password_hash (varchar)
+        * enabled (boolean)
+
+        * first_name (varchar)
+        * last_name (varchar)
+        * gamer_tag (varchar)
+        * bio (varchar)
+        * birthday (date)
+        * fk preference_id (int)
+
+    * preference
+        * pk preference_id (int)
+        * preference_name (varchar)
+
+    * app_role
+        * pk app_role_id (int)
+        * role_name (varchar)
+
+    * app_user_role
+        * fk app_user_id (int)
+        * fk app_role_id (int)
+
+    * games
+        * pk games_id (int)
+        * game_title (varchar)
+    
+    * app_user_games
+        * fk_app_user_id (int)
+        * fk_games_id (int)
+
+    * matches
+        * pk matches_id (int)
+        * fk app_user_id alias user1 (int)
+        * fk app_user_id alias user2 (int)
+            * (note: not sure if it will work... needs some trial and error)
+        * matchTime (datetime)
+
+    * posting
+        * pk posting_id (int)
+        * fk app_user_id (int)
+        * fk games_id (int)
+        * header (varchar) 
+            * null-able
+        * description (varchar)
+    
 * (optional?) Create queries to test tables
 
 ### IntelliJ
 * Create Models and Enums
-    * Gamer 
-        * Fields: String firstName, String lastName, LocalDate birthDate, GameCategory favoriteGameCategory, Game<> favoriteGames 
-    * GameCategory (Enum)
+    * AppUser 
+        * int AppUserId 
+        * String email
+        * String password
+        * boolean enabled
+        * String firstName
+        * String lastName
+        * String gamerTag
+        * LocalDate birthday
+        * Preference gender
+        * Preference preference
+    * Preference (enum)
+        * MALE
+        * FEMALE
+        * OTHER
+        * ANY
     * Game 
-        * Fields: gameTitle
+        * int gameId
+        * String gameTitle
     * Match
-        * Fields: 
+        * int matchId
+        * int appUserId1
+        * int appUserId2
+        * LocalDateTime matchTime
+    * Posting
+        * int postingId
+        * String header
+        * String description
+
+* Create CRUD methods for data (jdbc template repository)
+    * 
 
 ### React 
 * Use npm to create react app
@@ -67,3 +135,11 @@ We all had an interest in gaming and we thought the idea of a gaming partner / g
 * figure out how to have a search bar that autofills with games from a game API so that game names are consistent when added to list of favorite games
 * figure out if BotPress works for our purposes
 * look into GreenSocks documentation
+* look into how to handle matches table and if having two foreign keys from the same table, but with an alias, will work
+
+## Stretch Goals
+* favorite game genres in app_user
+* game console field in app_user
+
+
+
