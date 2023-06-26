@@ -49,12 +49,14 @@ We all had an interest in gaming and we thought the idea of a gaming partner / g
         * password_hash (varchar)
         * enabled (boolean)
 
-        * first_name (varchar)
-        * last_name (varchar)
+            * first_name (varchar)
+            * last_name (varchar)
+                * (might remove these two since the app is moving away from the dating aspect) 
         * gamer_tag (varchar)
         * bio (varchar)
         * birthday (date)
         * fk preference_id (int)
+            * (might simplify preference into just the user's gender)
 
     * preference
         * pk preference_id (int)
@@ -100,8 +102,9 @@ We all had an interest in gaming and we thought the idea of a gaming partner / g
         * String email
         * String password
         * boolean enabled
-        * String firstName
-        * String lastName
+            * String firstName
+            * String lastName
+                * (might remove these two since the app is moving away from the dating aspect) 
         * String gamerTag
         * LocalDate birthday
         * Preference gender
@@ -109,8 +112,9 @@ We all had an interest in gaming and we thought the idea of a gaming partner / g
     * Preference (enum)
         * MALE
         * FEMALE
+        * NONBINARY
         * OTHER
-        * ANY
+        * PREFER_NOT_TO_SAY
     * Game 
         * int gameId
         * String gameTitle
@@ -124,7 +128,50 @@ We all had an interest in gaming and we thought the idea of a gaming partner / g
         * String header
         * String description
 
-* Create CRUD methods for data (jdbc template repository)
+* REFERENCE PACKAGE
+    * add application properties file (double check name?) for environmental variables
+
+* DATA LAYER:
+    * Create repositories (jdbc template repository) and interfaces
+    * Add custom DataAccessException class
+        * (check to see if necessary?)
+    * Create mappers for AppUser, Game, Posting, Match
+    * Create CRUD methods in repositories 
+        * AppUserJdbcTemplateRepository
+            * findAll
+            * findByUsername
+            * add
+            * delete
+            * update
+        * Game (we're pulling game titles from an API)
+            * findAll
+            * findByGameTitle
+            * add
+            * delete
+        * Posting
+            * findAll
+            * findByGameTitle
+            * add
+            * update
+            * delete
+        * Match
+            * findAll
+            * findById
+            * add
+            * delete
+    * Create data tests for each repository and test CRUD methods along the way
+* DOMAIN LAYER
+    * Add Validation API  
+    * Create Result class with generic type and a ResultType enum
+    * Create Service classes for AppUser, Game, Posting, Match
+    * Create service tests and test methods as you go
+        * utilize the Validation API
+    * (In a Controllers package)
+        * create Controllers 
+
+
+* SECURITY PACKAGE
+    * AuthController in Controllers package
     * 
 
 ### React 
