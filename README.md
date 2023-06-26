@@ -42,6 +42,7 @@ We all had an interest in gaming and we thought the idea of a gaming partner / g
 * Create file tree diagram with classes and methods that we might need
 * Create Maven Project and set up pom.xml
 * Create basic packages following 3-layer architecture
+* Determine components needed for React app on client side
 
 ## Database
 ### MySQL
@@ -51,9 +52,18 @@ We all had an interest in gaming and we thought the idea of a gaming partner / g
 ### IntelliJ
 * Create Models and Enums
     * Gamer 
+        * Fields: String firstName, String lastName, LocalDate birthDate, GameCategory favoriteGameCategory, Game<> favoriteGames 
     * GameCategory (Enum)
-    * 
+    * Game 
+        * Fields: gameTitle
+    * Match
+        * Fields: 
 
 ### React 
 * Use npm to create react app
 * 
+
+## Research Needed
+* figure out how to have a search bar that autofills with games from a game API so that game names are consistent when added to list of favorite games
+* figure out if BotPress works for our purposes
+* look into GreenSocks documentation
