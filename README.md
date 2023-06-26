@@ -2,6 +2,10 @@
 
 # Group 6 - Maria, Jackie, Jay
 
+## NOTE:
+* wireframe PDFs might be cut off in the GitHub preview, so please download them to see the full size
+
+
 Project Name (Candidates): 
 * P2 (pronounced "Player 2")
 * Party Up
@@ -141,6 +145,8 @@ We all had an interest in gaming and we thought the idea of a gaming partner / g
         * AppUserJdbcTemplateRepository (2-3 hours)
             * findAll
             * findByUsername
+            * findByGameTitle
+                * (maybe? in case you want to search for people with the same favorite games as you) 
             * add
             * delete
             * update
@@ -161,27 +167,66 @@ We all had an interest in gaming and we thought the idea of a gaming partner / g
             * add
             * delete
     * Create data tests for each repository and test CRUD methods along the way
+
 * DOMAIN LAYER
     * Add Validation API (2-3 hours)
     * Create Result class with generic type and a ResultType enum (1-2 hours)
     * Create Service classes for AppUser, Game, Posting, Match (2-3 hours)
     * Create service tests and test methods as you go (2-3 hours)
         * utilize the Validation API (2-3 hours)
-    * (In a Controllers package)
-        * create Controllers (2-3 hours)
 
+* CONTROLLERS PACKAGE
+    * create Controllers (2-3 hours)
+    * ErrorResponse enum
+    * GlobalExceptionHandler
 
 * SECURITY PACKAGE (3-4 hours)
-    * AuthController in Controllers package
-    * AppUserService
+    * AuthController in controllers package
+    * AppUser 
+        * (should already exist in models package)
+    * AppUserService 
+        * (should already exist in domain package)
     * JwtConverter
     * JwtRequestFilter
     * SecurityConfig
     * AppConfig outside of securities package
 
 ### React 
-* Use npm to create react app
-* 
+* Use npm to create react app/install node modules (30 min)
+* Install react-router-dom@6 in preparation for client based routing 
+* Remove extra stuff in react app except for:
+    * index.html
+    * index.js
+    * index.css
+    * App.js
+* Create basic UI components: (1-2 hours)
+    * Home
+    * About
+    * Contact
+    * NavBar
+    * Not Found
+    * Error
+    * Confirmation / Success
+* Create specific components for our app: (2-3 hours)
+    * UserProfile
+        * (loads any user's information, including user currently logged in. perhaps the UI could be more shiny to distinguish "you" and other users)
+    * EditProfile
+        * (only available for your own profile)
+        * (a form that lets you edit and delete YOUR user info)
+    * GamerList 
+        * (list of users, can sort by games maybe)
+    * Postings
+        * (list of postings)
+        * (if logged in, can make a posting, edit your own postings, and delete your own postings)
+    * Login
+        * (form for authentiacting user)
+    * Register
+        * (form to create a new user)
+    * AuthContext 
+        * (for useContext later...)
+* Update App.js with client-based routing (30 min)
+* Update index.css with basic page styling
+    * link to necessary CSS framework (Bootstrap?) if needed 
 
 ## Research Needed
 * figure out how to have a search bar that autofills with games from a game API so that game names are consistent when added to list of favorite games
@@ -191,7 +236,9 @@ We all had an interest in gaming and we thought the idea of a gaming partner / g
 
 ## Stretch Goals
 * favorite game genres in app_user
+    * so we might have an option to sort by mutual favorite game genres
 * game console field in app_user
+    * so we might have an option to sort by mutual game consoles
 
 
 
