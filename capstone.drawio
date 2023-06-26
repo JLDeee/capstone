@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-06-26T16:43:10.896Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" etag="J4UARtulpqfJxBRfCRd8" version="21.3.4" type="device">
+<mxfile host="app.diagrams.net" modified="2023-06-26T18:16:37.025Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" etag="-s8N7znltGmQFraKvuZl" version="21.3.4" type="device">
   <diagram name="Page-1" id="XJ1ZkM-qjGJ42IzvbAsi">
     <mxGraphModel dx="936" dy="483" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -10,16 +10,16 @@
         <mxCell id="8MtfA58x22x18pHc_ZFs-9" value="gamer, games? (handled by api), matches, liked you, liked me, user," style="text;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry width="360" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="8MtfA58x22x18pHc_ZFs-10" value="User&lt;br&gt;&lt;br&gt;userId(pk)&lt;br&gt;&lt;div style=&quot;&quot;&gt;email&lt;/div&gt;&lt;div style=&quot;&quot;&gt;password&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+        <mxCell id="8MtfA58x22x18pHc_ZFs-10" value="User&lt;br&gt;&lt;br&gt;user_id(pk)&lt;br&gt;&lt;div style=&quot;&quot;&gt;email&lt;/div&gt;&lt;div style=&quot;&quot;&gt;password&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
           <mxGeometry x="40" y="120" width="160" height="120" as="geometry" />
         </mxCell>
-        <mxCell id="8MtfA58x22x18pHc_ZFs-11" value="Gamer&lt;br&gt;gamerId(pk)&lt;br&gt;userId(fk)&lt;br&gt;firstName&lt;br&gt;lastName&lt;br&gt;gamerTag&lt;br&gt;birthDate&lt;br&gt;genres" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="240" y="120" width="160" height="120" as="geometry" />
+        <mxCell id="8MtfA58x22x18pHc_ZFs-11" value="Gamer&lt;br&gt;gamer_id(pk)&lt;br&gt;user_id(fk)&lt;br&gt;firstName&lt;br&gt;lastName&lt;br&gt;gamerTag&lt;br&gt;birthDate&lt;br&gt;genres&lt;br&gt;friend_romance&lt;br&gt;preferences" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="70" width="160" height="170" as="geometry" />
         </mxCell>
-        <mxCell id="8MtfA58x22x18pHc_ZFs-12" value="Games&lt;br&gt;gamesId(pk)&lt;br&gt;games" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="8MtfA58x22x18pHc_ZFs-12" value="Games&lt;br&gt;games_id(pk)&lt;br&gt;games" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="680" y="120" width="160" height="120" as="geometry" />
         </mxCell>
-        <mxCell id="8MtfA58x22x18pHc_ZFs-13" value="gamerGames&lt;br&gt;gamerId(fk)&lt;br&gt;gamesId(fk)&lt;br&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="8MtfA58x22x18pHc_ZFs-13" value="gamerGames&lt;br&gt;gamer_id(fk)&lt;br&gt;games_id(fk)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="460" y="120" width="160" height="120" as="geometry" />
         </mxCell>
         <mxCell id="8MtfA58x22x18pHc_ZFs-19" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERmany;startArrow=ERmany;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="1" source="8MtfA58x22x18pHc_ZFs-11" target="8MtfA58x22x18pHc_ZFs-13">
@@ -37,10 +37,10 @@
         <mxCell id="8MtfA58x22x18pHc_ZFs-21" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERmandOne;startArrow=ERmandOne;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="8MtfA58x22x18pHc_ZFs-10">
           <mxGeometry width="100" height="100" relative="1" as="geometry">
             <mxPoint x="290" y="380" as="sourcePoint" />
-            <mxPoint x="250" y="180" as="targetPoint" />
+            <mxPoint x="240" y="180" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="8MtfA58x22x18pHc_ZFs-27" value="You Liked&lt;br&gt;youLikedId(pk)&lt;br&gt;gamerId(fk)&lt;br&gt;youLiked" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="8MtfA58x22x18pHc_ZFs-27" value="You Liked&lt;br&gt;you_liked_id(pk)&lt;br&gt;gamer_id(fk)&lt;br&gt;you_liked" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="120" y="320" width="160" height="120" as="geometry" />
         </mxCell>
         <mxCell id="8MtfA58x22x18pHc_ZFs-28" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERoneToMany;rounded=0;" edge="1" parent="1">
@@ -49,7 +49,7 @@
             <mxPoint x="120" y="360" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="8MtfA58x22x18pHc_ZFs-29" value="Liked You&lt;br&gt;likedYouId(pk)&lt;br&gt;gamerId(fk)&lt;br&gt;likedYou" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="8MtfA58x22x18pHc_ZFs-29" value="Liked You&lt;br&gt;liked_you_id(pk)&lt;br&gt;gamer_id(fk)&lt;br&gt;liked_you" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="360" y="280" width="160" height="120" as="geometry" />
         </mxCell>
         <mxCell id="8MtfA58x22x18pHc_ZFs-32" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERoneToMany;rounded=0;entryX=-0.008;entryY=0.33;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="8MtfA58x22x18pHc_ZFs-11" target="8MtfA58x22x18pHc_ZFs-29">
