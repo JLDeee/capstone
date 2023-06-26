@@ -7,6 +7,7 @@ Project Name (Candidates):
 * Party Up
 * Link
 * Splitscreen
+* GG - Gamer's Guild
 
 Team Name (Candidates): 
 * Gamers to Lovers
@@ -43,7 +44,7 @@ We all had an interest in gaming and we thought the idea of a gaming partner / g
 ### MySQL
 * Create database and tables for Production and Test
 
-    * app_user 
+    * app_user (2-3 hours)
         * pk app_user_id (int)
         * email (varchar)
         * password_hash (varchar)
@@ -58,34 +59,34 @@ We all had an interest in gaming and we thought the idea of a gaming partner / g
         * fk preference_id (int)
             * (might simplify preference into just the user's gender)
 
-    * preference
+    * preference (1 hour)
         * pk preference_id (int)
         * preference_name (varchar)
 
-    * app_role
+    * app_role (1 hour)
         * pk app_role_id (int)
         * role_name (varchar)
 
-    * app_user_role
+    * app_user_role (1 hour)
         * fk app_user_id (int)
         * fk app_role_id (int)
 
-    * games
+    * games (1 hour)
         * pk games_id (int)
         * game_title (varchar)
     
-    * app_user_games
+    * app_user_games (1 hour)
         * fk_app_user_id (int)
         * fk_games_id (int)
 
-    * matches
+    * matches (1-2 hours)
         * pk matches_id (int)
         * fk app_user_id alias user1 (int)
         * fk app_user_id alias user2 (int)
             * (note: not sure if it will work... needs some trial and error)
         * matchTime (datetime)
 
-    * posting
+    * posting (1-2 hours)
         * pk posting_id (int)
         * fk app_user_id (int)
         * fk games_id (int)
@@ -93,11 +94,11 @@ We all had an interest in gaming and we thought the idea of a gaming partner / g
             * null-able
         * description (varchar)
     
-* (optional?) Create queries to test tables
+* (optional?) Create queries to test tables (1-2 hours)
 
 ### IntelliJ
 * Create Models and Enums
-    * AppUser 
+    * AppUser (2-3 hours)
         * int AppUserId 
         * String email
         * String password
@@ -109,21 +110,21 @@ We all had an interest in gaming and we thought the idea of a gaming partner / g
         * LocalDate birthday
         * Preference gender
         * Preference preference
-    * Preference (enum)
+    * Preference (enum) (1 hour)
         * MALE
         * FEMALE
         * NONBINARY
         * OTHER
         * PREFER_NOT_TO_SAY
-    * Game 
+    * Game (1 hour)
         * int gameId
         * String gameTitle
-    * Match
+    * Match (1-2 hours)
         * int matchId
         * int appUserId1
         * int appUserId2
         * LocalDateTime matchTime
-    * Posting
+    * Posting (1-2 hours)
         * int postingId
         * String header
         * String description
@@ -137,42 +138,46 @@ We all had an interest in gaming and we thought the idea of a gaming partner / g
         * (check to see if necessary?)
     * Create mappers for AppUser, Game, Posting, Match
     * Create CRUD methods in repositories 
-        * AppUserJdbcTemplateRepository
+        * AppUserJdbcTemplateRepository (2-3 hours)
             * findAll
             * findByUsername
             * add
             * delete
             * update
-        * Game (we're pulling game titles from an API)
+        * Game (we're pulling game titles from an API) (2-3 hours)
             * findAll
             * findByGameTitle
             * add
             * delete
-        * Posting
+        * Posting (2-3 hours)
             * findAll
             * findByGameTitle
             * add
             * update
             * delete
-        * Match
+        * Match (2-3 hours)
             * findAll
             * findById
             * add
             * delete
     * Create data tests for each repository and test CRUD methods along the way
 * DOMAIN LAYER
-    * Add Validation API  
-    * Create Result class with generic type and a ResultType enum
-    * Create Service classes for AppUser, Game, Posting, Match
-    * Create service tests and test methods as you go
-        * utilize the Validation API
+    * Add Validation API (2-3 hours)
+    * Create Result class with generic type and a ResultType enum (1-2 hours)
+    * Create Service classes for AppUser, Game, Posting, Match (2-3 hours)
+    * Create service tests and test methods as you go (2-3 hours)
+        * utilize the Validation API (2-3 hours)
     * (In a Controllers package)
-        * create Controllers 
+        * create Controllers (2-3 hours)
 
 
-* SECURITY PACKAGE
+* SECURITY PACKAGE (3-4 hours)
     * AuthController in Controllers package
-    * 
+    * AppUserService
+    * JwtConverter
+    * JwtRequestFilter
+    * SecurityConfig
+    * AppConfig outside of securities package
 
 ### React 
 * Use npm to create react app
