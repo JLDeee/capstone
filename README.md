@@ -16,4 +16,4 @@ Brief Summary: Game partner finding / dating app. Based on Bumble’s model, you
 
 Why we chose this topic: We all had an interest in gaming and we thought the idea of a gaming partner / gaming oriented dating app would be a fun idea. The app would specifically cater towards gamers and allow for gamers from any platform to be able to connect and interact, whether it be just for finding a gaming friend or a romantic partner. 
 
-New Technology: Maybe GreenSock for fun animations. 
+New Technology: GreenSock for fun animations and chatbot api to simulate talking to someone you've matched with. 
