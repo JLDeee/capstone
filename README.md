@@ -114,7 +114,7 @@ We all had an interest in gaming and we thought the idea of a gaming partner / g
         * LocalDate birthday
         * Preference gender
         * Preference preference
-    * Preference (enum) (1 hour)
+    * Gender (enum) (1 hour)
         * MALE
         * FEMALE
         * NONBINARY
@@ -213,11 +213,13 @@ We all had an interest in gaming and we thought the idea of a gaming partner / g
     * EditProfile
         * (only available for your own profile)
         * (a form that lets you edit and delete YOUR user info)
-    * GamerList 
+    * UserList 
         * (list of users, can sort by games maybe)
     * Postings
         * (list of postings)
         * (if logged in, can make a posting, edit your own postings, and delete your own postings)
+    * MakePosting
+        * (form to add a posting if logged in)
     * Login
         * (form for authentiacting user)
     * Register
@@ -240,5 +242,86 @@ We all had an interest in gaming and we thought the idea of a gaming partner / g
 * game console field in app_user
     * so we might have an option to sort by mutual game consoles
 
+# Class Tree
+```
+gamer
+├───client
+│   └───gamer-client (our react app)
+│   │   ├───public
+│   │   │   └───index.html
+│   │   ├───src
+│   │   │   ├───App.js
+│   │   │   ├───index.css
+│   │   │   ├───index.js
+│   │   │   ├───UserProfile.js
+│   │   │   ├───EditProfile.js
+│   │   │   ├───UserList.js
+│   │   │   ├───Postings.js
+│   │   │   ├───MakePosting.js
+│   │   │   ├───components
+│   │   │   │   ├───Home.js
+│   │   │   │   ├───About.js
+│   │   │   │   ├───Contact.js
+│   │   │   │   ├───NavBar.js
+│   │   │   │   ├───NotFound.js
+│   │   │   │   ├───Error.js
+│   │   │   │   ├───Success.js
+│   │   │   │   ├───Login.js
+│   │   │   │   └───Register.js
+│   │   │   └───context
+│   │   │       └───AuthContext.js
+│   │   └───node_modules
+├───server
+│   ├───database
+│   │   ├───production.sql
+│   │   ├───test.sql
+│   │   └───queries.sql
+│   └───src
+│       ├───main
+│       │   ├───java
+│       │   │   └───learn
+│       │   │       └───gamer
+│       │   │           ├───controllers
+│       │   │           ├───data
+│       │   │           │   ├───mappers
+│       │   │           │   │   ├───AppUserMapper.java
+│       │   │           │   │   ├───PostingMapper.java
+│       │   │           │   │   ├───GameMapper.java
+│       │   │           │   │   └───MatchMapper.java
+│       │   │           │   ├───DataAccessException.java
+│       │   │           │   ├───AppUserJdbcTemplateRepository.java
+│       │   │           │   ├───AppUserJdbcRepository.java (interface)
+│       │   │           │   ├───PostingJdbcTemplateRepository.java
+│       │   │           │   ├───PostingRepository.java (interface)
+│       │   │           │   ├───GameRJdbcTemplateepository.java
+│       │   │           │   ├───GameRepository.java (interface)
+│       │   │           │   ├───MatchJdbcTemplateRepository.java
+│       │   │           │   └───MatchRepository.java (interface)
+│       │   │           ├───domain
+│       │   │           │   ├───Result.java
+│       │   │           │   ├───ResultType.java (enum)
+│       │   │           │   ├───PostingService.java
+│       │   │           │   ├───GameService.java
+│       │   │           │   └───MatchService.java
+│       │   │           ├───models
+│       │   │           │   ├───AppUser.java
+│       │   │           │   ├───Game.java
+│       │   │           │   ├───Gender.java (enum)
+│       │   │           │   ├───Match.java
+│       │   │           │   └───Posting.java
+│       │   │           ├───security
+│       │   │           │   ├───AppUserService.java
+│       │   │           │   ├───JwtConverter.java
+│       │   │           │   ├───JwtRequestFilter.java
+│       │   │           │   └───SecurityConfig.java
+│       │   │           ├───App.jav
+│       │   │           └───AppConfig.java
+│       │   └───resources
+│       │       └───application.properties
+│       └───test
+│           ├───java
+│           │   └─── (insert tests here...)
+│           └───resources
+│               └───application.properties
 
-
+```
