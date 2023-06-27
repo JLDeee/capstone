@@ -6,16 +6,16 @@ public class Match {
     private int matchId;
     private AppUser appUser1;
     private AppUser appUser2;
-    private LocalDate matchTime;
+    private LocalDate dateMatched;
 
     public Match() {
     }
 
-    public Match(int matchId, AppUser appUser1, AppUser appUser2, LocalDate matchTime) {
+    public Match(int matchId, AppUser appUser1, AppUser appUser2, LocalDate dateMatched) {
         this.matchId = matchId;
         this.appUser1 = appUser1;
         this.appUser2 = appUser2;
-        this.matchTime = matchTime;
+        this.dateMatched = dateMatched;
     }
 
     public int getMatchId() {
@@ -42,11 +42,11 @@ public class Match {
         this.appUser2 = appUser2;
     }
 
-    public LocalDate getMatchTime() {
-        return matchTime;
+    public LocalDate getDateMatched() {
+        return dateMatched;
     }
 
-    public void setMatchTime(LocalDate matchTime) {
-        this.matchTime = matchTime;
+    public void setDateMatched(LocalDate dateMatched) {
+        this.dateMatched = dateMatched;
     }
 }
