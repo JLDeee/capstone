@@ -4,10 +4,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
-import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -41,6 +37,8 @@ public class AppUser implements UserDetails {
         this.enabled = enabled;
         this.authorities = convertRolesToAuthorities(roles);
     }
+
+
 
     private static Collection<GrantedAuthority> convertRolesToAuthorities(List<String> roles) {
         return roles.stream()
