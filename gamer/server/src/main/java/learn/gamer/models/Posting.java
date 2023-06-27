@@ -9,18 +9,20 @@ public class Posting {
     private String header;
     private String description;
     private LocalDate datePosted;
-    private Game game;
+    private int gameId;
+    private int appUserId;
 
     //constructors
     public Posting() {
     }
 
-    public Posting(int postingId, String header, String description, LocalDate datePosted, Game game) {
+    public Posting(int postingId, String header, String description, LocalDate datePosted, int gameId, int appUserId) {
         this.postingId = postingId;
         this.header = header;
         this.description = description;
         this.datePosted = datePosted;
-        this.game = game;
+        this.gameId = gameId;
+        this.appUserId = appUserId;
     }
 
     //getters and setters
@@ -57,12 +59,20 @@ public class Posting {
         this.datePosted = datePosted;
     }
 
-    public Game getGame() {
-        return game;
+    public int getGameId() {
+        return gameId;
     }
 
-    public void setGame(Game game) {
-        this.game = game;
+    public void setGameId(int gameId) {
+        this.gameId = gameId;
+    }
+
+    public int getAppUserId() {
+        return appUserId;
+    }
+
+    public void setAppUserId(int appUserId) {
+        this.appUserId = appUserId;
     }
 
     //override and hash
@@ -72,15 +82,11 @@ public class Posting {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Posting posting = (Posting) o;
-        return postingId == posting.postingId &&
-                Objects.equals(header, posting.header) &&
-                Objects.equals(description, posting.description) &&
-                Objects.equals(datePosted, posting.datePosted) &&
-                Objects.equals(game, posting.game);
+        return postingId == posting.postingId && gameId == posting.gameId && appUserId == posting.appUserId && Objects.equals(header, posting.header) && Objects.equals(description, posting.description) && Objects.equals(datePosted, posting.datePosted);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(postingId, header, description, datePosted, game);
+        return Objects.hash(postingId, header, description, datePosted, gameId, appUserId);
     }
 }//ends class
