@@ -14,12 +14,8 @@ public class MatchMapper implements RowMapper<Match> {
         Match match = new Match();
         match.setMatchId(rs.getInt("match_id"));
         match.setDateMatched(rs.getDate("date_match").toLocalDate());
-
-        AppUserMapper appUserMapper1 = new AppUserMapper();
-        match.setAppUser1(appUserMapper1.mapRow(rs,rowNum));
-        AppUserMapper appUserMapper2 = new AppUserMapper();
-        match.setAppUser2(appUserMapper2.mapRow(rs,rowNum));
-
+        match.setAppUserId1(rs.getInt("user_id_one"));
+        match.setAppUserId2(rs.getInt("user_id_two"));
         return match;
     }
 }

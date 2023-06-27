@@ -15,8 +15,4 @@ public class GameMapper implements RowMapper<Game> {
         game.setGameTitle(rs.getString("game_title"));
         return game;
     }
-//    create table game (
-//    game_id int primary key auto_increment,
-//    game_title varchar(255) not null
-//    );
 }

@@ -1,6 +1,4 @@
 package learn.gamer.models;
-
-import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 
