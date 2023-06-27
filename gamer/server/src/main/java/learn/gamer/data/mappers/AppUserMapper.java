@@ -12,11 +12,11 @@ import java.util.Collection;
 import java.util.List;
 
 public class AppUserMapper implements RowMapper<AppUser> {
-    private final List<String> roles;
-
-    public AppUserMapper(List<String> roles) {
-        this.roles = roles;
-    }
+//    private final List<String> roles;
+//
+//    public AppUserMapper(List<String> roles) {
+//        this.roles = roles;
+//    }
 
     /*public AppUser(int appUserId, String gamerTag, String bio, LocalDate birthday, Gender gender, String email, String password, boolean enabled, List<String> roles, Collection<GrantedAuthority> authorities) {
         this.appUserId = appUserId;
@@ -33,15 +33,15 @@ public class AppUserMapper implements RowMapper<AppUser> {
 
     @Override
     public AppUser mapRow(ResultSet rs, int rowNum) throws SQLException {
-        return new AppUser(
-                rs.getInt("app_user_id"),
-                rs.getString("gamer_tag"),
-                rs.getString("bio"),
-                rs.getDate("birth_date").toLocalDate(),
-                Gender.valueOf(rs.getString("gender_type")),
-                rs.getString("email"),
-                rs.getString("`password`"),
-                rs.getBoolean("enabled"),
-                roles);
+        AppUser appUser = new AppUser();
+        appUser.setAppUserId(rs.getInt("app_user_id"));
+        appUser.setBio(rs.getString("bio"));
+        appUser.setBirthday(rs.getDate("birth_date").toLocalDate());
+        appUser.setEmail(rs.getString("email"));
+        appUser.setEnabled(rs.getBoolean("enabled"));
+        appUser.setPassword(rs.getString("`password`"));
+        appUser.setGamerTag(rs.getString("gamer_tag"));
+        appUser.setGender(Gender.valueOf(rs.getString("gender")));
+        return appUser;
     }
 }
