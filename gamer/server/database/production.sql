@@ -2,10 +2,10 @@ drop database if exists gamer;
 create database gamer;
 use gamer;
 
-create table gender (
-	gender_id int primary key auto_increment,
-	gender_type varchar(20) not null
-);
+-- create table gender (
+-- 	gender_id int primary key auto_increment,
+-- 	gender_type varchar(20) not null
+-- );
 
 create table app_user (
 	app_user_id int primary key auto_increment,
@@ -15,10 +15,11 @@ create table app_user (
     birth_date date not null,
     bio varchar(1000) not null,
 	enabled boolean not null,
-    gender_id int not null,
-    constraint fk_app_user_gender_id
-		foreign key (gender_id)
-		references gender(gender_id)
+    gender_type varchar(20) not null
+--     gender_id int not null,
+--     constraint fk_app_user_gender_id
+-- 		foreign key (gender_id)
+-- 		references gender(gender_id)
 );
 
 create table app_role (
@@ -43,10 +44,10 @@ create table `match` (
     user_id_two int not null,
     date_match date not null,
     constraint fk_match_app_user_id_one
-		foreign key (app_user_id_one)
+		foreign key (user_id_one)
 		references app_user(app_user_id),
 	constraint fk_match_app_user_id_two
-		foreign key (app_user_id_two)
+		foreign key (user_id_two)
 		references app_user(app_user_id)
 );
 
@@ -112,17 +113,25 @@ drop table if exists app_user;
 --         references app_role(app_role_id)
 -- );
 
-insert into app_role (`name`) values
-    ('USER'),
-    ('ADMIN');
-
--- passwords are set to "P@ssw0rd!"
-insert into app_user (username, password_hash, enabled)
-    values
-    ('john@smith.com', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 1),
-    ('sally@jones.com', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 1);
-
-insert into app_user_role
-    values
-    (1, 2),
-    (2, 1);
+insert into app_user (app_user_id, email, `password`, gamer_tag, birth_date, bio, enabled, gender_type)
+		values
+		(1, 'maria@alcantara.com', 'abc123', 'gt_maria', '1995-08-18', 'Hello, I love playing fps and rpg games!', true, 'FEMALE'),
+        (2, 'jay@wu.com', 'abc123', 'gt_jay', '1997-09-19', 'Hello, I am a game designer that loves playing Animal Crossing New Horizons!', true, 'NONBINARY'),
+        (3, 'jackie@luu.com', 'abc123', 'gt_jackie', '1999-07-17', 'Hello, I love playing league of legends!', true, 'MALE'),
+        (4, 'brit@hemming.com', 'abc123', 'gt_brit', '1993-06-16', 'Hello, I love playing puzzle games!', true, 'FEMALE'),
+        (5, 'scott@certain.com', 'abc123', 'gt_scott', '1991-05-15', 'Hello, I love playing adventure games!', false, 'MALE');
+        
+        
+	insert into app_role (app_role_id, role_name)
+		values
+		(1, 'ADMIN'),
+        (2, 'USER');
+        
+        
+	insert into app_user_role (app_user_id, app_role_id)
+		values
+		(1, 2),
+        (2, 2),
+        (3, 2),
+        (4, 1),
+        (5, 2);
