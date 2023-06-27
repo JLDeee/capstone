@@ -4,7 +4,7 @@ use gamer;
 
 create table gender (
 	gender_id int primary key auto_increment,
-	gender varchar(20) not null
+	gender_type varchar(20) not null
 );
 
 create table app_user (
