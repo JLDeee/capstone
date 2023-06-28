@@ -21,42 +21,42 @@ public class MatchJdbcTemplateRepository implements MatchRepository {
 
     @Override
     public List<Match> findAll() {
-        final String sql = "select match_id, user_id_one, user_id_two, date_match "
+        final String sql = "select match_id, gamer_1, gamer_2, date_match "
                 + "from `match` "
                 + "order by date_match desc;";
         return jdbcTemplate.query(sql, new MatchMapper());
     }
 
     @Override
-    public List<Match> findYouMatched(int appUserId1) {
-        // note: the first user (user_id_one) is "you", the user_id_two is whoever you matched with)
-        final String sql = "select match_id, user_id_one, user_id_two, date_match "
+    public List<Match> findYouMatched(int gamerId1) {
+        // note: the first gamer (gamer_1) is "you", gamer_2 is whoever you matched with)
+        final String sql = "select match_id, gamer_1, gamer_2, date_match "
                 + "from `match` "
-                + "where user_id_one = ? "
+                + "where gamer_1 = ? "
                 + "order by date_match desc;";
-        return jdbcTemplate.query(sql, new MatchMapper(), appUserId1);
+        return jdbcTemplate.query(sql, new MatchMapper(), gamerId1);
     }
 
     @Override
-    public List<Match> findMatchedYou(int appUserId2) {
-        final String sql = "select match_id, user_id_one, user_id_two, date_match "
+    public List<Match> findMatchedYou(int gamerId2) {
+        final String sql = "select match_id, gamer_1, gamer_2, date_match "
                 + "from `match` "
-                + "where user_id_two = ? "
+                + "where gamer_2 = ? "
                 + "order by date_match desc;";
-        return jdbcTemplate.query(sql, new MatchMapper(), appUserId2);
+        return jdbcTemplate.query(sql, new MatchMapper(), gamerId2);
     }
 
     @Override
     @Transactional
     public Match add(Match match) {
-        final String sql = "insert into `match` (user_id_one, user_id_two, date_match) "
+        final String sql = "insert into `match` (gamer_1, gamer_2, date_match) "
                 + "values (?,?,?);";
 
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, match.getAppUserId1());
-            ps.setInt(2, match.getAppUserId2());
+            ps.setInt(1, match.getGamerId1());
+            ps.setInt(2, match.getGamerId2());
             ps.setDate(3, match.getDateMatched() == null ? null : Date.valueOf(match.getDateMatched()));
             return ps;
         }, keyHolder);
