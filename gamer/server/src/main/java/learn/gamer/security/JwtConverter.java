@@ -55,7 +55,7 @@ public class JwtConverter {
             int appUserId = (int)jws.getBody().get("app_user_id");
             String authStr = (String) jws.getBody().get("authorities");
 
-            // TODO Need to figure out how to reurn new AppUser with its fields
+            // TODO Need to figure out how to return new AppUser with its fields
             //return new AppUser(appUserId, username, null, true,
                     //Arrays.asList(authStr.split(",")));
 
