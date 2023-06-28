@@ -4,17 +4,17 @@ import java.time.LocalDate;
 
 public class Match {
     private int matchId;
-    private int appUserId1;
-    private int appUserId2;
+    private int gamerId1;
+    private int gamerId2;
     private LocalDate dateMatched;
 
     public Match() {
     }
 
-    public Match(int matchId, int appUserId1, int appUserId2, LocalDate dateMatched) {
+    public Match(int matchId, int gamerId1, int gamerId2, LocalDate dateMatched) {
         this.matchId = matchId;
-        this.appUserId1 = appUserId1;
-        this.appUserId2 = appUserId2;
+        this.gamerId1 = gamerId1;
+        this.gamerId2 = gamerId2;
         this.dateMatched = dateMatched;
     }
 
@@ -26,20 +26,20 @@ public class Match {
         this.matchId = matchId;
     }
 
-    public int getAppUserId1() {
-        return appUserId1;
+    public int getGamerId1() {
+        return gamerId1;
     }
 
-    public void setAppUserId1(int appUserId1) {
-        this.appUserId1 = appUserId1;
+    public void setGamerId1(int gamerId1) {
+        this.gamerId1 = gamerId1;
     }
 
-    public int getAppUserId2() {
-        return appUserId2;
+    public int getGamerId2() {
+        return gamerId2;
     }
 
-    public void setAppUserId2(int appUserId2) {
-        this.appUserId2 = appUserId2;
+    public void setGamerId2(int gamerId2) {
+        this.gamerId2 = gamerId2;
     }
 
     public LocalDate getDateMatched() {
