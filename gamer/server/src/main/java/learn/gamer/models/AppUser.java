@@ -47,7 +47,7 @@ public class AppUser implements UserDetails {
     }
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
+    public Collection<GrantedAuthority> getAuthorities() {
         return new ArrayList<>(authorities);
     }
 

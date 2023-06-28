@@ -23,19 +23,19 @@ class AppUserJdbcTemplateRepositoryTest {
     @Autowired
     AppUserJdbcTemplateRepository repository;
 
-    static boolean hasRun = false;
+    @Autowired
+    KnownGoodState knownGoodState;
 
     @BeforeEach
-    void setup() {
-        if (!hasRun) {
-            jdbcTemplate.update("call set_known_good_state();");
-            hasRun = true;
-        }
+    void setUp(){
+        knownGoodState.set();
     }
 
     @Test
     void shouldFindAll(){
+        List<AppUser> appUsers = repository.findAll();
 
+        assertTrue(appUsers.size() > 1);
     }
 
     @Test

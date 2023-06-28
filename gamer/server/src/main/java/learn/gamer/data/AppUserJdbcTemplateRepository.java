@@ -67,11 +67,15 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
 
     @Override
     public Game findByGameTitle(String gameTitle) {
-        final String sql = "select * "
-                + "from game "
-                + "where game.game_title = ?;";
 
-        return jdbcTemplate.query(sql, mapper, gameTitle);
+        final String sql = "select g.game_title "
+        + "from game g "
+        + "inner join app_user_game aug on g.game_id = aug.game_id "
+        + "inner join app_user au on aug.app_user_id = au.app_user_id "
+        + "where g.game_title = ?;";
+
+        //return jdbcTemplate.query(sql,new AppUserMapper(roles), gameTitle);
+        return null;
     }
 
     @Override
@@ -163,4 +167,3 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
         return jdbcTemplate.query(sql, (rs, rowId) -> rs.getString("role_name"), gamerTag);
     }
     }
-}
