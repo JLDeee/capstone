@@ -46,7 +46,7 @@ public class PostingJdbcTemplateRepository implements PostingRepository {
 
         final String sql = "select " +
                 "posting_id, " +
-                "app_user_id, " +
+                "gamer_id, " +
                 "game_id, " +
                 "header, " +
                 "`description`, " +

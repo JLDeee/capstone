@@ -1,20 +1,14 @@
 package learn.gamer.data;
 
 import learn.gamer.models.AppUser;
-import learn.gamer.models.Game;
-
-import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 public interface AppUserRepository {
-    List<AppUser> findAll();
+    AppUser findByUserNname(String username);
 
-    AppUser findByGamerTag(String gamerTag);
+    @Transactional
+    AppUser create(AppUser user);
 
-    Game findByGameTitle(String gameTitle);
-
-    AppUser create(AppUser appUser);
-
-    boolean delete(AppUser appUser);
-
-    boolean update(AppUser appUser);
+    @Transactional
+    void update(AppUser user);
 }

@@ -55,8 +55,8 @@ public class MatchJdbcTemplateRepository implements MatchRepository {
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, match.getAppUserId1());
-            ps.setInt(2, match.getAppUserId2());
+            ps.setInt(1, match.getGamerId1());
+            ps.setInt(2, match.getGamerId2());
             ps.setDate(3, match.getDateMatched() == null ? null : Date.valueOf(match.getDateMatched()));
             return ps;
         }, keyHolder);
