@@ -130,35 +130,35 @@ public class PostingJdbcTemplateRepository implements PostingRepository {
     //UPDATE
     @Override
     public boolean update(Posting posting) throws DataAccessException {
-//        final String sql = "update posting set " +
-//                "header = ?, " +
-//                "`description` = ?, " +
-//                "date_posted = ?, " +
-//                "game_id = ?, " +
-//                "app_user_id = ?, " +
-//                "where posting_id = ?;";
-//
-//        int rowsUpdated = jdbcTemplate.update(sql,
-//                posting.getHeader(),
-//                posting.getDescription(),
-//                posting.getDatePosted(),
-//                posting.getGameId(),
-//                posting.getAppUserId(),
-//                posting.getPostingId());
-//
-//        return rowsUpdated > 0;
-        return false;
+        final String sql = "update posting set " +
+                "header = ?, " +
+                "`description` = ?, " +
+                "date_posted = ?, " +
+                "game_id = ?, " +
+                "app_user_id = ? " +
+                "where posting_id = ?;";
+
+        int rowsUpdated = jdbcTemplate.update(sql,
+                posting.getHeader(),
+                posting.getDescription(),
+                posting.getDatePosted(),
+                posting.getGameId(),
+                posting.getAppUserId(),
+                posting.getPostingId());
+
+        return rowsUpdated > 0;
+
     }
 
 
     //DELETE
     @Override
     public boolean deleteById(int postingId) throws DataAccessException {
-//        final String sql = "set foreign_key_checks = 0; " +
+        final String sql = "delete from posting where posting_id = ?;";
+        return jdbcTemplate.update(sql, postingId) > 0;
+//        "set foreign_key_checks = 0; " +
 //                "delete from posting where posting_id = ?; " +
 //                "set foreign_key_checks = 0; ";
-//        return jdbcTemplate.update(sql, postingId) > 0;
-        return false;
     }
 
 }

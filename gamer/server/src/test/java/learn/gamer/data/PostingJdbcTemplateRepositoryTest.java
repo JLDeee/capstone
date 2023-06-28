@@ -57,7 +57,7 @@ class PostingJdbcTemplateRepositoryTest {
     void shouldFindByUsername() throws DataAccessException {
         List<Posting> result = repository.findByUsername("maria@alcantara.com");
         assertNotNull(result);
-        assertTrue(result.size() == 2);
+        assertTrue(result.size() == 3);
     }
 
     @Test
@@ -119,10 +119,11 @@ class PostingJdbcTemplateRepositoryTest {
     @Test
     void shouldUpdate() throws DataAccessException {
         Posting posting = new Posting();
-        posting.setHeader("Looking for two teammates for trio queue");
-        posting.setDescription("Need two people to help me get through this dungeon, level 25+ only");
+        posting.setPostingId(1);
+        posting.setHeader("Does anyone have any great mods?");
+        posting.setDescription("Hey just wondering if anyone has and links to some good mods, thanks.");
         posting.setDatePosted(LocalDate.of(2023, 06, 27));
-        posting.setGameId(2);
+        posting.setGameId(5);
         posting.setAppUserId(1);
 
         assertTrue(repository.update(posting));
