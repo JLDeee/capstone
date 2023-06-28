@@ -8,7 +8,7 @@ import java.util.List;
 public interface AppUserRepository {
     List<AppUser> findAll();
 
-    List<AppUser> findByGamerTag(String gamerTag);
+    AppUser findByGamerTag(String gamerTag);
 
     Game findByGameTitle(String gameTitle);
 
