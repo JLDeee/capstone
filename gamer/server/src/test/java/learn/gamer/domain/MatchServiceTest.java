@@ -39,11 +39,13 @@ class MatchServiceTest {
     }
 
     @Test
-    void shouldNotFindMatchedYou(){
-        when(repository.findMatchedYou(1)).thenReturn(List.of(
-                new Match(1,1,2, LocalDate.of(2023, 06, 25)));
-        List<Match> matches = service.findYouMatched(1);
+    void shouldFindMatchedYou(){
+        when(repository.findMatchedYou(2)).thenReturn(List.of(
+                new Match(1,1,2, LocalDate.of(2023, 06, 25))));
+        List<Match> matches = service.findMatchedYou(2);
         assertEquals(matches.size(), 1);
+        assertTrue(matches.get(0).getGamerId1() == 1);
+        assertTrue(matches.get(0).getGamerId2() == 2);
     }
 
     @Test
@@ -54,7 +56,12 @@ class MatchServiceTest {
 
     @Test
     void shouldFindYouMatched(){
-
+        when(repository.findYouMatched(1)).thenReturn(List.of(
+                new Match(1,1,2, LocalDate.of(2023, 06, 25))));
+        List<Match> matches = service.findMatchedYou(2);
+        assertEquals(matches.size(), 1);
+        assertTrue(matches.get(0).getGamerId1() == 1);
+        assertTrue(matches.get(0).getGamerId2() == 2);
     }
 
     @Test
@@ -67,8 +74,8 @@ class MatchServiceTest {
     void shouldAddMatch(){
         Match match = new Match();
         match.setMatchId(1);
-        match.setAppUserId1(1);
-        match.setAppUserId2(2);
+        match.setGamerId1(1);
+        match.setGamerId2(2);
         match.setDateMatched(LocalDate.of(2023, 06, 20));
 
         when(repository.add(match)).thenReturn(match);
@@ -96,8 +103,8 @@ class MatchServiceTest {
     void shouldNotAddMatchIfDateIsInTheFuture(){
         Match match = new Match();
         match.setMatchId(1);
-        match.setAppUserId1(1);
-        match.setAppUserId2(2);
+        match.setGamerId1(1);
+        match.setGamerId2(2);
         match.setDateMatched(LocalDate.of(2024, 06, 20));
 
         when(repository.add(match)).thenReturn(match);
@@ -112,8 +119,8 @@ class MatchServiceTest {
     void shouldNotAddMatchIfDateIsNull(){
         Match match = new Match();
         match.setMatchId(1);
-        match.setAppUserId1(1);
-        match.setAppUserId2(2);
+        match.setGamerId1(1);
+        match.setGamerId2(2);
 
         when(repository.add(match)).thenReturn(match);
 
