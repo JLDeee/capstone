@@ -75,3 +75,22 @@ select match_id, gamer_1, gamer_2, date_match
 from `match`
 where gamer_1 = 2
 order by date_match desc;
+
+select *
+from `match`;
+
+select 
+app_user_id, 
+username, 
+`password`, 
+enabled 
+from app_user 
+where username = 'maria@alcantara.com';
+
+update gamer 
+set gender_type = ?, 
+gamer_tag = ?, 
+birth_date = ?, bio = ? where gamer_id = ?;
+
+select *
+from app_user;

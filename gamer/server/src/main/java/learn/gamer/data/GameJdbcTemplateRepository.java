@@ -74,10 +74,10 @@ public class GameJdbcTemplateRepository implements GameRepository {
                 + "where p.game_id = ?;";
         int postingCount = jdbcTemplate.queryForObject(sql, Integer.class, gameId);
 
-        final String sql2 = "select count(aug.game_id) "
-                + "from app_user_game aug "
-                + "left outer join game g on g.game_id = aug.game_id "
-                + "where aug.game_id = ?;";
+        final String sql2 = "select count(grg.game_id) "
+                + "from gamer_game grg "
+                + "left outer join game g on g.game_id = grg.game_id "
+                + "where grg.game_id = ?;";
         int appUserGameCount = jdbcTemplate.queryForObject(sql2, Integer.class, gameId);
 
         return (postingCount + appUserGameCount);
