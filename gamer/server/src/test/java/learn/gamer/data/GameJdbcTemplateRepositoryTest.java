@@ -34,44 +34,58 @@ class GameJdbcTemplateRepositoryTest {
         assertTrue(games.size() > 0);
     }
 
-//        @Autowired
-//    private SolarPanelJdbcTemplateRepository repository;
-//
-//    @Autowired
-//    private JdbcTemplate jdbcTemplate;
-//
-//    static boolean hasSetup = false;
-//
-//    @BeforeEach
-//    void setup() {
-//        if (!hasSetup) {
-//            hasSetup = true;
-//            jdbcTemplate.update("call set_known_good_state();");
-//        }
-//    }
-//
-//    @Test
-//    void shouldFindAll() throws DataAccessException {
-//        List<SolarPanel> result = repository.findAll();
-//        assertNotNull(result);
-//        assertTrue(result.size() >= 4);
-//
-//        SolarPanel solarPanel = new SolarPanel();
-//        solarPanel.setId(1);
-//        solarPanel.setSection("The Ridge");
-//        solarPanel.setRow(1);
-//        solarPanel.setColumn(1);
-//        solarPanel.setYearInstalled(2020);
-//        solarPanel.setMaterial(Material.POLY_SI);
-//        solarPanel.setTracking(true);
-//
-//        assertTrue(result.contains(solarPanel));
-//    }
-//
-//    @Test
-//    void shouldFindBySection() throws DataAccessException {
-//        List<SolarPanel> result = repository.findBySection("The Ridge");
-//        assertNotNull(result);
-//        assertTrue(result.size() == 1 || result.size() == 2);
-//    }
+    @Test
+    void shouldFindYakuzaZero() {
+        Game expected = new Game(1, "Yakuza 0");
+        Game actual = repository.findByGameTitle("Yakuza 0");
+
+        assertEquals(expected.getGameTitle(), actual.getGameTitle());
+    }
+
+    @Test
+    void shouldNotFindSimsZero() {
+        Game badGame = repository.findByGameTitle("Sims 0");
+        assertNull(badGame);
+    }
+
+    @Test
+    void shouldAddGame() {
+        Game game = new Game();
+        game.setGameTitle("Destiny");
+        Game result = repository.add(game);
+
+        assertNotNull(result);
+        // there are 5 games in the game table in the gamer_test database
+        assertEquals(6, result.getGameId());
+        assertEquals("Destiny", result.getGameTitle());
+    }
+
+    @Test
+    void shouldDeleteById() {
+        // add game since all games in database are in use
+        Game game = new Game();
+        game.setGameTitle("Destiny");
+        Game addResult = repository.add(game);
+
+        assertNotNull(addResult);
+        // there are 5 games in the game table in the gamer_test database
+        assertEquals(6, addResult.getGameId());
+        assertEquals("Destiny", addResult.getGameTitle());
+
+        boolean deleteResult = repository.deleteById(6);
+        assertTrue(deleteResult);
+        assertNull(repository.findByGameTitle("Destiny"));
+    }
+
+    @Test
+    void shouldNotDeleteIfGameInUse() {
+        boolean result = repository.deleteById(2);
+        assertFalse(result);
+    }
+
+    @Test
+    void shouldNotDeleteByNonExistingId() {
+        boolean result = repository.deleteById(999);
+        assertFalse(result);
+    }
 }

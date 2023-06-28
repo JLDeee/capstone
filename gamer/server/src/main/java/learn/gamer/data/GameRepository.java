@@ -14,5 +14,8 @@ public interface GameRepository {
     @Transactional
     Game add(Game game);
 
+    @Transactional
     boolean deleteById(int gameId);
+
+    int getUsageCount(int gameId);
 }
