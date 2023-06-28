@@ -21,7 +21,8 @@ public class GameJdbcTemplateRepository implements GameRepository {
     @Override
     public List<Game> findAll() {
         final String sql = "select game_id, game_title "
-                + "from game;";
+                + "from game "
+                + "order by game_title;";
         return jdbcTemplate.query(sql, new GameMapper());
     }
 
@@ -56,8 +57,29 @@ public class GameJdbcTemplateRepository implements GameRepository {
     }
 
     @Override
+    @Transactional
     public boolean deleteById(int gameId) {
-        final String sql = "delete from game where id = ?;";
-        return jdbcTemplate.update(sql, gameId) > 0;
+        if (getUsageCount(gameId) == 0) {
+            final String sql = "delete from game where game_id = ?;";
+            return jdbcTemplate.update(sql, gameId) > 0;
+        }
+        return false;
+    }
+
+    @Override
+    public int getUsageCount(int gameId) {
+        final String sql = "select count(p.game_id) "
+                + "from posting p "
+                + "left outer join game g on g.game_id = p.game_id "
+                + "where p.game_id = ?;";
+        int postingCount = jdbcTemplate.queryForObject(sql, Integer.class, gameId);
+
+        final String sql2 = "select count(aug.game_id) "
+                + "from app_user_game aug "
+                + "left outer join game g on g.game_id = aug.game_id "
+                + "where aug.game_id = ?;";
+        int appUserGameCount = jdbcTemplate.queryForObject(sql2, Integer.class, gameId);
+
+        return (postingCount + appUserGameCount);
     }
 }
