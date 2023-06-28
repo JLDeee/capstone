@@ -70,6 +70,22 @@ class GameServiceTest {
     }
 
     @Test
+    void shouldNotAddDuplicateGame(){
+        List<Game> games = List.of(new Game(1,"League of Legends"),
+        new Game(2, "Street Fighter 6"));
+
+        Game game = new Game();
+        game.setGameId(1);
+        game.setGameTitle("League of Legends");
+
+        //when(repository.add(game)).thenReturn(games.add(game));
+
+        Result<Game> result = service.add(game);
+
+        assertFalse(result.isSuccess());
+    }
+
+    @Test
     void shouldFindHaloByGameTitle() {
             when(repository.findByGameTitle("Halo")).thenReturn(new Game());
             Game game = service.findByGameTitle("Halo");

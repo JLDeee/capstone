@@ -2,6 +2,7 @@ package learn.gamer.domain;
 
 import learn.gamer.data.GameRepository;
 import learn.gamer.data.MatchRepository;
+import learn.gamer.data.mappers.MatchMapper;
 import learn.gamer.models.Game;
 import learn.gamer.models.Match;
 import org.junit.jupiter.api.Test;
@@ -39,7 +40,8 @@ class MatchServiceTest {
 
     @Test
     void shouldNotFindMatchedYou(){
-       // when(repository.findMatchedYou(1)).thenReturn(new Match());
+        when(repository.findMatchedYou(1)).thenReturn(List.of(
+                new Match(1,1,2, LocalDate.of(2023, 06, 25)));
         List<Match> matches = service.findYouMatched(1);
         assertEquals(matches.size(), 1);
     }
@@ -59,6 +61,84 @@ class MatchServiceTest {
     void shouldNotFindNullYouMatched(){
         List<Match> matches = service.findMatchedYou(99);
         assertEquals(matches.size(), 0);
+    }
+
+    @Test
+    void shouldAddMatch(){
+        Match match = new Match();
+        match.setMatchId(1);
+        match.setAppUserId1(1);
+        match.setAppUserId2(2);
+        match.setDateMatched(LocalDate.of(2023, 06, 20));
+
+        when(repository.add(match)).thenReturn(match);
+
+        Result<Match> result = service.add(match);
+
+        assertTrue(result.isSuccess());
+        assertEquals(result.getMessages().size(), 0);
+    }
+
+    @Test
+    void shouldNotAddMatchWithoutGamers(){
+        Match match = new Match();
+        match.setDateMatched(LocalDate.of(2023, 06, 20));
+
+        when(repository.add(match)).thenReturn(match);
+
+        Result<Match> result = service.add(match);
+
+        assertFalse(result.isSuccess());
+        assertEquals(result.getMessages().size(), 1);
+    }
+
+    @Test
+    void shouldNotAddMatchIfDateIsInTheFuture(){
+        Match match = new Match();
+        match.setMatchId(1);
+        match.setAppUserId1(1);
+        match.setAppUserId2(2);
+        match.setDateMatched(LocalDate.of(2024, 06, 20));
+
+        when(repository.add(match)).thenReturn(match);
+
+        Result<Match> result = service.add(match);
+
+        assertFalse(result.isSuccess());
+        assertEquals(result.getMessages().size(), 1);
+    }
+
+    @Test
+    void shouldNotAddMatchIfDateIsNull(){
+        Match match = new Match();
+        match.setMatchId(1);
+        match.setAppUserId1(1);
+        match.setAppUserId2(2);
+
+        when(repository.add(match)).thenReturn(match);
+
+        Result<Match> result = service.add(match);
+
+        assertFalse(result.isSuccess());
+        assertEquals(result.getMessages().size(), 1);
+    }
+
+    @Test
+    void shouldDeleteById(){
+        when(repository.deleteById(1)).thenReturn(true);
+
+        Result<Match> result = service.deleteById(1);
+
+        assertTrue(result.isSuccess());
+    }
+
+    @Test
+    void shouldNotDeleteByInvalidId(){
+        Result<Match> result = service.deleteById(9999);
+
+        assertFalse(result.isSuccess());
+        assertEquals(1, result.getMessages().size());
+        assertTrue(result.getMessages().get(0).contains("was not found"));
     }
 
 

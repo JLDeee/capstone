@@ -57,12 +57,18 @@ public class MatchService {
     //check if null
     //Check if Id is same
     //check that match date is in the past
+    //check that there is a date for the match
     private Result<Match> validate (Match match) {
 
         Result<Match> result = new Result<>();
 
         if (match == null) {
             result.addMessage("Match must exist.", ResultType.INVALID);
+            return result;
+        }
+
+        if(match.getDateMatched() == null){
+            result.addMessage("Match must have a matched date.", ResultType.INVALID);
             return result;
         }
 

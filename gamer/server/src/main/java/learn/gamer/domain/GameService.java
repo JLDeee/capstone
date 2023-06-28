@@ -64,6 +64,13 @@ public class GameService {
         if (game.getGameTitle() == null || game.getGameTitle().isBlank()) {
             result.addMessage("Game `gameTitle` is required.", ResultType.INVALID);
         }
+
+        List<Game> games = gameRepository.findAll();
+        for(Game gameInList : games){
+            if(gameInList.getGameTitle() == game.getGameTitle()){
+                result.addMessage("Cannot have duplicate of same game.", ResultType.INVALID);
+            }
+        }
         return result;
     }
 }
