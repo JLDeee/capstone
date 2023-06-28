@@ -4,7 +4,7 @@ import learn.gamer.models.AppUser;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface AppUserRepository {
-    AppUser findByUserNname(String username);
+    AppUser findByUsername(String username);
 
     @Transactional
     AppUser create(AppUser user);

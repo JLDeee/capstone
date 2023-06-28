@@ -24,7 +24,7 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
     }
 
     @Override
-    public AppUser findByUserNname(String username) {
+    public AppUser findByUsername(String username) {
         List<String> roles = getRolesByUsername(username);
         final String sql = "select app_user_id, username, password_hash, enabled "
                 + "from app_user "
