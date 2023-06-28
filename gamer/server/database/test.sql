@@ -6,7 +6,7 @@ create table app_user (
 	app_user_id int primary key auto_increment,
 	username varchar(255) not null,
     `password` varchar(30) not null,
-	enabled boolean not null
+	enabled boolean not null default true
 );
 
 create table app_role (
@@ -31,7 +31,7 @@ create table gamer (
     gender_type varchar(20) not null,
     gamer_tag varchar(20) not null,
     birth_date date not null,
-    bio varchar(1000) not null,
+    bio varchar(500) not null,
 	constraint fk_gamer_app_user_id
 		foreign key (app_user_id)
 		references app_user(app_user_id)
@@ -71,7 +71,7 @@ create table posting (
     gamer_id int not null,
     game_id int not null,
     header varchar(255) not null,
-    `description` varchar(5000) not null,
+    `description` varchar(2000) not null,
     date_posted date not null,
     constraint fk_posting_gamer_id
 		foreign key (gamer_id)
@@ -155,7 +155,8 @@ begin
         (2, 'League of Legends'),
         (3, 'Ghost Trick: Phantom Detective'),
         (4, 'Animal Crossing: New Horizons'),
-        (5, 'Sims 4');
+        (5, 'Sims 4'),
+        (6, 'Pokemon Super Mystery Dungeon');
 	
     insert into gamer_game (gamer_id, game_id)
 		values

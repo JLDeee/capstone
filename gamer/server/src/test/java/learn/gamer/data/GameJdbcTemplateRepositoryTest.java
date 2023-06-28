@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
 
@@ -56,25 +55,16 @@ class GameJdbcTemplateRepositoryTest {
 
         assertNotNull(result);
         // there are 5 games in the game table in the gamer_test database
-        assertEquals(6, result.getGameId());
+        assertEquals(7, result.getGameId());
         assertEquals("Destiny", result.getGameTitle());
     }
 
     @Test
     void shouldDeleteById() {
-        // add game since all games in database are in use
-        Game game = new Game();
-        game.setGameTitle("Destiny");
-        Game addResult = repository.add(game);
-
-        assertNotNull(addResult);
-        // there are 5 games in the game table in the gamer_test database
-        assertEquals(6, addResult.getGameId());
-        assertEquals("Destiny", addResult.getGameTitle());
-
+        // delete id 6, pokemon super mystery dungeon, which isn't in use
         boolean deleteResult = repository.deleteById(6);
         assertTrue(deleteResult);
-        assertNull(repository.findByGameTitle("Destiny"));
+        assertNull(repository.findByGameTitle("Pokemon Super Mystery Dungeon"));
     }
 
     @Test

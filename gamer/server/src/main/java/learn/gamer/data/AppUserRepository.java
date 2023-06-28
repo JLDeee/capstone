@@ -10,5 +10,5 @@ public interface AppUserRepository {
     AppUser create(AppUser user);
 
     @Transactional
-    void update(AppUser user);
+    boolean update(AppUser user);
 }

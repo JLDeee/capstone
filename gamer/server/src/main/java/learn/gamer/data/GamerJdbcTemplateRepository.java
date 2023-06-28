@@ -4,6 +4,7 @@ import learn.gamer.data.mappers.GamerMapper;
 import learn.gamer.models.Gamer;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
@@ -11,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
 
+@Repository
 public class GamerJdbcTemplateRepository implements GamerRepository {
     private final JdbcTemplate jdbcTemplate;
     public GamerJdbcTemplateRepository(JdbcTemplate jdbcTemplate) {
@@ -73,9 +75,9 @@ public class GamerJdbcTemplateRepository implements GamerRepository {
     @Transactional
     public boolean update(Gamer gamer) {
         final String sql = "update gamer set "
-                + "gender_type = ? "
-                + "gamer_tag = ? "
-                + "birth_date = ? "
+                + "gender_type = ?, "
+                + "gamer_tag = ?, "
+                + "birth_date = ?, "
                 + "bio = ? "
                 + "where gamer_id = ?;";
         return jdbcTemplate.update(sql,

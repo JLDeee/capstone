@@ -54,10 +54,10 @@ class PostingJdbcTemplateRepositoryTest {
     }
 
     @Test
-    void shouldFindByUsername() throws DataAccessException {
-        List<Posting> result = repository.findByUsername("maria@alcantara.com");
+    void shouldFindByGamerTag() throws DataAccessException {
+        List<Posting> result = repository.findByGamerTag("gt_maria");
         assertNotNull(result);
-        assertTrue(result.size() == 3);
+        assertEquals(2, result.size());
     }
 
     @Test
@@ -82,7 +82,7 @@ class PostingJdbcTemplateRepositoryTest {
 
     @Test
     void shouldNotFindByInvalidUsername() throws DataAccessException {
-        List<Posting> result = repository.findByUsername("invalid");
+        List<Posting> result = repository.findByGamerTag("invalid");
         assertEquals(0, result.size());
     }
 
@@ -106,7 +106,7 @@ class PostingJdbcTemplateRepositoryTest {
         posting.setDescription("Need someone to help me get through this dungeon, level 25+ only");
         posting.setDatePosted(LocalDate.of(2023, 06, 27));
         posting.setGameId(2);
-        posting.setAppUserId(1);
+        posting.setGamerId(3);
 
         Posting result = repository.create(posting);
 
@@ -124,7 +124,7 @@ class PostingJdbcTemplateRepositoryTest {
         posting.setDescription("Hey just wondering if anyone has and links to some good mods, thanks.");
         posting.setDatePosted(LocalDate.of(2023, 06, 27));
         posting.setGameId(5);
-        posting.setAppUserId(1);
+        posting.setGamerId(1);
 
         assertTrue(repository.update(posting));
     }
