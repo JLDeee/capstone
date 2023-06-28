@@ -75,9 +75,9 @@ create table posting (
 
 
 
-drop table if exists app_user_role;
-drop table if exists app_role;
-drop table if exists app_user;
+-- drop table if exists app_user_role;
+-- drop table if exists app_role;
+-- drop table if exists app_user;
 
 
 
@@ -85,20 +85,20 @@ drop table if exists app_user;
 delimiter //
 create procedure set_known_good_state()
 begin
+	delete from `match`;
+    alter table `match` auto_increment = 1;
+    delete from posting;
+	alter table posting auto_increment = 1;
+    delete from app_user_game; 
+    delete from app_user_role;
     delete from app_user;
     alter table app_user auto_increment = 1;
     delete from app_role;
     alter table app_role auto_increment = 1;
-    delete from app_user_role;
-	delete from `match`;
-    alter table `match` auto_increment = 1;
 	delete from game;
 	alter table game auto_increment = 1;
-    delete from app_user_game;
-    delete from posting;
-	alter table posting auto_increment = 1;
-        
-
+    
+    
 	insert into app_user (app_user_id, email, `password`, gamer_tag, birth_date, bio, enabled, gender_type)
 		values
 		(1, 'maria@alcantara.com', 'abc123', 'gt_maria', '1995-08-18', 'Hello, I love playing fps and rpg games!', true, 'FEMALE'),
