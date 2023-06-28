@@ -34,16 +34,16 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
         appUser.setBirthday(resultSet.getDate("birth_date").toLocalDate());
         appUser.setEmail(resultSet.getString("email"));
         appUser.setEnabled(resultSet.getBoolean("enabled"));
-        appUser.setPassword(resultSet.getString("`password`"));
+        appUser.setPassword(resultSet.getString("password"));
         appUser.setGamerTag(resultSet.getString("gamer_tag"));
-        appUser.setGender(Gender.valueOf(resultSet.getString("gender")));
+        appUser.setGender(Gender.valueOf(resultSet.getString("gender_type")));
 
         return appUser;
     };
 
     @Override
     public List<AppUser> findAll() {
-        final String sql = "select * "
+        final String sql = "select app_user_id, email, `password`, gamer_tag, birth_date, bio, enabled, gender_type "
                 + "from app_user "
                 + "order by gamer_tag;";
 
@@ -54,11 +54,9 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
     public AppUser findByGamerTag(String gamerTag) {
         List<String> roles = getRolesByGamerTag(gamerTag);
 
-        final String sql = """
-                select *
-                from app_user
-                where gamer_tag = ?;
-                """;
+        final String sql = "select app_user_id, email, `password`, gamer_tag, birth_date, bio, enabled, gender_type "
+                + "from app_user "
+                + "where gamer_tag = ?;";
 
         return jdbcTemplate.query(sql, new AppUserMapper(roles), gamerTag)
                 .stream()
@@ -80,7 +78,7 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
 
     @Override
     public AppUser create(AppUser appUser) {
-        final String sql = "insert into app_user (username, password_hash) values (?, ?);";
+        final String sql = "insert into app_user (username, `password`) values (?, ?);";
 
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
@@ -102,8 +100,9 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
     }
 
     @Override
+    @Transactional
     public boolean delete(AppUser appUser) {
-        final String sql = "delete app_user "
+        final String sql = "delete from app_user "
                 + "where app_user_id = ?;";
         return false;
     }
@@ -157,13 +156,11 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
     }
 
     private List<String> getRolesByGamerTag(String gamerTag) {
-        final String sql = """
-                select r.role_name
-                from app_role ur
-                inner join app_user_role r on ur.app_role_id = r.app_role_id
-                inner join app_user au on ur.app_user_id = au.app_user_id
-                where au.gamer_tag = ?
-                """;
+        final String sql = "select r.role_name "
+                + "from app_user_role ur "
+                + "inner join app_role r on ur.app_role_id = r.app_role_id "
+                + "inner join app_user au on ur.app_user_id = au.app_user_id "
+                + "where au.gamer_tag = ?";
         return jdbcTemplate.query(sql, (rs, rowId) -> rs.getString("role_name"), gamerTag);
     }
     }

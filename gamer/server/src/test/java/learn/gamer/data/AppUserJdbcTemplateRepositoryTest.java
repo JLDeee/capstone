@@ -35,7 +35,7 @@ class AppUserJdbcTemplateRepositoryTest {
     void shouldFindAll(){
         List<AppUser> appUsers = repository.findAll();
 
-        assertTrue(appUsers.size() > 1);
+        assertTrue(appUsers.size() == 7);
     }
 
     @Test
@@ -47,4 +47,14 @@ class AppUserJdbcTemplateRepositoryTest {
         assertTrue(actual.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ADMIN")));
     }
 
+    @Test
+    void shouldUpdateJackie() {
+        AppUser jackie = repository.findByGamerTag("gt_jackie");
+        jackie.setEnabled(false);
+
+        assertTrue(repository.update(jackie));
+
+        AppUser updatedJackie = repository.findByGamerTag("gt_jackie");
+        assertFalse(updatedJackie.isEnabled());
+    }
 }

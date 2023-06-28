@@ -39,9 +39,9 @@ public class AppUserMapper implements RowMapper<AppUser> {
         appUser.setBirthday(rs.getDate("birth_date").toLocalDate());
         appUser.setEmail(rs.getString("email"));
         appUser.setEnabled(rs.getBoolean("enabled"));
-        appUser.setPassword(rs.getString("`password`"));
+        appUser.setPassword(rs.getString("password"));
         appUser.setGamerTag(rs.getString("gamer_tag"));
-        appUser.setGender(Gender.valueOf(rs.getString("gender")));
+        appUser.setGender(Gender.valueOf(rs.getString("gender_type")));
         return appUser;
     }
 }

@@ -16,7 +16,6 @@ public class AppUser implements UserDetails {
     private String bio;
     private LocalDate birthday;
     private Gender gender;
-
     private String email;
     private String password;
     private boolean enabled;
