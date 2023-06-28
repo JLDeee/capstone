@@ -66,14 +66,14 @@ public class PostingJdbcTemplateRepository implements PostingRepository {
     }
 
     @Override
-    public List<Posting> findByUsername(String username) throws DataAccessException {
+    public List<Posting> findByGamerTag(String gamerTag) throws DataAccessException {
 
         final String sql = "select p.posting_id, p.gamer_id, p.game_id, p.header, p.`description`, p.date_posted " +
                 "from posting p " +
                 "inner join gamer gr on p.gamer_id = gr.gamer_id " +
                 "where gr.gamer_tag = ?";
 
-        return jdbcTemplate.query(sql, new PostingMapper(), username);
+        return jdbcTemplate.query(sql, new PostingMapper(), gamerTag);
     }
 
     @Override

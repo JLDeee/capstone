@@ -14,7 +14,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
-
 class AppUserJdbcTemplateRepositoryTest {
 
     @Autowired
@@ -32,29 +31,36 @@ class AppUserJdbcTemplateRepositoryTest {
     }
 
     @Test
-    void shouldFindAll(){
-        List<AppUser> appUsers = repository.findAll();
-
-        assertTrue(appUsers.size() == 7);
+    void shouldFindByUsername() {
+        AppUser result = repository.findByUsername("maria@alcantara.com");
+        assertNotNull(result);
+        assertEquals(1, result.getAppUserId());
+        assertEquals("maria@alcantara.com", result.getUsername());
     }
 
     @Test
-    void shouldFindJackieByGamerTag(){
-        AppUser actual = repository.findByGamerTag("gt_jackie");
-
-        assertTrue(actual.isEnabled());
-        assertEquals(1, actual.getAuthorities().size());
-        assertTrue(actual.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ADMIN")));
+    void shouldNotFindByNonExistingUsername() {
+        AppUser badResult = repository.findByUsername("blahblah");
+        assertNull(badResult);
     }
 
     @Test
-    void shouldUpdateJackie() {
-        AppUser jackie = repository.findByGamerTag("gt_jackie");
-        jackie.setEnabled(false);
+    void shouldCreateNewUser() {
+        AppUser newUser = new AppUser(0, "ilikekewpiemayo@gmail.com", "coolpassword", true, List.of("USER"));
+        AppUser actual = repository.create(newUser);
+        assertNotNull(actual);
+        assertEquals("ilikekewpiemayo@gmail.com", actual.getUsername());
+        assertEquals("coolpassword", actual.getPassword());
+        assertTrue(actual.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("USER")));
+    }
 
-        assertTrue(repository.update(jackie));
+    @Test
+    void shouldUpdateUser() {
+        AppUser updateJay = repository.findByUsername("jay@wu.com");
+        updateJay.setEnabled(false);
 
-        AppUser updatedJackie = repository.findByGamerTag("gt_jackie");
-        assertFalse(updatedJackie.isEnabled());
+        assertTrue(repository.update(updateJay));
+        AppUser newJay = repository.findByUsername("jay@wu.com");
+        assertFalse(newJay.isEnabled());
     }
 }

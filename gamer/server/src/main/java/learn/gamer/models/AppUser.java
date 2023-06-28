@@ -4,6 +4,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,7 +13,7 @@ public class AppUser implements UserDetails {
     private int appUserId;
     private final String username;
     private final String password;
-    private final boolean enabled;
+    private boolean enabled;
     private final Collection<GrantedAuthority> authorities;
 
     public AppUser(int appUserId, String username, String password, boolean enabled, List<String> roles) {
@@ -31,7 +32,7 @@ public class AppUser implements UserDetails {
 
     @Override
     public Collection<GrantedAuthority> getAuthorities() {
-        return null;
+        return new ArrayList<>(authorities);
     }
 
     @Override
@@ -61,7 +62,11 @@ public class AppUser implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public int getAppUserId() {
