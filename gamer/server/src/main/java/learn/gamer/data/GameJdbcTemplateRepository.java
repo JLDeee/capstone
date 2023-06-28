@@ -4,12 +4,14 @@ import learn.gamer.data.mappers.GameMapper;
 import learn.gamer.models.Game;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
 
+@Repository
 public class GameJdbcTemplateRepository implements GameRepository {
     private final JdbcTemplate jdbcTemplate;
     public GameJdbcTemplateRepository(JdbcTemplate jdbcTemplate) {

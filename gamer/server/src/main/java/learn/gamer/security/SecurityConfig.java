@@ -11,6 +11,7 @@
 //
 //@Configuration
 //public class SecurityConfig {
+
 //
 //    private final JwtConverter converter;
 //
@@ -58,4 +59,5 @@
 //    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
 //        return config.getAuthenticationManager();
 //    }
+
 //}
