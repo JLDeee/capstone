@@ -89,13 +89,13 @@ create table posting (
 --         (4, 'brit@hemming.com', 'abc123', 'gt_brit', '1993-06-16', 'Hello, I love playing puzzle games!', true, 'FEMALE'),
 --         (5, 'scott@certain.com', 'abc123', 'gt_scott', '1991-05-15', 'Hello, I love playing adventure games!', false, 'MALE');
 
-insert into app_user (username, `password`, enabled)
+insert into app_user (app_user_id, username, `password`, enabled)
     values
-    ('maria@alcantara.com', 'abc123', true),
-	('jay@wu.com', 'abc123', true),
-	('jackie@luu.com', 'abc123', true),
-	('brit@hemming.com', 'abc123', true),
-	('scott@certain.com', 'abc123', false);
+    (1, 'maria@alcantara.com', 'abc123', true),
+	(2, 'jay@wu.com', 'abc123', true),
+	(3, 'jackie@luu.com', 'abc123', true),
+	(4, 'brit@hemming.com', 'abc123', true),
+	(5, 'scott@certain.com', 'abc123', false);
         
 insert into app_role (app_role_id, role_name)
 	values
