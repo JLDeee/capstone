@@ -103,8 +103,8 @@ public class PostingJdbcTemplateRepository implements PostingRepository {
     @Override
     public Posting create(Posting posting) throws DataAccessException {
 
-        final String sql = "insert into posting (posting_id, app_user_id, game_id, header, `description`, date_posted) " +
-                "values (?, ?, ?, ?, ?, ?);";
+        final String sql = "insert into posting (header, `description`, date_posted, game_id, app_user_id) " +
+                "values (?, ?, ?, ?, ?);";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
