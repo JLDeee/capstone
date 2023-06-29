@@ -29,18 +29,51 @@ public class SecurityConfig {
                 .antMatchers("/authenticate").permitAll()
                 .antMatchers("/refresh_token").authenticated()
                 .antMatchers("/create_account").permitAll()
-                // TODO: add our own paths here
+                // gamer
                 .antMatchers(HttpMethod.GET,
-                        "/order").permitAll()
-                .antMatchers(HttpMethod.GET,
-                        "/sighting", "/sighting/*").permitAll()
+                        "/gamer", "/gamer/*").permitAll()
                 .antMatchers(HttpMethod.POST,
-                        "/sighting").hasAnyAuthority("USER", "ADMIN")
+                        "/gamer/").permitAll()
                 .antMatchers(HttpMethod.PUT,
-                        "/sighting/*").hasAnyAuthority("USER", "ADMIN")
+                        "/gamer/*").permitAll()
+                // game
+                .antMatchers(HttpMethod.GET,
+                        "/game", "/game/*").permitAll()
+                .antMatchers(HttpMethod.POST,
+                        "/game").permitAll()
                 .antMatchers(HttpMethod.DELETE,
-                        "/sighting/*").hasAnyAuthority("ADMIN")
-                // if we get to this point, let's deny all requests
+                        "/game").permitAll()
+//                .antMatchers(HttpMethod.POST,
+//                        "/game").hasAnyAuthority("USER", "ADMIN")
+//                .antMatchers(HttpMethod.DELETE,
+//                        "/game/*").hasAnyAuthority("USER","ADMIN")
+                // post
+                .antMatchers(HttpMethod.GET,
+                        "/posting", "/posting/*").permitAll()
+                .antMatchers(HttpMethod.POST,
+                        "/posting").permitAll()
+                .antMatchers(HttpMethod.PUT,
+                        "/posting/*").permitAll()
+                .antMatchers(HttpMethod.DELETE,
+                        "/posting/*").permitAll()
+//                .antMatchers(HttpMethod.POST,
+//                        "/posting").hasAnyAuthority("USER", "ADMIN")
+//                .antMatchers(HttpMethod.PUT,
+//                        "/posting/*").hasAnyAuthority("USER", "ADMIN")
+//                .antMatchers(HttpMethod.DELETE,
+//                        "/posting/*").hasAnyAuthority("ADMIN")
+                // match
+                .antMatchers(HttpMethod.GET,
+                        "/match", "/you_match/*", "/match_you/*").permitAll()
+                .antMatchers(HttpMethod.POST,
+                        "/match").permitAll()
+                .antMatchers(HttpMethod.DELETE,
+                        "/match/*").permitAll()
+//                .antMatchers(HttpMethod.POST,
+//                        "/match").hasAnyAuthority("USER", "ADMIN")
+//                .antMatchers(HttpMethod.DELETE,
+//                        "/match/*").hasAnyAuthority("USER","ADMIN")
+
                 .antMatchers("/**").denyAll()
 
                 .and()
