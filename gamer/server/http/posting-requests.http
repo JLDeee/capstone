@@ -1,0 +1,5 @@
+@url = http://localhost:8080/posting
+
+### [ ] Get back all posting records
+
+GET http://localhost:8080/posting HTTP/1.1
