@@ -33,7 +33,7 @@ public class PostingService {
     }
 
     public List<Posting> findByUsername(String username) throws DataAccessException {
-        return repository.findByUsername(username);
+        return repository.findByGamerTag(username);
     }
 
     public List<Posting> findByGameTitle(String gameTitle) throws DataAccessException {

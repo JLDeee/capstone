@@ -35,16 +35,7 @@ class PostingJdbcTemplateRepositoryTest {
         List<Posting> result = repository.findAll();
         assertNotNull(result);
         assertTrue(result.size() >= 10);
-//
-//        Posting posting = new Posting();
-//        posting.setPostingId(12);
-//        posting.setHeader("Looking for teammate for duo queue");
-//        posting.setDescription("Need someone to help me get through this dungeon, level 25+ only");
-//        posting.setDatePosted(LocalDate.of(2023, 06, 27));
-//        posting.setGameId(2);
-//        posting.setAppUserId(1);
-//
-//        assertTrue(result.contains(posting));
+
     }
 
     @Test

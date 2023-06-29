@@ -59,7 +59,7 @@ class PostingServiceTest {
         List<Posting> expected = List.of(
                 new Posting(1, "Does anyone have any good mods?", "Hey just wondering if anyone has and links to some good mods, thanks.", LocalDate.of(2023, 06, 27),5, 1),
                 new Posting(2, "Looking for a carry", "Just made a smurf and I need someone to hard carry for a few levels pleaseee", LocalDate.of(2023, 06, 26),2, 1));
-        when(repository.findByUsername("maria@alcantara.com")).thenReturn(expected);
+        when(repository.findByGamerTag("maria@alcantara.com")).thenReturn(expected);
         List<Posting> postings = service.findByUsername("maria@alcantara.com");
         assertNotNull(postings);
         assertEquals(postings, expected);
@@ -96,7 +96,7 @@ class PostingServiceTest {
         posting.setDescription("Testing testing 123...");
         posting.setDatePosted(LocalDate.now());
         posting.setGameId(5);
-        posting.setAppUserId(1);
+        posting.setGamerId(1);
 
         when(repository.create(posting)).thenReturn(posting);
 
