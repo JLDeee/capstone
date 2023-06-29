@@ -45,8 +45,9 @@ public class PostingController {
         return service.findByGameId(gameId);
     }
 
-    @GetMapping("/date/{datePosted}")
-    public List<Posting> findByDate(@PathVariable LocalDate datePosted) throws DataAccessException {
+    @GetMapping("/date/{date}")
+    public List<Posting> findByDate(@PathVariable String date) throws DataAccessException {
+        LocalDate datePosted = LocalDate.parse(date);
         return service.findByDate(datePosted);
     }
 
