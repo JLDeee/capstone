@@ -9,6 +9,14 @@ public class Result<T> {
     private T payload;
     private ResultType resultType = ResultType.SUCCESS;
 
+    public ResultType getResultType() {
+        return resultType;
+    }
+
+    public boolean isSuccess(){
+        return resultType == ResultType.SUCCESS;
+    }
+
     public T getPayload() {
         return payload;
     }
@@ -17,24 +25,17 @@ public class Result<T> {
         this.payload = payload;
     }
 
-    public void addMessage(String message){
-        addMessage(message, ResultType.INVALID);
+    public List<String> getMessages(){
+        return new ArrayList<>(messages);
     }
 
     public void addMessage(String message, ResultType resultType){
-        this.resultType = resultType;
         messages.add(message);
+        this.resultType = resultType;
     }
 
-    public List<String> getMessages(){
-        return messages;
-    }
 
-    public boolean isSuccess(){
-        return resultType == ResultType.SUCCESS;
-    }
 
-    public ResultType getResultType() {
-        return resultType;
-    }
+
+
 }
