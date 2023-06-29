@@ -33,7 +33,7 @@ select p.posting_id, p.gamer_id, p.game_id, p.header, p.`description`, p.date_po
 from posting p
 inner join gamer gr on p.gamer_id = gr.gamer_id
 inner join app_user u on u.app_user_id = gr.app_user_id
-where u.email = 'maria@alcantara.com';
+where u.username = 'maria@alcantara.com';
 
 select p.posting_id, p.gamer_id, p.game_id, p.header, p.`description`, p.date_posted
 from posting p
@@ -87,10 +87,10 @@ enabled
 from app_user 
 where username = 'maria@alcantara.com';
 
-update gamer 
-set gender_type = ?, 
-gamer_tag = ?, 
-birth_date = ?, bio = ? where gamer_id = ?;
+-- update gamer 
+-- set gender_type = ?, 
+-- gamer_tag = ?, 
+-- birth_date = ?, bio = ? where gamer_id = ?;
 
 select *
 from app_user;

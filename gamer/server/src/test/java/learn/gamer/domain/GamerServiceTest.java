@@ -16,7 +16,6 @@ import static org.mockito.Mockito.when;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 class GamerServiceTest {
-
     @Autowired
     GamerService service;
 
@@ -25,14 +24,11 @@ class GamerServiceTest {
 
     @Test
     void shouldFindAll() {
-
         when(repository.findAll()).thenReturn(List.of(
                 new Gamer(1, 1, Gender.MALE, "JLD", LocalDate.of(1999, 06, 04), "ADC main in League of Legends. Looking for a support duo to play with. :)"),
                 new Gamer(2, 2, Gender.FEMALE, "isabelle", LocalDate.of(2001, 04, 14), "Looking for someone to play Animal Crossing with and vibe!")
         ));
-
         List<Gamer> gamers = service.findAll();
-
         assertEquals(2, gamers.size());
     }
 
@@ -44,35 +40,33 @@ class GamerServiceTest {
     }
 
     @Test
-    void shouldNotFindNullByGamerTag(){
+    void shouldNotFindNonExistingGamerTag(){
+        when(repository.findByGamerTag("BABABOOP")).thenReturn(null);
         Gamer gamer = service.findByGamerTag("BABABOOP");
         assertNull(gamer);
     }
 
     @Test
-    void shouldFindHaloByGameTitle() {
+    void shouldFindByGameTitle() {
         when(repository.findByGameTitle("Fire Emblem")).thenReturn(new Gamer());
         Gamer gamer = service.findByGameTitle("Fire Emblem");
         assertNotNull(gamer);
     }
 
     @Test
-    void shouldNotFindNullByGameTitle(){
+    void shouldNotFindByNonExistingGameTitle(){
+        when(repository.findByGamerTag("BABABOOP")).thenReturn(null);
         Gamer gamer = service.findByGameTitle("BABABOOP");
         assertNull(gamer);
     }
 
     @Test
-    void shouldCreateGamer(){
-        Gamer gamer = new Gamer();
-        gamer.setGamerId(1);
-        gamer.setAppUserId(1);
-        gamer.setGamerTag("JLD");
-        gamer.setGenderType(Gender.MALE);
-        gamer.setBirthDate(LocalDate.of(1999, 06, 04));
-        gamer.setBio("ADC main in League of Legends. Looking for a support duo to play with. :)");
+    void shouldCreateValidGamer(){
+        Gamer expectedGamer = getGamer();
 
-        when(repository.create(gamer)).thenReturn(gamer);
+        Gamer gamer = getGamer();
+        gamer.setGamerId(0);
+        when(repository.create(gamer)).thenReturn(expectedGamer);
 
         Result<Gamer> result = service.create(gamer);
 
@@ -92,12 +86,8 @@ class GamerServiceTest {
 
     @Test
     void shouldNotCreateGamerIfGamerTagIsNull(){
-        Gamer gamer = new Gamer();
-        gamer.setGamerId(1);
-        gamer.setAppUserId(1);
-        gamer.setGenderType(Gender.MALE);
-        gamer.setBirthDate(LocalDate.of(1999, 06, 04));
-        gamer.setBio("ADC main in League of Legends. Looking for a support duo to play with. :)");
+        Gamer gamer = getGamer();
+        gamer.setGamerTag("");
 
         when(repository.create(gamer)).thenReturn(gamer);
 
@@ -105,12 +95,13 @@ class GamerServiceTest {
 
         assertFalse(result.isSuccess());
         assertEquals(result.getMessages().size(), 1);
+        assertEquals("Gamer tag is required.", result.getMessages().get(0));
     }
 
     @Test
     void shouldNotCreateGamerIfGenderTypeIsNull(){
         Gamer gamer = new Gamer();
-        gamer.setGamerId(1);
+        gamer.setGamerId(0);
         gamer.setAppUserId(1);
         gamer.setGamerTag("JLD");
         gamer.setBirthDate(LocalDate.of(1999, 06, 04));
@@ -122,12 +113,13 @@ class GamerServiceTest {
 
         assertFalse(result.isSuccess());
         assertEquals(result.getMessages().size(), 1);
+        assertEquals("Gender is required.", result.getMessages().get(0));
     }
 
     @Test
     void shouldNotCreateGamerIfBirthDateIsNull(){
         Gamer gamer = new Gamer();
-        gamer.setGamerId(1);
+        gamer.setGamerId(0);
         gamer.setAppUserId(1);
         gamer.setGamerTag("JLD");
         gamer.setGenderType(Gender.MALE);
@@ -139,12 +131,13 @@ class GamerServiceTest {
 
         assertFalse(result.isSuccess());
         assertEquals(result.getMessages().size(), 1);
+        assertEquals("Birth date is required.", result.getMessages().get(0));
     }
 
     @Test
     void shouldNotCreateGamerIfBioIsNull(){
         Gamer gamer = new Gamer();
-        gamer.setGamerId(1);
+        gamer.setGamerId(0);
         gamer.setAppUserId(1);
         gamer.setGamerTag("JLD");
         gamer.setGenderType(Gender.MALE);
@@ -156,20 +149,95 @@ class GamerServiceTest {
 
         assertFalse(result.isSuccess());
         assertEquals(result.getMessages().size(), 1);
+        assertEquals("Bio is required.", result.getMessages().get(0));
     }
 
     @Test
-    void shouldFindGamerByGameTitle(){
-        when(repository.findByGameTitle("Halo")).thenReturn(new Gamer());
-        Gamer gamer = service.findByGameTitle("Halo");
-        assertNotNull(gamer);
+    void shouldNotCreateWithDuplicateGamerTag() {
+        Gamer gamer = getGamer();
+
+        Gamer existingGamer = getGamer();
+        existingGamer.setGamerId(999);
+        existingGamer.setAppUserId(999);
+        existingGamer.setBio("Get duped!!!");
+
+        when(repository.findAll()).thenReturn(List.of(existingGamer));
+
+        Result<Gamer> result = service.create(gamer);
+        assertFalse(result.isSuccess());
+        assertEquals(result.getMessages().size(), 1);
+        assertEquals("That gamer tag is already in use! Duplicate gamer tag.", result.getMessages().get(0));
     }
 
     @Test
-    void shouldNotFindGamerByNullGameTitle(){
+    void shouldNotCreateWithIdOtherThanZero() {
+        Gamer gamer = getGamer();
+        gamer.setGamerId(999);
+        when(repository.create(gamer)).thenReturn(gamer);
 
+        Result<Gamer> result = service.create(gamer);
+
+        assertFalse(result.isSuccess());
+        assertEquals(result.getMessages().size(), 1);
+        assertEquals("Gamer ID cannot be set for an add operation.", result.getMessages().get(0));
     }
 
+    @Test
+    void shouldUpdateIfValid() {
+        Gamer existing = getGamer();
+        existing.setGamerId(9);
 
+        Gamer toUpdate = getGamer();
+        toUpdate.setGamerId(9);
+        toUpdate.setGamerTag("TheCoolerJLD");
 
+        when(repository.findAll()).thenReturn(List.of(existing));
+        when(repository.update(toUpdate)).thenReturn(true);
+
+        Result<Gamer> result = service.update(toUpdate);
+        assertTrue(result.isSuccess());
+    }
+
+    @Test
+    void shouldNotUpdateWithDuplicateName() {
+        Gamer duper = getGamer();
+        duper.setGamerId(13);
+        duper.setGamerTag("WarpTrotter");
+
+        Gamer toUpdate = getGamer();
+        toUpdate.setGamerId(9);
+        toUpdate.setGamerTag("WarpTrotter");
+
+        when(repository.findAll()).thenReturn(List.of(duper));
+        when(repository.update(toUpdate)).thenReturn(false);
+
+        Result<Gamer> result = service.update(toUpdate);
+        assertFalse(result.isSuccess());
+        assertEquals(result.getMessages().size(), 1);
+        assertEquals("That gamer tag is already in use! Duplicate gamer tag.", result.getMessages().get(0));
+    }
+
+    @Test
+    void shouldNotUpdateNonExistingId() {
+        Gamer toUpdate = getGamer();
+        toUpdate.setGamerId(999);
+
+        Result<Gamer> result = service.update(toUpdate);
+        assertFalse(result.isSuccess());
+        assertEquals(ResultType.NOT_FOUND, result.getResultType());
+        assertEquals(result.getMessages().size(), 1);
+        assertEquals("Gamer ID 999 not found.", result.getMessages().get(0));
+    }
+
+    // just a method so we don't have to keep retyping this
+    private Gamer getGamer() {
+        Gamer gamer = new Gamer();
+        gamer.setGamerId(0);
+        gamer.setAppUserId(1);
+        gamer.setGamerTag("JLD");
+        gamer.setGenderType(Gender.MALE);
+        gamer.setBirthDate(LocalDate.of(1999, 06, 04));
+        gamer.setBio("ADC main in League of Legends. Looking for a support duo to play with. :)");
+        return gamer;
+    }
 }
