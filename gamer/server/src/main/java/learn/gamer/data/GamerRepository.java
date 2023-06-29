@@ -11,7 +11,9 @@ public interface GamerRepository {
 
     Gamer findByGamerTag(String gamerTag);
 
-    Gamer findByGameTitle(String gameTitle);
+    List<Gamer> findByGameTitle(String gameTitle);
+
+    List<Gamer> findByGameId(int gameId);
 
     Gamer create(Gamer gamer);
 

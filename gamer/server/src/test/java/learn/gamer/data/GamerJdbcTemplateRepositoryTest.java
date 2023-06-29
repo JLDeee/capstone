@@ -53,6 +53,34 @@ class GamerJdbcTemplateRepositoryTest {
     }
 
     @Test
+    void shouldFindByGameTitle() {
+        List<Gamer> gamers = repository.findByGameTitle("Yakuza 0");
+        assertNotNull(gamers);
+        assertTrue(gamers.size() > 0);
+        assertEquals(2, gamers.size());
+    }
+
+    @Test
+    void shouldNotFindByNonExistingGameTitle() {
+        List<Gamer> gamers = repository.findByGameTitle("BEEPBOOP");
+        assertEquals(0, gamers.size());
+    }
+
+    @Test
+    void shouldFindByGameId() {
+        List<Gamer> gamers = repository.findByGameId(1);
+        assertNotNull(gamers);
+        assertTrue(gamers.size() > 0);
+        assertEquals(2, gamers.size());
+    }
+
+    @Test
+    void shouldNotFindByNonExistingGameId() {
+        List<Gamer> gamers = repository.findByGameId(999);
+        assertEquals(0, gamers.size());
+    }
+
+    @Test
     void shouldUpdate() {
         Gamer newJackie = repository.findByGamerTag("gt_jackie");
         newJackie.setBio("League of Legends XIV coming soon! (not a lie) (trust me)");
@@ -60,6 +88,6 @@ class GamerJdbcTemplateRepositoryTest {
         assertTrue(repository.update(newJackie));
         Gamer actual = repository.findByGamerTag("gt_jackie");
         assertNotNull(actual);
-        assertEquals("League of Legends XIV coming soon! (true)", actual.getBio());
+        assertEquals("League of Legends XIV coming soon! (not a lie) (trust me)", actual.getBio());
     }
 }

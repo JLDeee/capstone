@@ -39,14 +39,25 @@ public class GamerJdbcTemplateRepository implements GamerRepository {
     }
 
     @Override
-    public Gamer findByGameTitle(String gameTitle) {
-        final String sql = "select g.game_title "
+    public List<Gamer> findByGameTitle(String gameTitle) {
+        final String sql = "select gr.gamer_id, gr.app_user_id, gr.gender_type, gr.gamer_tag, gr.birth_date, gr.bio "
                 + "from game g "
                 + "inner join gamer_game grg on grg.game_id = g.game_id "
                 + "inner join gamer gr on grg.gamer_id = gr.gamer_id "
-                + "where g.game_title = ?;";
-        return jdbcTemplate.query(sql, new GamerMapper(), gameTitle)
-                .stream().findFirst().orElse(null);
+                + "where g.game_title = ? "
+                + "order by gr.gamer_tag asc;";
+        return jdbcTemplate.query(sql, new GamerMapper(), gameTitle);
+    }
+
+    @Override
+    public List<Gamer> findByGameId(int gameId) {
+        final String sql = "select gr.gamer_id, gr.app_user_id, gr.gender_type, gr.gamer_tag, gr.birth_date, gr.bio "
+                + "from game g "
+                + "inner join gamer_game grg on grg.game_id = g.game_id "
+                + "inner join gamer gr on grg.gamer_id = gr.gamer_id "
+                + "where g.game_id = ? "
+                + "order by gr.gamer_tag asc;";
+        return jdbcTemplate.query(sql, new GamerMapper(), gameId);
     }
 
     @Override
