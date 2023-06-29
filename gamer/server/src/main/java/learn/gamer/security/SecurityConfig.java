@@ -31,14 +31,17 @@ public class SecurityConfig {
                 .antMatchers("/create_account").permitAll()
                 // gamer
                 .antMatchers(HttpMethod.GET,
-                        "/gamer", "/gamer/*", "/gamer/game/*").permitAll()
+                        "/gamer",
+                        "/gamer/*",
+                        "/gamer/game/*").permitAll()
                 .antMatchers(HttpMethod.POST,
                         "/gamer/").permitAll()
                 .antMatchers(HttpMethod.PUT,
                         "/gamer/*").permitAll()
                 // game
                 .antMatchers(HttpMethod.GET,
-                        "/game", "/game/*").permitAll()
+                        "/game",
+                        "/game/*").permitAll()
                 .antMatchers(HttpMethod.POST,
                         "/game").permitAll()
                 .antMatchers(HttpMethod.DELETE,
@@ -49,7 +52,12 @@ public class SecurityConfig {
 //                        "/game/*").hasAnyAuthority("USER","ADMIN")
                 // post
                 .antMatchers(HttpMethod.GET,
-                        "/posting", "/posting/*", "/posting/game/*").permitAll()
+                        "/posting",
+                        "/posting/*",
+                        "/posting/player/*",
+                        "/posting/game/title/*",
+                        "/posting/game/id/*",
+                        "/posting/date/*").permitAll()
                 .antMatchers(HttpMethod.POST,
                         "/posting").permitAll()
                 .antMatchers(HttpMethod.PUT,
@@ -64,7 +72,9 @@ public class SecurityConfig {
 //                        "/posting/*").hasAnyAuthority("ADMIN")
                 // match
                 .antMatchers(HttpMethod.GET,
-                        "/match", "/you_match/*", "/match_you/*").permitAll()
+                        "/match",
+                        "/you_match/*",
+                        "/match_you/*").permitAll()
                 .antMatchers(HttpMethod.POST,
                         "/match").permitAll()
                 .antMatchers(HttpMethod.DELETE,
