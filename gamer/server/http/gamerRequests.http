@@ -1,0 +1,13 @@
+@url =  http://localhost:8080/gamer
+
+GET {{url}} HTTP/1.1
+
+###
+
+GET {{url}}/gt_jackie HTTP/1.1
+
+###
+
+GET {{url}}/game/1 HTTP/1.1
+
+###
