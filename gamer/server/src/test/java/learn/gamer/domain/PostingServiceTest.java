@@ -164,32 +164,34 @@ class PostingServiceTest {
         assertTrue(result.getMessages().size() == 2);
     }
 
-//    @Test
-//    void shouldNotCreateDuplicate() throws DataAccessException {
-//        Posting posting = new Posting();
-//        posting.setHeader("Does anyone have any good mods?");
-//        posting.setDescription("Hey just wondering if anyone has and links to some good mods, thanks.");
-//        posting.setDatePosted(LocalDate.now());
-//        posting.setGameId(5);
-//        posting.setAppUserId(1);
-//
+    @Test
+    void shouldNotCreateDuplicate() throws DataAccessException {
+        Posting posting = new Posting();
+        posting.setHeader("Does anyone have any good mods?");
+        posting.setDescription("Hey just wondering if anyone has and links to some good mods, thanks.");
+        posting.setDatePosted(LocalDate.parse("2023-06-27"));
+        posting.setGameId(5);
+        posting.setGamerId(1);
+
 //        when(repository.create(posting)).thenReturn(posting);
-//
-//
-//        Result<Posting> result = service.create(posting);
-//
-//        assertFalse(result.isSuccess());
-//        assertTrue(result.getMessages().size() == 1);
-//    }
+
+        Posting posting2 = new Posting();
+        posting2.setHeader("Does anyone have any good mods?");
+        posting2.setDescription("Hey just wondering if anyone has and links to some good mods, thanks.");
+        posting2.setDatePosted(LocalDate.parse("2023-06-27"));
+        posting2.setGameId(5);
+        posting2.setGamerId(1);
+
+        when(repository.findAll()).thenReturn(List.of(posting2));
+//        when(repository.create(posting2)).thenReturn(posting2);
+
+
+        Result<Posting> result = service.create(posting);
+
+        assertFalse(result.isSuccess());
+        assertTrue(result.getMessages().size() == 1);
+    }
 }
 
 
 
-//        Posting posting2 = new Posting();
-//        posting.setHeader("Does anyone have any good mods?");
-//        posting.setDescription("Hey just wondering if anyone has and links to some good mods, thanks.");
-//        posting.setDatePosted(LocalDate.now());
-//        posting.setGameId(5);
-//        posting.setAppUserId(1);
-//
-//        when(repository.create(posting2)).thenReturn(posting2);
