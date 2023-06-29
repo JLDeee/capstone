@@ -30,22 +30,22 @@ public class PostingController {
         return service.findById(postingId);
     }
 
-    @GetMapping("/{gamerTag}")
+    @GetMapping("/player/{gamerTag}")
     public List<Posting> findByGamerTag(@PathVariable String gamerTag) throws DataAccessException {
         return service.findByGamerTag(gamerTag);
     }
 
-    @GetMapping("/{gameTitle}")
+    @GetMapping("/game/title/{gameTitle}")
     public List<Posting> findByGameTitle(@PathVariable String gameTitle) throws DataAccessException {
         return service.findByGameTitle(gameTitle);
     }
 
-    @GetMapping("/{gameId}")
+    @GetMapping("/game/id/{gameId}")
     public List<Posting> findByGameId(@PathVariable int gameId) throws DataAccessException {
         return service.findByGameId(gameId);
     }
 
-    @GetMapping("/{datePosted}")
+    @GetMapping("/date/{datePosted}")
     public List<Posting> findByDate(@PathVariable LocalDate datePosted) throws DataAccessException {
         return service.findByDate(datePosted);
     }
