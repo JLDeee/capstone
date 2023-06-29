@@ -91,6 +91,12 @@ class PostingJdbcTemplateRepositoryTest {
     }
 
     @Test
+    void shouldNotFindByInvalidGameId() throws DataAccessException {
+        List<Posting> result = repository.findByGameId(99);
+        assertEquals(0, result.size());
+    }
+
+    @Test
     void shouldNotFindByFutureDate() throws DataAccessException {
         List<Posting> result = repository.findByDate(LocalDate.of(2024, 06, 27));
         assertEquals(0, result.size());
