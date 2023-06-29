@@ -2,6 +2,7 @@ package learn.gamer.domain;
 
 import learn.gamer.data.GameRepository;
 import learn.gamer.models.Game;
+import learn.gamer.models.Gamer;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -71,18 +72,21 @@ class GameServiceTest {
 
     @Test
     void shouldNotAddDuplicateGame(){
-        List<Game> games = List.of(new Game(1,"League of Legends"),
-        new Game(2, "Street Fighter 6"));
-
         Game game = new Game();
         game.setGameId(1);
         game.setGameTitle("League of Legends");
 
-        //when(repository.add(game)).thenReturn(games.add(game));
+        Game duplicate = new Game();
+        duplicate.setGameId(9);
+        duplicate.setGameTitle("League of Legends");
 
-        Result<Game> result = service.add(game);
+        when(repository.findAll()).thenReturn(List.of(game));
+        when(repository.add(duplicate)).thenReturn(duplicate);
 
+        Result<Game> result = service.add(duplicate);
         assertFalse(result.isSuccess());
+        assertEquals(result.getMessages().size(), 1);
+        assertEquals("Cannot have duplicate of same game.", result.getMessages().get(0));
     }
 
     @Test
