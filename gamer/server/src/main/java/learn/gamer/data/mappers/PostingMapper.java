@@ -16,7 +16,7 @@ public class PostingMapper implements RowMapper<Posting> {
         posting.setDescription(rs.getString("description"));
         posting.setDatePosted(rs.getDate("date_posted").toLocalDate());
         posting.setGameId(rs.getInt("game_id"));
-        posting.setAppUserId(rs.getInt("app_user_id"));
+        posting.setGamerId(rs.getInt("gamer_id"));
         return posting;
     }
 }

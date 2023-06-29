@@ -1,8 +1,6 @@
 package learn.gamer.data;
 
-import learn.gamer.models.Game;
 import learn.gamer.models.Match;
-import org.apache.tomcat.jni.Local;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,23 +36,23 @@ class MatchJdbcTemplateRepositoryTest {
     }
 
     @Test
-    void shouldFindMatchesFromId2() {
+    void shouldFindMatchesFromId3() {
 //        (1, 2, 6, '2023-06-27'),
 //        (2, 3, 7, '2023-06-26');
-        // "matchFrom" means "these are the matches sent FROM user with id 2 (from user 2)
-        List<Match> matchFrom = repository.findYouMatched(2);
+        // "matchFrom" means "these are the matches sent FROM user with id 3 (from user 2)
+        List<Match> matchFrom = repository.findYouMatched(3);
         assertNotNull(matchFrom);
         assertEquals(1, matchFrom.size());
-        assertEquals(6, matchFrom.get(0).getAppUserId2());
+        assertEquals(7, matchFrom.get(0).getGamerId2());
     }
 
     @Test
-    void shouldFindMatchesForId2() {
+    void shouldFindMatchesForId7() {
         // "matchedTo" means "these are the matches sent TO user with id 7 (from other people)
         List<Match> matchedTo = repository.findMatchedYou(7);
         assertNotNull(matchedTo);
         assertEquals(1, matchedTo.size());
-        assertEquals(3, matchedTo.get(0).getAppUserId1());
+        assertEquals(3, matchedTo.get(0).getGamerId1());
     }
 
     @Test
@@ -68,15 +66,15 @@ class MatchJdbcTemplateRepositoryTest {
     @Test
     void shouldAddNewMatch() {
         Match match = new Match();
-        match.setAppUserId1(1);
-        match.setAppUserId2(2);
+        match.setGamerId1(1);
+        match.setGamerId2(2);
         match.setDateMatched(LocalDate.parse("2023-01-01"));
 
         Match actual = repository.add(match);
         assertNotNull(actual);
         assertEquals(3, actual.getMatchId());
-        assertEquals(1, actual.getAppUserId1());
-        assertEquals(2, actual.getAppUserId2());
+        assertEquals(1, actual.getGamerId1());
+        assertEquals(2, actual.getGamerId2());
         assertEquals(LocalDate.parse("2023-01-01"), actual.getDateMatched());
     }
 

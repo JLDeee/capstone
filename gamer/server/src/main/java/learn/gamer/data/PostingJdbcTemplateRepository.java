@@ -46,7 +46,7 @@ public class PostingJdbcTemplateRepository implements PostingRepository {
 
         final String sql = "select " +
                 "posting_id, " +
-                "app_user_id, " +
+                "gamer_id, " +
                 "game_id, " +
                 "header, " +
                 "`description`, " +
@@ -58,7 +58,7 @@ public class PostingJdbcTemplateRepository implements PostingRepository {
 
     @Override
     public Posting findById(int postingId) throws DataAccessException {
-        final String sql = "select posting_id, app_user_id, game_id, header, `description`, date_posted " +
+        final String sql = "select posting_id, gamer_id, game_id, header, `description`, date_posted " +
                 "from posting " +
                 "where posting_id = ?";
 
@@ -66,20 +66,20 @@ public class PostingJdbcTemplateRepository implements PostingRepository {
     }
 
     @Override
-    public List<Posting> findByUsername(String username) throws DataAccessException {
+    public List<Posting> findByGamerTag(String gamerTag) throws DataAccessException {
 
-        final String sql = "select p.posting_id, p.app_user_id, p.game_id, p.header, p.`description`, p.date_posted " +
+        final String sql = "select p.posting_id, p.gamer_id, p.game_id, p.header, p.`description`, p.date_posted " +
                 "from posting p " +
-                "inner join app_user u on p.app_user_id = u.app_user_id " +
-                "where u.email = ?";
+                "inner join gamer gr on p.gamer_id = gr.gamer_id " +
+                "where gr.gamer_tag = ?";
 
-        return jdbcTemplate.query(sql, new PostingMapper(), username);
+        return jdbcTemplate.query(sql, new PostingMapper(), gamerTag);
     }
 
     @Override
     public List<Posting> findByGameTitle(String gameTitle) throws DataAccessException {
 
-        final String sql = "select p.posting_id, p.app_user_id, p.game_id, p.header, p.`description`, p.date_posted " +
+        final String sql = "select p.posting_id, p.gamer_id, p.game_id, p.header, p.`description`, p.date_posted " +
                 "from posting p " +
                 "inner join game g on p.game_id = g.game_id " +
                 "where g.game_title = ?";
@@ -90,7 +90,7 @@ public class PostingJdbcTemplateRepository implements PostingRepository {
     @Override
     public List<Posting> findByDate(LocalDate datePosted) throws DataAccessException {
 
-        final String sql = "select posting_id, app_user_id, game_id, header, `description`, date_posted " +
+        final String sql = "select posting_id, gamer_id, game_id, header, `description`, date_posted " +
                 "from posting " +
                 "where date_posted = ?";
 
@@ -103,7 +103,7 @@ public class PostingJdbcTemplateRepository implements PostingRepository {
     @Override
     public Posting create(Posting posting) throws DataAccessException {
 
-        final String sql = "insert into posting (header, `description`, date_posted, game_id, app_user_id) " +
+        final String sql = "insert into posting (header, `description`, date_posted, game_id, gamer_id) " +
                 "values (?, ?, ?, ?, ?);";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -113,7 +113,7 @@ public class PostingJdbcTemplateRepository implements PostingRepository {
             statement.setString(2, posting.getDescription());
             statement.setDate(3, posting.getDatePosted() == null ? null : Date.valueOf(posting.getDatePosted()));
             statement.setInt(4, posting.getGameId());
-            statement.setInt(5, posting.getAppUserId());
+            statement.setInt(5, posting.getGameId());
             return statement;
         }, keyHolder);
 
@@ -135,7 +135,7 @@ public class PostingJdbcTemplateRepository implements PostingRepository {
                 "`description` = ?, " +
                 "date_posted = ?, " +
                 "game_id = ?, " +
-                "app_user_id = ? " +
+                "gamer_id = ? " +
                 "where posting_id = ?;";
 
         int rowsUpdated = jdbcTemplate.update(sql,
@@ -143,7 +143,7 @@ public class PostingJdbcTemplateRepository implements PostingRepository {
                 posting.getDescription(),
                 posting.getDatePosted(),
                 posting.getGameId(),
-                posting.getAppUserId(),
+                posting.getGamerId(),
                 posting.getPostingId());
 
         return rowsUpdated > 0;

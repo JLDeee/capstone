@@ -11,7 +11,7 @@ public interface PostingRepository {
 
     Posting findById(int postingId) throws DataAccessException;
 
-    List<Posting> findByUsername(String username) throws DataAccessException;
+    List<Posting> findByGamerTag(String gamerTag) throws DataAccessException;
 
     List<Posting> findByGameTitle(String gameTitle) throws DataAccessException;
 
