@@ -31,7 +31,7 @@ public class SecurityConfig {
                 .antMatchers("/create_account").permitAll()
                 // gamer
                 .antMatchers(HttpMethod.GET,
-                        "/gamer", "/gamer/*").permitAll()
+                        "/gamer", "/gamer/*", "/gamer/game/*").permitAll()
                 .antMatchers(HttpMethod.POST,
                         "/gamer/").permitAll()
                 .antMatchers(HttpMethod.PUT,
@@ -49,7 +49,7 @@ public class SecurityConfig {
 //                        "/game/*").hasAnyAuthority("USER","ADMIN")
                 // post
                 .antMatchers(HttpMethod.GET,
-                        "/posting", "/posting/*").permitAll()
+                        "/posting", "/posting/*", "/posting/game/*").permitAll()
                 .antMatchers(HttpMethod.POST,
                         "/posting").permitAll()
                 .antMatchers(HttpMethod.PUT,
