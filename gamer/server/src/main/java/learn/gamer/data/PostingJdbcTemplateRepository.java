@@ -22,19 +22,6 @@ public class PostingJdbcTemplateRepository implements PostingRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-//    private final RowMapper<Posting> mapper = (resultSet, rowIndex) -> {
-//        Posting posting = new Posting();
-//
-//        posting.setPostingId(resultSet.getInt("posting_id"));
-//        posting.setHeader(resultSet.getString("header"));
-//        posting.setDescription(resultSet.getString("description"));
-//        posting.setDatePosted(resultSet.getDate("date_posted").toLocalDate());
-//        posting.setGameId(resultSet.getInt("game_id"));
-//        posting.setAppUserId(resultSet.getInt("app_user_id"));
-//
-//        return posting;
-//    };
-
     //full CRUD methods
         //including find by username and find by game title
 
