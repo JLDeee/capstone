@@ -36,6 +36,15 @@ public class GameController {
         return ResponseEntity.ok(game);
     }
 
+    @GetMapping("/{game_title}")
+    public ResponseEntity<Game> findByGameID(@PathVariable int gameId) {
+        Game game = service.findByGameId(gameId);
+        if (game == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(game);
+    }
+
     @PostMapping
     public ResponseEntity<?> add(@RequestBody Game game) {
         Result<Game> result = service.add(game);
