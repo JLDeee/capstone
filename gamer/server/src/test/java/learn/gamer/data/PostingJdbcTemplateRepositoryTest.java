@@ -72,7 +72,7 @@ class PostingJdbcTemplateRepositoryTest {
     }
 
     @Test
-    void shouldNotFindByInvalidUsername() throws DataAccessException {
+    void shouldNotFindByInvalidGamerTag() throws DataAccessException {
         List<Posting> result = repository.findByGamerTag("invalid");
         assertEquals(0, result.size());
     }
