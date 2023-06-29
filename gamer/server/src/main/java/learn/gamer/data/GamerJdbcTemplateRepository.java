@@ -1,6 +1,7 @@
 package learn.gamer.data;
 
 import learn.gamer.data.mappers.GamerMapper;
+import learn.gamer.models.Game;
 import learn.gamer.models.Gamer;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;

@@ -12,6 +12,9 @@ public interface GameRepository {
     Game findByGameTitle(String gameTitle);
 
     @Transactional
+    Game findByGameId(int gameId);
+
+    @Transactional
     Game add(Game game);
 
     @Transactional

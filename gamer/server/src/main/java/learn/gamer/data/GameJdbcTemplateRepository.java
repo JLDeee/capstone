@@ -38,6 +38,16 @@ public class GameJdbcTemplateRepository implements GameRepository {
 
     @Override
     @Transactional
+    public Game findByGameId(int gameId) {
+        final String sql = "select game_id, game_title "
+                + "from game "
+                + "where game_id = ?;";
+        return jdbcTemplate.query(sql, new GameMapper(), gameId)
+                .stream().findFirst().orElse(null);
+    }
+
+    @Override
+    @Transactional
     public Game add(Game game) {
         final String sql = "insert into game (game_title) values (?);";
 

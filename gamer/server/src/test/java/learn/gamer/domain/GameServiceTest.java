@@ -103,6 +103,26 @@ class GameServiceTest {
     }
 
     @Test
+    void shouldFindByGameId(){
+        when(repository.findByGameId(7)).thenReturn(new Game());
+        Game game = service.findByGameId(7);
+        assertNotNull(game);
+    }
+
+    @Test
+    void shouldNotFindNonExistingGameById(){
+        Game game = service.findByGameId(99);
+        assertNull(game);
+    }
+
+    @Test
+    void shouldNotFindGameWithInvalidId(){
+        when(repository.findByGameId(-5)).thenReturn(new Game());
+        Game game = service.findByGameId(-5);
+        assertNull(game);
+    }
+
+    @Test
     void shouldNotAddNull(){
         // Arrange
         Game game = null;

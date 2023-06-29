@@ -48,6 +48,20 @@ class GameJdbcTemplateRepositoryTest {
     }
 
     @Test
+    void shouldFindByGameId(){
+        Game expected = new Game(5, "Yakuza 0");
+        Game actual = repository.findByGameId(5);
+
+        assertEquals(expected.getGameTitle(), actual.getGameTitle());
+    }
+
+    @Test
+    void shouldNotFindNonExistingGameById(){
+        Game fakeGame = repository.findByGameId(999);
+        assertNull(fakeGame);
+    }
+
+    @Test
     void shouldAddGame() {
         Game game = new Game();
         game.setGameTitle("Destiny");
