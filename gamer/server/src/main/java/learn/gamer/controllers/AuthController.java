@@ -4,6 +4,7 @@ import learn.gamer.domain.Result;
 import learn.gamer.models.AppUser;
 import learn.gamer.security.AppUserService;
 import learn.gamer.security.JwtConverter;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,6 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
+@ConditionalOnWebApplication
 public class AuthController {
     private final AuthenticationManager authenticationManager;
     private final JwtConverter jwtConverter;
