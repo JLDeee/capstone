@@ -2,6 +2,7 @@ package learn.gamer.controllers;
 
 import learn.gamer.domain.MatchService;
 import learn.gamer.domain.Result;
+import learn.gamer.domain.ResultType;
 import learn.gamer.models.Game;
 import learn.gamer.models.Match;
 import org.springframework.http.HttpStatus;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:3000"})
+//@CrossOrigin(origins = {"http://localhost:3000"})
 @RequestMapping("/match")
 public class MatchController {
 
@@ -44,9 +45,21 @@ public class MatchController {
         return ResponseEntity.ok(matches);
     }
 
-/*    @PostMapping
-    public ResponseEntity<Match> add(@RequestBody Match match) {
+    @PostMapping
+    public ResponseEntity<?> add(@RequestBody Match match) {
         Result<Match> result = service.add(match);
-        return new ResponseEntity<>(result.getPayload(), getStatus(result, HttpStatus.CREATED));
-    }*/
+        if (!result.isSuccess()) {
+            return new ResponseEntity<>(result.getMessages(), HttpStatus.BAD_REQUEST); // 400
+        }
+        return new ResponseEntity<>(result.getPayload(), HttpStatus.CREATED); // 201
+    }
+
+    @DeleteMapping("/{match_id}")
+    public ResponseEntity<Void> deleteById(@PathVariable int matchId) {
+        Result<Match> result = service.deleteById(matchId);
+        if (result.getResultType() == ResultType.NOT_FOUND) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT); // 204
+    }
 }

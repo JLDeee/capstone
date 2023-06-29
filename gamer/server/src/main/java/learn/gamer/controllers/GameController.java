@@ -1,14 +1,18 @@
 package learn.gamer.controllers;
 
 import learn.gamer.domain.GameService;
+import learn.gamer.domain.Result;
+import learn.gamer.domain.ResultType;
 import learn.gamer.models.Game;
+import learn.gamer.models.Match;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:3000"})
+//@CrossOrigin(origins = {"http://localhost:3000"})
 @RequestMapping("/game")
 public class GameController {
 
@@ -24,11 +28,29 @@ public class GameController {
     }
 
     @GetMapping("/{game_title}")
-    public ResponseEntity<Game> findById(@PathVariable String gameTitle) {
+    public ResponseEntity<Game> findByGameTitle(@PathVariable String gameTitle) {
         Game game = service.findByGameTitle(gameTitle);
         if (game == null) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(game);
+    }
+
+    @PostMapping
+    public ResponseEntity<?> add(@RequestBody Game game) {
+        Result<Game> result = service.add(game);
+        if (!result.isSuccess()) {
+            return new ResponseEntity<>(result.getMessages(), HttpStatus.BAD_REQUEST); // 400
+        }
+        return new ResponseEntity<>(result.getPayload(), HttpStatus.CREATED); // 201
+    }
+
+    @DeleteMapping("/{game_id}")
+    public ResponseEntity<Void> deleteById(@PathVariable int gameId) {
+        Result<Game> result = service.deleteById(gameId);
+        if (result.getResultType() == ResultType.NOT_FOUND) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT); // 204
     }
 }
