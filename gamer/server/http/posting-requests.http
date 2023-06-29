@@ -2,4 +2,16 @@
 
 ### [ ] Get back all posting records
 
-GET http://localhost:8080/posting HTTP/1.1
+GET {{url}} HTTP/1.1
+
+### [ ] Get back one posting by their ID
+
+GET {{url}}/5 HTTP/1.1
+
+### [ ] Get back postings by someone's GT
+
+GET {{url}}/player/gt_maria HTTP/1.1
+
+### [ ] Get back postings by game ID
+
+GET {{url}}/game/id/5 HTTP/1.1
