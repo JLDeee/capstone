@@ -58,7 +58,7 @@ class MatchServiceTest {
     void shouldFindYouMatched(){
         when(repository.findYouMatched(1)).thenReturn(List.of(
                 new Match(1,1,2, LocalDate.of(2023, 06, 25))));
-        List<Match> matches = service.findMatchedYou(2);
+        List<Match> matches = service.findYouMatched(1);
         assertEquals(matches.size(), 1);
         assertTrue(matches.get(0).getGamerId1() == 1);
         assertTrue(matches.get(0).getGamerId2() == 2);
@@ -89,6 +89,38 @@ class MatchServiceTest {
     @Test
     void shouldNotAddMatchWithoutGamers(){
         Match match = new Match();
+        match.setDateMatched(LocalDate.of(2023, 06, 20));
+
+        when(repository.add(match)).thenReturn(match);
+
+        Result<Match> result = service.add(match);
+
+        assertFalse(result.isSuccess());
+        assertEquals(result.getMessages().size(), 1);
+    }
+
+    @Test
+    void shouldNotAddMatchIfGamersAreTheSame(){
+        Match match = new Match();
+        match.setMatchId(1);
+        match.setGamerId1(1);
+        match.setGamerId2(1);
+        match.setDateMatched(LocalDate.of(2023, 06, 20));
+
+        when(repository.add(match)).thenReturn(match);
+
+        Result<Match> result = service.add(match);
+
+        assertFalse(result.isSuccess());
+        assertEquals(result.getMessages().size(), 1);
+    }
+
+    @Test
+    void shouldNotAddMatchIfGamerIdsAreInvalid(){
+        Match match = new Match();
+        match.setMatchId(1);
+        match.setGamerId1(0);
+        match.setGamerId2(-1);
         match.setDateMatched(LocalDate.of(2023, 06, 20));
 
         when(repository.add(match)).thenReturn(match);

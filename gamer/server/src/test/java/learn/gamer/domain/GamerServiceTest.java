@@ -1,11 +1,8 @@
 package learn.gamer.domain;
 
 import learn.gamer.data.GamerRepository;
-import learn.gamer.data.MatchRepository;
-import learn.gamer.models.Game;
 import learn.gamer.models.Gamer;
 import learn.gamer.models.Gender;
-import learn.gamer.models.Match;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

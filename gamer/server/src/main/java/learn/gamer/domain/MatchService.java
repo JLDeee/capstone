@@ -58,6 +58,7 @@ public class MatchService {
     //Check if Id is same
     //check that match date is in the past
     //check that there is a date for the match
+    //gamer 1 and 2 cannot be null
     private Result<Match> validate(Match match) {
 
         Result<Match> result = new Result<>();
@@ -74,6 +75,17 @@ public class MatchService {
 
         if(match.getDateMatched().isAfter(LocalDate.now())) {
             result.addMessage("Match must be in the past.", ResultType.INVALID);
+            return result;
+        }
+
+        if(match.getGamerId1() <= 0 || match.getGamerId2() <= 0) {
+            result.addMessage("GamerId1 and/or gamerId2 must exist", ResultType.INVALID);
+            return result;
+        }
+
+        if(match.getGamerId1() == match.getGamerId2()) {
+            result.addMessage("GamerId1 and gamerId2 cannot be the same", ResultType.INVALID);
+            return result;
         }
         return result;
     }
