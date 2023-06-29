@@ -79,6 +79,19 @@ class PostingServiceTest {
     }
 
     @Test
+    void shouldFindByGameId5() throws DataAccessException {
+        List<Posting> expected = List.of(
+                new Posting(1, "Does anyone have any good mods?", "Hey just wondering if anyone has and links to some good mods, thanks.", LocalDate.of(2023, 06, 27),5, 1),
+                new Posting(9, "I made some sick living room mods", "If anyone wants to make their living room look amazing DM me I have a link", LocalDate.of(2023, 06, 21),5, 5),
+                new Posting(10, "What do I do if I die?", "My toon just died trying to put a house fire out, not sure what to do?", LocalDate.of(2023, 06, 20),5, 6),
+                new Posting(11, "Looking for friends to play with", "I have been out of the gaming scene for a while and could use some buddies to play with!", LocalDate.of(2023, 06, 19),5, 6));
+        when(repository.findByGameId(5)).thenReturn(expected);
+        List<Posting> postings = service.findByGameId(5);
+        assertNotNull(postings);
+        assertEquals(postings, expected);
+    }
+
+    @Test
     void shouldFindBySpecificDate() throws DataAccessException {
         List<Posting> expected = List.of(
                 new Posting(5, "Does anyone need a carry?", "I am bored and have time tonight to carry a n00b out there, let me know", LocalDate.of(2023, 06, 23),2, 3),
@@ -138,8 +151,14 @@ class PostingServiceTest {
     }
 
     @Test
-    void shouldNotFindByInvalidGame() throws DataAccessException {
+    void shouldNotFindByInvalidGameTitle() throws DataAccessException {
         List<Posting> postings = service.findByGameTitle("Sims 1.5");
+        assertEquals(0, postings.size());
+    }
+
+    @Test
+    void shouldNotFindByInvalidGameId() throws DataAccessException {
+        List<Posting> postings = service.findByGameId(999);
         assertEquals(0, postings.size());
     }
 
