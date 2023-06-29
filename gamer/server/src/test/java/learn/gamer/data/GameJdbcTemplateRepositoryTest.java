@@ -49,8 +49,8 @@ class GameJdbcTemplateRepositoryTest {
 
     @Test
     void shouldFindByGameId(){
-        Game expected = new Game(5, "Yakuza 0");
-        Game actual = repository.findByGameId(5);
+        Game expected = new Game(1, "Yakuza 0");
+        Game actual = repository.findByGameId(1);
 
         assertEquals(expected.getGameTitle(), actual.getGameTitle());
     }
