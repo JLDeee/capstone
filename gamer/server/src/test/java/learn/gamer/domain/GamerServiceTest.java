@@ -34,15 +34,15 @@ class GamerServiceTest {
 
     @Test
     void shouldFindByGamerTag(){
-        when(repository.findByGamerTag("JLD")).thenReturn(new Gamer());
-        Gamer gamer = service.findByGamerTag("JLD");
+        when(repository.findByGamerId(1)).thenReturn(new Gamer());
+        Gamer gamer = service.findByGamerId(1);
         assertNotNull(gamer);
     }
 
     @Test
     void shouldNotFindNonExistingGamerTag(){
-        when(repository.findByGamerTag("BABABOOP")).thenReturn(null);
-        Gamer gamer = service.findByGamerTag("BABABOOP");
+        when(repository.findByGamerId(999)).thenReturn(null);
+        Gamer gamer = service.findByGamerId(999);
         assertNull(gamer);
     }
 

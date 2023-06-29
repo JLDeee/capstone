@@ -29,10 +29,10 @@ public class GamerController {
         return service.findByGameId(gameId);
     }
 
-    @GetMapping("/{gamerTag}")
-    public ResponseEntity<Gamer> findByGamerTag(@PathVariable String gamerTag) {
-        Gamer gamer = service.findByGamerTag(gamerTag);
-        if (gamerTag == null) {
+    @GetMapping("/{gamerId}")
+    public ResponseEntity<Gamer> findByGamerId(@PathVariable int gamerId) {
+        Gamer gamer = service.findByGamerId(gamerId);
+        if (gamerId <= 0) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND); // 404
         }
         return new ResponseEntity<>(gamer, HttpStatus.OK); // 200
@@ -47,9 +47,9 @@ public class GamerController {
         return new ResponseEntity<>(result.getPayload(), HttpStatus.CREATED); // 201
     }
 
-    @PutMapping("/{gamerTag}")
-    public ResponseEntity<?> update(@PathVariable String gamerTag, @RequestBody Gamer gamer) {
-        if (gamerTag != gamer.getGamerTag()) {
+    @PutMapping("/{gamerId}")
+    public ResponseEntity<?> update(@PathVariable int gamerId, @RequestBody Gamer gamer) {
+        if (gamerId != gamer.getGamerId()) {
             return new ResponseEntity<>(HttpStatus.CONFLICT); // 409
         }
         Result<Gamer> result = service.update(gamer);

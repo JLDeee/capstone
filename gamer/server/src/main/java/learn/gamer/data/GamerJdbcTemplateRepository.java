@@ -29,12 +29,12 @@ public class GamerJdbcTemplateRepository implements GamerRepository {
     }
 
     @Override
-    public Gamer findByGamerTag(String gamerTag) {
+    public Gamer findByGamerId(int gamerId) {
         final String sql = "select gamer_id, app_user_id, gender_type, gamer_tag, birth_date, bio "
                 + "from gamer "
-                + "where gamer_tag = ?;";
+                + "where gamer_id = ?;";
 
-        return jdbcTemplate.query(sql, new GamerMapper(), gamerTag)
+        return jdbcTemplate.query(sql, new GamerMapper(), gamerId)
                 .stream().findFirst().orElse(null);
     }
 

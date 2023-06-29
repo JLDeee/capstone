@@ -1,6 +1,5 @@
 package learn.gamer.data;
 
-import learn.gamer.models.Game;
 import learn.gamer.models.Gamer;
 import learn.gamer.models.Gender;
 import org.junit.jupiter.api.BeforeEach;
@@ -36,10 +35,11 @@ class GamerJdbcTemplateRepositoryTest {
     }
 
     @Test
-    void shouldFindByGamerTag() {
+    void shouldFindByGamerId() {
         // (3, 3, 'MALE', 'gt_jackie', '1999-07-17', 'Hello, I love playing league of legends!'),
-        Gamer jackie = repository.findByGamerTag("gt_jackie");
+        Gamer jackie = repository.findByGamerId(3);
         assertNotNull(jackie);
+        assertEquals("gt_jackie", jackie.getGamerTag());
         assertEquals(3, jackie.getGamerId());
         assertEquals(Gender.MALE, jackie.getGenderType());
         assertEquals(LocalDate.parse("1999-07-17"), jackie.getBirthDate());
@@ -47,8 +47,8 @@ class GamerJdbcTemplateRepositoryTest {
     }
 
     @Test
-    void shouldNotFindByNonExistingGamerTag() {
-        Gamer badGamer = repository.findByGamerTag("blahblah");
+    void shouldNotFindByNonExistingGamerId() {
+        Gamer badGamer = repository.findByGamerId(999);
         assertNull(badGamer);
     }
 
@@ -82,12 +82,16 @@ class GamerJdbcTemplateRepositoryTest {
 
     @Test
     void shouldUpdate() {
-        Gamer newJackie = repository.findByGamerTag("gt_jackie");
+        Gamer newJackie = repository.findByGamerId(3);
         newJackie.setBio("League of Legends XIV coming soon! (not a lie) (trust me)");
 
         assertTrue(repository.update(newJackie));
-        Gamer actual = repository.findByGamerTag("gt_jackie");
+        Gamer actual = repository.findByGamerId(3);
         assertNotNull(actual);
         assertEquals("League of Legends XIV coming soon! (not a lie) (trust me)", actual.getBio());
+
+        // changing it back so that the above tests passes
+        actual.setBio("Hello, I love playing league of legends!");
+        repository.update(actual);
     }
 }

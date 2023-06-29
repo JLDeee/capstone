@@ -9,7 +9,7 @@ import java.util.List;
 public interface GamerRepository {
     List<Gamer> findAll();
 
-    Gamer findByGamerTag(String gamerTag);
+    Gamer findByGamerId(int gamerId);
 
     List<Gamer> findByGameTitle(String gameTitle);
 

@@ -35,7 +35,7 @@ public class SecurityConfig {
                         "/gamer/*",
                         "/gamer/game/*").permitAll()
                 .antMatchers(HttpMethod.POST,
-                        "/gamer/").permitAll()
+                        "/gamer").permitAll()
                 .antMatchers(HttpMethod.PUT,
                         "/gamer/*").permitAll()
                 // game
