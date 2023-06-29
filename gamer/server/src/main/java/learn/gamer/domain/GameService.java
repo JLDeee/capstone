@@ -23,6 +23,10 @@ public class GameService {
         return gameRepository.findByGameTitle(gameTitle);
     }
 
+    public Game findByGameId(int gameId) {
+        return gameRepository.findByGameId(gameId);
+    }
+
     public Result<Game> add(Game game) {
         Result<Game> result = validate(game);
         if (result.getResultType() != ResultType.SUCCESS) {
@@ -50,7 +54,7 @@ public class GameService {
     //VALIDATIONS
     //check if null
     //check for duplicate
-    //
+    //cannot have invalid gameId
 
     private Result<Game> validate(Game game) {
 
@@ -63,12 +67,19 @@ public class GameService {
 
         if (game.getGameTitle() == null || game.getGameTitle().isBlank()) {
             result.addMessage("Game `gameTitle` is required.", ResultType.INVALID);
+            return result;
+        }
+
+        if(game.getGameId() <= 0){
+            result.addMessage("Game ID must be valid", ResultType.INVALID);
+            return result;
         }
 
         List<Game> games = gameRepository.findAll();
         for(Game gameInList : games){
             if(gameInList.getGameTitle().equals(game.getGameTitle())){
                 result.addMessage("Cannot have duplicate of same game.", ResultType.INVALID);
+                return result;
             }
         }
         return result;

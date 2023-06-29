@@ -1,5 +1,6 @@
 package learn.gamer.data;
 
+import learn.gamer.models.Game;
 import learn.gamer.models.Gamer;
 import org.springframework.transaction.annotation.Transactional;
 
