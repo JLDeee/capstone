@@ -3,12 +3,14 @@ package learn.gamer.domain;
 import learn.gamer.data.GamerRepository;
 import learn.gamer.models.Game;
 import learn.gamer.models.Gamer;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.Year;
 import java.util.Calendar;
 import java.util.List;
 
+@Service
 public class GamerService {
 
     private final GamerRepository gamerRepository;
