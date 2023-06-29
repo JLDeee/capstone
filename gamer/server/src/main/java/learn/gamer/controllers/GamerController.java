@@ -24,7 +24,7 @@ public class GamerController {
         return service.findAll();
     }
     
-    @GetMapping("/{gameId}")
+    @GetMapping("/game/{gameId}")
     public List<Gamer> findByGameId(@PathVariable int gameId) {
         return service.findByGameId(gameId);
     }
