@@ -164,23 +164,23 @@ class PostingServiceTest {
         assertTrue(result.getMessages().size() == 2);
     }
 
-    @Test
-    void shouldNotCreateDuplicate() throws DataAccessException {
-        Posting posting = new Posting();
-        posting.setHeader("Does anyone have any good mods?");
-        posting.setDescription("Hey just wondering if anyone has and links to some good mods, thanks.");
-        posting.setDatePosted(LocalDate.now());
-        posting.setGameId(5);
-        posting.setAppUserId(1);
-
-        when(repository.create(posting)).thenReturn(posting);
-
-
-        Result<Posting> result = service.create(posting);
-
-        assertFalse(result.isSuccess());
-        assertTrue(result.getMessages().size() == 1);
-    }
+//    @Test
+//    void shouldNotCreateDuplicate() throws DataAccessException {
+//        Posting posting = new Posting();
+//        posting.setHeader("Does anyone have any good mods?");
+//        posting.setDescription("Hey just wondering if anyone has and links to some good mods, thanks.");
+//        posting.setDatePosted(LocalDate.now());
+//        posting.setGameId(5);
+//        posting.setAppUserId(1);
+//
+//        when(repository.create(posting)).thenReturn(posting);
+//
+//
+//        Result<Posting> result = service.create(posting);
+//
+//        assertFalse(result.isSuccess());
+//        assertTrue(result.getMessages().size() == 1);
+//    }
 }
 
 

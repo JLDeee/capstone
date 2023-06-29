@@ -107,14 +107,14 @@ public class PostingService {
         }
 
         //checking for duplicate posts
-        if (result.isSuccess()) {
-            List<Posting> posts = repository.findAll();
-            for (Posting post: posts) {
-                if (posting.getHeader().equalsIgnoreCase(post.getHeader()) && posting.getDescription().equalsIgnoreCase(post.getDescription())) {
-                    result.addMessage("This post has already been made", ResultType.INVALID);
-                }
-            }
-        }
+//        if (result.isSuccess()) {
+//            List<Posting> posts = repository.findAll();
+//            for (Posting post: posts) {
+//                if (posting.getHeader().equalsIgnoreCase(post.getHeader()) && posting.getDescription().equalsIgnoreCase(post.getDescription())) {
+//                    result.addMessage("This post has already been made", ResultType.INVALID);
+//                }
+//            }
+//        }
 
         return result;
     }
