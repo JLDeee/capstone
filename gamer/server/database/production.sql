@@ -5,7 +5,7 @@ use gamer;
 create table app_user (
 	app_user_id int primary key auto_increment,
 	username varchar(255) not null,
-    `password` varchar(30) not null,
+    `password` varchar(2048) not null,
 	enabled boolean not null default true
 );
 

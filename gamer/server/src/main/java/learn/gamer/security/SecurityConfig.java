@@ -11,8 +11,6 @@
 //
 //@Configuration
 //public class SecurityConfig {
-
-//
 //    private final JwtConverter converter;
 //
 //    public SecurityConfig(JwtConverter converter) {
@@ -21,20 +19,15 @@
 //
 //    @Bean
 //    public SecurityFilterChain filterChain(HttpSecurity http, AuthenticationConfiguration authConfig) throws Exception {
-//        // we're not using HTML forms in our app
-//        //so disable CSRF (Cross Site Request Forgery)
 //        http.csrf().disable();
 //
-//        // this configures Spring Security to allow
-//        //CORS related requests (such as preflight checks)
 //        http.cors();
 //
-//        //TODO Need to fix the antMatchers after we figure out the keywords to do Http Methods
 //        http.authorizeRequests()
-//                // new...
 //                .antMatchers("/authenticate").permitAll()
 //                .antMatchers("/refresh_token").authenticated()
 //                .antMatchers("/create_account").permitAll()
+//                // TODO: add our own paths here
 ////                .antMatchers(HttpMethod.GET,
 ////                        "/order").permitAll()
 ////                .antMatchers(HttpMethod.GET,
@@ -51,7 +44,6 @@
 //                .addFilter(new JwtRequestFilter(authenticationManager(authConfig), converter))
 //                .sessionManagement()
 //                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-//
 //        return http.build();
 //    }
 //
@@ -59,5 +51,4 @@
 //    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
 //        return config.getAuthenticationManager();
 //    }
-
 //}
