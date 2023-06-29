@@ -106,15 +106,21 @@ public class PostingService {
             result.addMessage("Description is required", ResultType.INVALID);
         }
 
+
         //checking for duplicate posts
-//        if (result.isSuccess()) {
-//            List<Posting> posts = repository.findAll();
+        if (result.isSuccess()) {
+            List<Posting> posts = repository.findAll();
+            if (posts.size() > 0) {
+                if (posts.stream().anyMatch(p -> p.getHeader().equals(posting.getHeader()) && p.getDescription().equals(posting.getDescription()))) {
+                    result.addMessage("This post has already been made", ResultType.INVALID);
+                }
+            }
 //            for (Posting post: posts) {
 //                if (posting.getHeader().equalsIgnoreCase(post.getHeader()) && posting.getDescription().equalsIgnoreCase(post.getDescription())) {
 //                    result.addMessage("This post has already been made", ResultType.INVALID);
 //                }
 //            }
-//        }
+        }
 
         return result;
     }
