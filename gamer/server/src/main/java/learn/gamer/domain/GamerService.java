@@ -27,8 +27,12 @@ public class GamerService {
         return repository.findByGamerTag(gamerTag);
     }
 
-    public Gamer findByGameTitle(String gameTitle){
+    public List<Gamer> findByGameTitle(String gameTitle){
         return repository.findByGameTitle(gameTitle);
+    }
+
+    public List<Gamer> findByGameId(int gameId) {
+        return repository.findByGameId(gameId);
     }
 
     public Result<Gamer> create(Gamer gamer){

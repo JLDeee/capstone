@@ -48,16 +48,32 @@ class GamerServiceTest {
 
     @Test
     void shouldFindByGameTitle() {
-        when(repository.findByGameTitle("Fire Emblem")).thenReturn(new Gamer());
-        Gamer gamer = service.findByGameTitle("Fire Emblem");
-        assertNotNull(gamer);
+        when(repository.findByGameTitle("Fire Emblem")).thenReturn(List.of(new Gamer()));
+        List<Gamer> gamers = service.findByGameTitle("Fire Emblem");
+        assertNotNull(gamers);
+        assertEquals(1, gamers.size());
     }
 
     @Test
     void shouldNotFindByNonExistingGameTitle(){
-        when(repository.findByGamerTag("BABABOOP")).thenReturn(null);
-        Gamer gamer = service.findByGameTitle("BABABOOP");
-        assertNull(gamer);
+        when(repository.findByGameTitle("BABABOOP")).thenReturn(null);
+        List<Gamer> gamers = service.findByGameTitle("BABABOOP");
+        assertNull(gamers);
+    }
+
+    @Test
+    void shouldFindByGameId() {
+        when(repository.findByGameId(1)).thenReturn(List.of(new Gamer()));
+        List<Gamer> gamers = service.findByGameId(1);
+        assertNotNull(gamers);
+        assertEquals(1, gamers.size());
+    }
+
+    @Test
+    void shouldNotFindByNonExistingGameId(){
+        when(repository.findByGameId(9999)).thenReturn(null);
+        List<Gamer> gamers = service.findByGameId(9999);
+        assertNull(gamers);
     }
 
     @Test
