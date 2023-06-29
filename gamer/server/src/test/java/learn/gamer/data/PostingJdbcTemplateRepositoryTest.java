@@ -59,6 +59,13 @@ class PostingJdbcTemplateRepositoryTest {
     }
 
     @Test
+    void shouldFindByGameId() throws DataAccessException {
+        List<Posting> result = repository.findByGameId(5);
+        assertNotNull(result);
+        assertTrue(result.size() == 4);
+    }
+
+    @Test
     void shouldFindByDate() throws DataAccessException {
         List<Posting> result = repository.findByDate(LocalDate.of(2023, 06, 27));
         assertNotNull(result);

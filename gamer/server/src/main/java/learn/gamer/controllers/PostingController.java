@@ -2,7 +2,9 @@ package learn.gamer.controllers;
 
 import learn.gamer.data.DataAccessException;
 import learn.gamer.domain.PostingService;
+import learn.gamer.domain.Result;
 import learn.gamer.models.Posting;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,11 +46,33 @@ public class PostingController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> add(@RequestBody Posting posting) {
-        Result<Agent> result = service.add(agent);
+    public ResponseEntity<Object> create(@RequestBody Posting posting) throws DataAccessException {
+        Result<Posting> result = service.create(posting);
         if (result.isSuccess()) {
             return new ResponseEntity<>(result.getPayload(), HttpStatus.CREATED);
         }
-        return ErrorResponse.build(result);
+        return new ResponseEntity<>(result.getMessages(), HttpStatus.BAD_REQUEST);
+    }
+
+    @PutMapping("/{postingId}")
+    public ResponseEntity<Object> update(@PathVariable int postingId, @RequestBody Posting posting) throws DataAccessException {
+        if (postingId != posting.getPostingId()) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+
+        Result<Posting> result = service.update(posting);
+        if (result.isSuccess()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
+        return new ResponseEntity<>(result.getMessages(), HttpStatus.BAD_REQUEST);
+    }
+
+    @DeleteMapping("/{postingId}")
+    public ResponseEntity<Void> deleteById(@PathVariable int postingId) throws DataAccessException {
+        if (service.deleteById(postingId)) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }

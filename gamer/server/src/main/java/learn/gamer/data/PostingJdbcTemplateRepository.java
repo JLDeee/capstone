@@ -75,6 +75,16 @@ public class PostingJdbcTemplateRepository implements PostingRepository {
     }
 
     @Override
+    public List<Posting> findByGameId(int gameId) throws DataAccessException {
+        final String sql = "select p.posting_id, p.gamer_id, p.game_id, p.header, p.`description`, p.date_posted " +
+                "from posting p " +
+                "inner join game g on p.game_id = g.game_id " +
+                "where g.game_id = ?";
+
+        return jdbcTemplate.query(sql, new PostingMapper(), gameId);
+    }
+
+    @Override
     public List<Posting> findByDate(LocalDate datePosted) throws DataAccessException {
 
         final String sql = "select posting_id, gamer_id, game_id, header, `description`, date_posted " +
