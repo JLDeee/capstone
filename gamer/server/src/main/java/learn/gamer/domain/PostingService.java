@@ -40,6 +40,10 @@ public class PostingService {
         return repository.findByGameTitle(gameTitle);
     }
 
+    public List<Posting> findByGameId(int gameId) throws DataAccessException {
+        return repository.findByGameId(gameId);
+    }
+
     public List<Posting> findByDate(LocalDate datPosted) throws DataAccessException {
         return repository.findByDate(datPosted);
     }
