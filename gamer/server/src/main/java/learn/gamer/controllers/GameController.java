@@ -27,7 +27,7 @@ public class GameController {
         return service.findAll();
     }
 
-    @GetMapping("/{game_title}")
+    @GetMapping("/{gameTitle}")
     public ResponseEntity<Game> findByGameTitle(@PathVariable String gameTitle) {
         Game game = service.findByGameTitle(gameTitle);
         if (game == null) {
@@ -36,7 +36,7 @@ public class GameController {
         return ResponseEntity.ok(game);
     }
 
-    @GetMapping("/{game_title}")
+    @GetMapping("/{gameId}")
     public ResponseEntity<Game> findByGameID(@PathVariable int gameId) {
         Game game = service.findByGameId(gameId);
         if (game == null) {
@@ -54,7 +54,7 @@ public class GameController {
         return new ResponseEntity<>(result.getPayload(), HttpStatus.CREATED); // 201
     }
 
-    @DeleteMapping("/{game_id}")
+    @DeleteMapping("/{gameId}")
     public ResponseEntity<Void> deleteById(@PathVariable int gameId) {
         Result<Game> result = service.deleteById(gameId);
         if (result.getResultType() == ResultType.NOT_FOUND) {
