@@ -27,7 +27,7 @@ public class MatchController {
         return service.findAll();
     }
 
-    @GetMapping("/{gamer_id_1}")
+    @GetMapping("/you_match/{gamerId1}")
     public ResponseEntity<List<Match>> findYouMatched(@PathVariable int gamerId1) {
         List<Match> matches = service.findYouMatched(gamerId1);
         if (matches.size() == 0) {
@@ -36,7 +36,7 @@ public class MatchController {
         return ResponseEntity.ok(matches);
     }
 
-    @GetMapping("/{gamer_id_2}")
+    @GetMapping("/match_you/{gamerId2}")
     public ResponseEntity<List<Match>> findMatchedYou(@PathVariable int gamerId2) {
         List<Match> matches = service.findMatchedYou(gamerId2);
         if (matches.size() == 0) {
@@ -54,7 +54,7 @@ public class MatchController {
         return new ResponseEntity<>(result.getPayload(), HttpStatus.CREATED); // 201
     }
 
-    @DeleteMapping("/{match_id}")
+    @DeleteMapping("/{matchId}")
     public ResponseEntity<Void> deleteById(@PathVariable int matchId) {
         Result<Match> result = service.deleteById(matchId);
         if (result.getResultType() == ResultType.NOT_FOUND) {
