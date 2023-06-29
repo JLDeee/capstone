@@ -32,8 +32,8 @@ public class PostingService {
         return repository.findById(postingId);
     }
 
-    public List<Posting> findByUsername(String username) throws DataAccessException {
-        return repository.findByGamerTag(username);
+    public List<Posting> findByGamerTag(String gamerTag) throws DataAccessException {
+        return repository.findByGamerTag(gamerTag);
     }
 
     public List<Posting> findByGameTitle(String gameTitle) throws DataAccessException {
