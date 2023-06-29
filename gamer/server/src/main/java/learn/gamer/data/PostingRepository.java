@@ -15,6 +15,8 @@ public interface PostingRepository {
 
     List<Posting> findByGameTitle(String gameTitle) throws DataAccessException;
 
+    List<Posting> findByGameId(int gameId) throws DataAccessException;
+
     List<Posting> findByDate(LocalDate datePosted) throws DataAccessException;
 
     //CREATE
