@@ -12,6 +12,7 @@ function GamerProfile() {
         bio:"InsertBioHere",
     }
     const [gamer, setGamer] = useState(GAMER_PROFILE_BLANK);
+    const [gamerGames, setGamerGames] = useState([]);
     const auth = useContext(AuthContext);
     const { id } = useParams();
     const url = "http://localhost:8080/gamer";
