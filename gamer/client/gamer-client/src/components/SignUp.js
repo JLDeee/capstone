@@ -1,0 +1,94 @@
+import AuthContext from "../context/AuthContext";
+import { useState, useContext } from "react";
+import { Link } from "react-router-dom";
+
+function SignUp() {
+    // NOTE: THIS NEEDS TO BE REDONE TO CREATE AN ACCOUNT INSTEAD
+    const [credentials, setCredentials] = useState({
+        username: "",
+        password: ""
+    })
+    const [errors, setErrors] = useState([]);
+    const url = "http://localhost:8080/";
+    const auth = useContext(AuthContext);
+
+    const handleChange = (event) => {
+        const nextCredentials = {...credentials};
+        nextCredentials[event.target.name] = event.target.value;
+        setCredentials(nextCredentials);
+        // for bugtesting
+        console.log(nextCredentials);
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log("yay");
+        const init = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(credentials),
+        }
+
+        fetch(`${url}/authenticate`, init)
+        .then(response => {
+            if (response.status === 200) {
+                const {jwt_token} = response.json();
+                auth.login(jwt_token);
+                navigate("/");
+            } else { 
+                return Promise.reject(`${response.status}: Bad credentials. Login failed.`);
+            } 
+        })
+        .catch(data => setErrors(data));
+    }
+
+    return (
+        <main className="container">
+            <section id="loginContainer">
+                <h2>Sign Up For Gamer's Guild!</h2>
+                {errors.length > 0 && (
+                    <div className="alert alert-danger">
+                        <p>The following errors were found:</p>
+                        <ul>
+                            {errors.map(error => 
+                            <li key={error}>{error}</li>
+                            )}
+                        </ul>
+                    </div>
+                )}
+
+                <form onSubmit={handleSubmit}>
+                <fieldset className="form-group">
+                        <label htmlFor="username">Username:</label>
+                        <input id="username" 
+                        name="username" 
+                        type="text" 
+                        className="form-control" 
+                        onChange={handleChange}/>
+                    </fieldset>
+                    <fieldset className="form-group">
+                        <label htmlFor="password">Password:</label>
+                        <input id="password" 
+                        name="password" 
+                        type="password" 
+                        className="form-control"
+                        onChange={handleChange}/>
+                    </fieldset>
+                    <div className="mt-4">
+                        <button className="btn btn-success mr-2" type="submit">
+                            Create Account
+                        </button>
+                        <Link className="btn btn-warning" type="button" to={"/"}>
+                            Cancel
+                        </Link>
+                    </div>
+                </form>
+            </section>
+        </main>
+    );
+}
+
+export default SignUp;
