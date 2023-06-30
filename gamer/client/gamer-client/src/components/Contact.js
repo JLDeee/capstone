@@ -8,6 +8,16 @@ function Contact(){
        </header>
        <section className="contact">
 
+        <div className="contactUsForm">
+        <h2>Have a question?<br/>Shoot us message!</h2>
+            <form action="mailto:recipient@example.com" method="get" enctype="text/plain">      
+                <input name="name" type="text" className="feedback-input" placeholder="GamerTag" />   
+                <input name="email" type="text" className="feedback-input" placeholder="Email" />
+                <textarea name="text" className="feedback-input" placeholder="Comment"></textarea>
+                <input type="submit" value="SUBMIT"/>
+            </form>
+        </div>
+
         <div className="ggContact">
             <p>For inquiries, please contact us at gamersguild@gg.com</p>
             <p>or text us at (111)gmr-gild!</p>
@@ -30,5 +40,7 @@ function Contact(){
     </div>
     </>)
 }
+
+
 
 export default Contact;
