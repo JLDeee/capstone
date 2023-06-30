@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 function Home(){
     return(<>
     <div className="container">
@@ -17,7 +18,21 @@ function Home(){
        </div>
 
         <div className="getStarted">
-        <Link to={'/'}>Get Started!</Link>
+        <Link to={'/register'}>Get Started!</Link>
+        </div>
+
+        <div className='introDuoFinder'>
+            <p>Our duo finder offers an easy way for gamers to connect one on one. After creating your account you can begin swiping on potential gaming friends! 
+                If you both swipe on eachother you can start messaging one another to talk about gaming, set up a game together, or just chill! 
+                Whatever gaming interests you may have, you're sure to find someone who shares the same interests!</p>
+                <Link to={'/duo'}>Learn More</Link>
+        </div>
+
+        <div className='introToForum'>
+            <p>Our Community Forum offers a way for players to make posts for specific games they're looking for partners for. 
+                You can start by looking through the forum to check out what people are playing! After you've gotten accustomed to the Community Forum, 
+                you can either begin accepting posts from other players or make a forum post yourself!</p>
+                <Link to={'/community'}>View Posts</Link>
         </div>
 
        <div className="ourStory">
