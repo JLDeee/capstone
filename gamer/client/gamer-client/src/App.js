@@ -4,6 +4,10 @@ import Login from "./components/Login";
 import AuthContext from "./context/AuthContext";
 import jwtDecode from "jwt-decode";
 import SignUp from "./components/SignUp";
+import About from "./components/About";
+import Community from "./components/Community";
+import FindDuo from "./components/FindDuo";
+import NotFound from "./components/NotFound";
 
 const LOCAL_STORAGE_TOKEN_KEY = "gamersGuildToken";
 
@@ -57,6 +61,10 @@ function App() {
           <Route path="/" element={<Login/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/sign_up" element={<SignUp/>}/>
+          <Route path="/components/About" element={<About/>}/>
+          <Route path="/components/Community" element={<Community/>}/>
+          <Route path="/components/FindDuo" element={<FindDuo/>}/>
+          <Route path="/components/NotFound" element={<NotFound/>}/>
           {/* insert other routes here! */}
         </Routes>
       </Router>
