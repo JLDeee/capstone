@@ -1,11 +1,9 @@
-import { Link } from 'react-router-dom';
-
 function Duo(){
     return(<>
     <div className="container">
        <header>
         <div>
-            <h1>How Our Duos Finder Works</h1>
+            <h1>How Our Duo Finder Works</h1>
         </div>
        </header>
        <section className="duosExplanation">
