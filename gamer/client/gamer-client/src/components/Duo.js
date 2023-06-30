@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 function Duo(){
     return(<>
     <div className="container">
