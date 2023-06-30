@@ -4,6 +4,9 @@ import Login from "./components/Login";
 import AuthContext from "./context/AuthContext";
 import jwtDecode from "jwt-decode";
 import SignUp from "./components/SignUp";
+import GamerProfile from "./components/GamerProfile";
+import GamerForm from "./components/GamerForm";
+import GamerList from "./components/GamerList";
 
 const LOCAL_STORAGE_TOKEN_KEY = "gamersGuildToken";
 
@@ -56,7 +59,11 @@ function App() {
         <Routes>
           <Route path="/" element={<Login/>}/>
           <Route path="/login" element={<Login/>}/>
-          <Route path="/sign_up" element={<SignUp/>}/>
+          <Route path="/sign-up" element={<SignUp/>}/>
+          <Route path="/profile" element={<GamerProfile/>}/>
+          <Route path="/profile/form" element={<GamerForm/>}/>
+          <Route path="/profile/:id/form" element={<GamerForm/>}/>
+          <Route path="/gamers" element={<GamerList/>}/>
           {/* insert other routes here! */}
         </Routes>
       </Router>
