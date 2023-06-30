@@ -19,8 +19,6 @@ class GameJdbcTemplateRepositoryTest {
     @Autowired
     private KnownGoodState knownGoodState;
 
-    static boolean hasSetup = false;
-
     @BeforeEach
     void setup() {
         knownGoodState.set();

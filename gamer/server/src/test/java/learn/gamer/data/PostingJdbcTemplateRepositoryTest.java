@@ -19,9 +19,6 @@ class PostingJdbcTemplateRepositoryTest {
     private PostingJdbcTemplateRepository repository;
 
     @Autowired
-    private JdbcTemplate jdbcTemplate;
-
-    @Autowired
     KnownGoodState knownGoodState;
 
     @BeforeEach

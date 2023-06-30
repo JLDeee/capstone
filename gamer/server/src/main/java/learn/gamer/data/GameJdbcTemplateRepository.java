@@ -1,5 +1,6 @@
 package learn.gamer.data;
 
+import learn.gamer.data.mappers.GameGamerMapper;
 import learn.gamer.data.mappers.GameMapper;
 import learn.gamer.models.Game;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -42,8 +43,12 @@ public class GameJdbcTemplateRepository implements GameRepository {
         final String sql = "select game_id, game_title "
                 + "from game "
                 + "where game_id = ?;";
-        return jdbcTemplate.query(sql, new GameMapper(), gameId)
+        Game game = jdbcTemplate.query(sql, new GameMapper(), gameId)
                 .stream().findFirst().orElse(null);
+        if (game != null ) {
+            addGamers(game);
+        }
+        return game;
     }
 
     @Override
@@ -91,5 +96,15 @@ public class GameJdbcTemplateRepository implements GameRepository {
         int appUserGameCount = jdbcTemplate.queryForObject(sql2, Integer.class, gameId);
 
         return (postingCount + appUserGameCount);
+    }
+
+    private void addGamers(Game game) {
+        final String sql = "select grg.gamer_id, grg.game_id "
+                + "gr.app_user_id, gr.gender_type, gr.gamer_tag, gr.birth_date, gr.bio "
+                + "from gamer_game grg "
+                + "inner join gamer gr on gr.gamer_id = grg.gamer_id "
+                + "where grg.game_id = ?;";
+        var gameGamers = jdbcTemplate.query(sql, new GameGamerMapper(), game.getGameId());
+        game.setGamers(gameGamers);
     }
 }
