@@ -199,7 +199,7 @@ We all had an interest in gaming and we thought the idea of a gaming partner / g
     * index.js
     * index.css
     * App.js
-* Create basic UI components: (1-2 hours)
+* [x] Create basic UI components: (1-2 hours)
     * Home
     * About
     * Contact
