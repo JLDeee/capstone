@@ -64,11 +64,11 @@ function App() {
         <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path="/login" element={<Login/>}/>
-          <Route path="/sign_up" element={<SignUp/>}/>
-          <Route path="/components/About" element={<About/>}/>
-          <Route path="/components/Community" element={<Community/>}/>
-          <Route path="/components/FindDuo" element={<FindDuo/>}/>
-          <Route path="/components/NotFound" element={<NotFound/>}/>
+          <Route path="/sign-up" element={<SignUp/>}/>
+          <Route path="/about" element={<About/>}/>
+          <Route path="/community" element={<Community/>}/>
+          <Route path="/find-duo" element={<FindDuo/>}/>
+          <Route path="*" element={<NotFound/>}/>
           <Route path="/duo" element={<Duo/>}/>
           {/* insert other routes here! */}
         </Routes>
