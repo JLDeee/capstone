@@ -4,6 +4,9 @@ import Login from "./components/Login";
 import AuthContext from "./context/AuthContext";
 import jwtDecode from "jwt-decode";
 import SignUp from "./components/SignUp";
+import GamerProfile from "./components/GamerProfile";
+import GamerForm from "./components/GamerForm";
+import GamerList from "./components/GamerList";
 import About from "./components/About";
 import Community from "./components/Community";
 import FindDuo from "./components/FindDuo";
@@ -65,6 +68,10 @@ function App() {
           <Route path="/" element={<Home/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/sign-up" element={<SignUp/>}/>
+          <Route path="/profile" element={<GamerProfile/>}/>
+          <Route path="/profile/form" element={<GamerForm/>}/>
+          <Route path="/profile/:id/form" element={<GamerForm/>}/>
+          <Route path="/gamers" element={<GamerList/>}/>
           <Route path="/about" element={<About/>}/>
           <Route path="/community" element={<Community/>}/>
           <Route path="/find-duo" element={<FindDuo/>}/>
