@@ -10,6 +10,7 @@ import FindDuo from "./components/FindDuo";
 import NotFound from "./components/NotFound";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
+import Duo from "./components/Duo";
 
 const LOCAL_STORAGE_TOKEN_KEY = "gamersGuildToken";
 
@@ -68,6 +69,7 @@ function App() {
           <Route path="/community" element={<Community/>}/>
           <Route path="/find-duo" element={<FindDuo/>}/>
           <Route path="*" element={<NotFound/>}/>
+          <Route path="/duo" element={<Duo/>}/>
           {/* insert other routes here! */}
         </Routes>
       </Router>
