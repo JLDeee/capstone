@@ -7,6 +7,13 @@ import SignUp from "./components/SignUp";
 import GamerProfile from "./components/GamerProfile";
 import GamerForm from "./components/GamerForm";
 import GamerList from "./components/GamerList";
+import About from "./components/About";
+import Community from "./components/Community";
+import FindDuo from "./components/FindDuo";
+import NotFound from "./components/NotFound";
+import Navbar from "./components/Navbar";
+import Home from "./components/Home";
+import Duo from "./components/Duo";
 
 const LOCAL_STORAGE_TOKEN_KEY = "gamersGuildToken";
 
@@ -56,14 +63,20 @@ function App() {
   return (
     <AuthContext.Provider value={auth}>
       <Router>
+        <Navbar/>
         <Routes>
-          <Route path="/" element={<Login/>}/>
+          <Route path="/" element={<Home/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/sign-up" element={<SignUp/>}/>
           <Route path="/profile" element={<GamerProfile/>}/>
           <Route path="/profile/form" element={<GamerForm/>}/>
           <Route path="/profile/:id/form" element={<GamerForm/>}/>
           <Route path="/gamers" element={<GamerList/>}/>
+          <Route path="/about" element={<About/>}/>
+          <Route path="/community" element={<Community/>}/>
+          <Route path="/find-duo" element={<FindDuo/>}/>
+          <Route path="*" element={<NotFound/>}/>
+          <Route path="/duo" element={<Duo/>}/>
           {/* insert other routes here! */}
         </Routes>
       </Router>
