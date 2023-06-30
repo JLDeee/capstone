@@ -1,8 +1,9 @@
 import AuthContext from "../context/AuthContext";
 import { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function SignUp() {
+    const navigate = useNavigate();
     // NOTE: THIS NEEDS TO BE REDONE TO CREATE AN ACCOUNT INSTEAD
     const [credentials, setCredentials] = useState({
         username: "",
