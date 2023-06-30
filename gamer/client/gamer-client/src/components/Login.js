@@ -9,7 +9,7 @@ function Login() {
         password: ""
     })
     const [errors, setErrors] = useState([]);
-    const url = "http://localhost:8080/";
+    const url = "http://localhost:8080";
     const auth = useContext(AuthContext);
 
     const handleChange = (event) => {
@@ -53,11 +53,12 @@ function Login() {
                 {errors.length > 0 && (
                     <div className="alert alert-danger">
                         <p>The following errors were found:</p>
-                        <ul>
+                        {/* <ul>
                             {errors.map(error => 
                             <li key={error}>{error}</li>
                             )}
-                        </ul>
+                        </ul> */}
+                        <p>{errors}</p>
                     </div>
                 )}
 

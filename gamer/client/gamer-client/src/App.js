@@ -15,6 +15,9 @@ import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Duo from "./components/Duo";
 import Contact from "./components/Contact";
+import Faq from "./components/Faq";
+import Footer from "./components/Footer";
+
 
 const LOCAL_STORAGE_TOKEN_KEY = "gamersGuildToken";
 
@@ -79,11 +82,11 @@ function App() {
           <Route path="*" element={<NotFound/>}/>
           <Route path="/duo" element={<Duo/>}/>
           <Route path="/contact" element={<Contact/>}/>
+          <Route path="/faq" element={<Faq/>}/>
+          <Route path="/register" element={<SignUp/>}/>
           {/* insert other routes here! */}
         </Routes>
-        <footer>
-          
-        </footer>
+        <Footer/>
       </Router>
     </AuthContext.Provider>
   );

@@ -10,7 +10,7 @@ function SignUp() {
         password: ""
     })
     const [errors, setErrors] = useState([]);
-    const url = "http://localhost:8080/";
+    const url = "http://localhost:8080";
     const auth = useContext(AuthContext);
 
     const handleChange = (event) => {
@@ -33,7 +33,7 @@ function SignUp() {
             body: JSON.stringify(credentials),
         }
 
-        fetch(`${url}/authenticate`, init)
+        fetch(`${url}/create_account`, init)
         .then(response => {
             if (response.status === 200) {
                 const {jwt_token} = response.json();
@@ -54,9 +54,10 @@ function SignUp() {
                     <div className="alert alert-danger">
                         <p>The following errors were found:</p>
                         <ul>
-                            {errors.map(error => 
+                            {/* {errors.map(error => 
                             <li key={error}>{error}</li>
-                            )}
+                            )} */}
+                            <p>{errors}</p>
                         </ul>
                     </div>
                 )}
