@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 function About() {
     return(<>
         <header>
@@ -16,7 +18,7 @@ function About() {
                 <div className="aboutRight">
                     <img src="https://images.unsplash.com/photo-1581351123004-757df051db8e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="spy cat"/>
                 </div>
-                <Link to={'/'}><button>Joing us!</button></Link>
+                <Link to={'/sign_up'}><button>Join us!</button></Link>
         </section>
     </>);
 }
