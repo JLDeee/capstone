@@ -1,5 +1,6 @@
 package learn.gamer.data;
 
+import learn.gamer.data.mappers.GamerGameMapper;
 import learn.gamer.data.mappers.GamerMapper;
 import learn.gamer.models.Game;
 import learn.gamer.models.Gamer;
@@ -34,8 +35,12 @@ public class GamerJdbcTemplateRepository implements GamerRepository {
                 + "from gamer "
                 + "where gamer_id = ?;";
 
-        return jdbcTemplate.query(sql, new GamerMapper(), gamerId)
+        Gamer gamer = jdbcTemplate.query(sql, new GamerMapper(), gamerId)
                 .stream().findFirst().orElse(null);
+        if (gamer != null) {
+            addGames(gamer);
+        }
+        return gamer;
     }
 
     @Override
@@ -98,5 +103,15 @@ public class GamerJdbcTemplateRepository implements GamerRepository {
                 gamer.getBirthDate(),
                 gamer.getBio(),
                 gamer.getGamerId()) > 0;
+    }
+
+    private void addGames(Gamer gamer) {
+        final String sql = "select grg.gamer_id, grg.game_id, "
+                + "g.game_title "
+                + "from gamer_game grg "
+                + "inner join game g on grg.game_id = g.game_id "
+                + "where grg.gamer_id = ?";
+        var gamerGames = jdbcTemplate.query(sql, new GamerGameMapper(), gamer.getGamerId());
+        gamer.setGames(gamerGames);
     }
 }

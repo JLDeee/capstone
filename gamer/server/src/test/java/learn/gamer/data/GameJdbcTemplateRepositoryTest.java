@@ -19,8 +19,6 @@ class GameJdbcTemplateRepositoryTest {
     @Autowired
     private KnownGoodState knownGoodState;
 
-    static boolean hasSetup = false;
-
     @BeforeEach
     void setup() {
         knownGoodState.set();
@@ -39,6 +37,21 @@ class GameJdbcTemplateRepositoryTest {
         Game actual = repository.findByGameTitle("Yakuza 0");
 
         assertEquals(expected.getGameTitle(), actual.getGameTitle());
+    }
+
+    @Test
+    void shouldFindYakuzaZeroGamers() {
+        Game yakuzaZero = repository.findByGameTitle("Yakuza 0");
+        assertNotNull(yakuzaZero.getGamers());
+        assertEquals(2, yakuzaZero.getGamers().size());
+        assertEquals("gt_jay", yakuzaZero.getGamers().get(0).getGamer().getGamerTag());
+        assertEquals("gt_jackie", yakuzaZero.getGamers().get(1).getGamer().getGamerTag());
+
+        Game yakuzaZeroById = repository.findByGameId(1);
+        assertNotNull(yakuzaZeroById.getGamers());
+        assertEquals(2, yakuzaZeroById.getGamers().size());
+        assertEquals("gt_jay", yakuzaZeroById.getGamers().get(0).getGamer().getGamerTag());
+        assertEquals("gt_jackie", yakuzaZeroById.getGamers().get(1).getGamer().getGamerTag());
     }
 
     @Test

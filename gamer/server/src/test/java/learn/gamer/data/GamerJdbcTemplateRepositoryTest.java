@@ -20,8 +20,6 @@ class GamerJdbcTemplateRepositoryTest {
     @Autowired
     private KnownGoodState knownGoodState;
 
-    static boolean hasSetup = false;
-
     @BeforeEach
     void setup() {
         knownGoodState.set();
@@ -44,6 +42,15 @@ class GamerJdbcTemplateRepositoryTest {
         assertEquals(Gender.MALE, jackie.getGenderType());
         assertEquals(LocalDate.parse("1999-07-17"), jackie.getBirthDate());
         assertEquals("Hello, I love playing league of legends!", jackie.getBio());
+    }
+
+    @Test
+    void shouldGetGamersGames() {
+        Gamer jackie = repository.findByGamerId(3);
+        assertNotNull(jackie.getGames());
+        assertEquals(2, jackie.getGames().size());
+        assertEquals("League of Legends", jackie.getGames().get(0).getGame().getGameTitle());
+        assertEquals("Yakuza 0", jackie.getGames().get(1).getGame().getGameTitle());
     }
 
     @Test

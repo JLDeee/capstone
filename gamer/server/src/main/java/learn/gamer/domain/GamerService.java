@@ -1,8 +1,10 @@
 package learn.gamer.domain;
 
+import learn.gamer.data.GamerGameRepository;
 import learn.gamer.data.GamerRepository;
 import learn.gamer.models.Game;
 import learn.gamer.models.Gamer;
+import learn.gamer.models.GamerGame;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -14,9 +16,11 @@ import java.util.stream.Collectors;
 @Service
 public class GamerService {
     private final GamerRepository repository;
+    private final GamerGameRepository gamerGameRepository;
 
-    public GamerService(GamerRepository repository) {
+    public GamerService(GamerRepository repository, GamerGameRepository gamerGameRepository) {
         this.repository = repository;
+        this.gamerGameRepository = gamerGameRepository;
     }
 
     public List<Gamer> findAll(){
@@ -64,6 +68,22 @@ public class GamerService {
             result.addMessage(String.format("Gamer ID %s not found.", gamer.getGamerId()), ResultType.NOT_FOUND);
         }
         return result;
+    }
+
+    // methods for GamerGame
+    public Result<Void> addGame(GamerGame gamerGame) {
+        Result<Void> result = validate(gamerGame);
+        if (!result.isSuccess()) {
+            return result;
+        }
+        if (!gamerGameRepository.add(gamerGame)) {
+            result.addMessage("Game was not added.", ResultType.INVALID);
+        }
+        return result;
+    }
+
+    public boolean deleteGameByKey(int gamerId, int gameId) {
+        return gamerGameRepository.deleteByKey(gamerId, gameId);
     }
 
     private Result<Gamer> validate(Gamer gamer) {
@@ -128,6 +148,20 @@ public class GamerService {
                     result.addMessage("That gamer tag is already in use! Duplicate gamer tag.", ResultType.DUPLICATE);
                 }
             }
+        }
+        return result;
+    }
+
+    private Result<Void> validate(GamerGame gamerGame) {
+        Result<Void> result = new Result<>();
+        if (gamerGame == null) {
+            result.addMessage("gamerGame cannot be null.", ResultType.INVALID);
+            return result;
+        }
+
+        if (gamerGame.getGame() == null) {
+            result.addMessage("Game is required.", ResultType.INVALID);
+            return result;
         }
         return result;
     }

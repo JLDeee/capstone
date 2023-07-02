@@ -17,9 +17,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class AppUserJdbcTemplateRepositoryTest {
 
     @Autowired
-    JdbcTemplate jdbcTemplate;
-
-    @Autowired
     AppUserJdbcTemplateRepository repository;
 
     @Autowired
