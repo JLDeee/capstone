@@ -18,17 +18,13 @@ function Contact(){
             </form>
         </div>
 
-        <div className="ggContact">
-            <p>For inquiries, please contact us at gamersguild@gg.com</p>
-            <p>or text us at (111)gmr-gild!</p>
-        </div>
-
         <div className="developerContact">
             <h5>Website Developers</h5>
             <p>Maria Alcantara<br>
             </br>Jackie Luu<br>
             </br>Jay Wu</p>
         </div>
+        
         <div className="apiContact">
             <h5>API</h5>
             <p>Link: TBA</p>
