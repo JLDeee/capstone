@@ -80,19 +80,6 @@ public class SecurityConfig {
 //                        "/posting/*").hasAnyAuthority("USER", "ADMIN")
 //                .antMatchers(HttpMethod.DELETE,
 //                        "/posting/*").hasAnyAuthority("ADMIN")
-                // match
-//                .antMatchers(HttpMethod.GET,
-//                        "/match",
-//                        "/match/you_match/*",
-//                        "/match/match_you/*").permitAll()
-//                .antMatchers(HttpMethod.POST,
-//                        "/match").permitAll()
-//                .antMatchers(HttpMethod.DELETE,
-//                        "/match/*").permitAll()
-//                .antMatchers(HttpMethod.POST,
-//                        "/match").hasAnyAuthority("USER", "ADMIN")
-//                .antMatchers(HttpMethod.DELETE,
-//                        "/match/*").hasAnyAuthority("USER","ADMIN")
 
                 .antMatchers("/**").denyAll()
 
