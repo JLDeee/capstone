@@ -15,6 +15,7 @@ import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Duo from "./components/Duo";
 import Contact from "./components/Contact";
+import Searchbar from "./components/search/Searchbar";
 
 const LOCAL_STORAGE_TOKEN_KEY = "gamersGuildToken";
 
@@ -79,6 +80,7 @@ function App() {
           <Route path="*" element={<NotFound/>}/>
           <Route path="/duo" element={<Duo/>}/>
           <Route path="/contact" element={<Contact/>}/>
+          <Route path="/search-bar" element={<Searchbar/>}/>
           {/* insert other routes here! */}
         </Routes>
         <footer>
