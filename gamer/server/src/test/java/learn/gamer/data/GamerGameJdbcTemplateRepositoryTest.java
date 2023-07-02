@@ -39,8 +39,8 @@ class GamerGameJdbcTemplateRepositoryTest {
 
     @Test
     void shouldDeleteByKey() {
-        assertTrue(repository.deleteByKey(2, 1));
-        assertFalse(repository.deleteByKey(2, 1));
+        assertTrue(repository.deleteByKey(6, 5));
+        assertFalse(repository.deleteByKey(6, 5));
     }
 
     private GamerGame getGamerGame() {
@@ -48,8 +48,8 @@ class GamerGameJdbcTemplateRepositoryTest {
         gamerGame.setGamerId(1);
 
         Game game = new Game();
-        game.setGameId(1);
-        game.setGameTitle("Yakuza 0");
+        game.setGameId(3);
+        game.setGameTitle("Ghost Trick: Phantom Detective");
         gamerGame.setGame(game);
 
         return gamerGame;

@@ -54,6 +54,28 @@ class GamerJdbcTemplateRepositoryTest {
     }
 
     @Test
+    void shouldGetGamersMatchesSent() {
+        Gamer gamer = repository.findByGamerId(6);
+        assertNotNull(gamer.getSentMatches());
+        assertEquals(1, gamer.getSentMatches().size());
+        assertEquals(6, gamer.getSentMatches().get(0).getGamerSenderId());
+
+        assertEquals(2, gamer.getSentMatches().get(0).getGamerReceiver().getGamerId());
+        assertEquals(LocalDate.parse("2023-06-27"), gamer.getSentMatches().get(0).getDateMatchSent());
+    }
+
+    @Test
+    void shouldGetGamersMatchesReceived() {
+        Gamer gamer = repository.findByGamerId(2);
+        assertNotNull(gamer.getReceivedMatches());
+        assertEquals(1, gamer.getReceivedMatches().size());
+        assertEquals(2, gamer.getReceivedMatches().get(0).getGamerReceiverId());
+
+        assertEquals(6, gamer.getReceivedMatches().get(0).getGamerSender().getGamerId());
+        assertEquals(LocalDate.parse("2023-06-27"), gamer.getReceivedMatches().get(0).getDateMatchReceived());
+    }
+
+    @Test
     void shouldNotFindByNonExistingGamerId() {
         Gamer badGamer = repository.findByGamerId(999);
         assertNull(badGamer);
