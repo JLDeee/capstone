@@ -45,6 +45,15 @@ class GamerJdbcTemplateRepositoryTest {
     }
 
     @Test
+    void shouldGetGamersGames() {
+        Gamer jackie = repository.findByGamerId(3);
+        assertNotNull(jackie.getGames());
+        assertEquals(2, jackie.getGames().size());
+        assertEquals("League of Legends", jackie.getGames().get(0).getGame().getGameTitle());
+        assertEquals("Yakuza 0", jackie.getGames().get(1).getGame().getGameTitle());
+    }
+
+    @Test
     void shouldNotFindByNonExistingGamerId() {
         Gamer badGamer = repository.findByGamerId(999);
         assertNull(badGamer);

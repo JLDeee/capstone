@@ -33,8 +33,12 @@ public class GameJdbcTemplateRepository implements GameRepository {
         final String sql = "select game_id, game_title "
                 + "from game "
                 + "where game_title = ?;";
-        return jdbcTemplate.query(sql, new GameMapper(), gameTitle)
+        Game game = jdbcTemplate.query(sql, new GameMapper(), gameTitle)
                 .stream().findFirst().orElse(null);
+        if (game != null ) {
+            addGamers(game);
+        }
+        return game;
     }
 
     @Override
@@ -99,7 +103,7 @@ public class GameJdbcTemplateRepository implements GameRepository {
     }
 
     private void addGamers(Game game) {
-        final String sql = "select grg.gamer_id, grg.game_id "
+        final String sql = "select grg.gamer_id, grg.game_id, "
                 + "gr.app_user_id, gr.gender_type, gr.gamer_tag, gr.birth_date, gr.bio "
                 + "from gamer_game grg "
                 + "inner join gamer gr on gr.gamer_id = grg.gamer_id "

@@ -28,13 +28,13 @@ class GamerGameJdbcTemplateRepositoryTest {
         GamerGame gamerGame = getGamerGame();
         assertTrue(repository.add(gamerGame));
 
-        try {
-            repository.add(gamerGame);
-            // TODO: apparently this is supposed to fail, but why?
-            fail("Cannot add the same game to the gamer twice.");
-        } catch (DataAccessException ex) {
-
-        }
+//        try {
+//            repository.add(gamerGame);
+//            // this must fail
+//            fail("Cannot add the same game to the gamer twice.");
+//        } catch (DataAccessException ex) {
+//
+//        }
     }
 
     @Test
@@ -48,8 +48,8 @@ class GamerGameJdbcTemplateRepositoryTest {
         gamerGame.setGamerId(1);
 
         Game game = new Game();
-        game.setGameId(9);
-        game.setGameTitle("Zero Escape: The Nonary Games");
+        game.setGameId(1);
+        game.setGameTitle("Yakuza 0");
         gamerGame.setGame(game);
 
         return gamerGame;

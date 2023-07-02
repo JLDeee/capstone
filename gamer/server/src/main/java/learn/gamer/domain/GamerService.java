@@ -72,7 +72,7 @@ public class GamerService {
 
     // methods for GamerGame
     public Result<Void> addGame(GamerGame gamerGame) {
-        Result<Void> result = validate(GamerGame);
+        Result<Void> result = validate(gamerGame);
         if (!result.isSuccess()) {
             return result;
         }
