@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 
-const SpecificPosts = ({users}) => {
+const SpecificPosts = ({userIndex}) => {
     const [users, setUser] = useState([]);
     const url = 'http://jsonplaceholder.typicode.com/users'
 
@@ -19,10 +19,14 @@ const SpecificPosts = ({users}) => {
     }, []); // empty dependency array tells react to run once when the component is intially loaded
 
     return(
+        
         <div>
-            {users.map(user => (
+            {users[userIndex].map((user, index) => {
+                return <p key={index}>{user.name}</p>
+            })}
+            {/* {users[userIndex].map(user => (
                 <p>{user.name}</p>
-            ))}
+            ))} */}
         </div>
     );
 }
