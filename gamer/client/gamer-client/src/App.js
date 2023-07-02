@@ -17,6 +17,7 @@ import Duo from "./components/Duo";
 import Contact from "./components/Contact";
 import Faq from "./components/Faq";
 import Footer from "./components/Footer";
+import Match from "./components/Match";
 
 
 const LOCAL_STORAGE_TOKEN_KEY = "gamersGuildToken";
@@ -84,6 +85,7 @@ function App() {
           <Route path="/contact" element={<Contact/>}/>
           <Route path="/faq" element={<Faq/>}/>
           <Route path="/register" element={<SignUp/>}/>
+          <Route path="/match" element={<Match/>}/>
           {/* insert other routes here! */}
         </Routes>
         <Footer/>
