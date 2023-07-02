@@ -14,7 +14,6 @@ public class MatchReceivedMapper implements RowMapper<MatchReceived> {
         matchReceived.setDateMatchReceived(rs.getDate("date_match").toLocalDate());
         matchReceived.setGamerReceiverId(rs.getInt("gamer_receiver_id"));
 
-
         GamerMapper gamerMapper = new GamerMapper();
         matchReceived.setGamerSender(gamerMapper.mapRow(rs, rowNum));
 

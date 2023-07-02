@@ -1,9 +1,6 @@
 package learn.gamer.data;
 
-import learn.gamer.data.mappers.GamerGameMapper;
-import learn.gamer.data.mappers.GamerMapper;
-import learn.gamer.data.mappers.MatchMapper;
-import learn.gamer.data.mappers.MatchSentMapper;
+import learn.gamer.data.mappers.*;
 import learn.gamer.models.Game;
 import learn.gamer.models.Gamer;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -41,6 +38,8 @@ public class GamerJdbcTemplateRepository implements GamerRepository {
                 .stream().findFirst().orElse(null);
         if (gamer != null) {
             addGames(gamer);
+            addMatchesSent(gamer);
+            addMatchesReceived(gamer);
         }
         return gamer;
     }
@@ -118,11 +117,22 @@ public class GamerJdbcTemplateRepository implements GamerRepository {
     }
 
     private void addMatchesSent(Gamer gamer) {
-        final String sql = "select m.gamer_receiver_id, m.gamer_sender_id, m.date_match "
+        final String sql = "select m.gamer_receiver_id, m.gamer_sender_id, m.date_match, "
+                + "gr.gamer_id, gr.app_user_id, gr.gender_type, gr.gamer_tag, gr.birth_date, gr.bio "
                 + "from `match` m "
-                + "inner join gamer gr on gr.gamer_id = m.gamer_sender_id "
-                + "where gr.gamer_id = ?;";
+                + "inner join gamer gr on gr.gamer_id = m.gamer_receiver_id "
+                + "where m.gamer_sender_id = ?;";
         var matchesSent = jdbcTemplate.query(sql, new MatchSentMapper(), gamer.getGamerId());
         gamer.setSentMatches(matchesSent);
+    }
+
+    private void addMatchesReceived(Gamer gamer) {
+        final String sql = "select m.gamer_receiver_id, m.gamer_sender_id, m.date_match, "
+                + "gr.gamer_id, gr.app_user_id, gr.gender_type, gr.gamer_tag, gr.birth_date, gr.bio "
+                + "from `match` m "
+                + "inner join gamer gr on gr.gamer_id = m.gamer_sender_id "
+                + "where m.gamer_receiver_id = ?;";
+        var matchesReceived = jdbcTemplate.query(sql, new MatchReceivedMapper(), gamer.getGamerId());
+        gamer.setReceivedMatches(matchesReceived);
     }
 }
