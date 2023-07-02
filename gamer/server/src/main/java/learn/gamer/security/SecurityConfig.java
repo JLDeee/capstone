@@ -38,7 +38,17 @@ public class SecurityConfig {
                         "/gamer").permitAll()
                 .antMatchers(HttpMethod.PUT,
                         "/gamer/*").permitAll()
-                // game
+                // gamer game
+                .antMatchers(HttpMethod.POST,
+                        "/gamer/game").permitAll()
+                .antMatchers(HttpMethod.DELETE,
+                        "/gamer/game/*/*").permitAll()
+                // match sent
+                .antMatchers(HttpMethod.POST,
+                        "/gamer/match").permitAll()
+                .antMatchers(HttpMethod.DELETE,
+                        "/gamer/match/*/*").permitAll()
+
                 .antMatchers(HttpMethod.GET,
                         "/game",
                         "/game/*").permitAll()
@@ -71,14 +81,14 @@ public class SecurityConfig {
 //                .antMatchers(HttpMethod.DELETE,
 //                        "/posting/*").hasAnyAuthority("ADMIN")
                 // match
-                .antMatchers(HttpMethod.GET,
-                        "/match",
-                        "/match/you_match/*",
-                        "/match/match_you/*").permitAll()
-                .antMatchers(HttpMethod.POST,
-                        "/match").permitAll()
-                .antMatchers(HttpMethod.DELETE,
-                        "/match/*").permitAll()
+//                .antMatchers(HttpMethod.GET,
+//                        "/match",
+//                        "/match/you_match/*",
+//                        "/match/match_you/*").permitAll()
+//                .antMatchers(HttpMethod.POST,
+//                        "/match").permitAll()
+//                .antMatchers(HttpMethod.DELETE,
+//                        "/match/*").permitAll()
 //                .antMatchers(HttpMethod.POST,
 //                        "/match").hasAnyAuthority("USER", "ADMIN")
 //                .antMatchers(HttpMethod.DELETE,
