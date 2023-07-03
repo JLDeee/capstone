@@ -22,9 +22,7 @@ function Community() {
             .catch(console.log);
     }, []); // empty dependency array tells react to run once when the component is intially loaded
 
-    // let userId = users.map((user) => {
-    //     return user.id
-    // })
+
 
 
     return(<>
