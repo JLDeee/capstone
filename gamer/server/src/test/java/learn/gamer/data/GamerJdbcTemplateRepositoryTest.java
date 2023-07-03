@@ -20,8 +20,6 @@ class GamerJdbcTemplateRepositoryTest {
     @Autowired
     private KnownGoodState knownGoodState;
 
-    static boolean hasSetup = false;
-
     @BeforeEach
     void setup() {
         knownGoodState.set();
@@ -44,6 +42,37 @@ class GamerJdbcTemplateRepositoryTest {
         assertEquals(Gender.MALE, jackie.getGenderType());
         assertEquals(LocalDate.parse("1999-07-17"), jackie.getBirthDate());
         assertEquals("Hello, I love playing league of legends!", jackie.getBio());
+    }
+
+    @Test
+    void shouldGetGamersGames() {
+        Gamer jackie = repository.findByGamerId(3);
+        assertNotNull(jackie.getGames());
+        assertEquals(2, jackie.getGames().size());
+        assertEquals("League of Legends", jackie.getGames().get(0).getGame().getGameTitle());
+        assertEquals("Yakuza 0", jackie.getGames().get(1).getGame().getGameTitle());
+    }
+
+    @Test
+    void shouldGetGamersMatchesSent() {
+        Gamer gamer = repository.findByGamerId(6);
+        assertNotNull(gamer.getSentMatches());
+        assertEquals(1, gamer.getSentMatches().size());
+        assertEquals(6, gamer.getSentMatches().get(0).getGamerSenderId());
+
+        assertEquals(2, gamer.getSentMatches().get(0).getGamerReceiver().getGamerId());
+        assertEquals(LocalDate.parse("2023-06-27"), gamer.getSentMatches().get(0).getDateMatchSent());
+    }
+
+    @Test
+    void shouldGetGamersMatchesReceived() {
+        Gamer gamer = repository.findByGamerId(2);
+        assertNotNull(gamer.getReceivedMatches());
+        assertEquals(1, gamer.getReceivedMatches().size());
+        assertEquals(2, gamer.getReceivedMatches().get(0).getGamerReceiverId());
+
+        assertEquals(6, gamer.getReceivedMatches().get(0).getGamerSender().getGamerId());
+        assertEquals(LocalDate.parse("2023-06-27"), gamer.getReceivedMatches().get(0).getDateMatchReceived());
     }
 
     @Test
