@@ -1,6 +1,11 @@
+import AuthContext from '../context/AuthContext';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+
 function Home(){
-    return(<>
+    const auth = useContext(AuthContext);
+
+    return(
     <div className="container">
        <header>
         <div>
@@ -18,7 +23,7 @@ function Home(){
        </div>
 
         <div className="getStarted">
-        <Link to={'/register'}>Get Started!</Link>
+            <Link to={'/register'}>Get Started!</Link>
         </div>
 
         <div className='introDuoFinder'>
@@ -69,7 +74,7 @@ function Home(){
         <p>Copyright 2023</p>
        </footer>
     </div>
-    </>)
+    )
     
 }
 

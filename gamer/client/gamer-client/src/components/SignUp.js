@@ -4,7 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 
 function SignUp() {
     const navigate = useNavigate();
-    // NOTE: THIS NEEDS TO BE REDONE TO CREATE AN ACCOUNT INSTEAD
     const [credentials, setCredentials] = useState({
         username: "",
         password: ""
@@ -27,20 +26,19 @@ function SignUp() {
         const init = {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
-                'Accept': 'application/json'
+                "Content-Type": "application/json"
             },
             body: JSON.stringify(credentials),
         }
 
         fetch(`${url}/create_account`, init)
         .then(response => {
-            if (response.status === 200) {
+            if (response.status === 201) {
+                console.log(response);
                 const {jwt_token} = response.json();
-                auth.login(jwt_token);
-                navigate("/");
+                navigate("/success", {state: {message: `You are now signed up as ${credentials.username}. Please create your profile!`}});
             } else { 
-                return Promise.reject(`${response.status}: Bad credentials. Login failed.`);
+                return Promise.reject(`${response.status}: ${response.body}`);
             } 
         })
         .catch(data => setErrors(data));

@@ -2,9 +2,11 @@ package learn.gamer.domain;
 
 import learn.gamer.data.GamerGameRepository;
 import learn.gamer.data.GamerRepository;
+import learn.gamer.data.MatchSentRepository;
 import learn.gamer.models.Game;
 import learn.gamer.models.Gamer;
 import learn.gamer.models.GamerGame;
+import learn.gamer.models.MatchSent;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -17,10 +19,12 @@ import java.util.stream.Collectors;
 public class GamerService {
     private final GamerRepository repository;
     private final GamerGameRepository gamerGameRepository;
+    private final MatchSentRepository matchSentRepository;
 
-    public GamerService(GamerRepository repository, GamerGameRepository gamerGameRepository) {
+    public GamerService(GamerRepository repository, GamerGameRepository gamerGameRepository, MatchSentRepository matchSentRepository) {
         this.repository = repository;
         this.gamerGameRepository = gamerGameRepository;
+        this.matchSentRepository = matchSentRepository;
     }
 
     public List<Gamer> findAll(){
@@ -86,6 +90,19 @@ public class GamerService {
         return gamerGameRepository.deleteByKey(gamerId, gameId);
     }
 
+    // methods for MatchSent
+    public Result<Void> addMatchSent(MatchSent matchSent) {
+        Result<Void> result = validate(matchSent);
+        if(!result.isSuccess()) {
+            return result;
+        }
+        if (!matchSentRepository.add(matchSent)) {
+            result.addMessage("Match was not sent.", ResultType.INVALID);
+        }
+        return result;
+    }
+
+    // validation methods
     private Result<Gamer> validate(Gamer gamer) {
         Result<Gamer> result = new Result<>();
 
@@ -161,6 +178,30 @@ public class GamerService {
 
         if (gamerGame.getGame() == null) {
             result.addMessage("Game is required.", ResultType.INVALID);
+            return result;
+        }
+        return result;
+    }
+
+    private Result<Void> validate(MatchSent matchSent) {
+        Result<Void> result = new Result<>();
+        if (matchSent == null) {
+            result.addMessage("Match sent cannot be null.", ResultType.INVALID);
+            return result;
+        }
+
+        if (matchSent.getGamerReceiver() == null) {
+            result.addMessage("Gamer that received the match is required.", ResultType.INVALID);
+            return result;
+        }
+
+        if (matchSent.getDateMatchSent() == null) {
+            result.addMessage("Date for match sent is required.", ResultType.INVALID);
+            return result;
+        }
+
+        if (matchSent.getDateMatchSent().isAfter(LocalDate.now())) {
+            result.addMessage("Match can't be in the future.", ResultType.INVALID);
             return result;
         }
         return result;
