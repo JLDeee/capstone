@@ -10,12 +10,45 @@ function GamerProfile() {
         gamerTag:"GamerTag",
         birthDate:"2000-01-01",
         bio:"InsertBioHere",
+        games: [
+            {
+                gameId:"1",
+                gameTitle:"Game1"
+            },
+            {
+                gameId:"2",
+                gameTitle:"Game2"
+            },
+        ],
+        sentMatches: [
+            {
+                gamerId:"1",
+                gamerTag:"sent_to_other1"
+            },
+            {
+                gamerId:"2",
+                gamerTag:"sent_to_other2"
+            },
+        ],
+        receivedMatches: [
+            {
+                gamerId:"1",
+                gamerTag:"i_got_this1"
+            },
+            {
+                gamerId:"2",
+                gamerTag:"i_got_this2"
+            },
+        ],
     }
     const [gamer, setGamer] = useState(GAMER_PROFILE_BLANK);
-    const [gamerGames, setGamerGames] = useState([]);
+    
     const auth = useContext(AuthContext);
     const { id } = useParams();
     const url = "http://localhost:8080/gamer";
+
+    const today = new Date();
+    console.log(today.toISOString().split("T")[0]);
 
     // get user profile information
     useEffect( () => {
@@ -30,10 +63,39 @@ function GamerProfile() {
             })
             .then( data => {
                 setGamer(data);
+                console.log(data);
             })
             .catch(console.log);
         }
     }, []);
+
+    const handleAddMatch = () => {
+        console.log("adding match!");
+        // const init = {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: {
+        //         'gamerId':'',
+        //         'gamerSenderId':'',
+        //         'dateMatchSent': 
+        //     }
+        //     JSON.stringify(solarPanel)
+        // }
+        // fetch(`${url}/gamer/match`)
+        // .then(response => )
+    }
+
+    
+    const handleRemoveMatch = () => {
+        console.log("removing match!");
+        // const init = {
+        //     method: 'DELETE'
+        // };
+        // fetch(`${url}/gamer/match/${gamer.gamerId}/${INSERT_MATCH_SENDER_ID_AKA_YOU}`)
+        // // .then(response => )
+    }
 
     return(
         <>
@@ -41,15 +103,38 @@ function GamerProfile() {
             <section className="gamerProfileInfo">
                 <h2>{gamer.gamerTag}'s Profile</h2>
                 <div>
-                    <p>Gamer ID: {gamer.gamerId}</p>
-                    <p>Gender: {gamer.genderType}</p>
-                    <p>birthDate: {gamer.birthDate}</p>
-                    <p>About me: {gamer.bio}</p>
+                    <p>ID: {gamer.gamerId}</p>
+                    <p>GENDER: {gamer.genderType}</p>
+                    <p>BDAY: {gamer.birthDate}</p>
+                    <p>BIO: {gamer.bio}</p>
+                    <p>FAV GAMES:</p>
+                    <ul>
+                        {gamer.games.map(game => 
+                            <li key={game.gameId}>{game.gameTitle}</li>
+                        )}
+                    </ul>
+                    <p>GG'd BY:</p>
+                    <ul>
+                        {gamer.sentMatches.map(gamer => 
+                            <li key={gamer.gamerId}>{gamer.gamerTag}</li>
+                        )}
+                    </ul>
+                    <p>GG'd BY:</p>
+                    <ul>
+                        {gamer.receivedMatches.map(gamer => 
+                            <li key={gamer.gamerId}>{gamer.gamerTag}</li>
+                        )}
+                    </ul>
+
                 </div>
                 <div>
-                    <Link to="/profile/{id}/form" className="btn btn-success mr-2" type="button">
+                    <p>TODO: make this link only appear if this is YOUR profile</p>
+                    <Link to={`/profile/${gamer.gamerId}/form`} className="btn btn-success mr-2" type="button">
                         Edit
                     </Link>
+                    <p>TODO: make this button only appear if this is someone ELSE'S profile</p>
+                    <button onClick={handleAddMatch}>Send a GG!</button>
+                    <button onClick={handleRemoveMatch}>Remove GG</button>
                 </div>
             </section>
         </main>
