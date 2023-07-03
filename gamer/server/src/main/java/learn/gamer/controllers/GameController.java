@@ -30,18 +30,18 @@ public class GameController {
     public ResponseEntity<Game> findByGameTitle(@PathVariable String gameTitle) {
         Game game = service.findByGameTitle(gameTitle);
         if (game == null) {
-            return ResponseEntity.notFound().build();
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404
         }
-        return ResponseEntity.ok(game);
+        return new ResponseEntity<>(game, HttpStatus.OK); // 200
     }
 
     @GetMapping("/{gameId}")
     public ResponseEntity<Game> findByGameID(@PathVariable int gameId) {
         Game game = service.findByGameId(gameId);
         if (game == null) {
-            return ResponseEntity.notFound().build();
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404
         }
-        return ResponseEntity.ok(game);
+        return new ResponseEntity<>(game, HttpStatus.OK); // 200
     }
 
     @PostMapping

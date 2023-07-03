@@ -32,7 +32,7 @@ public class GamerController {
     @GetMapping("/{gamerId}")
     public ResponseEntity<Gamer> findByGamerId(@PathVariable int gamerId) {
         Gamer gamer = service.findByGamerId(gamerId);
-        if (gamerId <= 0) {
+        if (gamer == null || gamerId <= 0) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND); // 404
         }
         return new ResponseEntity<>(gamer, HttpStatus.OK); // 200

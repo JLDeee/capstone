@@ -59,7 +59,7 @@ public class AuthController {
         }
         HashMap<String, Integer> map = new HashMap<>();
         map.put("appUserId", result.getPayload().getAppUserId());
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(map, HttpStatus.CREATED); // 201
     }
 
     @PostMapping("/refresh_token")

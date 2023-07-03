@@ -3,7 +3,6 @@ import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 function Login() {
-    const navigate = useNavigate();
     const [credentials, setCredentials] = useState({
         username: "",
         password: ""
@@ -11,6 +10,7 @@ function Login() {
     const [errors, setErrors] = useState([]);
     const url = "http://localhost:8080";
     const auth = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const handleChange = (event) => {
         const nextCredentials = {...credentials};
@@ -26,8 +26,7 @@ function Login() {
         const init = {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
-                'Accept': 'application/json'
+                "Content-Type": "application/json"
             },
             body: JSON.stringify(credentials),
         }
@@ -35,9 +34,10 @@ function Login() {
         fetch(`${url}/authenticate`, init)
         .then(response => {
             if (response.status === 200) {
+                console.log(response);
                 const {jwt_token} = response.json();
                 auth.login(jwt_token);
-                navigate("/");
+                navigate("/success", {state: {message: `You are now logged in as ${credentials.username}.`}});
             } else { 
                 return Promise.reject(`${response.status}: Bad credentials. Login failed.`);
             } 
@@ -50,6 +50,8 @@ function Login() {
         <main className="container">
             <section id="loginContainer">
                 <h2>Log In</h2>
+                <p>Don't have an account?</p>
+                <Link to="/sign-up">Sign up!</Link>
                 {errors.length > 0 && (
                     <div className="alert alert-danger">
                         <p>The following errors were found:</p>
