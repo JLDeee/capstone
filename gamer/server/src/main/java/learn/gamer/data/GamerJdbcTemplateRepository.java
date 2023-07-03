@@ -1,6 +1,6 @@
 package learn.gamer.data;
 
-import learn.gamer.data.mappers.GamerMapper;
+import learn.gamer.data.mappers.*;
 import learn.gamer.models.Game;
 import learn.gamer.models.Gamer;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -34,8 +34,14 @@ public class GamerJdbcTemplateRepository implements GamerRepository {
                 + "from gamer "
                 + "where gamer_id = ?;";
 
-        return jdbcTemplate.query(sql, new GamerMapper(), gamerId)
+        Gamer gamer = jdbcTemplate.query(sql, new GamerMapper(), gamerId)
                 .stream().findFirst().orElse(null);
+        if (gamer != null) {
+            addGames(gamer);
+            addMatchesSent(gamer);
+            addMatchesReceived(gamer);
+        }
+        return gamer;
     }
 
     @Override
@@ -98,5 +104,35 @@ public class GamerJdbcTemplateRepository implements GamerRepository {
                 gamer.getBirthDate(),
                 gamer.getBio(),
                 gamer.getGamerId()) > 0;
+    }
+
+    private void addGames(Gamer gamer) {
+        final String sql = "select grg.gamer_id, grg.game_id, "
+                + "g.game_title "
+                + "from gamer_game grg "
+                + "inner join game g on grg.game_id = g.game_id "
+                + "where grg.gamer_id = ?";
+        var gamerGames = jdbcTemplate.query(sql, new GamerGameMapper(), gamer.getGamerId());
+        gamer.setGames(gamerGames);
+    }
+
+    private void addMatchesSent(Gamer gamer) {
+        final String sql = "select m.gamer_receiver_id, m.gamer_sender_id, m.date_match, "
+                + "gr.gamer_id, gr.app_user_id, gr.gender_type, gr.gamer_tag, gr.birth_date, gr.bio "
+                + "from `match` m "
+                + "inner join gamer gr on gr.gamer_id = m.gamer_receiver_id "
+                + "where m.gamer_sender_id = ?;";
+        var matchesSent = jdbcTemplate.query(sql, new MatchSentMapper(), gamer.getGamerId());
+        gamer.setSentMatches(matchesSent);
+    }
+
+    private void addMatchesReceived(Gamer gamer) {
+        final String sql = "select m.gamer_receiver_id, m.gamer_sender_id, m.date_match, "
+                + "gr.gamer_id, gr.app_user_id, gr.gender_type, gr.gamer_tag, gr.birth_date, gr.bio "
+                + "from `match` m "
+                + "inner join gamer gr on gr.gamer_id = m.gamer_sender_id "
+                + "where m.gamer_receiver_id = ?;";
+        var matchesReceived = jdbcTemplate.query(sql, new MatchReceivedMapper(), gamer.getGamerId());
+        gamer.setReceivedMatches(matchesReceived);
     }
 }

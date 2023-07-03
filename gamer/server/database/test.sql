@@ -38,15 +38,14 @@ create table gamer (
 );
 
 create table `match` (
-    match_id int primary key auto_increment,
     date_match date not null,
-    gamer_1 int not null,
-    gamer_2 int not null,
-    constraint fk_match_gamer_1
-		foreign key (gamer_1)
+    gamer_receiver_id int not null,
+    gamer_sender_id int not null,
+    constraint fk_match_gamer_receiver_id
+		foreign key (gamer_receiver_id)
 		references gamer(gamer_id),
-	constraint fk_match_gamer_2
-		foreign key (gamer_2)
+	constraint fk_match_gamer_sender_id
+		foreign key (gamer_sender_id)
 		references gamer(gamer_id)
 );
 
@@ -134,20 +133,10 @@ begin
         (6, 6, 'OTHER', 'gt_one', '1990-04-14', 'Hello, I am just here for the test!'),
         (7, 7, 'PREFER_NOT_TO_SAY', 'gt_two', '1991-03-13', 'Hello, I am just a test user!');
 
-    -- 	insert into app_user (app_user_id, email, `password`, gamer_tag, birth_date, bio, enabled, gender_type)
--- 		values
--- 		(1, 'maria@alcantara.com', 'abc123', 'gt_maria', '1995-08-18', 'Hello, I love playing fps and rpg games!', true, 'FEMALE'),
---         (2, 'jay@wu.com', 'abc123', 'gt_jay', '1997-09-19', 'Hello, I am a game designer that loves playing Animal Crossing New Horizons!', true, 'NONBINARY'),
---         (3, 'jackie@luu.com', 'abc123', 'gt_jackie', '1999-07-17', 'Hello, I love playing league of legends!', true, 'MALE'),
---         (4, 'brit@hemming.com', 'abc123', 'gt_brit', '1993-06-16', 'Hello, I love playing puzzle games!', true, 'FEMALE'),
---         (5, 'scott@certain.com', 'abc123', 'gt_scott', '1991-05-15', 'Hello, I love playing adventure games!', false, 'MALE'),
---         (6, 'testone@test.com', 'abc123', 'gt_one', '1990-04-14', 'Hello, I am just here for the test!', true, 'OTHER'),
---         (7, 'testtwo@test.com', 'abc123', 'gt_two', '1991-03-13', 'Hello, I am just a test user!', true, 'PREFER_NOT_TO_SAY');-- 
-        
-    insert into `match` (match_id, gamer_1, gamer_2, date_match)
+insert into `match` (gamer_receiver_id, gamer_sender_id, date_match)
 		values
-		(1, 2, 6, '2023-06-27'),
-        (2, 3, 7, '2023-06-26');
+		(2, 6, '2023-06-27'),
+        (3, 7, '2023-06-26');
 	
     insert into game (game_id, game_title)
 		values

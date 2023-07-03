@@ -4,7 +4,6 @@ import learn.gamer.domain.GameService;
 import learn.gamer.domain.Result;
 import learn.gamer.domain.ResultType;
 import learn.gamer.models.Game;
-import learn.gamer.models.Match;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,18 +30,18 @@ public class GameController {
     public ResponseEntity<Game> findByGameTitle(@PathVariable String gameTitle) {
         Game game = service.findByGameTitle(gameTitle);
         if (game == null) {
-            return ResponseEntity.notFound().build();
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404
         }
-        return ResponseEntity.ok(game);
+        return new ResponseEntity<>(game, HttpStatus.OK); // 200
     }
 
     @GetMapping("/{gameId}")
     public ResponseEntity<Game> findByGameID(@PathVariable int gameId) {
         Game game = service.findByGameId(gameId);
         if (game == null) {
-            return ResponseEntity.notFound().build();
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404
         }
-        return ResponseEntity.ok(game);
+        return new ResponseEntity<>(game, HttpStatus.OK); // 200
     }
 
     @PostMapping

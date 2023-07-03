@@ -1,0 +1,12 @@
+@url =  http://localhost:8080
+
+# endpoints: POST /authenticate, POST /create_account, POST /refresh_token
+
+### POST /authenticate (unhappy path, testing invalid password)
+POST {{url}}/create_account HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "bluejay",
+    "password": "bluejay" 
+}

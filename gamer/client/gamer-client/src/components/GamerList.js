@@ -34,11 +34,17 @@ function GamerList() {
                     {gamers.map(gamer => (
                         <div className="cardProfile" key={gamers.gamerId}>
                             <p>* beginning of card*</p>
-                            <p>{gamer.gamerId}</p>
+                            <p>ID: {gamer.gamerTag}</p>
                             {/* i assume an image goes here */}
-                            <p>{gamer.genderType}</p>
-                            <p>{gamer.birthDate}</p>
-                            <p>{gamer.bio}</p>
+                            <p>GENDER: {gamer.genderType}</p>
+                            <p>BDAY: {gamer.birthDate}</p>
+                            <p>BIO: {gamer.bio}</p>
+                            <p>FAV GAMES: </p>
+                            <ul>
+                                {gamer.games.map(game => {
+                                    <li>{game.gameTitle}</li>
+                                })}
+                            </ul>
                             <p>* end of card *</p>
                         </div>
                     ))}

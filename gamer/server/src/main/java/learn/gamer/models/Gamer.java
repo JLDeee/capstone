@@ -1,6 +1,8 @@
 package learn.gamer.models;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Gamer {
     private int gamerId;
@@ -9,6 +11,10 @@ public class Gamer {
     private String gamerTag;
     private LocalDate birthDate;
     private String bio;
+
+    private List<GamerGame> games = new ArrayList<>();
+    private List<MatchSent> sentMatches = new ArrayList<>();
+    private List<MatchReceived> receivedMatches = new ArrayList<>();
 
     public Gamer() {
     }
@@ -68,5 +74,29 @@ public class Gamer {
 
     public void setBio(String bio) {
         this.bio = bio;
+    }
+
+    public List<GamerGame> getGames() {
+        return games;
+    }
+
+    public void setGames(List<GamerGame> games) {
+        this.games = games;
+    }
+
+    public List<MatchSent> getSentMatches() {
+        return sentMatches;
+    }
+
+    public void setSentMatches(List<MatchSent> sentMatches) {
+        this.sentMatches = sentMatches;
+    }
+
+    public List<MatchReceived> getReceivedMatches() {
+        return receivedMatches;
+    }
+
+    public void setReceivedMatches(List<MatchReceived> receivedMatches) {
+        this.receivedMatches = receivedMatches;
     }
 }

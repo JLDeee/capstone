@@ -38,15 +38,14 @@ create table gamer (
 );
 
 create table `match` (
-    match_id int primary key auto_increment,
     date_match date not null,
-    gamer_1 int not null,
-    gamer_2 int not null,
-    constraint fk_match_gamer_1
-		foreign key (gamer_1)
+    gamer_receiver_id int not null,
+    gamer_sender_id int not null,
+    constraint fk_match_gamer_receiver_id
+		foreign key (gamer_receiver_id)
 		references gamer(gamer_id),
-	constraint fk_match_gamer_2
-		foreign key (gamer_2)
+	constraint fk_match_gamer_sender_id
+		foreign key (gamer_sender_id)
 		references gamer(gamer_id)
 );
 
@@ -124,10 +123,10 @@ insert into gamer (gamer_id, app_user_id, gender_type, gamer_tag, birth_date, bi
         (6, 6, 'OTHER', 'gt_one', '1990-04-14', 'Hello, I am just here for the test!'),
         (7, 7, 'PREFER_NOT_TO_SAY', 'gt_two', '1991-03-13', 'Hello, I am just a test user!');
         
-insert into `match` (match_id, gamer_1, gamer_2, date_match)
+insert into `match` (gamer_receiver_id, gamer_sender_id, date_match)
 		values
-		(1, 2, 6, '2023-06-27'),
-        (2, 3, 7, '2023-06-26');
+		(2, 6, '2023-06-27'),
+        (3, 7, '2023-06-26');
 	
 insert into game (game_id, game_title)
 		values

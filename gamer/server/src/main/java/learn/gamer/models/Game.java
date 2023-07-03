@@ -1,10 +1,13 @@
 package learn.gamer.models;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 
 public class Game {
     private int gameId;
     private String gameTitle;
+    private List<GameGamer> gamers = new ArrayList<>();
 
     public Game() {
     }
@@ -28,6 +31,14 @@ public class Game {
 
     public void setGameTitle(String gameTitle) {
         this.gameTitle = gameTitle;
+    }
+
+    public List<GameGamer> getGamers() {
+        return gamers;
+    }
+
+    public void setGamers(List<GameGamer> gamers) {
+        this.gamers = gamers;
     }
 }
 
