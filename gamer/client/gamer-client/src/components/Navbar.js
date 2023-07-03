@@ -14,13 +14,18 @@ function Navbar(){
 
     return(<>
         <nav>
-            <Link to={'/'}>Home</Link>
-            <Link to={'/about'}>About</Link>
-            <Link to={'/duo'}>Duo</Link>
-            <Link to={'/community'}>Community</Link>
-            {/* {auth.user && <Link to={'/community'}>Community</Link>}             */}
-            {!auth.user && <Link to={'/login'}>Log In</Link>}
-            {auth.user && <button type="button" onClick={handleLogOut}>Log Out</button>}
+            <div>
+                {auth.user && 
+                    <p>Welcome, {auth.user}</p>
+                }
+                <Link to={'/'}>Home</Link>
+                <Link to={'/about'}>About</Link>
+                <Link to={'/duo'}>Duo</Link>
+                <Link to={'/community'}>Community</Link>
+                {/* {auth.user && <Link to={'/community'}>Community</Link>}             */}
+                {!auth.user && <Link to={'/login'}>Log In</Link>}
+                {auth.user && <button type="button" onClick={handleLogOut}>Log Out</button>}
+            </div>
         </nav>
     </>)
 }

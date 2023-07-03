@@ -23,7 +23,7 @@ function Home(){
        </div>
 
         <div className="getStarted">
-            <Link to={'/register'}>Get Started!</Link>
+            <Link to={'/sign-up'}>Get Started!</Link>
         </div>
 
         <div className='introDuoFinder'>
