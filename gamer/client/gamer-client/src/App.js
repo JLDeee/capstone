@@ -13,6 +13,7 @@ import Community from "./components/Community";
 import FindDuo from "./components/FindDuo";
 import Duo from "./components/Duo";
 import Contact from "./components/Contact";
+import Searchbar from "./components/search/Searchbar";
 import Faq from "./components/Faq";
 
 import Login from "./components/Login";
@@ -94,6 +95,7 @@ function App() {
           <Route path="/find-duo" element={<FindDuo/>}/>
           <Route path="/duo" element={<Duo/>}/>
           <Route path="/contact" element={<Contact/>}/>
+          <Route path="/search-bar" element={<Searchbar/>}/>
           <Route path="/faq" element={<Faq/>}/>
 
           <Route path="/success" element={<Success/>}/>
