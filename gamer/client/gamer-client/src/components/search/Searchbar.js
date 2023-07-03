@@ -119,13 +119,13 @@ import React, {useState} from "react";
 const Searchbar = ({setResults}) => {
     const [input, setInput] = useState("")
     // const url = 'http://api.thegamesdb.net/v1/Games/ByGameName'
-    const url = 'http://jsonplaceholder.typicode.com/users'
+    const url = 'http://localhost:8080/game'
     const fetchData = (value) => {
         fetch(url)
         .then((response) => response.json()
         .then(json => {
-            const results = json.filter((user) => {
-                return value && user.name && user.name.toLowerCase().includes(value);
+            const results = json.filter((game) => {
+                return value && game.gameTitle.toLowerCase().includes(value);
             });
             setResults(results);
         }))
