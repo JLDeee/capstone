@@ -83,9 +83,15 @@ function App() {
           <Route path="/login" element={!user ? <Login/> : <Navigate to="/"/>}/>
           <Route path="/sign-up" element={!user ? <SignUp/> : <Navigate to="/"/>}/>
           {/* if not logged in, navigate to login page */}
-          <Route path="/profile" element={!user ? <Navigate to ="/login"/> : <GamerProfile/>}/>
+
+          <Route path="/profile" element={<GamerProfile/>}/>          
+          <Route path="/profile/form" element={<GamerForm/>}/>
+          <Route path="/profile/:id/form" element={<GamerForm/>}/>
+
+          {/* <Route path="/profile" element={!user ? <Navigate to ="/login"/> : <GamerProfile/>}/>
           <Route path="/profile/form" element={!user ? <Navigate to ="/login"/> : <GamerForm/>}/>
-          <Route path="/profile/:id/form" element={!user ? <Navigate to ="/login"/> : <GamerForm/>}/>
+          <Route path="/profile/:id/form" element={!user ? <Navigate to ="/login"/> : <GamerForm/>}/> */}
+
           <Route path="/gamers" element={!user ? <Navigate to ="/login"/> : <GamerList/>}/>
 
           <Route path="/about" element={<About/>}/>
