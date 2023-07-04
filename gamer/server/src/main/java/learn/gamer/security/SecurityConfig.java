@@ -49,10 +49,10 @@ public class SecurityConfig {
                         "/gamer/match").permitAll()
                 .antMatchers(HttpMethod.DELETE,
                         "/gamer/match/*/*").permitAll()
-
+                // game
                 .antMatchers(HttpMethod.GET,
                         "/game",
-                        "/game/*").permitAll()
+                        "/game/*", "/game/id/*").permitAll()
                 .antMatchers(HttpMethod.POST,
                         "/game").permitAll()
                 .antMatchers(HttpMethod.DELETE,
