@@ -5,21 +5,23 @@ import { Link } from "react-router-dom";
 
 function GamerForm() {
 
+    const auth = useContext(AuthContext);
     const GAMER_PROFILE_BLANK = {
         gamerId:"",
-        appUserId:"",
+        appUserId: auth.user.appUserId,
         genderType:"PREFER_NOT_TO_SAY",
         gamerTag:"GamerTag",
-        birthDate:"2000-01-01",
+        birthDate:"",
         bio:"InsertBioHere",
     }
     const [gamer, setGamer] = useState(GAMER_PROFILE_BLANK);
     const [errors, setErrors] = useState([]);
 
     const navigate = useNavigate();
-    const auth = useContext(AuthContext);
     const { id } = useParams();
     const url = "http://localhost:8080/gamer";
+
+
 
     // get user profile information
     useEffect( () => {
@@ -73,10 +75,10 @@ function GamerForm() {
                 }
             })
             .then(data =>{
-                if(data.id){
+                if(data.gamerId){
                     // TEMP url, make sure after successfully updating the user just goes to see their own profile again
                     // but maybe we should have a confirmation message first?!
-                    navigate("/profile");
+                    navigate("/success", {state: {message: `Congrats ${auth.user.username} / ${gamer.gamerTag}, you successfully updated your profile!`}});
                 }else{
                     setErrors(data);
                 }
@@ -101,10 +103,13 @@ function GamerForm() {
                 }
             })
             .then(data =>{
-                if(data.id){                    
+                if(data.gamerId){
+                    console.log(data);
+                    console.log(data.gamerId);         
                     // TEMP url, make sure after successfully creating, the user goes to see their own profile
-                    navigate("/profile");
-                }else{
+                    
+                    navigate("/success", {state: {message: `Congrats ${auth.user.username}, You created your profile with the gamertag ${gamer.gamerTag}!`}});
+                } else{
                     setErrors(data);
                 }
             })
