@@ -44,6 +44,23 @@ public class GamerJdbcTemplateRepository implements GamerRepository {
         return gamer;
     }
 
+
+    @Override
+    public Gamer findByAppUserUsername(String appUserUsername) {
+        final String sql = "select gr.gamer_id, gr.app_user_id, gr.gender_type, gr.gamer_tag, gr.birth_date, gr.bio "
+                + "from gamer gr "
+                + "inner join app_user au on au.app_user_id = gr.app_user_id "
+                + "where au.username = ?;";
+        Gamer gamer = jdbcTemplate.query(sql, new GamerMapper(), appUserUsername)
+                .stream().findFirst().orElse(null);
+        if (gamer != null) {
+            addGames(gamer);
+            addMatchesSent(gamer);
+            addMatchesReceived(gamer);
+        }
+        return gamer;
+    }
+
     @Override
     public List<Gamer> findByGameTitle(String gameTitle) {
         final String sql = "select gr.gamer_id, gr.app_user_id, gr.gender_type, gr.gamer_tag, gr.birth_date, gr.bio "

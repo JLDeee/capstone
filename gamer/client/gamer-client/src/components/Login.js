@@ -1,3 +1,4 @@
+import jwtDecode from "jwt-decode";
 import AuthContext from "../context/AuthContext";
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -26,7 +27,8 @@ function Login() {
         const init = {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Accept": "application/json"
             },
             body: JSON.stringify(credentials),
         }
@@ -35,12 +37,19 @@ function Login() {
         .then(response => {
             if (response.status === 200) {
                 console.log(response);
-                const {jwt_token} = response.json();
-                auth.login(jwt_token);
-                navigate("/success", {state: {message: `You are now logged in as ${credentials.username}.`}});
+                return response.json();
             } else { 
-                return Promise.reject(`${response.status}: Bad credentials. Login failed.`);
+                return Promise.reject(`${response.status}: Bad credentials! Login failed.`);
             } 
+        })
+        .then(data => {
+            console.log(data.jwt_token);
+            const jwtToken = data.jwt_token;
+            const decoded = jwtDecode(jwtToken);
+            console.log(decoded);
+            auth.login(jwtToken);
+            navigate("/success", {state: {message: `You are now logged in as ${credentials.username}.`}});
+
         })
         .catch(data => setErrors(data));
     }

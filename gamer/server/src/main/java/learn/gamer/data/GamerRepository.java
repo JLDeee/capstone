@@ -11,6 +11,8 @@ public interface GamerRepository {
 
     Gamer findByGamerId(int gamerId);
 
+    Gamer findByAppUserUsername(String appUserUsername);
+
     List<Gamer> findByGameTitle(String gameTitle);
 
     List<Gamer> findByGameId(int gameId);

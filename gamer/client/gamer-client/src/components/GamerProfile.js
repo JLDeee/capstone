@@ -11,47 +11,61 @@ function GamerProfile() {
         birthDate:"2000-01-01",
         bio:"InsertBioHere",
         games: [
-            {
+            {gamerId:"999",
+            game: {
                 gameId:"1",
                 gameTitle:"Game1"
-            },
-            {
-                gameId:"2",
-                gameTitle:"Game2"
-            },
+            }}, 
+            {gamerId:"999",
+            game: {
+                    gameId:"2",
+                    gameTitle:"Game2"
+            }}
         ],
         sentMatches: [
-            {
+            {gamerSenderId: "999",
+            gamerReceiver: {
                 gamerId:"1",
                 gamerTag:"sent_to_other1"
-            },
-            {
+            }},
+            {gamerSenderId: "999",
+                gamerReceiver: {
                 gamerId:"2",
                 gamerTag:"sent_to_other2"
-            },
+            }}
         ],
         receivedMatches: [
-            {
+            {gamerReceiverId: "999",
+            gamerSender: {
                 gamerId:"1",
                 gamerTag:"i_got_this1"
-            },
-            {
+            }},
+            {gamerReceiverId: "999",
+            gamerSender: {
                 gamerId:"2",
                 gamerTag:"i_got_this2"
-            },
-        ],
+            }}
+        ]
     }
     const [gamer, setGamer] = useState(GAMER_PROFILE_BLANK);
-    
+
     const auth = useContext(AuthContext);
     const { id } = useParams();
     const url = "http://localhost:8080/gamer";
 
     const today = new Date();
     console.log(today.toISOString().split("T")[0]);
+    console.log(auth.user);
 
     // get user profile information
     useEffect( () => {
+        console.log(id);
+        if(auth.userGamer.gamerTag) {
+            id = auth.userGamer.gamerId;
+        }
+        console.log(id);
+        console.log(auth.userGamer);
+        console.log("let's gooo");
         if (id) {
             fetch(`${url}/${id}`)
             .then(response => {
@@ -110,19 +124,19 @@ function GamerProfile() {
                     <p>FAV GAMES:</p>
                     <ul>
                         {gamer.games.map(game => 
-                            <li key={game.gameId}>{game.gameTitle}</li>
+                            <li key={game.game.gameId}>{game.game.gameTitle}</li>
                         )}
                     </ul>
                     <p>GG'd BY:</p>
                     <ul>
-                        {gamer.sentMatches.map(gamer => 
-                            <li key={gamer.gamerId}>{gamer.gamerTag}</li>
+                        {gamer.sentMatches.map(match => 
+                            <li key={match.gamerReceiver.gamerId}>{match.gamerReceiver.gamerTag} at {match.dateMatchReceived}</li>
                         )}
                     </ul>
                     <p>GG'd BY:</p>
                     <ul>
-                        {gamer.receivedMatches.map(gamer => 
-                            <li key={gamer.gamerId}>{gamer.gamerTag}</li>
+                        {gamer.receivedMatches.map(match => 
+                            <li key={match.gamerSender.gamerId}>{match.gamerSender.gamerTag} at {match.dateMatchReceived}</li>
                         )}
                     </ul>
 

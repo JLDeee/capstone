@@ -29,6 +29,15 @@ public class GamerController {
         return service.findByGameId(gameId);
     }
 
+    @GetMapping("/user/{appUserUsername}")
+    public ResponseEntity<Gamer> findByAppUserUsername(@PathVariable String appUserUsername) {
+        Gamer gamer = service.findByAppUserUsername(appUserUsername);
+        if (appUserUsername == null || gamer == null || appUserUsername.isBlank()) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND); // 404
+        }
+        return new ResponseEntity<>(gamer, HttpStatus.OK); // 200
+    }
+
     @GetMapping("/{gamerId}")
     public ResponseEntity<Gamer> findByGamerId(@PathVariable int gamerId) {
         Gamer gamer = service.findByGamerId(gamerId);

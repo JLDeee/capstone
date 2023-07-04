@@ -45,6 +45,17 @@ class GamerJdbcTemplateRepositoryTest {
     }
 
     @Test
+    void shouldFindByAppUserUsername() {
+        Gamer jackie = repository.findByAppUserUsername("jackie@luu.com");
+        assertNotNull(jackie);
+        assertEquals("gt_jackie", jackie.getGamerTag());
+        assertEquals(3, jackie.getGamerId());
+        assertEquals(Gender.MALE, jackie.getGenderType());
+        assertEquals(LocalDate.parse("1999-07-17"), jackie.getBirthDate());
+        assertEquals("Hello, I love playing league of legends!", jackie.getBio());
+    }
+
+    @Test
     void shouldGetGamersGames() {
         Gamer jackie = repository.findByGamerId(3);
         assertNotNull(jackie.getGames());
