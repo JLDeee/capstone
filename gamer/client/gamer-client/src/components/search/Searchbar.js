@@ -118,7 +118,6 @@
 import React, {useState} from "react";
 const Searchbar = ({setResults}) => {
     const [input, setInput] = useState("")
-    // const url = 'http://api.thegamesdb.net/v1/Games/ByGameName'
     const url = 'http://localhost:8080/game'
     const fetchData = (value) => {
         fetch(url)
@@ -133,6 +132,9 @@ const Searchbar = ({setResults}) => {
     const handleChange = (value) => {
         setInput(value)
         fetchData(value)
+        if(value === "") {
+            window.location.reload(false);
+        }
     }
     return(
         <div>
