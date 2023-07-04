@@ -110,7 +110,7 @@ function App() {
   const attachGamer = (user) => {
     console.log("getting gamer!");
     console.log(user);
-    fetch(`${url}/gamer/user/${user.username}`)
+    fetch(`${url}/gamer/user/${user.appUserId}`)
     .then(response => {
       if (response.status === 200) {
           console.log(response);

@@ -7,12 +7,12 @@ function GamerForm() {
 
     const auth = useContext(AuthContext);
     const GAMER_PROFILE_BLANK = {
-        gamerId:"",
+        gamerId: auth.userGamer.gamerId,
         appUserId: auth.user.appUserId,
-        genderType:"PREFER_NOT_TO_SAY",
-        gamerTag:"GamerTag",
+        genderType:"OTHER",
+        gamerTag:"",
         birthDate:"",
-        bio:"InsertBioHere",
+        bio:"",
     }
     const [gamer, setGamer] = useState(GAMER_PROFILE_BLANK);
     const [errors, setErrors] = useState([]);
@@ -36,6 +36,7 @@ function GamerForm() {
             })
             .then( data => {
                 setGamer(data);
+                console.log(data);
             })
             .catch(console.log);
         }
@@ -75,7 +76,8 @@ function GamerForm() {
                 }
             })
             .then(data =>{
-                if(data.gamerId){
+                console.log(data);
+                if(!data){
                     // TEMP url, make sure after successfully updating the user just goes to see their own profile again
                     // but maybe we should have a confirmation message first?!
                     navigate("/success", {state: {message: `Congrats ${auth.user.username} / ${gamer.gamerTag}, you successfully updated your profile!`}});
@@ -140,6 +142,7 @@ function GamerForm() {
                         name="gamerTag" 
                         type="text" 
                         className="form-control" 
+                        value={gamer.gamerTag}
                         onChange={handleChange}/>
                     </fieldset>
 
@@ -149,6 +152,7 @@ function GamerForm() {
                         name="birthDate" 
                         type="date" 
                         className="form-control"
+                        value={gamer.birthDate}
                         onChange={handleChange}/>
                     </fieldset>
 
@@ -157,6 +161,7 @@ function GamerForm() {
                         <select 
                         name="genderType" 
                         id="genderType" 
+                        placeholder="Select gender..."
                         className="form-control"
                         value={gamer.genderType}
                         onChange={handleChange}>
@@ -174,6 +179,7 @@ function GamerForm() {
                         name="bio" 
                         type="textarea" 
                         className="form-control"
+                        value={gamer.bio}
                         onChange={handleChange}/>
                     </fieldset>
 

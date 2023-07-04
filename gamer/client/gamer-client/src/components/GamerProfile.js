@@ -50,7 +50,7 @@ function GamerProfile() {
     const [gamer, setGamer] = useState(GAMER_PROFILE_BLANK);
 
     const auth = useContext(AuthContext);
-    const { id } = useParams();
+    let { id } = useParams();
     const url = "http://localhost:8080/gamer";
 
     const today = new Date();
