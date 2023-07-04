@@ -29,7 +29,9 @@ const LOCAL_STORAGE_TOKEN_KEY = "gamers-guild";
 
 function App() {
   const [user, setUser] = useState(null);
+  const [userGamer, setUserGamer] = useState(null);
   const[restoreLoginAttemptCompleted, setRestoreLoginAttemptCompleted] = useState(false);
+  const url = "http://localhost:8080";
 
   useEffect( () => {
     const token = localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY);
@@ -39,33 +41,70 @@ function App() {
     setRestoreLoginAttemptCompleted(true);
   }, []);
 
-  const login = (token) => {
-    localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, token);
+  const login = (jwtToken) => {
+    console.log(`this is the token!!! ${jwtToken}`);
+    console.log(LOCAL_STORAGE_TOKEN_KEY);
+    const decodedUser = jwtDecode(jwtToken);
+    console.log(decodedUser.app_user_id);
+    console.log(decodedUser.sub);
+    console.log(decodedUser.authorities.split(","));
+    const pendingUser = {
+      appUserId: decodedUser.app_user_id,
+      username: decodedUser.sub,
+      roles: decodedUser.authorities.split(",")
+    }
+    
+    // localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, token);
+    // const { sub: username, authorities: authoritiesString } = jwtDecode(token);
+    // const roles = authoritiesString.split(",");
+    // const user = {
+    //   username,
+    //   roles,
+    //   token,
+    //   hasRole(role) {
+    //     return this.roles.includes(role);
+    //   }
+    // };
+    console.log(decodedUser);
 
-    const { sub: username, authorities: authoritiesString } = jwtDecode(token);
-    const roles = authoritiesString.split(",");
-    const user = {
-      username,
-      roles,
-      token,
-      hasRole(role) {
-        return this.roles.includes(role);
-      }
-    };
+    console.log(pendingUser);
+    setUser(pendingUser);
+    
     console.log(user);
-    setUser(user);
+    attachGamer(user);
+    
     return user;
   }
 
   const logout = () => {
     setUser(null);
+    setUserGamer(null);
     localStorage.removeItem(LOCAL_STORAGE_TOKEN_KEY);
     console.log("wheee logging out");
     console.log(user);
   }
 
+  const attachGamer = (user) => {
+    console.log("getting gamer!");
+    fetch(`${url}/gamer/user/${user.username}`)
+    .then(response => {
+      if (response.status === 200) {
+          console.log(response);
+          return response.json();
+      } else {
+          return Promise.reject(`Unexpected status code: ${response.status}`);
+      }
+    })
+    .then( data => {
+        setUserGamer(data);
+        console.log(data);
+    })
+    .catch(console.log);
+  }
+
   const auth = {
     user: user ? {...user} : null,
+    userGamer: userGamer ? {...userGamer} : null,
     login,
     logout
   }
@@ -81,11 +120,14 @@ function App() {
         <Routes>
           <Route path="/" element={<Home/>}/>
           {/* if already logged in, navigate to home */}
-          <Route path="/login" element={!user ? <Login/> : <Navigate to="/"/>}/>
-          <Route path="/sign-up" element={!user ? <SignUp/> : <Navigate to="/"/>}/>
+
+          <Route path="/login" element={!user && !userGamer ? <Login/> : <Navigate to="/"/>}/>
+
+          <Route path="/sign-up" element={!user && !userGamer ? <SignUp/> : <Navigate to="/"/>}/>
           {/* if not logged in, navigate to login page */}
 
-          <Route path="/profile" element={<GamerProfile/>}/>          
+          <Route path="/profile" element={<GamerProfile/>}/>      
+          <Route path="/profile/:id" element={<GamerProfile/>}/>      
           <Route path="/profile/form" element={<GamerForm/>}/>
           <Route path="/profile/:id/form" element={<GamerForm/>}/>
 

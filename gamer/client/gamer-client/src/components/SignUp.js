@@ -26,23 +26,49 @@ function SignUp() {
         const init = {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Accept": "application/json"
             },
             body: JSON.stringify(credentials),
         }
 
         fetch(`${url}/create_account`, init)
         .then(response => {
-            if (response.status === 201) {
-                console.log(response);
-                const {jwt_token} = response.json();
-                navigate("/success", {state: {message: `You are now signed up as ${credentials.username}. Please create your profile!`}});
+
+            // .then(response => {
+            //     if (response.status === 200) {
+            //         console.log(response);
+            //         return response.json();
+            //     } else { 
+            //         return Promise.reject(`${response.status}: Bad credentials! Login failed.`);
+            //     } 
+            // })
+            // .then(data => {
+            //     console.log(data.jwt_token);
+            //     const jwtToken = data.jwt_token;
+            //     const decoded = jwtDecode(jwtToken);
+            //     console.log(decoded);
+            //     auth.login(jwtToken);
+            //     navigate("/success", {state: {message: `You are now logged in as ${credentials.username}.`}});
+    
+            // })
+            // .catch(data => setErrors(data));
+
+            if (response.status === 201 ) {
+                console.log(response.json());
+                navigate("/success", {state: {message: `You are now signed up as ${credentials.username}. Please login!`}});
+            } else if (response.status === 400) {
+                return response.json();
             } else { 
-                return Promise.reject(`${response.status}: ${response.body}`);
+                return Promise.reject(`${response.status}: Unexpected error code. Account creation failed.`);
             } 
         })
-        .catch(data => setErrors(data));
+        .then(data =>{
+                setErrors(data);
+        })
+        .catch(console.log)
     }
+    
 
     return (
         <main className="container">
@@ -52,10 +78,9 @@ function SignUp() {
                     <div className="alert alert-danger">
                         <p>The following errors were found:</p>
                         <ul>
-                            {/* {errors.map(error => 
+                            {errors.map(error => 
                             <li key={error}>{error}</li>
-                            )} */}
-                            <p>{errors}</p>
+                            )}
                         </ul>
                     </div>
                 )}

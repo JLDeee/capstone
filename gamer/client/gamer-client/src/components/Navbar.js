@@ -16,7 +16,7 @@ function Navbar(){
         <nav>
             <div>
                 {auth.user && 
-                    <p>Welcome, {auth.user}</p>
+                    <p>Welcome, {auth.user.username}</p>
                 }
                 <Link to={'/'}>Home</Link>
                 <Link to={'/about'}>About</Link>
