@@ -208,23 +208,25 @@ We all had an interest in gaming and we thought the idea of a gaming partner / g
     * Error
     * Confirmation / Success
 * Create specific components for our app: (2-3 hours)
-    * UserProfile
+    * Match
+        * 
+    * [x] UserProfile
         * (loads any user's information, including user currently logged in. perhaps the UI could be more shiny to distinguish "you" and other users)
-    * EditProfile
+    * [-]EditProfile
         * (only available for your own profile)
         * (a form that lets you edit and delete YOUR user info)
-    * UserList 
+    * [x]UserList 
         * (list of users, can sort by games maybe)
-    * Postings
+    * [X]Postings
         * (list of postings)
         * (if logged in, can make a posting, edit your own postings, and delete your own postings)
-    * MakePosting
+    * [-]MakePosting
         * (form to add a posting if logged in)
-    * Login
+    * [X]Login
         * (form for authentiacting user)
-    * Register
+    * [X]Register
         * (form to create a new user)
-    * AuthContext 
+    * [x]AuthContext 
         * (for useContext later...)
 * Update App.js with client-based routing (30 min)
 * Update index.css with basic page styling

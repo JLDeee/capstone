@@ -35,7 +35,7 @@ public class GameController {
         return new ResponseEntity<>(game, HttpStatus.OK); // 200
     }
 
-    @GetMapping("/{gameId}")
+    @GetMapping("/id/{gameId}")
     public ResponseEntity<Game> findByGameID(@PathVariable int gameId) {
         Game game = service.findByGameId(gameId);
         if (game == null) {

@@ -14,6 +14,8 @@ import FindDuo from "./components/FindDuo";
 import Duo from "./components/Duo";
 import Contact from "./components/Contact";
 import Searchbar from "./components/search/Searchbar";
+import Post from "./components/search/Post";
+import MakePost from "./components/MakePost";
 import Faq from "./components/Faq";
 
 import Login from "./components/Login";
@@ -174,6 +176,9 @@ function App() {
 
           <Route path="/success" element={<Success/>}/>
           <Route path="*" element={<NotFound/>}/>
+
+          <Route path="/post/:id" element={<Post/>}/>
+          <Route path="/make-post" element={<MakePost/>}/>
         </Routes>
         <Footer/>
       </Router>
