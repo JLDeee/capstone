@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useEffect, useState } from "react";
 import { useParams} from 'react-router-dom';
 import { Link, useNavigate, } from 'react-router-dom';
+import AuthContext from "../context/AuthContext";
 
+
+const today = new Date();
+// const date = today.setDate(today.getDate());
+const defaultValue = today.toISOString().split('T')[0] // yyyy-mm-dd
 
 const POST_DEFAULT = {
     header: '',
-    description: ''
+    description: '',
+    datePosted: defaultValue,
+    gameId: '',
+    gamerId: 0
 }
 
 const MakePost = () => {
@@ -15,6 +23,14 @@ const MakePost = () => {
     const post_url = 'http://localhost:8080/posting'
     // const { id } = useParams();
     const navigate = useNavigate();
+    const auth = useContext(AuthContext);
+
+    if (auth.userGamer) {
+        POST_DEFAULT.gamerId = auth.userGamer.gamerId
+    }
+    
+
+    
 
     // useEffect(() => {
     //     // if(id) {
@@ -95,9 +111,7 @@ const MakePost = () => {
         .catch(console.log)
     }
 
-    const today = new Date();
-    const date = today.setDate(today.getDate());
-    const defaultValue = new Date(date).toISOString().split('T')[0] // yyyy-mm-dd
+    
 
     return(
             <section className="make-post">
@@ -137,9 +151,9 @@ const MakePost = () => {
                             onChange={handlePostChange}/>
                     </fieldset>
                     <fieldset className="form-group">
-                        <label htmlFor="game">Game:</label>
-                        <input id="game" 
-                            name="game" 
+                        <label htmlFor="gameId">Game:</label>
+                        <input id="gameId" 
+                            name="gameId" 
                             type="search"
                             placeholder="Search for a game…" 
                             className="form-control"
@@ -149,7 +163,7 @@ const MakePost = () => {
                     </fieldset>
                     <datalist id="games">
                         {games.map((game) => (
-                            <option value={game.gameTitle}/>
+                            <option value={game.gameId}>{game.gameTitle}</option>
                         ))}
                     </datalist>
                     <div className="mt-4">
