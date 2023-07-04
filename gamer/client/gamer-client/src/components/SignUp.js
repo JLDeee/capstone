@@ -34,26 +34,6 @@ function SignUp() {
 
         fetch(`${url}/create_account`, init)
         .then(response => {
-
-            // .then(response => {
-            //     if (response.status === 200) {
-            //         console.log(response);
-            //         return response.json();
-            //     } else { 
-            //         return Promise.reject(`${response.status}: Bad credentials! Login failed.`);
-            //     } 
-            // })
-            // .then(data => {
-            //     console.log(data.jwt_token);
-            //     const jwtToken = data.jwt_token;
-            //     const decoded = jwtDecode(jwtToken);
-            //     console.log(decoded);
-            //     auth.login(jwtToken);
-            //     navigate("/success", {state: {message: `You are now logged in as ${credentials.username}.`}});
-    
-            // })
-            // .catch(data => setErrors(data));
-
             if (response.status === 201 ) {
                 console.log(response.json());
                 navigate("/success", {state: {message: `You are now signed up as ${credentials.username}. Please login!`}});
