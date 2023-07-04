@@ -217,14 +217,14 @@ We all had an interest in gaming and we thought the idea of a gaming partner / g
         * (a form that lets you edit and delete YOUR user info)
     * [x]UserList 
         * (list of users, can sort by games maybe)
-    * [-]Postings
+    * [X]Postings
         * (list of postings)
         * (if logged in, can make a posting, edit your own postings, and delete your own postings)
     * [-]MakePosting
         * (form to add a posting if logged in)
-    * [-]Login
+    * [X]Login
         * (form for authentiacting user)
-    * [-]Register
+    * [X]Register
         * (form to create a new user)
     * [x]AuthContext 
         * (for useContext later...)

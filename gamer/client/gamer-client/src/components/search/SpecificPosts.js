@@ -29,7 +29,7 @@ const SpecificPosts = (props) => {
         
         <div className="post-preview">
             {posts.map((post, index) => (
-                <Link to={`/post/${post.postId}`}><div key={index}>
+                <Link to={`/post/${post.postingId}`}><div key={index}>
                     <h3 className="postTitle">{post.header}</h3>
                     <p className="postDate">{post.datePosted}</p>
                     <FindGameTitle currentGameId={post.gameId}/>
