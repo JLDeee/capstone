@@ -55,17 +55,16 @@ function GamerProfile() {
 
     const today = new Date();
     console.log(today.toISOString().split("T")[0]);
-    console.log(auth.user);
 
     // get user profile information
     useEffect( () => {
-        console.log(id);
-        if(auth.userGamer.gamerTag) {
+        console.log(`You refreshed the page probably. here's the ${id}`);
+        if (!id) {
+            console.log(`this should be null if url is /profile : ${id}`);
+            console.log(auth.userGamer);
+            console.log(`setting new id as ${auth.userGamer.gamerId}`);    
             id = auth.userGamer.gamerId;
         }
-        console.log(id);
-        console.log(auth.userGamer);
-        console.log("let's gooo");
         if (id) {
             fetch(`${url}/${id}`)
             .then(response => {
@@ -143,12 +142,17 @@ function GamerProfile() {
                 </div>
                 <div>
                     <p>TODO: make this link only appear if this is YOUR profile</p>
-                    <Link to={`/profile/${gamer.gamerId}/form`} className="btn btn-success mr-2" type="button">
-                        Edit
-                    </Link>
+                    {auth.userGamer.gamerId === gamer.gamerId ? 
+                        (<Link to={`/profile/${gamer.gamerId}/form`} className="btn btn-success mr-2" type="button">
+                            Edit
+                        </Link>) : ("CAN'T EDIT")}
                     <p>TODO: make this button only appear if this is someone ELSE'S profile</p>
                     <button onClick={handleAddMatch}>Send a GG!</button>
                     <button onClick={handleRemoveMatch}>Remove GG</button>
+
+                    <p>
+                        <Link to="/gamers">Gamers List</Link>
+                    </p>
                 </div>
             </section>
         </main>

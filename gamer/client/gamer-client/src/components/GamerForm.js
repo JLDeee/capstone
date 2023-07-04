@@ -9,7 +9,7 @@ function GamerForm() {
     const GAMER_PROFILE_BLANK = {
         gamerId: auth.userGamer.gamerId,
         appUserId: auth.user.appUserId,
-        genderType:"OTHER",
+        genderType:"PREFER_NOT_TO_SAY",
         gamerTag:"",
         birthDate:"",
         bio:"",
@@ -21,24 +21,29 @@ function GamerForm() {
     const { id } = useParams();
     const url = "http://localhost:8080/gamer";
 
-
-
-    // get user profile information
+    // get Gamer Profile information if userGamer exists
     useEffect( () => {
         if (id) {
-            fetch(`${url}/${id}`)
-            .then(response => {
-                if (response.status === 200) {
-                    return response.json();
-                } else {
-                    return Promise.reject(`Unexpected status code: ${response.status}`);
-                }
-            })
-            .then( data => {
-                setGamer(data);
-                console.log(data);
-            })
-            .catch(console.log);
+            // i have to use == here instead of === because id is a seen as a string
+            if (auth.userGamer.gamerId == id) {
+
+                fetch(`${url}/${id}`)
+                .then(response => {
+                    if (response.status === 200) {
+                        return response.json();
+                    } else {
+                        return Promise.reject(`Unexpected status code: ${response.status}`);
+                    }
+                })
+                .then( data => {
+                    setGamer(data);
+                    console.log(data);
+                })
+                .catch(console.log);
+            } else {
+                console.log("You're trying to edit a profile that's not yours!");
+                navigate("/error", {state: {message: "You're trying to edit a profile that isn't yours!"}});
+            }
         }
     }, []);
 
