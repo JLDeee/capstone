@@ -44,6 +44,23 @@ public class GamerJdbcTemplateRepository implements GamerRepository {
         return gamer;
     }
 
+
+    @Override
+    public Gamer findByAppUserId(int appUserId) {
+        final String sql = "select gr.gamer_id, gr.app_user_id, gr.gender_type, gr.gamer_tag, gr.birth_date, gr.bio "
+                + "from gamer gr "
+                + "inner join app_user au on au.app_user_id = gr.app_user_id "
+                + "where au.app_user_id = ?;";
+        Gamer gamer = jdbcTemplate.query(sql, new GamerMapper(), appUserId)
+                .stream().findFirst().orElse(null);
+        if (gamer != null) {
+            addGames(gamer);
+            addMatchesSent(gamer);
+            addMatchesReceived(gamer);
+        }
+        return gamer;
+    }
+
     @Override
     public List<Gamer> findByGameTitle(String gameTitle) {
         final String sql = "select gr.gamer_id, gr.app_user_id, gr.gender_type, gr.gamer_tag, gr.birth_date, gr.bio "
@@ -111,7 +128,8 @@ public class GamerJdbcTemplateRepository implements GamerRepository {
                 + "g.game_title "
                 + "from gamer_game grg "
                 + "inner join game g on grg.game_id = g.game_id "
-                + "where grg.gamer_id = ?";
+                + "where grg.gamer_id = ? "
+                + "order by g.game_title asc;";
         var gamerGames = jdbcTemplate.query(sql, new GamerGameMapper(), gamer.getGamerId());
         gamer.setGames(gamerGames);
     }
@@ -121,7 +139,8 @@ public class GamerJdbcTemplateRepository implements GamerRepository {
                 + "gr.gamer_id, gr.app_user_id, gr.gender_type, gr.gamer_tag, gr.birth_date, gr.bio "
                 + "from `match` m "
                 + "inner join gamer gr on gr.gamer_id = m.gamer_receiver_id "
-                + "where m.gamer_sender_id = ?;";
+                + "where m.gamer_sender_id = ? "
+                + "order by m.date_match desc;";
         var matchesSent = jdbcTemplate.query(sql, new MatchSentMapper(), gamer.getGamerId());
         gamer.setSentMatches(matchesSent);
     }
@@ -131,7 +150,8 @@ public class GamerJdbcTemplateRepository implements GamerRepository {
                 + "gr.gamer_id, gr.app_user_id, gr.gender_type, gr.gamer_tag, gr.birth_date, gr.bio "
                 + "from `match` m "
                 + "inner join gamer gr on gr.gamer_id = m.gamer_sender_id "
-                + "where m.gamer_receiver_id = ?;";
+                + "where m.gamer_receiver_id = ? "
+                + "order by m.date_match desc;";
         var matchesReceived = jdbcTemplate.query(sql, new MatchReceivedMapper(), gamer.getGamerId());
         gamer.setReceivedMatches(matchesReceived);
     }

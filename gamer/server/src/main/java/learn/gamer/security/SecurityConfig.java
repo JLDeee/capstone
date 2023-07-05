@@ -33,7 +33,8 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.GET,
                         "/gamer",
                         "/gamer/*",
-                        "/gamer/game/*").permitAll()
+                        "/gamer/game/*",
+                        "/gamer/user/*").permitAll()
                 .antMatchers(HttpMethod.POST,
                         "/gamer").permitAll()
                 .antMatchers(HttpMethod.PUT,
@@ -48,10 +49,10 @@ public class SecurityConfig {
                         "/gamer/match").permitAll()
                 .antMatchers(HttpMethod.DELETE,
                         "/gamer/match/*/*").permitAll()
-
+                // game
                 .antMatchers(HttpMethod.GET,
                         "/game",
-                        "/game/*").permitAll()
+                        "/game/*", "/game/id/*").permitAll()
                 .antMatchers(HttpMethod.POST,
                         "/game").permitAll()
                 .antMatchers(HttpMethod.DELETE,

@@ -4,13 +4,16 @@ import FindGamer from "./FindGamer";
 import FindGameTitle from "./FindGameTitle";
 import { Link } from 'react-router-dom';
 
-const SpecificPosts = (props) => {
+
+const AllPosts = () => {
     const [posts, setPosts] = useState([]);
     const post_url = 'http://localhost:8080/posting'
+    
+
 
 
     useEffect(() => {
-        fetch(`${post_url}/game/id/${props.currentGame}`)
+        fetch(post_url)
             .then(response => {
                 if (response.status === 200) {
                     return response.json();
@@ -22,12 +25,12 @@ const SpecificPosts = (props) => {
             .catch(console.log);
     }, []); // empty dependency array tells react to run once when the component is intially loaded
 
-
+    console.log(posts);
 
 
     return(
         
-        <div className="post-preview">
+        <div className="post">
             {posts.map((post, index) => (
                 <Link to={`/post/${post.postingId}`}><div key={index}>
                     <h3 className="postTitle">{post.header}</h3>
@@ -40,4 +43,4 @@ const SpecificPosts = (props) => {
     );
 }
 
-export default SpecificPosts;
+export default AllPosts;

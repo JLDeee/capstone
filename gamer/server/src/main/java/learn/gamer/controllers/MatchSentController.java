@@ -28,7 +28,7 @@ public class MatchSentController {
 
     @DeleteMapping("/{matchReceiverId}/{matchSenderId}")
     public ResponseEntity<Void> deleteByKey(@PathVariable int matchReceiverId, @PathVariable int matchSenderId) {
-        if (service.deleteGameByKey(matchReceiverId, matchSenderId)) {
+        if (service.deleteMatchByKey(matchReceiverId, matchSenderId)) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT); // 204
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404

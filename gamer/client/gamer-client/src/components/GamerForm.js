@@ -2,40 +2,51 @@ import { useContext, useEffect, useState } from "react";
 import AuthContext from "../context/AuthContext";
 import { useParams, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import GameSearchBar from "./GameSearchBar";
 
 function GamerForm() {
 
+    const auth = useContext(AuthContext);
     const GAMER_PROFILE_BLANK = {
-        gamerId:"",
-        appUserId:"",
+        gamerId: auth.userGamer.gamerId,
+        appUserId: auth.user.appUserId,
         genderType:"PREFER_NOT_TO_SAY",
-        gamerTag:"GamerTag",
-        birthDate:"2000-01-01",
-        bio:"InsertBioHere",
+        gamerTag:"",
+        birthDate:"",
+        bio:"",
+        games:[],
     }
     const [gamer, setGamer] = useState(GAMER_PROFILE_BLANK);
     const [errors, setErrors] = useState([]);
+    const [messages, setMessages] = useState("");
 
     const navigate = useNavigate();
-    const auth = useContext(AuthContext);
     const { id } = useParams();
     const url = "http://localhost:8080/gamer";
 
-    // get user profile information
+    // get Gamer Profile information if userGamer exists
     useEffect( () => {
         if (id) {
-            fetch(`${url}/${id}`)
-            .then(response => {
-                if (response.status === 200) {
-                    return response.json();
-                } else {
-                    return Promise.reject(`Unexpected status code: ${response.status}`);
-                }
-            })
-            .then( data => {
-                setGamer(data);
-            })
-            .catch(console.log);
+            // i have to use == here instead of === because id is a seen as a string
+            if (auth.userGamer.gamerId == id) {
+
+                fetch(`${url}/${id}`)
+                .then(response => {
+                    if (response.status === 200) {
+                        return response.json();
+                    } else {
+                        return Promise.reject(`Unexpected status code: ${response.status}`);
+                    }
+                })
+                .then( data => {
+                    setGamer(data);
+                    console.log(data);
+                })
+                .catch(console.log);
+            } else {
+                console.log("You're trying to edit a profile that's not yours!");
+                navigate("/error", {state: {message: "You're trying to edit a profile that isn't yours!"}});
+            }
         }
     }, []);
 
@@ -73,10 +84,12 @@ function GamerForm() {
                 }
             })
             .then(data =>{
-                if(data.id){
+                console.log(data);
+                if(!data){
                     // TEMP url, make sure after successfully updating the user just goes to see their own profile again
                     // but maybe we should have a confirmation message first?!
-                    navigate("/profile");
+                    auth.attachGamer(auth.user.appUserId);
+                    navigate("/success", {state: {message: `Congrats ${auth.user.username} / ${gamer.gamerTag}, you successfully updated your profile!`}});
                 }else{
                     setErrors(data);
                 }
@@ -101,10 +114,13 @@ function GamerForm() {
                 }
             })
             .then(data =>{
-                if(data.id){                    
+                if(data.gamerId){
+                    console.log(data);
+                    console.log(data.gamerId);         
                     // TEMP url, make sure after successfully creating, the user goes to see their own profile
-                    navigate("/profile");
-                }else{
+                    auth.attachGamer(auth.user.appUserId);
+                    navigate("/success", {state: {message: `Congrats ${auth.user.username}, You created your profile with the gamertag ${gamer.gamerTag}!`}});
+                } else{
                     setErrors(data);
                 }
             })
@@ -112,6 +128,27 @@ function GamerForm() {
 
         }
     };
+
+    const handleRemoveFavoriteGame = (gameId) => {
+        console.log(`removing game ${gameId}`);
+        const init = {
+            method: 'DELETE'
+        };
+        fetch(`${url}/match/${auth.userGamer.gamerId}/${gameId}`, init)
+        .then(response => {
+            if (response.status === 204) {
+                const newGamer = {...gamer};
+                const newGames = gamer.games.filter(game => game.game.gameId !== gameId);
+                newGamer.games(newGames);
+                setGamer(newGamer);
+                setMessages(`Removed game from fav games.`);
+
+            } else {
+                return Promise.reject(`Unexpected status code: ${response.status}`);
+            }
+        })
+        .catch(console.log);
+    }
 
     return(
         <main className="container">
@@ -127,7 +164,7 @@ function GamerForm() {
                         </ul>
                     </div>
                 )}
-
+                <p>{messages}</p>
                 <form onSubmit={handleSubmit}>
                 <fieldset className="form-group">
                         <label htmlFor="gamerTag">Gamer Tag:</label>
@@ -135,6 +172,7 @@ function GamerForm() {
                         name="gamerTag" 
                         type="text" 
                         className="form-control" 
+                        value={gamer.gamerTag}
                         onChange={handleChange}/>
                     </fieldset>
 
@@ -144,6 +182,7 @@ function GamerForm() {
                         name="birthDate" 
                         type="date" 
                         className="form-control"
+                        value={gamer.birthDate}
                         onChange={handleChange}/>
                     </fieldset>
 
@@ -152,6 +191,7 @@ function GamerForm() {
                         <select 
                         name="genderType" 
                         id="genderType" 
+                        placeholder="Select gender..."
                         className="form-control"
                         value={gamer.genderType}
                         onChange={handleChange}>
@@ -169,8 +209,34 @@ function GamerForm() {
                         name="bio" 
                         type="textarea" 
                         className="form-control"
+                        value={gamer.bio}
                         onChange={handleChange}/>
                     </fieldset>
+                    <p>FAV GAMES:</p>
+                    {gamer.games.length > 0 ? (
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Game Title</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {gamer.games.map(game => (
+                            <tr key={game.game.gameId}>
+                                <td>{game.game.gameTitle} </td>
+                                <td><button onClick={() => handleRemoveFavoriteGame(game.game.gameId)} type="button">Remove Favorite Game</button></td>
+                            </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                    ) : (<p>None so far!</p>)}
+                    {(auth.userGamer.gamerTag) ? (
+                        <GameSearchBar/>
+                    ) : (
+                        <p>Create your profile first, and you can go back and add some!</p>
+                    )}
+
 
                     <div className="mt-4">
                         <button className="btn btn-success mr-2" type="submit">

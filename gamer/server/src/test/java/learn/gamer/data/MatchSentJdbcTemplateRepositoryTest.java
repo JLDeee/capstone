@@ -25,6 +25,19 @@ class MatchSentJdbcTemplateRepositoryTest {
     }
 
     @Test
+    void shouldFindByGamerSenderId() {
+        // current matches in gamer_test:
+//        insert into `match` (gamer_receiver_id, gamer_sender_id, date_match)
+//        values
+//        (2, 6, '2023-06-27'),
+//        (3, 7, '2023-06-26');
+        MatchSent matchSent = repository.findByKey(3, 7);
+        assertNotNull(matchSent);
+        assertEquals(3, matchSent.getGamerReceiver().getGamerId());
+        assertEquals("gt_jackie", matchSent.getGamerReceiver().getGamerTag());
+    }
+
+    @Test
     void shouldAdd() {
         MatchSent matchSent = getMatchSent();
         assertTrue(repository.add(matchSent));

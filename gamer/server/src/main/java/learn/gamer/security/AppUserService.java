@@ -62,6 +62,11 @@ public class AppUserService implements UserDetailsService {
         if (username.length() > 255) {
             result.addMessage("Username must be less than 255 characters.", ResultType.INVALID);
         }
+
+        if (repository.findByUsername(username) != null) {
+            result.addMessage("The provided username already exists.", ResultType.DUPLICATE);
+        }
+
         if (!isValidPassword(password)) {
             result.addMessage("Password must be contain at least 8 characters, and at least one of a number, a letter, and a special character.", ResultType.INVALID);
         }

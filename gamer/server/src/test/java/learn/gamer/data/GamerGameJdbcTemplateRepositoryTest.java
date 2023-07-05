@@ -2,6 +2,7 @@ package learn.gamer.data;
 
 import learn.gamer.models.Game;
 import learn.gamer.models.GamerGame;
+import learn.gamer.models.MatchSent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,14 @@ class GamerGameJdbcTemplateRepositoryTest {
     @BeforeEach
     void setup() {
         knownGoodState.set();
+    }
+
+    @Test
+    void shouldFindByKey() {
+        GamerGame gamerGame = repository.findByKey(1, 5);
+        assertNotNull(gamerGame);
+        assertEquals(5, gamerGame.getGame().getGameId());
+        assertEquals("Sims 4", gamerGame.getGame().getGameTitle());
     }
 
     @Test

@@ -35,6 +35,8 @@ public class GamerService {
         return repository.findByGamerId(gamerId);
     }
 
+    public Gamer findByAppUserId(int appUserId) { return repository.findByAppUserId(appUserId); }
+
     public List<Gamer> findByGameTitle(String gameTitle){
         return repository.findByGameTitle(gameTitle);
     }
@@ -100,6 +102,10 @@ public class GamerService {
             result.addMessage("Match was not sent.", ResultType.INVALID);
         }
         return result;
+    }
+
+    public boolean deleteMatchByKey(int gamerReceiverId, int gamerSenderId) {
+        return matchSentRepository.deleteByKey(gamerReceiverId, gamerSenderId);
     }
 
     // validation methods
@@ -172,12 +178,17 @@ public class GamerService {
     private Result<Void> validate(GamerGame gamerGame) {
         Result<Void> result = new Result<>();
         if (gamerGame == null) {
-            result.addMessage("gamerGame cannot be null.", ResultType.INVALID);
+            result.addMessage("The gamer's games cannot be null.", ResultType.INVALID);
             return result;
         }
 
         if (gamerGame.getGame() == null) {
             result.addMessage("Game is required.", ResultType.INVALID);
+            return result;
+        }
+
+        if (gamerGameRepository.findByKey(gamerGame.getGamerId(), gamerGame.getGame().getGameId()) != null ) {
+            result.addMessage("You already added this game to your list!", ResultType.DUPLICATE);
             return result;
         }
         return result;
@@ -186,22 +197,27 @@ public class GamerService {
     private Result<Void> validate(MatchSent matchSent) {
         Result<Void> result = new Result<>();
         if (matchSent == null) {
-            result.addMessage("Match sent cannot be null.", ResultType.INVALID);
+            result.addMessage("The GG sent cannot be null.", ResultType.INVALID);
             return result;
         }
 
         if (matchSent.getGamerReceiver() == null) {
-            result.addMessage("Gamer that received the match is required.", ResultType.INVALID);
+            result.addMessage("Gamer that received the GG is required.", ResultType.INVALID);
             return result;
         }
 
         if (matchSent.getDateMatchSent() == null) {
-            result.addMessage("Date for match sent is required.", ResultType.INVALID);
+            result.addMessage("Date for sending GG is required.", ResultType.INVALID);
             return result;
         }
 
         if (matchSent.getDateMatchSent().isAfter(LocalDate.now())) {
-            result.addMessage("Match can't be in the future.", ResultType.INVALID);
+            result.addMessage("GG send date can't be in the future.", ResultType.INVALID);
+            return result;
+        }
+
+        if (matchSentRepository.findByKey(matchSent.getGamerReceiver().getGamerId(), matchSent.getGamerSenderId()) != null ) {
+            result.addMessage("You already sent this user a GG!", ResultType.DUPLICATE);
             return result;
         }
         return result;
