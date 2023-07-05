@@ -1,5 +1,7 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import AuthContext from "../context/AuthContext";
+
 
 const BLANK_GAME= {
     gameTitle: ""
@@ -9,8 +11,16 @@ function GameSearchBar() {
     const [games, setGames] = useState([]);
     const [foundGames, setFoundGames] = useState([]);
     const [game, setGame] = useState(BLANK_GAME);
+
     const [errors, setErrors] = useState([]);
     const [messages, setMessages] = useState("");
+    const auth = useContext(AuthContext);
+
+    const BLANK_GAMER_GAME = {
+        gamerId: auth.userGamer.gamerId,
+        game: {}
+    };
+    const [gamerGame, setGamerGame] = useState(BLANK_GAMER_GAME);
     const navigate = useNavigate();
     const url = "http://localhost:8080";
 
@@ -88,26 +98,32 @@ function GameSearchBar() {
 
     const handleAddGamerGame = (gameId) => {
         console.log(gameId);
+        const newGamerGame = {...gamerGame};
         const gameToAdd = games.find(game => game.gameId === gameId);
-        console.log(`Adding game ${gameToAdd.gameTitle}`);
+        newGamerGame.game = gameToAdd;
+
+        console.log(newGamerGame);
         const init = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },
-            body: JSON.stringify(gameToAdd)
+            body: JSON.stringify(newGamerGame)
         };
         fetch(`${url}/gamer/game`, init)
         .then(response => {
-            if(response.status === 201 || response.status === 400){
+            if(response.status === 201) {
+                return null;
+            } else if( response.status === 400){
                 return response.json();
             }else{
                 return Promise.reject(`Unexpected status code: ${response.status}`);
             }
         })
         .then(data =>{
-            if(data.gamerId){
+            console.log(data);
+            if(!data){
                 setMessages(`You added ${game.gameTitle} as a favorite game!`);
             } else{
                 setErrors(data);

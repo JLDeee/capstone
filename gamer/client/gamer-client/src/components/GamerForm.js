@@ -14,9 +14,11 @@ function GamerForm() {
         gamerTag:"",
         birthDate:"",
         bio:"",
+        games:[],
     }
     const [gamer, setGamer] = useState(GAMER_PROFILE_BLANK);
     const [errors, setErrors] = useState([]);
+    const [messages, setMessages] = useState("");
 
     const navigate = useNavigate();
     const { id } = useParams();
@@ -129,6 +131,23 @@ function GamerForm() {
 
     const handleRemoveFavoriteGame = (gameId) => {
         console.log(`removing game ${gameId}`);
+        const init = {
+            method: 'DELETE'
+        };
+        fetch(`${url}/match/${auth.userGamer.gamerId}/${gameId}`, init)
+        .then(response => {
+            if (response.status === 204) {
+                const newGamer = {...gamer};
+                const newGames = gamer.games.filter(game => game.game.gameId !== gameId);
+                newGamer.games(newGames);
+                setGamer(newGamer);
+                setMessages(`Removed game from fav games.`);
+
+            } else {
+                return Promise.reject(`Unexpected status code: ${response.status}`);
+            }
+        })
+        .catch(console.log);
     }
 
     return(
@@ -145,7 +164,7 @@ function GamerForm() {
                         </ul>
                     </div>
                 )}
-
+                <p>{messages}</p>
                 <form onSubmit={handleSubmit}>
                 <fieldset className="form-group">
                         <label htmlFor="gamerTag">Gamer Tag:</label>
@@ -194,7 +213,7 @@ function GamerForm() {
                         onChange={handleChange}/>
                     </fieldset>
                     <p>FAV GAMES:</p>
-                    {gamer.games ? (
+                    {gamer.games.length > 0 ? (
                     <table>
                         <thead>
                             <tr>
@@ -206,15 +225,18 @@ function GamerForm() {
                             {gamer.games.map(game => (
                             <tr key={game.game.gameId}>
                                 <td>{game.game.gameTitle} </td>
-                                <td><button onClick={() => handleRemoveFavoriteGame(game.game.gameId)}>Remove Favorite Game</button></td>
+                                <td><button onClick={() => handleRemoveFavoriteGame(game.game.gameId)} type="button">Remove Favorite Game</button></td>
                             </tr>
                             ))}
                         </tbody>
                     </table>
-                    ) : ("None so far!")}
+                    ) : (<p>None so far!</p>)}
+                    {(auth.userGamer.gamerTag) ? (
+                        <GameSearchBar/>
+                    ) : (
+                        <p>Create your profile first, and you can go back and add some!</p>
+                    )}
 
-
-                    <GameSearchBar/>
 
                     <div className="mt-4">
                         <button className="btn btn-success mr-2" type="submit">
