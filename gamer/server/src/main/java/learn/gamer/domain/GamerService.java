@@ -104,6 +104,10 @@ public class GamerService {
         return result;
     }
 
+    public boolean deleteMatchByKey(int gamerReceiverId, int gamerSenderId) {
+        return matchSentRepository.deleteByKey(gamerReceiverId, gamerSenderId);
+    }
+
     // validation methods
     private Result<Gamer> validate(Gamer gamer) {
         Result<Gamer> result = new Result<>();

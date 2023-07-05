@@ -53,9 +53,9 @@ function GamerProfile() {
     const today = new Date();
     const adjustedTodayForTimezome = new Date(today.getTime() - today.getTimezoneOffset() * 60000);
 
-    console.log(adjustedTodayForTimezome.toISOString());
+    console.log(adjustedTodayForTimezome);
     const BLANK_MATCH_TO_SEND = {
-        dateMatchSent: today.toISOString().split("T")[0],
+        dateMatchSent: adjustedTodayForTimezome.toISOString().split("T")[0],
         gamerSenderId: auth.userGamer.gamerId,
         gamerReceiver: gamer
     };
@@ -134,6 +134,8 @@ function GamerProfile() {
 
     
     const handleRemoveMatch = () => {
+        console.log(gamer.gamerId);
+        console.log(auth.userGamer.gamerId);
         console.log("removing match!");
         const init = {
             method: 'DELETE'
