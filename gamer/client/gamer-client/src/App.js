@@ -27,7 +27,8 @@ import GamerList from "./components/GamerList";
 import Success from "./components/Success";
 import Error from "./components/Error";
 
-import GameSearchBar from "./components/GameSearchBar";
+import GameList from "./components/GameList";
+import GamerGameList from "./components/GamerGameList";
 
 
 const LOCAL_STORAGE_TOKEN_KEY = "gamers-guild";
@@ -185,8 +186,15 @@ function App() {
           Otherwise, you can View All Gamers. */}
           <Route path="/gamers" element={
             !user.username ? <Navigate to ="/login"/> : <GamerList/>}/>
+          <Route path="/profile/game" element={<GamerGameList/>}/>
 
-          <Route path="/game" element={<GameSearchBar/>}/>
+          {/* VIEW, ADD, DELETE GAMES - If you don't have a username (aka not logged in), go to Login instead.
+          Otherwise, if you don't have a gamer tag (aka no profile), go to Create Profile instead.
+          Otherwise, you can View, Add, and Delete games. */}
+          <Route path="/game" element={
+            !user.username ? <Navigate to="/login"/> : (
+              !userGamer.gamerTag ? <Navigate to={`/profile/form`}/> : <GameList/>
+          )}/>
 
           <Route path="/about" element={<About/>}/>
           <Route path="/community" element={<Community/>}/>

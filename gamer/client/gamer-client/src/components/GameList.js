@@ -1,31 +1,32 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import AuthContext from "../context/AuthContext";
-
+import { Link } from "react-router-dom";
 
 const BLANK_GAME= {
     gameTitle: ""
 }
 
-function GameSearchBar() {
+function GameList(props) {
+    const auth = useContext(AuthContext);
+
     const [games, setGames] = useState([]);
     const [foundGames, setFoundGames] = useState([]);
     const [game, setGame] = useState(BLANK_GAME);
-
-    const [errors, setErrors] = useState([]);
-    const [messages, setMessages] = useState("");
-    const auth = useContext(AuthContext);
-
     const BLANK_GAMER_GAME = {
         gamerId: auth.userGamer.gamerId,
         game: {}
     };
     const [gamerGame, setGamerGame] = useState(BLANK_GAMER_GAME);
+
+    const [messages, setMessages] = useState("");
+    const [errors, setErrors] = useState([]);
+    
     const navigate = useNavigate();
-    const url = "http://localhost:8080";
+    const url = "http://localhost:8080/game";
 
     useEffect( () => {
-        fetch(`${url}/game`)
+        fetch(url)
         .then(response => {
             if (response.status === 200) {
                 return response.json();
@@ -38,9 +39,29 @@ function GameSearchBar() {
             console.log(data)
         }) 
         .catch(console.log);
-    }, [games.length]);
+    }, []);
 
-    const handleAddNewGame= (event) => {
+    const handleDelete = (gameId) => {
+        const gameToDelete = games.find(game => game.gameId === gameId);
+        if(window.confirm(`Delete ${gameToDelete.gameTitle} from the game list?`)) {
+            const init = {
+                method: "DELETE"
+            };
+            fetch(`${url}/${gameId}`, init)
+            .then(response => {
+                if (response.status === 204) {
+                    const newGames = games.filter(game => game.gameId !== gameId);
+                    setGames(newGames);
+                    navigate("/success", {state: {message: `The game ${gameToDelete.gameTitle} was deleted from the list.`}});
+                } else {
+                    return Promise.reject(`${response.status}: It's possible this game is being used somewhere! Delete failed.`);
+                }
+            })
+            .catch(data => setErrors([data]));
+        }
+    }
+
+    const handleAdd= (event) => {
         event.preventDefault();
         const init = {
             method: 'POST',
@@ -50,7 +71,7 @@ function GameSearchBar() {
             },
             body: JSON.stringify(game)
         };
-        fetch(`${url}/game`, init)
+        fetch(`${url}`, init)
         .then(response => {
             if(response.status === 201 || response.status === 400){
                 return response.json();
@@ -60,8 +81,7 @@ function GameSearchBar() {
         })
         .then(data =>{
             if(data.gameId){
-                     
-                setMessages(`The game ${game.gameTitle} was successfully added to the list!`);
+                navigate("/success", {state: {message: `The game ${game.gameTitle} was successfully added to the list of games!`}})
             } else{
                 setErrors(data);
             }
@@ -79,7 +99,7 @@ function GameSearchBar() {
     }
 
     const searchGamesByTitle = (value) => {
-        fetch(`${url}/game`)
+        fetch(`${url}`)
         .then(response => {
             if (response.status === 200) {
                 return response.json();
@@ -102,7 +122,6 @@ function GameSearchBar() {
         const gameToAdd = games.find(game => game.gameId === gameId);
         newGamerGame.game = gameToAdd;
 
-        console.log(newGamerGame);
         const init = {
             method: 'POST',
             headers: {
@@ -111,7 +130,7 @@ function GameSearchBar() {
             },
             body: JSON.stringify(newGamerGame)
         };
-        fetch(`${url}/gamer/game`, init)
+        fetch(`${url}r/game`, init)
         .then(response => {
             if(response.status === 201) {
                 return null;
@@ -124,7 +143,7 @@ function GameSearchBar() {
         .then(data =>{
             console.log(data);
             if(!data){
-                setMessages(`You added ${game.gameTitle} as a favorite game!`);
+                navigate("/success", {state: {message: `You added ${gameToAdd.gameTitle} as a favorite game!`}});
             } else{
                 setErrors(data);
             }
@@ -133,19 +152,7 @@ function GameSearchBar() {
     }
 
     return (
-        <div>
-            <p>Search for a game?</p>
-            <input id="gameTitle" 
-            name="gameTitle" 
-            type="text" 
-            className="form-control" 
-            placeholder="Type in game title..."
-            onChange={handleChangeGame}/>
-            
-            <button className="btn btn-success mr-2" onClick={handleAddNewGame}>
-                Add game!
-            </button>
-            <p>{messages}</p>
+        <div className="gameListSearchDiv">
             {errors.length > 0 && (
                 <div className="alert alert-danger">
                     <p>The following errors were found:</p>
@@ -156,7 +163,32 @@ function GameSearchBar() {
                     </ul>
                 </div>
             )}
-            <p>Don't see your game in the results? Add a game to the list!</p>
+            <p>{messages}</p>
+            
+            <p>Search for a game?</p>
+            <input id="gameTitle" 
+            name="gameTitle" 
+            type="text" 
+            className="form-control" 
+            placeholder="Type in game title..."
+            onChange={handleChangeGame}/>
+            
+            {props.isComponent ? (
+                <div>
+                    <p>Don't see your game in the results? Go to Games List and add it!</p>
+                    <Link to="/game">Games List</Link>
+                </div>
+            ) : (
+                <div>
+                    <button className="btn btn-success mr-2" onClick={handleAdd}>
+                    Add game!
+                    </button>
+                <p>Don't see your game in the results? Add a game to the list!</p>
+               </div>
+
+            )}
+
+
             <p>Search results:</p>
             <table>
             <thead>
@@ -166,36 +198,41 @@ function GameSearchBar() {
                 </tr>
             </thead>
             <tbody>
-                {(foundGames.length > 0) ? (
+                {(foundGames.length <= 0 ) ? (
+                    (game.gameTitle ? (
+                        <tr>
+                            <td>No games found!</td>
+                            <td></td>
+                        </tr>
+                    ) : (
+                        games.map(game => (
+                            <tr key = {game.gameId}>
+                                <td>{game.gameTitle} </td>
+                                    {props.isComponent ? (
+                                    <td><button onClick={() => handleAddGamerGame(game.gameId)} type="button">Add Fav Game</button></td>
+                                    ) : (
+                                    <td><button onClick={() => handleDelete(game.gameId)} type="button">Remove Game</button></td>
+                                    )}
+                            </tr>
+                        ))
+                    ))
+                ) : (
                     foundGames.map(foundGame => (
                         <tr key = {foundGame.gameId}>
                             <td><strong>{foundGame.gameTitle}</strong></td>
-                            <td><button onClick={() => handleAddGamerGame(foundGame.gameId)} type="button">Add Game</button></td>
+                            {props.isComponent ? (
+                            <td><button onClick={() => handleAddGamerGame(foundGame.gameId)} type="button">Add Fav Game</button></td>
+                            ) : (
+                            <td><button onClick={() => handleDelete(foundGame.gameId)} type="button">Remove Game</button></td>
+                            )}
                         </tr>
-                        ))
-                ) : (
-                    games.map(game => (
-                    <tr key = {game.gameId}>
-                        <td>{game.gameTitle} </td>
-                        <td><button onClick={() => handleAddGamerGame(game.gameId)} type="button">Add Game</button></td>
-                    </tr>
-                    ))
-                )}
+                    )))}
 
             </tbody>
         </table>
         
-            {/* <div>
-                {foundGames.map(foundGame => (
-                    <div key = {foundGame.gameId}>
-                        <p><strong>{foundGame.gameTitle}</strong></p>
-                    </div>
-                ))}
-            </div> */}
-
-        </div>
-    );
-    
+    </div>
+    )
 }
 
-export default GameSearchBar;
+export default GameList;

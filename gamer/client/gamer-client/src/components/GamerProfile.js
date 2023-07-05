@@ -163,8 +163,10 @@ function GamerProfile() {
                     <p>BIO: {gamer.bio}</p>
                     <p>FAV GAMES:</p>
                     <ul>
-                        {gamer.games.map(game => 
+                        {(gamer.games.length > 0) ? (gamer.games.map(game => 
                             <li key={game.game.gameId}>{game.game.gameTitle}</li>
+                        )) : (
+                            <p>None yet! Edit your profile to add some!</p>
                         )}
                     </ul>
                     <p>SENT GG's FOR:</p>
@@ -185,8 +187,12 @@ function GamerProfile() {
                     <p>TODO: make this link only appear if this is YOUR profile</p>
                     {auth.userGamer.gamerId === gamer.gamerId ? 
                         (<Link to={`/profile/${gamer.gamerId}/form`} className="btn btn-success mr-2" type="button">
-                            Edit
-                        </Link>) : ("CAN'T EDIT")}
+                            Edit Profile
+                        </Link>) : ("CAN'T EDIT PROFILE")}
+                        {auth.userGamer.gamerId === gamer.gamerId ? 
+                        (<Link to={`/profile/game`} className="btn btn-success mr-2" type="button">
+                            Edit Fav Games
+                        </Link>) : ("CAN'T EDIT FAV GAMES")}
                     <p>TODO: make this button only appear if this is someone ELSE'S profile</p>
                     {(auth.userGamer.gamerTag) ? (
                         (auth.userGamer.gamerId !== gamer.gamerId) ? (

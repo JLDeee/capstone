@@ -31,13 +31,15 @@ const AllPosts = () => {
     return(
         
         <div className="post">
-            {posts.map((post, index) => (
-                <Link to={`/post/${post.postingId}`}><div key={index}>
-                    <h3 className="postTitle">{post.header}</h3>
+            {posts.map((post) => (
+                <div key={post.postingId}>
+                    <h3 className="postTitle">
+                    <Link to={`/post/${post.postingId}`}>
+                    {post.header}</Link></h3>
                     <p className="postDate">{post.datePosted}</p>
                     <FindGameTitle currentGameId={post.gameId}/>
                     <FindGamer currentGamerId={post.gamerId}/>
-                </div></Link>
+                </div>
             ))}
         </div>
     );
