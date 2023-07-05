@@ -132,6 +132,12 @@ const MakePost = () => {
                         readOnly={true} 
                         value={post.datePosted}
                         defaultValue={defaultValue} />
+                    <input id="gamerId" 
+                        type="text" 
+                        name="gamerId"
+                        readOnly={true} 
+                        value={auth.userGamer.gamerId}
+                        defaultValue={defaultValue} />
                     <fieldset className="form-group">
                         <label htmlFor="header">Subject:</label>
                         <input id="header" 

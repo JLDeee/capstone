@@ -61,6 +61,7 @@ function App() {
     setRestoreLoginAttemptCompleted(true);
   }, []);
 
+  localStorage.removeItem(LOCAL_STORAGE_TOKEN_KEY);
   const login = (jwtToken) => {
     console.log(`this is the token!!! ${jwtToken}`);
     console.log(LOCAL_STORAGE_TOKEN_KEY);
