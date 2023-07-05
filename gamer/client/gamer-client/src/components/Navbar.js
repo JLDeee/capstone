@@ -32,7 +32,7 @@ function Navbar(){
 
                 {(auth.user.username) &&
                     (<Link to={'/gamers'}>Gamers List</Link>)}
-                    
+
                 {/* {auth.user.username && <Link to={'/community'}>Community</Link>}             */}
                 {!auth.user.username && <Link to={'/login'}>Log In</Link>}
                 {auth.user.username && <button type="button" onClick={handleLogOut}>Log Out</button>}

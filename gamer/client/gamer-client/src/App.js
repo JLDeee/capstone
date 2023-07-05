@@ -17,15 +17,20 @@ import MakePost from "./components/MakePost";
 import Faq from "./components/Faq";
 import Match from "./components/Match";
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> 667f2e7b4d1e990fe8e5820a1d8452d715ddf60d
+=======
+
+>>>>>>> 34cc0bc10ea2469f43f8798cb0cf0daf8213d283
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import GamerForm from "./components/GamerForm";
 import GamerProfile from "./components/GamerProfile";
 import GamerList from "./components/GamerList";
 import Success from "./components/Success";
+<<<<<<< HEAD
 <<<<<<< HEAD
 import Message from "./components/Message";
 =======
@@ -39,6 +44,19 @@ import GameSearchBar from "./components/GameSearchBar";
 
 const LOCAL_STORAGE_TOKEN_KEY = "gamers-guil";
 =======
+=======
+
+import Message from "./components/Message";
+
+
+import Error from "./components/Error";
+
+import GameList from "./components/GameList";
+import GamerGameList from "./components/GamerGameList";
+
+const LOCAL_STORAGE_TOKEN_KEY = "gamers-guil";
+
+>>>>>>> 34cc0bc10ea2469f43f8798cb0cf0daf8213d283
 const LOCAL_STORAGE_TOKEN_KEY = "gamers-guild";
 const BLANK_USER = {
   appUserId:"",
@@ -57,7 +75,11 @@ const BLANK_USER_GAMER = {
   sentMatches:[],
   receivedMatches:[]
 }
+<<<<<<< HEAD
 >>>>>>> 667f2e7b4d1e990fe8e5820a1d8452d715ddf60d
+=======
+
+>>>>>>> 34cc0bc10ea2469f43f8798cb0cf0daf8213d283
 
 function App() {
   const [user, setUser] = useState(BLANK_USER);
@@ -195,8 +217,15 @@ function App() {
           Otherwise, you can View All Gamers. */}
           <Route path="/gamers" element={
             !user.username ? <Navigate to ="/login"/> : <GamerList/>}/>
+          <Route path="/profile/game" element={<GamerGameList/>}/>
 
-          <Route path="/game" element={<GameSearchBar/>}/>
+          {/* VIEW, ADD, DELETE GAMES - If you don't have a username (aka not logged in), go to Login instead.
+          Otherwise, if you don't have a gamer tag (aka no profile), go to Create Profile instead.
+          Otherwise, you can View, Add, and Delete games. */}
+          <Route path="/game" element={
+            !user.username ? <Navigate to="/login"/> : (
+              !userGamer.gamerTag ? <Navigate to={`/profile/form`}/> : <GameList/>
+          )}/>
 
           <Route path="/about" element={<About/>}/>
           <Route path="/community" element={<Community/>}/>
@@ -205,6 +234,7 @@ function App() {
           <Route path="/contact" element={<Contact/>}/>
           <Route path="/search-bar" element={<Searchbar/>}/>
           <Route path="/faq" element={<Faq/>}/>
+<<<<<<< HEAD
 <<<<<<< HEAD
           <Route path="/register" element={<SignUp/>}/>
           <Route path="/match" element={<Match/>}/>
@@ -219,11 +249,30 @@ function App() {
 <<<<<<< HEAD
           <Route path="/message" element={<Message/>}/>
 =======
+=======
+
+          <Route path="/register" element={<SignUp/>}/>
+          <Route path="/match" element={<Match/>}/>
+          {/* insert other routes here! */}
+
+          <Route path="/match" element={<Match/>}/>
+
+          <Route path="/success" element={<Success/>}/>
+          <Route path="/error" element={<Error/>}/>
+          <Route path="*" element={<NotFound/>}/>
+
+          <Route path="/message" element={<Message/>}/>
+
+>>>>>>> 34cc0bc10ea2469f43f8798cb0cf0daf8213d283
 
           <Route path="/post/:id" element={<Post/>}/>
           <Route path="/post/:id/edit" element={<MakePost/>}/>
           <Route path="/make-post" element={<MakePost/>}/>
+<<<<<<< HEAD
 >>>>>>> 667f2e7b4d1e990fe8e5820a1d8452d715ddf60d
+=======
+
+>>>>>>> 34cc0bc10ea2469f43f8798cb0cf0daf8213d283
         </Routes>
         <Footer/>
       </Router>
