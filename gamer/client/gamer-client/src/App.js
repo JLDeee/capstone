@@ -200,6 +200,7 @@ function App() {
           <Route path="*" element={<NotFound/>}/>
 
           <Route path="/post/:id" element={<Post/>}/>
+          <Route path="/post/:id/edit" element={<MakePost/>}/>
           <Route path="/make-post" element={<MakePost/>}/>
         </Routes>
         <Footer/>

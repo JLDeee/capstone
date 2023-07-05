@@ -40,7 +40,7 @@ function GamerList() {
                             <p>GENDER: {gamer.genderType}</p>
                             <p>BDAY: {gamer.birthDate}</p>
                             <p>BIO: {gamer.bio}</p>
-                            <FindPostsByGamer currentGamerTag={gamer.gamerTag}/>
+                            {/* <FindPostsByGamer currentGamerTag={gamer.gamerTag}/> */}
                             <p><Link to={`/profile/${gamer.gamerId}`}>View Profile</Link></p>
                             <p>---</p>
                         </div>
