@@ -110,7 +110,7 @@ public class PostingJdbcTemplateRepository implements PostingRepository {
             statement.setString(2, posting.getDescription());
             statement.setDate(3, posting.getDatePosted() == null ? null : Date.valueOf(posting.getDatePosted()));
             statement.setInt(4, posting.getGameId());
-            statement.setInt(5, posting.getGameId());
+            statement.setInt(5, posting.getGamerId());
             return statement;
         }, keyHolder);
 

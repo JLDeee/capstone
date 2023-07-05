@@ -208,13 +208,14 @@ We all had an interest in gaming and we thought the idea of a gaming partner / g
     * Error
     * Confirmation / Success
 * Create specific components for our app: (2-3 hours)
-    * Match
+    * [X]Match
         * 
     * [x] UserProfile
         * (loads any user's information, including user currently logged in. perhaps the UI could be more shiny to distinguish "you" and other users)
     * [-]EditProfile
         * (only available for your own profile)
         * (a form that lets you edit and delete YOUR user info)
+        * Add unknown games to database
     * [x]UserList 
         * (list of users, can sort by games maybe)
     * [X]Postings
@@ -222,6 +223,8 @@ We all had an interest in gaming and we thought the idea of a gaming partner / g
         * (if logged in, can make a posting, edit your own postings, and delete your own postings)
     * [-]MakePosting
         * (form to add a posting if logged in)
+        * CRUD
+        * Add unknown games to database
     * [X]Login
         * (form for authentiacting user)
     * [X]Register
