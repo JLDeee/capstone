@@ -1,5 +1,5 @@
-body {
-  margin: 0;
+/*  
+margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -12,11 +12,6 @@ code {
     monospace;
 }
 
-
-
-
-
-/* CSS FOR CHATBOX */
 :root {
   --body-bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   --msger-bg: #fff;
@@ -42,7 +37,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-image: var(--body-bg); /*This edits the background color and or image*/
+  background-image: var(--body-bg); 
   font-family: Helvetica, sans-serif;
 }
 
@@ -168,3 +163,5 @@ body {
 .msger-chat {
   background-image: url("https://t4.ftcdn.net/jpg/04/17/58/57/360_F_417585709_Vfa8DIejEXnT6zXY7h9q0nGR9NruHUYd.jpg");
 }
+
+*/

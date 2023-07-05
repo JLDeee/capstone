@@ -2,34 +2,35 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-d
 import { useEffect, useState } from "react";
 import jwtDecode from "jwt-decode";
 import AuthContext from "./context/AuthContext";
+
 import Home from "./components/Home";
 import Navbar from "./components/Navbar";
 import NotFound from "./components/NotFound";
+import Success from "./components/Success";
+import Error from "./components/Error";
 import Footer from "./components/Footer";
+import Contact from "./components/Contact";
+
+import Faq from "./components/Faq";
 import About from "./components/About";
 import Community from "./components/Community";
-import FindDuo from "./components/FindDuo";
 import Duo from "./components/Duo";
-import Contact from "./components/Contact";
-import Searchbar from "./components/search/Searchbar";
-import Post from "./components/search/Post";
-import MakePost from "./components/MakePost";
-import Faq from "./components/Faq";
 
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
+
+import Searchbar from "./components/search/Searchbar";
+import Post from "./components/search/Post";
+import MakePost from "./components/MakePost";
+
 import GamerForm from "./components/GamerForm";
 import GamerProfile from "./components/GamerProfile";
 import GamerList from "./components/GamerList";
-import Success from "./components/Success";
-
-import Message from "./components/Message";
-
-
-import Error from "./components/Error";
 
 import GameList from "./components/GameList";
 import GamerGameList from "./components/GamerGameList";
+
+import Message from "./components/Message";
 
 const LOCAL_STORAGE_TOKEN_KEY = "gamers-guild";
 const BLANK_USER = {
@@ -80,17 +81,6 @@ function App() {
       roles: decodedUser.authorities.split(",")
     }
     
-    // localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, token);
-    // const { sub: username, authorities: authoritiesString } = jwtDecode(token);
-    // const roles = authoritiesString.split(",");
-    // const user = {
-    //   username,
-    //   roles,
-    //   token,
-    //   hasRole(role) {
-    //     return this.roles.includes(role);
-    //   }
-    // };
     console.log(decodedUser);
 
     console.log(user);
@@ -198,15 +188,14 @@ function App() {
           )}/>
 
           <Route path="/about" element={<About/>}/>
-          <Route path="/community" element={<Community/>}/>
+          {/* VIEW ALL POSTS - If you don't have a username (aka not logged in), go to Login instead.
+          Otherwise, you can View All Posts. */}
+          <Route path="/community" element={!user.username ? <Navigate to="/login"/> : <Community/>}/>
+
           <Route path="/duo" element={<Duo/>}/>
           <Route path="/contact" element={<Contact/>}/>
           <Route path="/search-bar" element={<Searchbar/>}/>
           <Route path="/faq" element={<Faq/>}/>
-
-
-          <Route path="/register" element={<SignUp/>}/>
-          {/* insert other routes here! */}
 
           <Route path="/success" element={<Success/>}/>
           <Route path="/error" element={<Error/>}/>
@@ -214,10 +203,29 @@ function App() {
 
           <Route path="/message" element={<Message/>}/>
 
+          {/* VIEW POST - If you don't have a username (aka not logged in), go to Login instead.
+          If you don't have a gamer tag (aka no profile), go to Create Profile instead. 
+          Otherwise, you can View Post. */}
+          <Route path="/post/:id" element={
+            !user.username ? <Navigate to="/login"/> : (
+              !userGamer.gamerTag ? <Navigate to={`/profile/form`}/> : <Post/>
+          )}/>
 
-          <Route path="/post/:id" element={<Post/>}/>
-          <Route path="/post/:id/edit" element={<MakePost/>}/>
-          <Route path="/make-post" element={<MakePost/>}/>
+          {/* EDIT POST - If you don't have a username (aka not logged in), go to Login instead.
+          If you don't have a gamer tag (aka no profile), go to Create Profile instead. 
+          Otherwise, you can Edit Post (1 more validation in MakePost to check if the post is yours!) */}
+          <Route path="/post/:id/edit" element={
+            !user.username ? <Navigate to="/login"/> : (
+              !userGamer.gamerTag ? <Navigate to={`/profile/form`}/> : <MakePost/>
+          )}/>
+
+          {/* MAKE POST - If you don't have a username (aka not logged in), go to Login instead.
+          If you don't have a gamer tag (aka no profile), go to Create Profile instead. 
+          Otherwise, you can Make Post. */}
+          <Route path="/make-post" element={
+            !user.username ? <Navigate to="/login"/> : (
+              !userGamer.gamerTag ? <Navigate to={`/profile/form`}/> : <MakePost/>
+          )}/>
 
         </Routes>
         <Footer/>
