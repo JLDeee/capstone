@@ -1,5 +1,4 @@
-import AuthContext from "../context/AuthContext";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 function SignUp() {
@@ -10,7 +9,6 @@ function SignUp() {
     })
     const [errors, setErrors] = useState([]);
     const url = "http://localhost:8080";
-    const auth = useContext(AuthContext);
 
     const handleChange = (event) => {
         const nextCredentials = {...credentials};
@@ -26,23 +24,29 @@ function SignUp() {
         const init = {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Accept": "application/json"
             },
             body: JSON.stringify(credentials),
         }
 
         fetch(`${url}/create_account`, init)
         .then(response => {
-            if (response.status === 201) {
-                console.log(response);
-                const {jwt_token} = response.json();
-                navigate("/success", {state: {message: `You are now signed up as ${credentials.username}. Please create your profile!`}});
+            if (response.status === 201 ) {
+                console.log(response.json());
+                navigate("/success", {state: {message: `You are now signed up as ${credentials.username}. Please login!`}});
+            } else if (response.status === 400) {
+                return response.json();
             } else { 
-                return Promise.reject(`${response.status}: ${response.body}`);
+                return Promise.reject(`${response.status}: Unexpected error code. Account creation failed.`);
             } 
         })
-        .catch(data => setErrors(data));
+        .then(data =>{
+                setErrors(data);
+        })
+        .catch(console.log)
     }
+    
 
     return (
         <main className="container">
@@ -52,10 +56,9 @@ function SignUp() {
                     <div className="alert alert-danger">
                         <p>The following errors were found:</p>
                         <ul>
-                            {/* {errors.map(error => 
+                            {errors.map(error => 
                             <li key={error}>{error}</li>
-                            )} */}
-                            <p>{errors}</p>
+                            )}
                         </ul>
                     </div>
                 )}
