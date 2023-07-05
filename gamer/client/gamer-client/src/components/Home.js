@@ -1,22 +1,19 @@
 import { Link } from 'react-router-dom';
+import ArcadeImage from '../images/gg_arcadefloor.png'
+
 
 function Home(){
 
     return(
     <div className="container">
-       <header>
-        <div>
-            <h1>Welcome to Gamers' Guild!</h1>
-        </div>
-       </header>
        <section>
 
        <div className="logo">
-        <p>Insert Logo Here (getting rid of 404 logo not found)</p>
+        <p>Logo</p>
        </div>
 
        <div className="splashImage">
-       <img src="https://img.freepik.com/premium-vector/neon-game-joystick-icon-glowing-joystick-brick-wall-background-vector-illustration_175392-111.jpg"/>
+       <img src={ArcadeImage} alt="arcade floor" width="2400" height="1000"/>
        </div>
 
         <div className="getStarted">

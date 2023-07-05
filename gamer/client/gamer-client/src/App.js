@@ -17,7 +17,6 @@ import Searchbar from "./components/search/Searchbar";
 import Post from "./components/search/Post";
 import MakePost from "./components/MakePost";
 import Faq from "./components/Faq";
-import Match from "./components/Match";
 
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
@@ -196,7 +195,6 @@ function App() {
           <Route path="/contact" element={<Contact/>}/>
           <Route path="/search-bar" element={<Searchbar/>}/>
           <Route path="/faq" element={<Faq/>}/>
-          <Route path="/match" element={<Match/>}/>
 
           <Route path="/success" element={<Success/>}/>
           <Route path="/error" element={<Error/>}/>
