@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function FindPostByGamer(props) {
+function FindPostsByGamer(props) {
     const [posts, setPosts] = useState([]);
     const post_url = 'http://localhost:8080/posting'
 
@@ -17,13 +17,15 @@ function FindPostByGamer(props) {
         .catch(console.log);
     
     }, []); // empty dependency array tells react to run once when the component is intially loaded
+    console.log(props.currentGamerTag);
     return(
-        <>
+        <div className="gamer-posts">
         {posts.map(post => {
             <p className="gamer-posts">{post.header}</p>
+            {console.log(post.header)}
         })}
-        </>
+        </div>
     );
 }
 
-export default FindPostByGamer;
+export default FindPostsByGamer;

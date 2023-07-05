@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import FindPostByGamer from "./FindPostsByGamer";
+import FindPostsByGamer from "./FindPostsByGamer";
 
 function GamerList() {
     const [gamers, setGamers] = useState([]);
@@ -40,7 +40,7 @@ function GamerList() {
                             <p>GENDER: {gamer.genderType}</p>
                             <p>BDAY: {gamer.birthDate}</p>
                             <p>BIO: {gamer.bio}</p>
-                            <FindPostByGamer currentGamerTag={gamer.gamerTag}/>
+                            <FindPostsByGamer currentGamerTag={gamer.gamerTag}/>
                             <p><Link to={`/profile/${gamer.gamerId}`}>View Profile</Link></p>
                             <p>---</p>
                         </div>

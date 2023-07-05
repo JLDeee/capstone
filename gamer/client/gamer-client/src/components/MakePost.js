@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams} from 'react-router-dom';
 import { Link, useNavigate, } from 'react-router-dom';
 import AuthContext from "../context/AuthContext";
+import FindGamer from "./search/FindGamer";
 
 
 const today = new Date();
@@ -137,7 +138,7 @@ const MakePost = () => {
                         name="gamerId"
                         readOnly={true} 
                         value={auth.userGamer.gamerId}
-                        defaultValue={defaultValue} />
+                        defaultValue={<FindGamer currentGamerId={auth.userGamer.gamerId}/>} />
                     <fieldset className="form-group">
                         <label htmlFor="header">Subject:</label>
                         <input id="header" 
