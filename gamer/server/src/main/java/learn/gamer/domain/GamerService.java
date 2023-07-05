@@ -186,6 +186,11 @@ public class GamerService {
             result.addMessage("Game is required.", ResultType.INVALID);
             return result;
         }
+
+        if (gamerGameRepository.findByKey(gamerGame.getGamerId(), gamerGame.getGame().getGameId()) != null ) {
+            result.addMessage("You already added this game to your list!", ResultType.DUPLICATE);
+            return result;
+        }
         return result;
     }
 
@@ -211,7 +216,7 @@ public class GamerService {
             return result;
         }
 
-        if (matchSentRepository.findByGamerSenderId(matchSent.getGamerSenderId()) != null) {
+        if (matchSentRepository.findByKey(matchSent.getGamerReceiver().getGamerId(), matchSent.getGamerSenderId()) != null ) {
             result.addMessage("You already sent this user a GG!", ResultType.DUPLICATE);
             return result;
         }

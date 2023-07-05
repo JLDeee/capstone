@@ -27,6 +27,7 @@ import GamerList from "./components/GamerList";
 import Success from "./components/Success";
 import Error from "./components/Error";
 
+import GameSearchBar from "./components/GameSearchBar";
 
 
 const LOCAL_STORAGE_TOKEN_KEY = "gamers-guild";
@@ -162,7 +163,7 @@ function App() {
             !user.username ? <Navigate to="/login"/> : (
               !userGamer.gamerTag ? <Navigate to="/profile/form"/> : <GamerProfile/>
             )}/>
-          <Route path="/profile/:id" element={<GamerProfile/>}/>
+          <Route path="/profile/:id" element={!user.username ? <Navigate to="/login"/> : <GamerProfile/>}/>
 
           {/* CREATE PROFILE (ADD GAMER) - If you don't have a username (aka not logged in), go to Login instead. 
           Otherwise, if you DO have a gamer tag (aka already made profile) go to View Your Profile instead. 
@@ -184,6 +185,8 @@ function App() {
           Otherwise, you can View All Gamers. */}
           <Route path="/gamers" element={
             !user.username ? <Navigate to ="/login"/> : <GamerList/>}/>
+
+          <Route path="/game" element={<GameSearchBar/>}/>
 
           <Route path="/about" element={<About/>}/>
           <Route path="/community" element={<Community/>}/>

@@ -17,16 +17,13 @@ public class MatchSentJdbcTemplateRepository implements MatchSentRepository {
     }
 
     @Override
-    public MatchSent findByGamerSenderId(int gamerSenderId) {
-//        final String sql = "select gamer_receiver_id, gamer_sender_id, date_match "
-//                + "from `match` "
-//                + "where gamer_sender_id = ?;";
+    public MatchSent findByKey(int gamerReceiverId, int gamerSenderId) {
         final String sql = "select m.gamer_receiver_id, m.gamer_sender_id, m.date_match, "
                 + "gr.gamer_id, gr.app_user_id, gr.gender_type, gr.gamer_tag, gr.birth_date, gr.bio "
                 + "from `match` m "
                 + "inner join gamer gr on m.gamer_receiver_id = gr.gamer_id "
-                + "where gamer_sender_id = ?;";
-        MatchSent matchSent = jdbcTemplate.query(sql, new MatchSentMapper(), gamerSenderId)
+                + "where m.gamer_receiver_id = ? and m.gamer_sender_id = ?;";
+        MatchSent matchSent = jdbcTemplate.query(sql, new MatchSentMapper(), gamerReceiverId, gamerSenderId)
                 .stream().findFirst().orElse(null);
         if (matchSent != null) {
             addGamerReceiver(matchSent);

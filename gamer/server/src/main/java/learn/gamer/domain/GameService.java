@@ -33,9 +33,14 @@ public class GameService {
             return result;
         }
 
+        if (game.getGameId() > 0) {
+            result.addMessage("Game ID must be 0 for an add operation", ResultType.INVALID);
+            return result;
+        }
+
         Game inserted = gameRepository.add(game);
         if (inserted == null) {
-            result.addMessage("insert failed", ResultType.INVALID);
+            result.addMessage("Failed to add game.", ResultType.INVALID);
         } else {
             result.setPayload(inserted);
         }
@@ -44,9 +49,9 @@ public class GameService {
     }
 
     public Result<Game> deleteById(int gameId) {
-        Result<Game> result = new Result<Game>();
+        Result<Game> result = new Result<>();
         if (!gameRepository.deleteById(gameId)) {
-            result.addMessage("Game id " + gameId + " was not found.", ResultType.NOT_FOUND);
+            result.addMessage("Game ID " + gameId + " was not found.", ResultType.NOT_FOUND);
         }
         return result;
     }
@@ -61,24 +66,19 @@ public class GameService {
         Result<Game> result = new Result<>();
 
         if (game == null) {
-            result.addMessage("game cannot be null.",ResultType.INVALID);
+            result.addMessage("Game cannot be null.",ResultType.INVALID);
             return result;
         }
 
         if (game.getGameTitle() == null || game.getGameTitle().isBlank()) {
-            result.addMessage("Game `gameTitle` is required.", ResultType.INVALID);
-            return result;
-        }
-
-        if(game.getGameId() <= 0){
-            result.addMessage("Game ID must be valid", ResultType.INVALID);
+            result.addMessage("Game title is required.", ResultType.INVALID);
             return result;
         }
 
         List<Game> games = gameRepository.findAll();
         for(Game gameInList : games){
-            if(gameInList.getGameTitle().equals(game.getGameTitle())){
-                result.addMessage("Cannot have duplicate of same game.", ResultType.INVALID);
+            if(gameInList.getGameTitle().equalsIgnoreCase(game.getGameTitle())){
+                result.addMessage("A game with that title already exists!", ResultType.INVALID);
                 return result;
             }
         }

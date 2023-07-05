@@ -167,13 +167,13 @@ function GamerProfile() {
                             <li key={game.game.gameId}>{game.game.gameTitle}</li>
                         )}
                     </ul>
-                    <p>GG'd BY:</p>
+                    <p>SENT GG's FOR:</p>
                     <ul>
                         {gamer.sentMatches.map(match => 
-                            <li key={match.gamerReceiver.gamerId}>{match.gamerReceiver.gamerTag} at {match.dateMatchReceived}</li>
+                            <li key={match.gamerReceiver.gamerId}>{match.gamerReceiver.gamerTag} at {match.dateMatchSent}</li>
                         )}
                     </ul>
-                    <p>GG'd BY:</p>
+                    <p>GOT GG'd BY:</p>
                     <ul>
                         {gamer.receivedMatches.map(match => 
                             <li key={match.gamerSender.gamerId}>{match.gamerSender.gamerTag} at {match.dateMatchReceived}</li>
