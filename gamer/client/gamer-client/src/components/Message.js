@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { Link} from 'react-router-dom';
+import '../chat.css';
 
 function Message() {
     const msgerForm = get(".msger-inputarea");

@@ -14,21 +14,31 @@ function Navbar(){
 
     return(<>
         <nav>
-            <div>
-                {auth.user.username && 
-                    (<p>Welcome, {auth.user.username}</p>)}
-                {auth.userGamer.gamerTag && 
-                    (<p>GAMERTAG: {auth.userGamer.gamerTag}</p>)}
-                {(!auth.userGamer.gamerTag && auth.user.username) && 
-                    (<p>CREATE YOUR PROFILE NOWWW</p>)}
-                <Link to={'/'}>Home</Link>
-                <Link to={'/about'}>About</Link>
-                <Link to={'/duo'}>Duo</Link>
-                <Link to={'/community'}>Community</Link>
-                {(auth.userGamer.gamerTag && auth.user.username) &&
-                    (<Link to={'/profile'}>My Profile</Link>)}
-                {(!auth.userGamer.gamerTag && auth.user.username) && 
-                    (<Link to={'/profile/form'}>Create Profile</Link>)}
+            <ul>
+                
+                <li><Link to={'/'}>Home</Link></li>
+                <li><Link to={'/about'}>About</Link></li>
+                <li><Link to={'/duo'}>Duo</Link></li>
+                <li><Link to={'/community'}>Community</Link></li>
+                <li>{(auth.userGamer.gamerTag && auth.user.username) &&
+                    (<Link to={'/profile'}>My Profile</Link>)}</li>
+                <li>{(!auth.userGamer.gamerTag && auth.user.username) && 
+                    (<Link to={'/profile/form'}>Create Profile</Link>)}</li>
+
+                <li>{(auth.user.username) &&
+                    (<Link to={'/gamers'}>Gamers List</Link>)}</li>
+                    
+                {/* {auth.user.username && <Link to={'/community'}>Community</Link>}*/}
+                    <li>{!auth.user.username && <Link to={'/login'}>Log In</Link>}</li>
+                    <li>{auth.user.username && <button type="button" onClick={handleLogOut}>Log Out</button>}</li>
+                    {/* <li><button type="button" onClick={handleLogOut}>Emergency Log Out</button></li>     */}
+                <li>{auth.user.username && 
+                    (<p>Welcome, {auth.user.username}</p>)}</li>
+                <li>{auth.userGamer.gamerTag && 
+                    (<p>GAMERTAG: {auth.userGamer.gamerTag}</p>)}</li>
+                <li>{(!auth.userGamer.gamerTag && auth.user.username) && 
+                    (<p>CREATE YOUR PROFILE NOWWW</p>)}</li>    
+            </ul>
 
                 {(auth.user.username) &&
                     (<Link to={'/gamers'}>Gamers List</Link>)}
@@ -37,7 +47,7 @@ function Navbar(){
                 {!auth.user.username && <Link to={'/login'}>Log In</Link>}
                 {auth.user.username && <button type="button" onClick={handleLogOut}>Log Out</button>}
                 <button type="button" onClick={handleLogOut}>Emergency Log Out</button>
-            </div>
+
         </nav>
     </>)
 }

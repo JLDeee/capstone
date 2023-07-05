@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "../context/AuthContext";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import FindPostsByGamer from "./FindPostsByGamer";
 
 function GamerProfile() {
     const auth = useContext(AuthContext);
@@ -181,6 +182,7 @@ function GamerProfile() {
                             <li key={match.gamerSender.gamerId}>{match.gamerSender.gamerTag} at {match.dateMatchReceived}</li>
                         )}
                     </ul>
+                    <ul><FindPostsByGamer currentGamerTag={gamer.gamerTag}/></ul>
                 </div>
                 <div>
                     <p>TODO: make this link only appear if this is YOUR profile</p>

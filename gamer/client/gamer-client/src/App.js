@@ -15,7 +15,6 @@ import Searchbar from "./components/search/Searchbar";
 import Post from "./components/search/Post";
 import MakePost from "./components/MakePost";
 import Faq from "./components/Faq";
-import Match from "./components/Match";
 
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
@@ -31,8 +30,6 @@ import Error from "./components/Error";
 
 import GameList from "./components/GameList";
 import GamerGameList from "./components/GamerGameList";
-
-const LOCAL_STORAGE_TOKEN_KEY = "gamers-guil";
 
 const LOCAL_STORAGE_TOKEN_KEY = "gamers-guild";
 const BLANK_USER = {
@@ -208,11 +205,9 @@ function App() {
           <Route path="/search-bar" element={<Searchbar/>}/>
           <Route path="/faq" element={<Faq/>}/>
 
-          <Route path="/register" element={<SignUp/>}/>
-          <Route path="/match" element={<Match/>}/>
-          {/* insert other routes here! */}
 
-          <Route path="/match" element={<Match/>}/>
+          <Route path="/register" element={<SignUp/>}/>
+          {/* insert other routes here! */}
 
           <Route path="/success" element={<Success/>}/>
           <Route path="/error" element={<Error/>}/>
