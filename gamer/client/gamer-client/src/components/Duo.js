@@ -1,6 +1,6 @@
 function Duo(){
     return(<>
-        <div className="container">
+        <div className="aboutContainer">
             <header>
                 <h1>How Our Duo Finder Works</h1>
             </header>
