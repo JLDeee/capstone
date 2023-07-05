@@ -211,7 +211,8 @@ public class GamerService {
             return result;
         }
 
-        if (matchSentRepository.findByGamerSenderId(matchSent.getGamerSenderId()) != null) {
+
+        if (matchSentRepository.findByKey(matchSent.getGamerReceiver().getGamerId(), matchSent.getGamerSenderId()) != null ) {
             result.addMessage("You already sent this user a GG!", ResultType.DUPLICATE);
             return result;
         }

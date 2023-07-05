@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import AuthContext from "../context/AuthContext";
 import { useParams, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import GameSearchBar from "./GameSearchBar";
 
 function GamerForm() {
 
@@ -126,6 +127,10 @@ function GamerForm() {
         }
     };
 
+    const handleRemoveFavoriteGame = (gameId) => {
+        console.log(`removing game ${gameId}`);
+    }
+
     return(
         <main className="container">
             <section id="gamerProfileForm">
@@ -188,6 +193,28 @@ function GamerForm() {
                         value={gamer.bio}
                         onChange={handleChange}/>
                     </fieldset>
+                    <p>FAV GAMES:</p>
+                    {gamer.games ? (
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Game Title</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {gamer.games.map(game => (
+                            <tr key={game.game.gameId}>
+                                <td>{game.game.gameTitle} </td>
+                                <td><button onClick={() => handleRemoveFavoriteGame(game.game.gameId)}>Remove Favorite Game</button></td>
+                            </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                    ) : ("None so far!")}
+
+
+                    <GameSearchBar/>
 
                     <div className="mt-4">
                         <button className="btn btn-success mr-2" type="submit">

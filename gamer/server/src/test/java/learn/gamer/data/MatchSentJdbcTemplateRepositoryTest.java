@@ -31,7 +31,7 @@ class MatchSentJdbcTemplateRepositoryTest {
 //        values
 //        (2, 6, '2023-06-27'),
 //        (3, 7, '2023-06-26');
-        MatchSent matchSent = repository.findByGamerSenderId(7);
+        MatchSent matchSent = repository.findByKey(3, 7);
         assertNotNull(matchSent);
         assertEquals(3, matchSent.getGamerReceiver().getGamerId());
         assertEquals("gt_jackie", matchSent.getGamerReceiver().getGamerTag());
