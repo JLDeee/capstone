@@ -1,9 +1,6 @@
-import AuthContext from '../context/AuthContext';
-import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 function Home(){
-    const auth = useContext(AuthContext);
 
     return(
     <div className="container">
@@ -15,11 +12,11 @@ function Home(){
        <section>
 
        <div className="logo">
-       <img src="https://ov10-engine.flamingtext.com/netfu/tmp28000/coollogo_com-152464151.png"></img>
+        <p>Insert Logo Here (getting rid of 404 logo not found)</p>
        </div>
 
        <div className="splashImage">
-       <img src="https://img.freepik.com/premium-vector/neon-game-joystick-icon-glowing-joystick-brick-wall-background-vector-illustration_175392-111.jpg"></img>
+       <img src="https://img.freepik.com/premium-vector/neon-game-joystick-icon-glowing-joystick-brick-wall-background-vector-illustration_175392-111.jpg"/>
        </div>
 
         <div className="getStarted">

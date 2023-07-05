@@ -1,5 +1,4 @@
-import AuthContext from "../context/AuthContext";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 function SignUp() {
@@ -10,7 +9,6 @@ function SignUp() {
     })
     const [errors, setErrors] = useState([]);
     const url = "http://localhost:8080";
-    const auth = useContext(AuthContext);
 
     const handleChange = (event) => {
         const nextCredentials = {...credentials};
