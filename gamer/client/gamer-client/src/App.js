@@ -198,7 +198,6 @@ function App() {
 
           <Route path="/about" element={<About/>}/>
           <Route path="/community" element={<Community/>}/>
-          <Route path="/find-duo" element={<FindDuo/>}/>
           <Route path="/duo" element={<Duo/>}/>
           <Route path="/contact" element={<Contact/>}/>
           <Route path="/search-bar" element={<Searchbar/>}/>
