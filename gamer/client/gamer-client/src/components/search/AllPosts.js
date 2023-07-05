@@ -25,7 +25,7 @@ const AllPosts = () => {
             .catch(console.log);
     }, []); // empty dependency array tells react to run once when the component is intially loaded
 
-
+    console.log(posts);
 
 
     return(
