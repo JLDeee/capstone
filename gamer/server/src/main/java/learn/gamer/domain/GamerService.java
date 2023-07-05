@@ -174,7 +174,7 @@ public class GamerService {
     private Result<Void> validate(GamerGame gamerGame) {
         Result<Void> result = new Result<>();
         if (gamerGame == null) {
-            result.addMessage("gamerGame cannot be null.", ResultType.INVALID);
+            result.addMessage("The gamer's games cannot be null.", ResultType.INVALID);
             return result;
         }
 
@@ -188,22 +188,27 @@ public class GamerService {
     private Result<Void> validate(MatchSent matchSent) {
         Result<Void> result = new Result<>();
         if (matchSent == null) {
-            result.addMessage("Match sent cannot be null.", ResultType.INVALID);
+            result.addMessage("The GG sent cannot be null.", ResultType.INVALID);
             return result;
         }
 
         if (matchSent.getGamerReceiver() == null) {
-            result.addMessage("Gamer that received the match is required.", ResultType.INVALID);
+            result.addMessage("Gamer that received the GG is required.", ResultType.INVALID);
             return result;
         }
 
         if (matchSent.getDateMatchSent() == null) {
-            result.addMessage("Date for match sent is required.", ResultType.INVALID);
+            result.addMessage("Date for sending GG is required.", ResultType.INVALID);
             return result;
         }
 
         if (matchSent.getDateMatchSent().isAfter(LocalDate.now())) {
-            result.addMessage("Match can't be in the future.", ResultType.INVALID);
+            result.addMessage("GG send date can't be in the future.", ResultType.INVALID);
+            return result;
+        }
+
+        if (matchSentRepository.findByGamerSenderId(matchSent.getGamerSenderId()) != null) {
+            result.addMessage("You already sent this user a GG!", ResultType.DUPLICATE);
             return result;
         }
         return result;

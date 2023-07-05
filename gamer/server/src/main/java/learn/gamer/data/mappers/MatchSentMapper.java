@@ -12,13 +12,10 @@ public class MatchSentMapper implements RowMapper<MatchSent> {
     public MatchSent mapRow(ResultSet rs, int rowNum) throws SQLException {
         MatchSent matchSent = new MatchSent();
         matchSent.setDateMatchSent(rs.getDate("date_match").toLocalDate());
-
         matchSent.setGamerSenderId(rs.getInt("gamer_sender_id"));
+
         GamerMapper gamerMapper = new GamerMapper();
         matchSent.setGamerReceiver(gamerMapper.mapRow(rs, rowNum));
-
-        int gamerReceiverId = rs.getInt("gamer_receiver_id");
-//        matchSent.setGamerReceiver(gamerMapper.mapRow(rs, rowNum));
 
         return matchSent;
     }
