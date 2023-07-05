@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 
-
-function FindGamer(props) {
-    const [gamer, setGamer] = useState({});
-    const gamer_url = 'http://localhost:8080/gamer'
+function FindPostByGamer(props) {
+    const [posts, setPosts] = useState([]);
+    const post_url = 'http://localhost:8080/posting'
 
     useEffect(() => {
-        fetch(`${gamer_url}/${props.currentGamerId}`)
+        fetch(`${post_url}/player/${props.currentGamerTag}`)
         .then(response => {
             if (response.status === 200) {
                 return response.json();
@@ -14,15 +13,17 @@ function FindGamer(props) {
                 return Promise.reject(`Unexpected status code: ${response.status}`);
             }
         })
-        .then(data => setGamer(data)) // here we are setting our data to our state variable 
+        .then(data => setPosts(data)) // here we are setting our data to our state variable 
         .catch(console.log);
     
     }, []); // empty dependency array tells react to run once when the component is intially loaded
     return(
         <>
-        <p className="postGamer">{gamer.gamerTag}</p>
+        {posts.map(post => {
+            <p className="gamer-posts">{post.header}</p>
+        })}
         </>
     );
 }
 
-export default FindGamer;
+export default FindPostByGamer;
