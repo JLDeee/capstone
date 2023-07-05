@@ -6,13 +6,13 @@ import AuthContext from "../context/AuthContext";
 
 
 const today = new Date();
-const defaultValue = today.toISOString().split('T')[0] // yyyy-mm-dd
+const adjustedTodayForTimezome = new Date(today.getTime() - today.getTimezoneOffset() * 60000);
 
 const POST_DEFAULT = {
     header: '',
     description: '',
-    datePosted: defaultValue,
-    gamerId: 0,
+    datePosted: adjustedTodayForTimezome.toISOString().split("T")[0],
+    gamerId: '',
     gameId: ''
 }
 
@@ -23,16 +23,11 @@ const MakePost = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const auth = useContext(AuthContext);
-
-    if (auth.userGamer) {
-        POST_DEFAULT.gamerId = auth.userGamer.gamerId
-    }
     
-    
-
     useEffect(() => {
         console.log(id);
         if(id) {
+            // if id exists, load in post content!
             fetch(`${post_url}/${id}`)
             .then(response => {
                 if (response.status === 200) {
@@ -41,13 +36,20 @@ const MakePost = () => {
                     return Promise.reject(`Unexpected status code: ${response.status}`);
                 }
             })
-            
-            .then(data => setPost(data)) // here we are setting our data to our state variable 
+            .then(data => {
+                console.log(data);
+                setPost(data);
+                console.log(post);
+                if (auth.userGamer.gamerId != data.gamerId) {
+                    console.log("You're trying to edit a post that's not yours!");
+                    navigate("/error", {state: {message: "You're trying to edit a post that isn't yours!"}});    
+                }
+            }) // here we are setting our data to our state variable 
             .catch(console.log);
-        }
-        
+        } else if (auth.userGamer.gamerTag) {
+            POST_DEFAULT.gamerId = auth.userGamer.gamerId;
+        } 
     }, []); 
-
 
 
     // games fetch
@@ -76,10 +78,11 @@ const MakePost = () => {
         newPost[event.target.name] = event.target.value;
         // set the state 
         setPost(newPost);
+        console.log(post);
     }
 
-
     const handlePostSubmit = (event) => {
+        console.log(id);
         event.preventDefault();
         if (id) {
             updatePost();
@@ -88,7 +91,6 @@ const MakePost = () => {
         }
         
     }
-
 
     const addPost = () => {
         const init = {
@@ -124,11 +126,11 @@ const MakePost = () => {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
-            },
+            },   
             body: JSON.stringify(post)
-    };
-    console.log(post);
-    fetch(`${post_url}/${id}`, init)
+        }
+
+        fetch(`${post_url}/${id}`, init)
         .then(response => {
             if(response.status === 204){
                 return null;
@@ -148,8 +150,9 @@ const MakePost = () => {
             }
         })
         .catch(console.log);
-    }
-
+    };
+    
+    console.log(post);
 
     return(
             <section className="make-post">
@@ -169,16 +172,13 @@ const MakePost = () => {
                         type="date" 
                         name="dateRequired"
                         readOnly={true} 
-                        value={post.datePosted}
-                        defaultValue={defaultValue}
-                        onChange={handlePostChange}/>
+                        value={post.datePosted}/>
                     <input id="gamerId" 
                         type="text" 
                         name="gamerId"
                         readOnly={true} 
                         value={auth.userGamer.gamerId}
-                        defaultValue={auth.userGamer.gamerId}
-                        onChange={handlePostChange}/>
+                        defaultValue={auth.userGamer.gamerId}/>
                     <fieldset className="form-group">
                         <label htmlFor="header">Subject:</label>
                         <input id="header" 
@@ -210,12 +210,21 @@ const MakePost = () => {
                     </fieldset>
                     <datalist id="games">
                         {games.map((game) => (
-                            <option value={game.gameId}>{game.gameTitle}</option>
+                            <option key={game.gameId} 
+                            value={game.gameId}>{game.gameTitle}</option>
                         ))}
                     </datalist>
+                    <div>
+                        <p>Don't see your game in the results? Go to Games List and add it!</p>
+                        <Link to="/game">Games List</Link>
+                    </div>
                     <div className="mt-4">
-                        <button className="btn btn-success submitForm" type="submit" id="postFormSubmitButton"><i className="bi bi-file-earmark-check"></i>{id > 0 ? 'Update Post' : 'Add Post'}</button>
-                        <Link to={"/community"}><button className="btn btn-danger cancelSubmit" type="button"><i className="bi bi-stoplights"></i>Cancel</button></Link>
+                        <button className="btn btn-success submitForm" type="submit" id="postFormSubmitButton">
+                            {id > 0 ? 'Update Post' : 'Add Post'}
+                        </button>
+                        <Link to={"/community"} className="btn btn-danger cancelSubmit" type="button">
+                            Cancel
+                        </Link>
                 </div>
                 </form>
             </section>

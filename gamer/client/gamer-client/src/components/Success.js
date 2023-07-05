@@ -7,8 +7,6 @@ function Success(){
     <main>
         <h2>Success!</h2>
         <p>{ location.state ? `${location.state.message}` : ""}</p>
-
-        <Link to="/profile">Profile</Link>
     </main>
     )
 }
