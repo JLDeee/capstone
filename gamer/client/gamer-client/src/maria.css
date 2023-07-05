@@ -18,7 +18,16 @@ body {
     margin-top: 3.5%;
 }
 
-/*BUTTON STYLING*/
+
+
+
+
+
+
+
+
+
+/*===================================================BUTTON STYLING*/
 .button {
     width: 100px;
     height: 25px;
@@ -40,6 +49,13 @@ body {
     margin-top: -15%;
     margin-left: 15%;
     font-size: 2rem;
+}
+
+.aboutButton {
+    width: 300px;
+    height: 50px;
+    font-size: 2rem;
+    margin-left: 40%;
 }
 
 .button:before {
@@ -89,7 +105,19 @@ body {
     100% { background-position: 0 0; }
 }
 
-/*Navigation Styling*/
+
+
+
+
+
+
+
+
+
+
+
+
+/*============================================Navigation Styling*/
 nav{
     background-color: #4E6C70;
     display:flex;
@@ -126,7 +154,17 @@ nav a:hover {
     color: #49ADB6;
 }
 
-/*HOMEPAGE STYLING*/
+
+
+
+
+
+
+
+
+
+
+/*===========================================HOMEPAGE STYLING*/
 .splashImage{
     width: 100%;
 }
@@ -135,6 +173,111 @@ nav a:hover {
     display: flex;
 }
 
-.introDuoFinder p {
-    
+
+
+
+
+
+
+
+
+
+
+/*===========================================ABOUT PAGE STYLING*/
+.aboutPage {
+    background-image: url('https://images.unsplash.com/photo-1562949615-ee7437a2abb4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="people gaming at an internet cafe');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+.about {
+    background-color: #4E6C70;
+    margin-top: 45%;
+}
+
+.aboutGg {
+    text-align: center;
+}
+
+.three {
+    display: flex;
+}
+
+.aboutLeft, .aboutText, .aboutRight {
+    margin-top: 2%;
+    width: 33%;
+}
+
+.aboutText {
+    padding: 2%;
+}
+
+
+
+
+
+
+
+
+
+/*===========================================GG STYLING*/
+.container {
+    background-image: url('https://images.unsplash.com/photo-1554177255-61502b352de3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+.gg {
+    background-color: #4E6C70;
+    margin-top: 45%;
+
+}
+
+.top {
+    width: 50%;
+}
+
+
+
+
+
+/*===========================================FOOTER PAGE STYLING*/
+
+footer {
+    background-color: #4E6C70;
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 7vh;
+    display:inline;
+    overflow: hidden;
+    width: 100%; 
+    text-align: center;
+} 
+footer ul {
+    list-style-type: none;
+    display: inline-block;
+    text-align: left;
+}
+footer ul li {
+    float: left;
+    margin-right: 0.5em;
+    display: inline;
+    padding-right: 3rem;
+    margin-top: 1rem;
+}
+footer ul li a{
+    text-decoration: none;
+    color:#C4C64E;
+}
+
+footer a:hover {
+    text-decoration: none;
+    color: #49ADB6;
 }

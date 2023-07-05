@@ -18,7 +18,7 @@ function Navbar(){
                 <li className='logo'><Link to={'/'}>Logo</Link></li>
                 <li><Link to={'/'}>Home</Link></li>
                 <li><Link to={'/about'}>About</Link></li>
-                <li><Link to={'/duo'}>Duo</Link></li>
+                <li><Link to={'/duo'}>GG</Link></li>
                 <li><Link to={'/community'}>Community</Link></li>
                 <li>{(auth.userGamer.gamerTag && auth.user.username) &&
                     (<Link to={'/profile'}>My Profile</Link>)}</li>
