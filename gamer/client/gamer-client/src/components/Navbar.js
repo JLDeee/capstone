@@ -19,7 +19,8 @@ function Navbar(){
 
                 <li><Link to={'/'}>Home</Link></li>
                 <li><Link to={'/about'}>About</Link></li>
-                <li><Link to={'/duo'}>Duo</Link></li>
+
+                <li><Link to={'/duo'}>GG</Link></li>
                 {(auth.user.username) && (
                     <li><Link to={'/community'}>Community</Link></li>
                 )}
