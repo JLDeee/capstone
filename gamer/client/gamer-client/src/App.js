@@ -8,46 +8,19 @@ import NotFound from "./components/NotFound";
 import Footer from "./components/Footer";
 import About from "./components/About";
 import Community from "./components/Community";
-import FindDuo from "./components/FindDuo";
 import Duo from "./components/Duo";
 import Contact from "./components/Contact";
 import Searchbar from "./components/search/Searchbar";
 import Post from "./components/search/Post";
 import MakePost from "./components/MakePost";
 import Faq from "./components/Faq";
-<<<<<<< HEAD
-import Match from "./components/Match";
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 637e7945eb1956dd8497f1b303171f5f7b3059a0
 
->>>>>>> 667f2e7b4d1e990fe8e5820a1d8452d715ddf60d
-=======
-
->>>>>>> 34cc0bc10ea2469f43f8798cb0cf0daf8213d283
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import GamerForm from "./components/GamerForm";
 import GamerProfile from "./components/GamerProfile";
 import GamerList from "./components/GamerList";
 import Success from "./components/Success";
-<<<<<<< HEAD
-<<<<<<< HEAD
-import Message from "./components/Message";
-=======
-import Error from "./components/Error";
->>>>>>> 667f2e7b4d1e990fe8e5820a1d8452d715ddf60d
-
-import GameSearchBar from "./components/GameSearchBar";
-
-
-<<<<<<< HEAD
-
-const LOCAL_STORAGE_TOKEN_KEY = "gamers-guil";
-=======
-=======
 
 import Message from "./components/Message";
 
@@ -57,12 +30,6 @@ import Error from "./components/Error";
 import GameList from "./components/GameList";
 import GamerGameList from "./components/GamerGameList";
 
-<<<<<<< HEAD
-const LOCAL_STORAGE_TOKEN_KEY = "gamers-guil";
-
->>>>>>> 34cc0bc10ea2469f43f8798cb0cf0daf8213d283
-=======
->>>>>>> 637e7945eb1956dd8497f1b303171f5f7b3059a0
 const LOCAL_STORAGE_TOKEN_KEY = "gamers-guild";
 const BLANK_USER = {
   appUserId:"",
@@ -81,11 +48,7 @@ const BLANK_USER_GAMER = {
   sentMatches:[],
   receivedMatches:[]
 }
-<<<<<<< HEAD
->>>>>>> 667f2e7b4d1e990fe8e5820a1d8452d715ddf60d
-=======
 
->>>>>>> 34cc0bc10ea2469f43f8798cb0cf0daf8213d283
 
 function App() {
   const [user, setUser] = useState(BLANK_USER);
@@ -235,27 +198,10 @@ function App() {
 
           <Route path="/about" element={<About/>}/>
           <Route path="/community" element={<Community/>}/>
-          <Route path="/find-duo" element={<FindDuo/>}/>
           <Route path="/duo" element={<Duo/>}/>
           <Route path="/contact" element={<Contact/>}/>
           <Route path="/search-bar" element={<Searchbar/>}/>
           <Route path="/faq" element={<Faq/>}/>
-<<<<<<< HEAD
-<<<<<<< HEAD
-          <Route path="/register" element={<SignUp/>}/>
-          <Route path="/match" element={<Match/>}/>
-          {/* insert other routes here! */}
-=======
-          <Route path="/match" element={<Match/>}/>
-
->>>>>>> 667f2e7b4d1e990fe8e5820a1d8452d715ddf60d
-          <Route path="/success" element={<Success/>}/>
-          <Route path="/error" element={<Error/>}/>
-          <Route path="*" element={<NotFound/>}/>
-<<<<<<< HEAD
-          <Route path="/message" element={<Message/>}/>
-=======
-=======
 
 
           <Route path="/register" element={<SignUp/>}/>
@@ -267,16 +213,11 @@ function App() {
 
           <Route path="/message" element={<Message/>}/>
 
->>>>>>> 34cc0bc10ea2469f43f8798cb0cf0daf8213d283
 
           <Route path="/post/:id" element={<Post/>}/>
           <Route path="/post/:id/edit" element={<MakePost/>}/>
           <Route path="/make-post" element={<MakePost/>}/>
-<<<<<<< HEAD
->>>>>>> 667f2e7b4d1e990fe8e5820a1d8452d715ddf60d
-=======
 
->>>>>>> 34cc0bc10ea2469f43f8798cb0cf0daf8213d283
         </Routes>
         <Footer/>
       </Router>
