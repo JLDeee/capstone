@@ -85,6 +85,7 @@ function GamerForm() {
                 if(!data){
                     // TEMP url, make sure after successfully updating the user just goes to see their own profile again
                     // but maybe we should have a confirmation message first?!
+                    auth.attachGamer(auth.user.appUserId);
                     navigate("/success", {state: {message: `Congrats ${auth.user.username} / ${gamer.gamerTag}, you successfully updated your profile!`}});
                 }else{
                     setErrors(data);
@@ -114,7 +115,7 @@ function GamerForm() {
                     console.log(data);
                     console.log(data.gamerId);         
                     // TEMP url, make sure after successfully creating, the user goes to see their own profile
-                    
+                    auth.attachGamer(auth.user.appUserId);
                     navigate("/success", {state: {message: `Congrats ${auth.user.username}, You created your profile with the gamertag ${gamer.gamerTag}!`}});
                 } else{
                     setErrors(data);
