@@ -95,7 +95,7 @@ function App() {
     setUser(user);
     
     console.log(user);
-    attachGamer(user);
+    attachGamer(user.appUserId);
     
     return user;
   }
@@ -109,10 +109,10 @@ function App() {
     console.log("wheee logging out");
   }
 
-  const attachGamer = (user) => {
+  const attachGamer = (appUserId) => {
     console.log("getting gamer!");
-    console.log(user);
-    fetch(`${url}/gamer/user/${user.appUserId}`)
+    console.log(appUserId);
+    fetch(`${url}/gamer/user/${appUserId}`)
     .then(response => {
       if (response.status === 200) {
           console.log(response);
@@ -125,7 +125,6 @@ function App() {
         console.log("we're attaching a gamer!");
         const userGamer = data;
         console.log(data);
-        console.log(userGamer);
         setUserGamer(userGamer);
         console.log(userGamer);
     })
@@ -136,7 +135,8 @@ function App() {
     user: user ? {...user} : null,
     userGamer: userGamer ? {...userGamer} : null,
     login,
-    logout
+    logout,
+    attachGamer
   }
 
   if (!restoreLoginAttemptCompleted) {
