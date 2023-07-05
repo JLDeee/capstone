@@ -35,7 +35,7 @@ public class GamerService {
         return repository.findByGamerId(gamerId);
     }
 
-    public Gamer findByAppUserUsername(String appUserUsername) { return repository.findByAppUserUsername(appUserUsername); }
+    public Gamer findByAppUserId(int appUserId) { return repository.findByAppUserId(appUserId); }
 
     public List<Gamer> findByGameTitle(String gameTitle){
         return repository.findByGameTitle(gameTitle);

@@ -25,6 +25,7 @@ import GamerForm from "./components/GamerForm";
 import GamerProfile from "./components/GamerProfile";
 import GamerList from "./components/GamerList";
 import Success from "./components/Success";
+import Error from "./components/Error";
 
 
 
@@ -111,7 +112,7 @@ function App() {
   const attachGamer = (user) => {
     console.log("getting gamer!");
     console.log(user);
-    fetch(`${url}/gamer/user/${user.username}`)
+    fetch(`${url}/gamer/user/${user.appUserId}`)
     .then(response => {
       if (response.status === 200) {
           console.log(response);
@@ -149,23 +150,41 @@ function App() {
         <Navbar/>
         <Routes>
           <Route path="/" element={<Home/>}/>
-          {/* if already logged in, navigate to home */}
 
-          <Route path="/login" element={!user.username && !userGamer.gamerTag ? <Login/> : <Navigate to="/"/>}/>
+          {/* LOGIN/SIGN UP (CREATE APPUSER) - If you have a username (aka logged in), go to Home instead. 
+          Otherwise, you can Login/SignUp */}
+          <Route path="/login" element={user.username ? <Navigate to="/"/> : <Login/>}/>
+          <Route path="/sign-up" element={user.username ? <Navigate to="/"/> : <SignUp/>}/>
 
-          <Route path="/sign-up" element={!user.username && !userGamer.gamerTag ? <SignUp/> : <Navigate to="/"/>}/>
-          {/* if not logged in, navigate to login page */}
+          {/* VIEW YOUR PROFILE (VIEW GAMER) - If you don't have a username (aka not logged in), go to Login instead. 
+          Otherwise, if don't have a gamer tag (aka no profile), go to Create Profile instead. 
+          Otherwise, you can View Profile. */}
+          <Route path="/profile" element={
+            !user.username ? <Navigate to="/login"/> : (
+              !userGamer.gamerTag ? <Navigate to="/profile/form"/> : <GamerProfile/>
+            )}/>
+          <Route path="/profile/:id" element={<GamerProfile/>}/>
 
-          <Route path="/profile" element={<GamerProfile/>}/>      
-          <Route path="/profile/:id" element={<GamerProfile/>}/>      
-          <Route path="/profile/form" element={<GamerForm/>}/>
-          <Route path="/profile/:id/form" element={<GamerForm/>}/>
+          {/* CREATE PROFILE (ADD GAMER) - If you don't have a username (aka not logged in), go to Login instead. 
+          Otherwise, if you DO have a gamer tag (aka already made profile) go to View Your Profile instead. 
+          Otherwise, you can Create Profile */}
+          <Route path="/profile/form" element={
+            !user.username ? <Navigate to="/login"/> : (
+              userGamer.gamerTag ? <Navigate to={"/profile"}/> : <GamerForm/>
+            )}/>
 
-          {/* <Route path="/profile" element={!user ? <Navigate to ="/login"/> : <GamerProfile/>}/>
-          <Route path="/profile/form" element={!user ? <Navigate to ="/login"/> : <GamerForm/>}/>
-          <Route path="/profile/:id/form" element={!user ? <Navigate to ="/login"/> : <GamerForm/>}/> */}
+          {/* EDIT PROFILE (UPDATE GAMER) - If you don't have a username (aka not logged in), go to Login instead. 
+          Otherwise, if you don't have a gamer tag (aka no profile) go to Create Profile instead. 
+          Otherwise, you can Edit Profile (1 more validation in GamerForm for if your gamer id matches the url id!) */}
+          <Route path="/profile/:id/form" element={
+            !user.username ? <Navigate to="/login"/> : (
+              !userGamer.gamerTag ? <Navigate to={`/profile/form`}/> : <GamerForm/>
+          )}/>
 
-          <Route path="/gamers" element={!user ? <Navigate to ="/login"/> : <GamerList/>}/>
+          {/* VIEW GAMERS LIST (VIEW ALL GAMERS) - If you don't have a username (aka not logged in), go to Login instead.
+          Otherwise, you can View All Gamers. */}
+          <Route path="/gamers" element={
+            !user.username ? <Navigate to ="/login"/> : <GamerList/>}/>
 
           <Route path="/about" element={<About/>}/>
           <Route path="/community" element={<Community/>}/>
@@ -176,6 +195,7 @@ function App() {
           <Route path="/faq" element={<Faq/>}/>
 
           <Route path="/success" element={<Success/>}/>
+          <Route path="/error" element={<Error/>}/>
           <Route path="*" element={<NotFound/>}/>
 
           <Route path="/post/:id" element={<Post/>}/>

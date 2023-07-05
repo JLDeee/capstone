@@ -32,20 +32,15 @@ function GamerList() {
                 {/* ok i assume we still want the trading card album stuff */}
                 <div className="cardList">
                     {gamers.map(gamer => (
-                        <div className="cardProfile" key={gamers.gamerId}>
-                            <p>* beginning of card*</p>
-                            <p>ID: {gamer.gamerTag}</p>
+                        <div className="cardProfile" key={gamer.gamerId}>
+                            <p>---</p>
+                            <p><strong>{gamer.gamerTag}</strong> (ID: {gamer.gamerId})</p>
                             {/* i assume an image goes here */}
                             <p>GENDER: {gamer.genderType}</p>
                             <p>BDAY: {gamer.birthDate}</p>
                             <p>BIO: {gamer.bio}</p>
-                            <p>FAV GAMES: </p>
-                            <ul>
-                                {gamer.games.map(game => {
-                                    <li>{game.gameTitle}</li>
-                                })}
-                            </ul>
-                            <p>* end of card *</p>
+                            <p><Link to={`/profile/${gamer.gamerId}`}>View Profile</Link></p>
+                            <p>---</p>
                         </div>
                     ))}
                     

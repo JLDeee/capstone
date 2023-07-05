@@ -46,12 +46,12 @@ public class GamerJdbcTemplateRepository implements GamerRepository {
 
 
     @Override
-    public Gamer findByAppUserUsername(String appUserUsername) {
+    public Gamer findByAppUserId(int appUserId) {
         final String sql = "select gr.gamer_id, gr.app_user_id, gr.gender_type, gr.gamer_tag, gr.birth_date, gr.bio "
                 + "from gamer gr "
                 + "inner join app_user au on au.app_user_id = gr.app_user_id "
-                + "where au.username = ?;";
-        Gamer gamer = jdbcTemplate.query(sql, new GamerMapper(), appUserUsername)
+                + "where au.app_user_id = ?;";
+        Gamer gamer = jdbcTemplate.query(sql, new GamerMapper(), appUserId)
                 .stream().findFirst().orElse(null);
         if (gamer != null) {
             addGames(gamer);

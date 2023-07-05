@@ -7,12 +7,12 @@ function GamerForm() {
 
     const auth = useContext(AuthContext);
     const GAMER_PROFILE_BLANK = {
-        gamerId:"",
+        gamerId: auth.userGamer.gamerId,
         appUserId: auth.user.appUserId,
         genderType:"PREFER_NOT_TO_SAY",
-        gamerTag:"GamerTag",
+        gamerTag:"",
         birthDate:"",
-        bio:"InsertBioHere",
+        bio:"",
     }
     const [gamer, setGamer] = useState(GAMER_PROFILE_BLANK);
     const [errors, setErrors] = useState([]);
@@ -21,23 +21,29 @@ function GamerForm() {
     const { id } = useParams();
     const url = "http://localhost:8080/gamer";
 
-
-
-    // get user profile information
+    // get Gamer Profile information if userGamer exists
     useEffect( () => {
         if (id) {
-            fetch(`${url}/${id}`)
-            .then(response => {
-                if (response.status === 200) {
-                    return response.json();
-                } else {
-                    return Promise.reject(`Unexpected status code: ${response.status}`);
-                }
-            })
-            .then( data => {
-                setGamer(data);
-            })
-            .catch(console.log);
+            // i have to use == here instead of === because id is a seen as a string
+            if (auth.userGamer.gamerId == id) {
+
+                fetch(`${url}/${id}`)
+                .then(response => {
+                    if (response.status === 200) {
+                        return response.json();
+                    } else {
+                        return Promise.reject(`Unexpected status code: ${response.status}`);
+                    }
+                })
+                .then( data => {
+                    setGamer(data);
+                    console.log(data);
+                })
+                .catch(console.log);
+            } else {
+                console.log("You're trying to edit a profile that's not yours!");
+                navigate("/error", {state: {message: "You're trying to edit a profile that isn't yours!"}});
+            }
         }
     }, []);
 
@@ -75,7 +81,8 @@ function GamerForm() {
                 }
             })
             .then(data =>{
-                if(data.gamerId){
+                console.log(data);
+                if(!data){
                     // TEMP url, make sure after successfully updating the user just goes to see their own profile again
                     // but maybe we should have a confirmation message first?!
                     navigate("/success", {state: {message: `Congrats ${auth.user.username} / ${gamer.gamerTag}, you successfully updated your profile!`}});
@@ -140,6 +147,7 @@ function GamerForm() {
                         name="gamerTag" 
                         type="text" 
                         className="form-control" 
+                        value={gamer.gamerTag}
                         onChange={handleChange}/>
                     </fieldset>
 
@@ -149,6 +157,7 @@ function GamerForm() {
                         name="birthDate" 
                         type="date" 
                         className="form-control"
+                        value={gamer.birthDate}
                         onChange={handleChange}/>
                     </fieldset>
 
@@ -157,6 +166,7 @@ function GamerForm() {
                         <select 
                         name="genderType" 
                         id="genderType" 
+                        placeholder="Select gender..."
                         className="form-control"
                         value={gamer.genderType}
                         onChange={handleChange}>
@@ -174,6 +184,7 @@ function GamerForm() {
                         name="bio" 
                         type="textarea" 
                         className="form-control"
+                        value={gamer.bio}
                         onChange={handleChange}/>
                     </fieldset>
 
