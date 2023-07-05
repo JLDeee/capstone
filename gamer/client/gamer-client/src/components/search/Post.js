@@ -40,7 +40,6 @@ const Post = () => {
             .then(data => setPost(data)) // here we are setting our data to our state variable 
             .catch(console.log);
         }
-        
     }, [id]); 
 
     console.log(id);

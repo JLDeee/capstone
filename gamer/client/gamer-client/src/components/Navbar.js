@@ -39,6 +39,15 @@ function Navbar(){
                 <li>{(!auth.userGamer.gamerTag && auth.user.username) && 
                     (<p>CREATE YOUR PROFILE NOWWW</p>)}</li>    
             </ul>
+
+                {(auth.user.username) &&
+                    (<Link to={'/gamers'}>Gamers List</Link>)}
+
+                {/* {auth.user.username && <Link to={'/community'}>Community</Link>}             */}
+                {!auth.user.username && <Link to={'/login'}>Log In</Link>}
+                {auth.user.username && <button type="button" onClick={handleLogOut}>Log Out</button>}
+                <button type="button" onClick={handleLogOut}>Emergency Log Out</button>
+
         </nav>
     </>)
 }

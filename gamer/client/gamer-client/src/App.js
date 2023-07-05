@@ -2,12 +2,10 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-d
 import { useEffect, useState } from "react";
 import jwtDecode from "jwt-decode";
 import AuthContext from "./context/AuthContext";
-
 import Home from "./components/Home";
 import Navbar from "./components/Navbar";
 import NotFound from "./components/NotFound";
 import Footer from "./components/Footer";
-
 import About from "./components/About";
 import Community from "./components/Community";
 import FindDuo from "./components/FindDuo";
@@ -20,15 +18,18 @@ import Faq from "./components/Faq";
 
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
-
 import GamerForm from "./components/GamerForm";
 import GamerProfile from "./components/GamerProfile";
 import GamerList from "./components/GamerList";
 import Success from "./components/Success";
+
+import Message from "./components/Message";
+
+
 import Error from "./components/Error";
 
-import GameSearchBar from "./components/GameSearchBar";
-
+import GameList from "./components/GameList";
+import GamerGameList from "./components/GamerGameList";
 
 const LOCAL_STORAGE_TOKEN_KEY = "gamers-guild";
 const BLANK_USER = {
@@ -48,6 +49,7 @@ const BLANK_USER_GAMER = {
   sentMatches:[],
   receivedMatches:[]
 }
+
 
 function App() {
   const [user, setUser] = useState(BLANK_USER);
@@ -185,8 +187,15 @@ function App() {
           Otherwise, you can View All Gamers. */}
           <Route path="/gamers" element={
             !user.username ? <Navigate to ="/login"/> : <GamerList/>}/>
+          <Route path="/profile/game" element={<GamerGameList/>}/>
 
-          <Route path="/game" element={<GameSearchBar/>}/>
+          {/* VIEW, ADD, DELETE GAMES - If you don't have a username (aka not logged in), go to Login instead.
+          Otherwise, if you don't have a gamer tag (aka no profile), go to Create Profile instead.
+          Otherwise, you can View, Add, and Delete games. */}
+          <Route path="/game" element={
+            !user.username ? <Navigate to="/login"/> : (
+              !userGamer.gamerTag ? <Navigate to={`/profile/form`}/> : <GameList/>
+          )}/>
 
           <Route path="/about" element={<About/>}/>
           <Route path="/community" element={<Community/>}/>
@@ -196,13 +205,21 @@ function App() {
           <Route path="/search-bar" element={<Searchbar/>}/>
           <Route path="/faq" element={<Faq/>}/>
 
+
+          <Route path="/register" element={<SignUp/>}/>
+          {/* insert other routes here! */}
+
           <Route path="/success" element={<Success/>}/>
           <Route path="/error" element={<Error/>}/>
           <Route path="*" element={<NotFound/>}/>
 
+          <Route path="/message" element={<Message/>}/>
+
+
           <Route path="/post/:id" element={<Post/>}/>
           <Route path="/post/:id/edit" element={<MakePost/>}/>
           <Route path="/make-post" element={<MakePost/>}/>
+
         </Routes>
         <Footer/>
       </Router>
