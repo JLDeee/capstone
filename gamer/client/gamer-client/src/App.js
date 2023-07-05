@@ -2,12 +2,10 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-d
 import { useEffect, useState } from "react";
 import jwtDecode from "jwt-decode";
 import AuthContext from "./context/AuthContext";
-
 import Home from "./components/Home";
 import Navbar from "./components/Navbar";
 import NotFound from "./components/NotFound";
 import Footer from "./components/Footer";
-
 import About from "./components/About";
 import Community from "./components/Community";
 import FindDuo from "./components/FindDuo";
@@ -21,15 +19,21 @@ import Match from "./components/Match";
 
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
-
 import GamerForm from "./components/GamerForm";
 import GamerProfile from "./components/GamerProfile";
 import GamerList from "./components/GamerList";
 import Success from "./components/Success";
+
+import Message from "./components/Message";
+
+
 import Error from "./components/Error";
+
 
 import GameSearchBar from "./components/GameSearchBar";
 
+
+const LOCAL_STORAGE_TOKEN_KEY = "gamers-guil";
 
 const LOCAL_STORAGE_TOKEN_KEY = "gamers-guild";
 const BLANK_USER = {
@@ -49,6 +53,7 @@ const BLANK_USER_GAMER = {
   sentMatches:[],
   receivedMatches:[]
 }
+
 
 function App() {
   const [user, setUser] = useState(BLANK_USER);
@@ -196,15 +201,24 @@ function App() {
           <Route path="/contact" element={<Contact/>}/>
           <Route path="/search-bar" element={<Searchbar/>}/>
           <Route path="/faq" element={<Faq/>}/>
+
+          <Route path="/register" element={<SignUp/>}/>
+          <Route path="/match" element={<Match/>}/>
+          {/* insert other routes here! */}
+
           <Route path="/match" element={<Match/>}/>
 
           <Route path="/success" element={<Success/>}/>
           <Route path="/error" element={<Error/>}/>
           <Route path="*" element={<NotFound/>}/>
 
+          <Route path="/message" element={<Message/>}/>
+
+
           <Route path="/post/:id" element={<Post/>}/>
           <Route path="/post/:id/edit" element={<MakePost/>}/>
           <Route path="/make-post" element={<MakePost/>}/>
+
         </Routes>
         <Footer/>
       </Router>
