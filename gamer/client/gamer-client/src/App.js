@@ -20,11 +20,12 @@ import GamerForm from "./components/GamerForm";
 import GamerProfile from "./components/GamerProfile";
 import GamerList from "./components/GamerList";
 import Success from "./components/Success";
+import Message from "./components/Message";
 
 
 
 
-const LOCAL_STORAGE_TOKEN_KEY = "gamers-guild";
+const LOCAL_STORAGE_TOKEN_KEY = "gamers-guil";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -106,6 +107,7 @@ function App() {
           {/* insert other routes here! */}
           <Route path="/success" element={<Success/>}/>
           <Route path="*" element={<NotFound/>}/>
+          <Route path="/message" element={<Message/>}/>
         </Routes>
         <Footer/>
       </Router>
