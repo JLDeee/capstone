@@ -8,7 +8,6 @@ import NotFound from "./components/NotFound";
 import Footer from "./components/Footer";
 import About from "./components/About";
 import Community from "./components/Community";
-import FindDuo from "./components/FindDuo";
 import Duo from "./components/Duo";
 import Contact from "./components/Contact";
 import Searchbar from "./components/search/Searchbar";
@@ -199,7 +198,6 @@ function App() {
 
           <Route path="/about" element={<About/>}/>
           <Route path="/community" element={<Community/>}/>
-          <Route path="/find-duo" element={<FindDuo/>}/>
           <Route path="/duo" element={<Duo/>}/>
           <Route path="/contact" element={<Contact/>}/>
           <Route path="/search-bar" element={<Searchbar/>}/>

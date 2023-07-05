@@ -8,31 +8,31 @@ function Home(){
     <div className="container">
        <section>
 
-       <div className="logo">
-        <p>Logo</p>
-       </div>
+       
 
        <div className="splashImage">
-       <img src={ArcadeImage} alt="arcade floor" width="2400" height="1000"/>
+       <img src={ArcadeImage} alt="arcade floor" width="2030" height="1000"/>
        </div>
 
-        <div className="getStarted">
-            <Link to={'/sign-up'}>Get Started!</Link>
-        </div>
+       <Link to={'/login'}><button className='button buttonLg'>Get Started</button></Link>
+        <div className='homeInfo'>
+            <div className='introDuoFinder'>
+                <img src={'https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80'} width="900" height="600"/>        
+                <p>Our duo finder offers an easy way for gamers to connect one on one. After creating your account you can begin swiping on potential gaming friends! 
+                            If you both swipe on eachother you can start messaging one another to talk about gaming, set up a game together, or just chill! 
+                            Whatever gaming interests you may have, you're sure to find someone who shares the same interests!</p>        
+                <Link to={'/duo'}><button className='button'>Learn More</button></Link>
+            </div>
 
-        <div className='introDuoFinder'>
-            <p>Our duo finder offers an easy way for gamers to connect one on one. After creating your account you can begin swiping on potential gaming friends! 
-                If you both swipe on eachother you can start messaging one another to talk about gaming, set up a game together, or just chill! 
-                Whatever gaming interests you may have, you're sure to find someone who shares the same interests!</p>
-                <Link to={'/duo'}>Learn More</Link>
+            <div className='introToForum'>
+                <img src={'https://images.unsplash.com/photo-1560253023-3ec5d502959f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80'} width="900" height="600"/>
+                <p>Our Community Forum offers a way for players to make posts for specific games they're looking for partners for. 
+                            You can start by looking through the forum to check out what people are playing! After you've gotten accustomed to the Community Forum, 
+                            you can either begin accepting posts from other players or make a forum post yourself!</p>
+                <Link to={'/community'}><button className='button'>View Posts</button></Link>
+            </div>
         </div>
-
-        <div className='introToForum'>
-            <p>Our Community Forum offers a way for players to make posts for specific games they're looking for partners for. 
-                You can start by looking through the forum to check out what people are playing! After you've gotten accustomed to the Community Forum, 
-                you can either begin accepting posts from other players or make a forum post yourself!</p>
-                <Link to={'/community'}>View Posts</Link>
-        </div>
+        
 
        <div className="ourStory">
         <p>We created Gamers' Guild in 2023 with the goal of creating and fun and safe environment,
