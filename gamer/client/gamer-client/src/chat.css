@@ -13,6 +13,7 @@ code {
 }
 
 :root {
+
   --body-bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   --msger-bg: #fff;
   --border: 2px solid #ddd;
@@ -38,6 +39,7 @@ body {
   align-items: center;
   height: 100vh;
   background-image: var(--body-bg); 
+
   font-family: Helvetica, sans-serif;
 }
 
@@ -162,6 +164,8 @@ body {
 
 .msger-chat {
   background-image: url("https://t4.ftcdn.net/jpg/04/17/58/57/360_F_417585709_Vfa8DIejEXnT6zXY7h9q0nGR9NruHUYd.jpg");
+
 }
 
 */
+

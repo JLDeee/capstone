@@ -14,7 +14,9 @@ function Navbar(){
 
     return(<>
         <nav>
-        <ul>
+            <ul>
+                <li className='logo'><Link to={'/'}>Logo</Link></li>
+
                 <li><Link to={'/'}>Home</Link></li>
                 <li><Link to={'/about'}>About</Link></li>
                 <li><Link to={'/duo'}>Duo</Link></li>
@@ -41,14 +43,11 @@ function Navbar(){
                         Log Out
                     </button></li>)}
                     
-                {/* <li><button type="button" onClick={handleLogOut}>Emergency Log Out</button></li>     */}
                 <p>{auth.user.username && (`USER: ${auth.user.username} `)}
                     {auth.userGamer.gamerTag && (`/ GT: ${auth.userGamer.gamerTag}`)}
                     {(!auth.userGamer.gamerTag && auth.user.username) && (`(Create your profile!)`)} 
                 </p>
 
-                {/* <li>{(!auth.userGamer.gamerTag && auth.user.username) && 
-                    (<p>CREATE YOUR PROFILE NOWWW</p>)}</li>     */}
             </ul>
         </nav>
     </>)
