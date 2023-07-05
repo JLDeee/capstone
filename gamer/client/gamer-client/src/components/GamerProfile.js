@@ -181,7 +181,6 @@ function GamerProfile() {
                             <li key={match.gamerSender.gamerId}>{match.gamerSender.gamerTag} at {match.dateMatchReceived}</li>
                         )}
                     </ul>
-
                 </div>
                 <div>
                     <p>TODO: make this link only appear if this is YOUR profile</p>
