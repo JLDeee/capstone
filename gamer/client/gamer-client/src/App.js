@@ -15,10 +15,13 @@ import Searchbar from "./components/search/Searchbar";
 import Post from "./components/search/Post";
 import MakePost from "./components/MakePost";
 import Faq from "./components/Faq";
+<<<<<<< HEAD
 import Match from "./components/Match";
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
+=======
+>>>>>>> 637e7945eb1956dd8497f1b303171f5f7b3059a0
 
 >>>>>>> 667f2e7b4d1e990fe8e5820a1d8452d715ddf60d
 =======
@@ -54,9 +57,12 @@ import Error from "./components/Error";
 import GameList from "./components/GameList";
 import GamerGameList from "./components/GamerGameList";
 
+<<<<<<< HEAD
 const LOCAL_STORAGE_TOKEN_KEY = "gamers-guil";
 
 >>>>>>> 34cc0bc10ea2469f43f8798cb0cf0daf8213d283
+=======
+>>>>>>> 637e7945eb1956dd8497f1b303171f5f7b3059a0
 const LOCAL_STORAGE_TOKEN_KEY = "gamers-guild";
 const BLANK_USER = {
   appUserId:"",
@@ -251,11 +257,9 @@ function App() {
 =======
 =======
 
-          <Route path="/register" element={<SignUp/>}/>
-          <Route path="/match" element={<Match/>}/>
-          {/* insert other routes here! */}
 
-          <Route path="/match" element={<Match/>}/>
+          <Route path="/register" element={<SignUp/>}/>
+          {/* insert other routes here! */}
 
           <Route path="/success" element={<Success/>}/>
           <Route path="/error" element={<Error/>}/>

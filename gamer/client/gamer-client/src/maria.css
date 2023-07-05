@@ -1,0 +1,41 @@
+/*AFFECTS EVERYWHERE*/
+body {
+    background-color: #4E6C70;
+    color: #C4C64E;
+}
+
+/*Navigation Styling*/
+nav{
+    background-color: #4E6C70;
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 7vh;
+    display:inline;
+    overflow: hidden;
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    width: 100%; /* Full width */
+    text-align: center;
+}
+nav ul {
+    list-style-type: none;
+    display: inline-block;
+    text-align: left;
+}
+nav ul li {
+    float: left;
+    margin-right: 0.5em;
+    display: inline;
+    padding-right: 3rem;
+}
+nav ul li a{
+    text-decoration: none;
+    color:#C4C64E;
+    font-size: 1.3rem;
+}
+
+nav a:hover {
+    text-decoration: none;
+    color: #49ADB6;
+}
