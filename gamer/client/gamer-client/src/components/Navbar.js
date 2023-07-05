@@ -15,7 +15,7 @@ function Navbar(){
     return(<>
         <nav>
             <ul>
-                
+                <li className='logo'><Link to={'/'}>Logo</Link></li>
                 <li><Link to={'/'}>Home</Link></li>
                 <li><Link to={'/about'}>About</Link></li>
                 <li><Link to={'/duo'}>Duo</Link></li>
@@ -29,8 +29,8 @@ function Navbar(){
                     (<Link to={'/gamers'}>Gamers List</Link>)}</li>
                     
                 {/* {auth.user.username && <Link to={'/community'}>Community</Link>}*/}
-                    <li>{!auth.user.username && <Link to={'/login'}>Log In</Link>}</li>
-                    <li>{auth.user.username && <button type="button" onClick={handleLogOut}>Log Out</button>}</li>
+                    <li>{!auth.user.username && <Link to={'/login'}><button className='button' type="button" >Log In</button></Link>}</li>
+                    <li>{auth.user.username && <button className='button' type="button" onClick={handleLogOut}>Log Out</button>}</li>
                     {/* <li><button type="button" onClick={handleLogOut}>Emergency Log Out</button></li>     */}
                 <li>{auth.user.username && 
                     (<p>Welcome, {auth.user.username}</p>)}</li>
