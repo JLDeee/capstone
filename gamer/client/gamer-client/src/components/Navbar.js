@@ -40,7 +40,7 @@ function Navbar(){
                 {!auth.user.username && (
                     <li><Link to={'/login'}>Log In</Link></li>)}
                 {auth.user.username && (
-                    <li><button type="button" onClick={handleLogOut}>
+                    <li><button className='button' type="button" onClick={handleLogOut}>
                         Log Out
                     </button></li>)}
                     
