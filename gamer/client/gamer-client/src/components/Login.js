@@ -59,10 +59,6 @@ function Login() {
         <main className="container">
             <section id="loginContainer">
                 <h2>Log In</h2>
-                <p>Don't have an account?</p>
-                <Link to="/sign-up">
-                    <button className="button" type="button">Sign up!</button>
-                </Link>
                 {errors.length > 0 && (
                     <div className="alert alert-danger">
                         <p>The following errors were found:</p>
@@ -76,7 +72,7 @@ function Login() {
                 )}
 
                 <form onSubmit={handleSubmit}>
-                <fieldset className="form-group">
+                    <fieldset className="form-group">
                         <label htmlFor="username">Username:</label>
                         <input id="username" 
                         name="username" 
@@ -106,6 +102,12 @@ function Login() {
                         </Link>
                     </div>
                 </form>
+                <p>Don't have an account?</p>
+                <div className="centerButtonDiv">
+                <Link to="/sign-up">
+                    <button className="button" type="button">Sign up!</button>
+                </Link>
+                </div>
             </section>
         </main>
     )
