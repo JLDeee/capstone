@@ -2,6 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import AuthContext from "../context/AuthContext";
 import { Link } from "react-router-dom";
+import GGIconGame from "../images/gg_icon_game.png";
+
 
 const BLANK_GAME= {
     gameTitle: ""
@@ -152,7 +154,8 @@ function GameList(props) {
     }
 
     return (
-        <div className="gameListSearchDiv">
+        <main className="container">
+            <section id="gameListContainer">
             {errors.length > 0 && (
                 <div className="alert alert-danger">
                     <p>The following errors were found:</p>
@@ -164,8 +167,10 @@ function GameList(props) {
                 </div>
             )}
             <p>{messages}</p>
-            
-            <p>Search for a game?</p>
+            <div className="ggIcon">
+                <img src={GGIconGame} alt="A graphic showing a game controller"/>
+                <h2>Search for a game?</h2>
+            </div>
             <input id="gameTitle" 
             name="gameTitle" 
             type="text" 
@@ -230,8 +235,9 @@ function GameList(props) {
 
             </tbody>
         </table>
+        </section>
         
-    </div>
+    </main>
     )
 }
 
