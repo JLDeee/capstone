@@ -3,11 +3,15 @@ import GGTitle from '../images/gg_title_chill.png'
 import GGProfile from '../images/gg_profile.png'
 import GGMatch from '../images/gg_match.png'
 import GGLogo from '../images/gg_logo_chill.png'
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import AuthContext from '../context/AuthContext';
+import { gsap } from "gsap";
+import { useEffect } from 'react';
 
 
 function Home(){
+useEffect({})
+
     const auth = useContext(AuthContext);
 
     return(
