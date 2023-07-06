@@ -51,7 +51,7 @@ function Login() {
             navigate("/success", {state: {message: `You are now logged in as ${credentials.username}.`}});
 
         })
-        .catch(data => setErrors(data));
+        .catch(data => setErrors([data]));
     }
 
     return (
@@ -60,16 +60,18 @@ function Login() {
             <section id="loginContainer">
                 <h2>Log In</h2>
                 <p>Don't have an account?</p>
-                <Link to="/sign-up"><button className="button" type="button">Sign up!</button></Link>
+                <Link to="/sign-up">
+                    <button className="button" type="button">Sign up!</button>
+                </Link>
                 {errors.length > 0 && (
                     <div className="alert alert-danger">
                         <p>The following errors were found:</p>
-                        {/* <ul>
+                        <ul>
                             {errors.map(error => 
                             <li key={error}>{error}</li>
                             )}
-                        </ul> */}
-                        <p>{errors}</p>
+                        </ul>
+                        {/* <p>{errors}</p> */}
                     </div>
                 )}
 

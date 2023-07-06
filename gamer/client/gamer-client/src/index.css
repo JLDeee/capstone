@@ -10,7 +10,8 @@ body, html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background-color:black;
-    
+    color: cornsilk;
+    font-size: 20px;
 }
   
 h1, h2 {
@@ -25,7 +26,7 @@ section {
 
 .container {
     max-width: 70%;
-    margin: 7vh auto;
+    margin: 50px auto;
     background-color: #4E6C70;
     color:cornsilk;
 }
@@ -83,28 +84,42 @@ section {
     box-shadow: 10px 10px #49ADB6;
 }
 
+.alert{
+    background-color: #E164B3;
+    color: black;
+    margin:3% 5%;
+    padding:20px;
+    border-radius: 10px;
+    box-shadow: 10px 10px black;
+}
+
+/* NAV BAR */
+
 nav{
     width: 100%;
     top: 0;
     position:fixed;
-    height: 7vh;
+    height: 50px;
     background-color: #4E6C70;
     z-index: 2;
 }
 
 nav ul{
+    height: 50px;
     list-style-type: none;
     display:flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
 }
 nav li{
     margin:0 2%;
 }
 
 nav img {
-    height: 7vh;
-    padding: 10px 0;
+    position:fixed;
+    height: 100px;
+    padding: 10px 10px;
     /* margin: 10px 0 ; */
 }
 
@@ -120,8 +135,12 @@ nav a:hover {
 
 /*===================================================BUTTON STYLING*/
 .button {
-    width: 100px;
-    height: 30px;
+    width: fit-content;
+    height: fit-content;
+    padding: 10px 20px;
+    margin: 10px;
+
+    font-size: 1rem;
     border: 2px, solid, black;
     outline: none;
     color: cornsilk;
@@ -135,8 +154,10 @@ nav a:hover {
 
 .buttonLg {
     font-family: 'Fredoka', sans-serif;
-    width: 250px;
-    height: 50px;
+    width: fit-content;
+    height: fit-content;
+    padding: 10px 20px;
+    margin: 10px;
     z-index: 1;
     border-radius: 10px;
     font-size: 1.8rem;
@@ -183,6 +204,20 @@ nav a:hover {
     border-radius: 10px;
 }
 
+.boringButton {
+    text-decoration: none;
+    border: none;
+    background-color: #4E6C70;
+    color:cornsilk;
+    font-size: 1rem;
+}
+
+.boringButton:hover {
+    text-decoration: none;
+    color: #49ADB6;
+    cursor: pointer;
+}
+
 @keyframes glowing {
     0% { background-position: 0 0; }
     50% { background-position: 400% 0; }
@@ -200,18 +235,16 @@ footer {
 
 /* FORM */
 
-#loginContainer {
-    /* background-color: pink; */
-    margin:3% 0;
-    padding:5%;
+#loginContainer, #successContainer, #gamerProfileContainer, #gamersList {
+    padding: 3%;
+    min-height: 250px;
 }
 
 form {
     margin: 10px 0;
     border-style: none;
-    /* background-color: cornsilk; */
-    /* padding: 10px; */
 }
+
 fieldset {
     border-style: none;
     margin-bottom: 10px;
@@ -219,10 +252,55 @@ fieldset {
 
 form input {
     width: 100%;
+    margin: 5px 0;
+    padding:5px;
+    border-style: none;
 }
 
 .centerButtonDiv {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+}
+
+.apartDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+/* icon */
+.ggIcon {
+    /* width: 50px; */
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+.ggIcon img{
+    height: 5rem;
+    margin: 0 10px;
+    background-color: #49ADB6;
+    border-radius: 50px;
+}
+/* GAMER PROFILE */
+.cardProfile {
+    aspect-ratio: 1 / 1.2;
+    background-color: black;
+    width: 50%;
+    padding: 20px;
+    border: 1rem solid #C4C64E;
+    border-radius: 10px;
+    margin: 10px auto;
+    max-width: 400px;
+}
+
+.cardProfile img {
+    width: 100%;
+    padding: 10% 20%;
+
+}
+
+.cardProfile p {
+    margin-bottom: 10px;
 }

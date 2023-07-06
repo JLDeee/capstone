@@ -3,6 +3,10 @@ import AuthContext from "../context/AuthContext";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import FindPostsByGamer from "./FindPostsByGamer";
 
+import GGIconProfile from "../images/gg_icon_profile.png";
+import GGProfileIcon from "../images/gg_profile_icon.png";
+
+
 function GamerProfile() {
     const auth = useContext(AuthContext);
     
@@ -155,13 +159,28 @@ function GamerProfile() {
     return(
         <>
         <main className="container">
-            <section className="gamerProfileInfo">
-                <h2>{gamer.gamerTag}'s Profile</h2>
-                <div>
-                    <p>ID: {gamer.gamerId}</p>
-                    <p>GENDER: {gamer.genderType}</p>
-                    <p>BDAY: {gamer.birthDate}</p>
-                    <p>BIO: {gamer.bio}</p>
+            <section id="gamerProfileContainer">
+                <div className="ggIcon">
+                    <img src={GGIconProfile} alt="A graphic showing a card and some video game console buttons"/>
+                    <h2>{gamer.gamerTag}'s Profile</h2>
+                </div>
+                <div className="cardProfile">
+                    <div className="apartDiv">
+                        <p>GT: <strong>{gamer.gamerTag}</strong></p>
+                        <p>ID: {gamer.gamerId}</p>
+                    </div>
+                    <p>
+                        <img src={GGProfileIcon} alt="A default profile image"/>
+                    </p>
+                    <div className="apartDiv">
+                        <p>GENDER:</p>
+                        <p>{gamer.genderType}</p>
+                    </div>
+                    <div className="apartDiv">
+                        <p>BDAY:</p>
+                        <p>{gamer.birthDate}</p>
+                    </div>
+                    <p>BIO: <br/>{gamer.bio}</p>
                     <p>FAV GAMES:</p>
                     <ul>
                         {(gamer.games.length > 0) ? (gamer.games.map(game => 
@@ -185,21 +204,24 @@ function GamerProfile() {
                     <ul><FindPostsByGamer currentGamerTag={gamer.gamerTag}/></ul>
                 </div>
                 <div>
-                    <p>TODO: make this link only appear if this is YOUR profile</p>
+                    {/* <p>TODO: make this link only appear if this is YOUR profile</p> */}
                     {auth.userGamer.gamerId === gamer.gamerId ? 
-                        (<Link to={`/profile/${gamer.gamerId}/form`} className="btn btn-success mr-2" type="button">
-                            Edit Profile
-                        </Link>) : ("CAN'T EDIT PROFILE")}
-                        {auth.userGamer.gamerId === gamer.gamerId ? 
-                        (<Link to={`/profile/game`} className="btn btn-success mr-2" type="button">
-                            Edit Fav Games
-                        </Link>) : ("CAN'T EDIT FAV GAMES")}
-                    <p>TODO: make this button only appear if this is someone ELSE'S profile</p>
+                        (<div className="centerButtonDiv">
+                            <Link to={`/profile/${gamer.gamerId}/form`}>
+                                <button className="button" type="button">
+                                Edit Profile</button>
+                            </Link>
+                            <Link to={`/profile/game`}>
+                                <button className="button" type="button">
+                                Edit Fav Games</button>
+                            </Link>
+                        </div>) : ("CAN'T EDIT FAV GAMES")}
+                    {/* <p>TODO: make this button only appear if this is someone ELSE'S profile</p> */}
                     {(auth.userGamer.gamerTag) ? (
                         (auth.userGamer.gamerId !== gamer.gamerId) ? (
-                        <div>
-                            <button onClick={handleAddMatch}>Send a GG!</button>
-                            <button onClick={handleRemoveMatch}>Remove GG</button>
+                        <div className="centerButtonDiv">
+                            <button className="button" type="button" onClick={handleAddMatch}>Send a GG!</button>
+                            <button className="button" type="button" onClick={handleRemoveMatch}>Remove GG</button>
                         </div>) : (
                         "You can't give yourself a GG, sorry.")
                         ) : (
@@ -220,7 +242,10 @@ function GamerProfile() {
                         </div>
                     )}
 
-                    <p><Link to="/gamers">Gamers List</Link></p>
+                    <p><Link to="/gamers">
+                        <button className="button">Gamers List
+                        </button>
+                        </Link></p>
                 </div>
             </section>
         </main>

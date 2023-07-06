@@ -15,16 +15,18 @@ function Navbar(){
 
     return(<>
         <nav>
-            <ul>
-            <li>
-                <Link to={'/'}>
+        <Link to={'/'}>
                 <img src={GGLogo} alt="The Gamers' Guild logo: A 3D cube"/>
                 </Link>
-            </li>
+            <ul>
                 <li><Link to={'/'}>Home</Link></li>
-                <li><Link to={'/about'}>About</Link></li>
+                {(!auth.user.username) && (
+                    <li><Link to={'/about'}>About</Link></li>)}
+                {(!auth.user.username) && (
+                    <li><Link to={'/duo'}>GG</Link></li>
+                )}
 
-                <li><Link to={'/duo'}>GG</Link></li>
+                
                 {(auth.user.username) && (
                     <li><Link to={'/community'}>Community</Link></li>
                 )}
@@ -44,15 +46,14 @@ function Navbar(){
                 {!auth.user.username && (
                     <li><Link to={'/login'}>Log In</Link></li>)}
                 {auth.user.username && (
-                    <li><button type="button" onClick={handleLogOut}>
+                    <li><button class="boringButton" type="button" onClick={handleLogOut}>
                         Log Out
                     </button></li>)}
-                {auth.user.username && (
-                    <p>{auth.user.username && (`USER: ${auth.user.username} `)}
-                        {auth.userGamer.gamerTag && (`/ GT: ${auth.userGamer.gamerTag}`)}
-                        {(!auth.userGamer.gamerTag && auth.user.username) && (`(Create your profile!)`)} 
-                    </p>
-                )}
+
+                {(auth.user.username && !auth.userGamer.gamerTag) && (
+                    <li>USER:<strong> {auth.user.username}</strong></li>)}
+                {auth.userGamer.gamerTag && (
+                    <li>GT:<strong> {auth.userGamer.gamerTag}</strong></li>)}
             </ul>
         </nav>
     </>)

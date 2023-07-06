@@ -20,10 +20,9 @@ function Home(){
                 <br/><span className="boldBlue">PROFILE</span>!</h2>
             <img className="promoImg" src={GGProfile} alt="A graphic showing profiles similar to trading card games"/>
             <p>Our duo finder offers an easy way for gamers to connect one on one. After creating your account you can begin swiping on potential gaming friends! 
-                            If you both swipe on eachother you can start messaging one another to talk about gaming, set up a game together, or just chill! 
-                            Whatever gaming interests you may have, you're sure to find someone who shares the same interests!</p>        
-                <Link to={'/duo'}><button className='button'>Learn More</button></Link>
-            
+            If you both swipe on eachother you can start messaging one another to talk about gaming, set up a game together, or just chill! 
+            Whatever gaming interests you may have, you're sure to find someone who shares the same interests!</p>   
+                <Link to={'/duo'}><button className='button'>Learn More</button></Link>            
 
             <h2>Chat with other 
                 <br/><span className="boldPink">GAMERS</span>!</h2>
