@@ -56,8 +56,10 @@ function GamerList() {
                             </div>
                             <p>BIO: <br/>{gamer.bio}</p>
                             {/* <FindPostsByGamer currentGamerTag={gamer.gamerTag}/> */}
-                            <p><Link to={`/profile/${gamer.gamerId}`}>
-                                <button className="button" type="button">View Profile</button></Link></p>
+                            <div className="centerButtonDiv">
+                                <Link to={`/profile/${gamer.gamerId}`}>
+                                <button className="button" type="button">View Profile</button></Link>
+                            </div>
 
                         </div>
                     ))}

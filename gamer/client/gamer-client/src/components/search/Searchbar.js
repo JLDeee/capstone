@@ -8,7 +8,7 @@ const Searchbar = ({setResults}) => {
         .then((response) => response.json()
         .then(json => {
             const results = json.filter((game) => {
-                return value && game.gameTitle.toLowerCase().includes(value);
+                return value && game.gameTitle.toLowerCase().includes(value.toLowerCase());
             });
             setResults(results);
         }))

@@ -3,6 +3,7 @@ import SpecificPosts from "./search/SpecificPosts";
 import AllPosts from "./search/AllPosts";
 import { useState } from "react";
 import { Link } from 'react-router-dom';
+import GGIconCommunity from "../images/gg_icon_community.png";
 
 
 function Community() {
@@ -21,9 +22,21 @@ function Community() {
     }
 
 
-    return(<>
+    return(
+        <main className="container">
         <section className="about">
+            <div className="ggIcon">
+                <img src={GGIconCommunity} alt="A graphic showing a game controller"/>
+                <h2>Community</h2>
+            </div>
+            <div className="centerButtonDiv">
+            <Link to={"/make-post"}>
+                <button className="button postButton">Make a Post</button>
+            </Link>
+
+            </div>
             <div>
+                <p>Search posts by game: </p>
                 <Searchbar setResults={setResults}/>
             </div>
             <div id="results">
@@ -34,18 +47,20 @@ function Community() {
                 }{console.log(currentGameId)}
             </div>
 
-            <Link to={"/make-post"}><button>Make a Post</button></Link>
+            <div className="communityBody">        
 
-            <p className="communityP">In dapibus ac magna nec ornare. Nam justo ante, faucibus quis sapien non, congue eleifend diam. Proin eget justo ac tortor aliquam finibus. In sapien elit, vestibulum a odio non, ultricies laoreet nisi. Pellentesque mattis lorem vel tristique mollis. Suspendisse ac bibendum mi. Maecenas accumsan lobortis elit ut condimentum. Sed feugiat eu purus a luctus. Fusce ac lobortis justo, eget finibus nisi. Duis dictum est vel bibendum pharetra. Nullam sollicitudin, lacus a imperdiet sollicitudin, tortor sem scelerisque nunc, ut blandit lorem nunc nec nisl. Vivamus ornare hendrerit mi at imperdiet. Phasellus sem sapien, vestibulum vel porta et, dapibus sit amet arcu. Phasellus sed ipsum eu ex interdum ultrices.</p>
+       
 
-            <div className="post">
+            {/* <p className="communityP">In dapibus ac magna nec ornare. Nam justo ante, faucibus quis sapien non, congue eleifend diam. Proin eget justo ac tortor aliquam finibus. In sapien elit, vestibulum a odio non, ultricies laoreet nisi. Pellentesque mattis lorem vel tristique mollis. Suspendisse ac bibendum mi. Maecenas accumsan lobortis elit ut condimentum. Sed feugiat eu purus a luctus. Fusce ac lobortis justo, eget finibus nisi. Duis dictum est vel bibendum pharetra. Nullam sollicitudin, lacus a imperdiet sollicitudin, tortor sem scelerisque nunc, ut blandit lorem nunc nec nisl. Vivamus ornare hendrerit mi at imperdiet. Phasellus sem sapien, vestibulum vel porta et, dapibus sit amet arcu. Phasellus sed ipsum eu ex interdum ultrices.</p> */}
+
+            <div>
                 {active === false && <AllPosts/>}
                 {active === true && <SpecificPosts currentGame={currentGameId}/>}
             </div>
             
-            
+            </div>
         </section>
-    </>);
+    </main>);
 }
 
 export default Community;

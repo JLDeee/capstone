@@ -1,10 +1,9 @@
 function Duo(){
     return(<>
         <div className="container">
-            <header>
-                <h1>How Our Duo Finder Works</h1>
-            </header>
             <section className="gg">
+                <h2>How Our Duo Finder Works</h2>
+
                 <div className="top">
                     <div className="duosPictureMain">
                         <img src="https://www.esrb.org/wp-content/uploads/2020/04/V1_ESRB_blog_Playing-Multiplayer-Games_Artboard-2-1024x538.jpg"></img>

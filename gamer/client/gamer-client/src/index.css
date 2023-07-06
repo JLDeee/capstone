@@ -76,13 +76,23 @@ section {
     max-width: 200px;
 }
 
-.successStory{
+.successStory, .post{
     background-color: #C4C64E;
     color: black;
     margin:3% 5%;
     padding:20px;
     border-radius: 10px;
     box-shadow: 10px 10px #49ADB6;
+}
+
+.post a{
+  text-decoration: none;
+  color: black;
+}
+
+.post a:hover{
+  color: cornsilk;
+
 }
 
 .alert{
@@ -232,12 +242,37 @@ nav a:hover {
 
 /* FOOTER */
 footer {
+    width: 100%;
+    max-width: 70%;
+    margin: 0 15%;
+    margin-bottom: 20px;
+    z-index: 2;
     background-color: black;
-    display:flex;
-    justify-content: space-between;
-    align-items: flex-end;
+
     color: cornsilk;
 }
+footer ul {
+  list-style-type: none;
+  display:flex;
+  align-items: center;
+  justify-content: space-evenly;
+  text-align: center;
+}
+
+footer ul li a {
+  text-decoration: none;
+  color:cornsilk;
+}
+
+footer a:hover {
+  text-decoration: none;
+  color: #49ADB6;
+}
+
+footer li{
+  padding: 0 10px;
+}
+
 
 /* FORM */
 
@@ -287,6 +322,7 @@ select {
     display: flex;
     align-items: center;
     justify-content: left;
+    margin-bottom: 20px;
 }
 .ggIcon img{
     height: 5rem;
@@ -320,4 +356,11 @@ select {
 .cardProfile ul {
     margin-left:25px;
     margin-bottom: 10px;
+}
+
+table {
+  /* background-color: pink; */
+  min-width: 500px;
+  margin: 0 auto;
+  
 }

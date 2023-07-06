@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom';
 
 function About() {
-    return(<section className='aboutPage'>
+    return(
+    <main className='container'>
+    <section className='aboutPage'>
         <header>
             <h1>Welcome to Gamer's Guild</h1>
         </header>
@@ -20,7 +22,8 @@ function About() {
             </div>
             <Link to={'/sign_up'}><button className='button aboutButton'>Join us!</button></Link>
         </div>
-    </section>);
+    </section>
+    </main>);
 }
 
 export default About;

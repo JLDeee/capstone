@@ -49,11 +49,6 @@ function Navbar(){
                     <li><button class="boringButton" type="button" onClick={handleLogOut}>
                         Log Out
                     </button></li>)}
-
-                {(auth.user.username && !auth.userGamer.gamerTag) && (
-                    <li>USER:<strong> {auth.user.username}</strong></li>)}
-                {auth.userGamer.gamerTag && (
-                    <li>GT:<strong> {auth.userGamer.gamerTag}</strong></li>)}
             </ul>
         </nav>
     </>)

@@ -1,15 +1,12 @@
 function Contact(){
     return(<>
     <div className="container">
-       <header>
-        <div>
-            <h1>Contact Us</h1>
-        </div>
-       </header>
        <section className="contact">
 
         <div className="contactUsForm">
-        <h2>Have a question?<br/>Shoot us message!</h2>
+        <h2>Contact Us</h2>
+
+        <h3>Have a question?<br/>Shoot us message!</h3>
             <form action="mailto:recipient@example.com" method="get" enctype="text/plain">      
                 <input name="name" type="text" className="feedback-input" placeholder="GamerTag" />   
                 <input name="email" type="text" className="feedback-input" placeholder="Email" />
@@ -24,15 +21,13 @@ function Contact(){
             </br>Jackie Luu<br>
             </br>Jay Wu</p>
         </div>
-        
+{/*         
         <div className="apiContact">
             <h5>API</h5>
             <p>Link: TBA</p>
-        </div>
+        </div> */}
        </section>
-       <footer>
-        <p>Copyright 2023</p>
-       </footer>
+
     </div>
     </>)
 }

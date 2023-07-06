@@ -82,6 +82,7 @@ function Message() {
     
 
     return (
+      <main className="container">
         <section class="msger">
   <header class="msger-header">
     <div class="msger-header-title">
@@ -206,6 +207,7 @@ function Message() {
     <button type="submit" class="msger-send-btn">Send</button>
   </form>
 </section>
+</main>
     );
 };
 

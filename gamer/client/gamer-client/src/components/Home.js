@@ -3,16 +3,29 @@ import GGTitle from '../images/gg_title_chill.png'
 import GGProfile from '../images/gg_profile.png'
 import GGMatch from '../images/gg_match.png'
 import GGLogo from '../images/gg_logo_chill.png'
+import { useContext } from 'react';
+import AuthContext from '../context/AuthContext';
 
 
 function Home(){
+    const auth = useContext(AuthContext);
 
     return(
     <div className="container">
         <div className="splashImage">
             <img src={GGTitle} alt="A neon Gamer's Guild title logo"/>
+            {(auth.user.username && !auth.userGamer.gamerTag) && (
+                    <div>
+                    <div className='alert'>
+                        USER:<strong> {auth.user.username}</strong></div>
+                        <Link to={'/profile/form'}><button className='button buttonLg'>Create Profile</button></Link>
+                    </div>
+                    )}
+                {auth.userGamer.gamerTag && (
+                    <div className='alert'>GT:<strong> {auth.userGamer.gamerTag}</strong></div>)}
+            {!auth.user.username && (
             <Link to={'/login'}><button className='button buttonLg'>Get Started</button></Link>
-
+            )}
         </div>
         <section>
         <div className="ggPromo">
@@ -81,9 +94,6 @@ function Home(){
        </div>
 
        </section>
-       <footer>
-        <p>Copyright 2023</p>
-       </footer>
     </div>
     )
     

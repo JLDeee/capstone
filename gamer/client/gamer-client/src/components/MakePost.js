@@ -155,6 +155,7 @@ const MakePost = () => {
     console.log(post);
 
     return(
+        <main className="container">
             <section className="make-post">
                 <h2 className="postFormHeading" id="postFormHeading">{id > 0 ? 'Update Post' : 'Add Post'}</h2>
                 {errors.length > 0 && (
@@ -214,20 +215,24 @@ const MakePost = () => {
                             value={game.gameId}>{game.gameTitle}</option>
                         ))}
                     </datalist>
-                    <div>
-                        <p>Don't see your game in the results? Go to Games List and add it!</p>
-                        <Link to="/game">Games List</Link>
-                    </div>
-                    <div className="mt-4">
-                        <button className="btn btn-success submitForm" type="submit" id="postFormSubmitButton">
+
+                    <div className="centerButtonDiv">
+                        <button className="button submitForm" type="submit" id="postFormSubmitButton">
                             {id > 0 ? 'Update Post' : 'Add Post'}
                         </button>
-                        <Link to={"/community"} className="btn btn-danger cancelSubmit" type="button">
-                            Cancel
+                        <Link to={"/community"}>
+                            <button className="button cancelSubmit" type="button">
+                            Cancel</button>
                         </Link>
-                </div>
+                    </div>
+                        <p>Don't see your game in the results? Go to Games List and add it!</p>
+                    <div className="centerButtonDiv">
+                        <Link to="/game">
+                            <button className="button" type="button">Games List</button></Link>
+                    </div>
                 </form>
             </section>
+            </main>
     );
 }
 

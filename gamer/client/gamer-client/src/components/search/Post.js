@@ -65,6 +65,7 @@ const Post = () => {
 
 
     return(
+        <main className="container">
         <section className="postSection">
             <div>
                 <Searchbar setResults={setResults}/>
@@ -83,23 +84,27 @@ const Post = () => {
             <div className="post">
                 <div key={post.postingId}>
                     <h3 className="postTitle">{post.header}</h3>
-                    <p className="postDate">{post.datePosted}</p>
+                    <p className="postDate">POSTED: {post.datePosted}</p>
                     <FindGameTitle currentGameId={post.gameId}/>
+                    <Link to={`/profile/${post.gamerId}`}>
                     <FindGamer currentGamerId={post.gamerId}/>
+                    </Link>
                     <p className="description">{post.description}</p>
             </div>
+
             </div>
             {auth.userGamer.gamerId == post.gamerId ? (
-            <div>
-                <Link to={`/post/${post.postingId}/edit/`} className="btn-light editAgent" >
-                    Edit Post
-                </Link>
-                <button className="btn-light deleteAgent" onClick={() => handleDeletePost(post.postingId)}>
-                    Delete Post
-                </button>
-            </div>
+                <div>
+                    <Link to={`/post/${post.postingId}/edit/`} className="btn-light editAgent" >
+                        Edit Post
+                    </Link>
+                    <button className="btn-light deleteAgent" onClick={() => handleDeletePost(post.postingId)}>
+                        Delete Post
+                    </button>
+                </div>
             ) : ("CAN'T EDIT/DELETE OTHER POSTS")}
         </section>
+        </main>
     );
 }
 

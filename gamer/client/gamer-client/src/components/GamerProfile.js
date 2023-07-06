@@ -215,7 +215,7 @@ function GamerProfile() {
                                 <button className="button" type="button">
                                 Edit Fav Games</button>
                             </Link>
-                        </div>) : ("CAN'T EDIT FAV GAMES")}
+                        </div>) : ("")}
                     {/* <p>TODO: make this button only appear if this is someone ELSE'S profile</p> */}
                     {(auth.userGamer.gamerTag) ? (
                         (auth.userGamer.gamerId !== gamer.gamerId) ? (
@@ -223,7 +223,7 @@ function GamerProfile() {
                             <button className="button" type="button" onClick={handleAddMatch}>Send a GG!</button>
                             <button className="button" type="button" onClick={handleRemoveMatch}>Remove GG</button>
                         </div>) : (
-                        "You can't give yourself a GG, sorry.")
+                        "")
                         ) : (
                         <div>
                             <p>Create a profile to send a GG!</p>
@@ -243,10 +243,11 @@ function GamerProfile() {
                         </div>
                     )}
 
-                    <p><Link to="/gamers">
+                    <div className="centerButtonDiv"><Link to="/gamers">
                         <button className="button">Gamers List
                         </button>
-                        </Link></p>
+                        </Link>
+                    </div>
                 </div>
             </section>
         </main>

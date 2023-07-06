@@ -21,7 +21,6 @@ function GameList(props) {
     };
     const [gamerGame, setGamerGame] = useState(BLANK_GAMER_GAME);
 
-    const [messages, setMessages] = useState("");
     const [errors, setErrors] = useState([]);
     
     const navigate = useNavigate();
@@ -156,6 +155,10 @@ function GameList(props) {
     return (
         <div className="container">
             <section id="gameListContainer">
+            <div className="ggIcon">
+                <img src={GGIconGame} alt="A graphic showing a game controller"/>
+                <h2>Search for a game?</h2>
+            </div>
             {errors.length > 0 && (
                 <div className="alert alert-danger">
                     <p>The following errors were found:</p>
@@ -166,11 +169,6 @@ function GameList(props) {
                     </ul>
                 </div>
             )}
-            <p>{messages}</p>
-            <div className="ggIcon">
-                <img src={GGIconGame} alt="A graphic showing a game controller"/>
-                <h2>Search for a game?</h2>
-            </div>
             <input id="gameTitle" 
             name="gameTitle" 
             type="text" 
@@ -181,16 +179,22 @@ function GameList(props) {
             {props.isComponent ? (
                 <div>
                     <p>Don't see your game in the results? Go to Games List and add it!</p>
+                <div className="centerButtonDiv">
                     <Link to="/game">
                         <button className="button" type="button">Games List</button></Link>
                 </div>
+                </div>
             ) : (
-                <div>
+                <>
+                <p>Don't see your game in the results? Add a game to the list!</p>
+
+                <div className="centerButtonDiv">
+                    
                     <button className="button" onClick={handleAdd}>
                     Add game!
                     </button>
-                <p>Don't see your game in the results? Add a game to the list!</p>
                </div>
+                </>
 
             )}
 
