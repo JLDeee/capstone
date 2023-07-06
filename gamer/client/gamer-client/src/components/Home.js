@@ -6,11 +6,42 @@ import GGLogo from '../images/gg_logo_chill.png'
 import { useContext, useEffect } from 'react';
 import AuthContext from '../context/AuthContext';
 import { gsap } from "gsap";
-import { useEffect } from 'react';
-
+import { ScrollTrigger } from 'gsap/src/all';
 
 function Home(){
-useEffect({})
+    useEffect(() => {
+         
+        /*Image Animations*/
+        gsap.set(".splashImage", {
+            autoAlpha: 0,
+        })
+
+        gsap.from(".splashImage", {
+            scrollTrigger: {
+                trigger: ".splashImage",
+                    start: "bottom bottom",
+                    end: "+= 10",
+                    scrub: 1
+                },
+            duration: 0.5,
+            autoAlpha: 1
+        })
+
+        gsap.set(".img2", {
+            autoAlpha: 0,
+        })
+
+        gsap.from(".img2", {
+            scrollTrigger: {
+                trigger: ".img1",
+                    start: "bottom bottom",
+                    end: "+= 50",
+                    scrub: 1
+                },
+            duration: 0.5,
+            autoAlpha: 1
+        })
+    })
 
     const auth = useContext(AuthContext);
 
