@@ -51,7 +51,7 @@ function SignUp() {
     return (
         <main className="container">
             <section id="loginContainer">
-                <h2>Sign Up For Gamer's Guild!</h2>
+                <h2 className="loginH2">Sign Up For Gamer's Guild!</h2>
                 {errors.length > 0 && (
                     <div className="alert alert-danger">
                         <p>The following errors were found:</p>
@@ -81,12 +81,12 @@ function SignUp() {
                         onChange={handleChange}/>
                     </fieldset>
                     <div className="mt-4">
-                        <button className="btn btn-success mr-2" type="submit">
+                        <button className="btn btn-success mr-2 button loginButton" type="submit">
                             Create Account
                         </button>
-                        <Link className="btn btn-warning" type="button" to={"/login"}>
+                        <Link to={"/login"}><button className="btn btn-warning button loginButton" type="button">
                             Cancel
-                        </Link>
+                        </button></Link>
                     </div>
                 </form>
             </section>

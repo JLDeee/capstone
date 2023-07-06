@@ -32,7 +32,7 @@ const AllPosts = () => {
         
         <div className="post">
             {posts.map((post) => (
-                <div key={post.postingId}>
+                <div className="allPosts" key={post.postingId}>
                     <h3 className="postTitle">
                     <Link to={`/post/${post.postingId}`}>
                     {post.header}</Link></h3>
