@@ -58,6 +58,10 @@ body {
     margin-left: 40%;
 }
 
+.learnbtns {
+    margin-left: 40%;
+}
+
 .button:before {
     content: '';
     background: linear-gradient(45deg, #a1175c, #a05111, #C4C64E, #17978d, #208d7b, #343644, #49ADB6, #E164B3, #921855);
@@ -165,19 +169,80 @@ nav a:hover {
 
 
 /*===========================================HOMEPAGE STYLING*/
-.splashImage{
-    width: 100%;
+.homeContainer{
+    background-image: url('./images/gg_arcadefloor.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.homeSection {
+    background-color: #4E6C70;
+    margin-top: 45%;
 }
 
 .homeInfo {
     display: flex;
 }
 
+.firstP, .secondP {
+    padding-top: 4%;
+    padding-left: 5%;
+    padding-right:5%;
+}
 
+.introDuoFinder, .introToForum {
+    padding: 3%;
+}
 
+.firstDrawing, .secondDrawing {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
+.ourStory {
+    padding: 3%;
+}
 
+.successStories {
+    display: flex;
+    padding: 3%;
+}
 
+.successStory {
+    padding: 1%;
+}
+
+.person {
+    text-transform: uppercase;
+    background-image: linear-gradient(
+    -225deg,
+    #343644 0%,
+    #a05111 29%,
+    #a1175c 67%,
+    #C4C64E 100%
+  );
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  color: #fff;
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 2s linear infinite;
+  display: inline-block;
+}
+
+@keyframes textclip {
+    to {
+      background-position: 200% center;
+    }
+  }
 
 
 
@@ -239,11 +304,35 @@ nav a:hover {
 
 }
 
-.top {
-    width: 50%;
+.top, .bottom {
+    display: flex;
+}
+
+.ggTopLeft, .ggTopRight, .ggBottomLeft, .ggBottomRight {
+    width: 100%;
+}
+
+.ggTopRight, .ggBottomLeft {
+    padding: 5%;
+}
+
+.allDivs {
+    margin: 20%;
 }
 
 
+
+
+
+
+
+/*===========================================COMMUNITY STYLING*/
+.searchBarContainer {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    min-width: 200px;
+}
 
 
 
