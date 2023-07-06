@@ -60,9 +60,9 @@ function Home(){
         
 
        {/* <div className="ourStory"> */}
-       <p><h2>About
+       <h2>About
             <br/><span className="boldYellow">G</span>AMERS' <span className="boldYellow">G</span>UILD</h2>
-        </p>
+       
         <img className="aboutImg" src={GGLogo} alt="The Gamers' Guild logo: A 3D cube"/>
         <p>
         We created Gamers' Guild in 2023 with the goal of creating and fun and safe environment,

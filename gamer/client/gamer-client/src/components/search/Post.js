@@ -6,6 +6,8 @@ import Searchbar from "./Searchbar";
 import { useParams} from 'react-router-dom';
 import { Link, useNavigate } from 'react-router-dom';
 import AuthContext from "../../context/AuthContext";
+import GGIconCommunity from "../../images/gg_icon_community.png";
+
 
 const Post = () => {
     const [post, setPost] = useState({});
@@ -67,7 +69,7 @@ const Post = () => {
     return(
         <main className="container">
         <section className="postSection">
-            <div>
+            {/* <div>
                 <Searchbar setResults={setResults}/>
             </div>
             <div id="results">
@@ -80,6 +82,10 @@ const Post = () => {
                         {result.gameTitle}</div> 
                 })}
                 {console.log(currentGameId)}
+            </div> */}
+            <div className="ggIcon">
+                <img src={GGIconCommunity} alt="A graphic showing a speech bubble"/>
+                <h2>Post</h2>
             </div>
             <div className="post">
                 <div key={post.postingId}>
@@ -94,11 +100,12 @@ const Post = () => {
 
             </div>
             {auth.userGamer.gamerId == post.gamerId ? (
-                <div>
-                    <Link to={`/post/${post.postingId}/edit/`} className="btn-light editAgent" >
-                        Edit Post
+                <div className="centerButtonDiv">
+                    <Link to={`/post/${post.postingId}/edit/`}>
+                    <button className="button " >
+                        Edit Post</button>
                     </Link>
-                    <button className="btn-light deleteAgent" onClick={() => handleDeletePost(post.postingId)}>
+                    <button className="button" onClick={() => handleDeletePost(post.postingId)}>
                         Delete Post
                     </button>
                 </div>

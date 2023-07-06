@@ -20,7 +20,7 @@ function About() {
                     <img src="https://images.unsplash.com/photo-1581351123004-757df051db8e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="spy cat"/>
                 </div>
             </div>
-            <Link to={'/sign_up'}><button className='button aboutButton'>Join us!</button></Link>
+            <Link to={'/sign-up'}><button className='button aboutButton'>Join us!</button></Link>
         </div>
     </section>
     </main>);

@@ -26,10 +26,6 @@ function Navbar(){
                     <li><Link to={'/duo'}>GG</Link></li>
                 )}
 
-                
-                {(auth.user.username) && (
-                    <li><Link to={'/community'}>Community</Link></li>
-                )}
                 {(auth.userGamer.gamerTag && auth.user.username) && (
                     <li><Link to={'/profile'}>My Profile</Link></li>
                 )}
@@ -37,11 +33,18 @@ function Navbar(){
                 {(!auth.userGamer.gamerTag && auth.user.username) && (
                     <li><Link to={'/profile/form'}>Create Profile</Link></li>
                 )}
+                
+
 
                 {(auth.user.username) && (
                     <li><Link to={'/gamers'}>Gamers List</Link></li>)}
                 {(auth.userGamer.gamerTag && auth.user.username) && (
                     <li><Link to={'/game'}>Games List</Link></li>)}
+
+
+                {(auth.user.username) && (
+                    <li><Link to={'/community'}>Community</Link></li>
+                )}
 
                 {!auth.user.username && (
                     <li><Link to={'/login'}>Log In</Link></li>)}

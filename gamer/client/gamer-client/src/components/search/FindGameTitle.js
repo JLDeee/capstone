@@ -19,7 +19,7 @@ function FindGameTitle(props) {
     }, []); // empty dependency array tells react to run once when the component is intially loaded
     return(
         <>
-        <p className="postGame">{game.gameTitle}</p>
+        <p className="postGame">GAME: {game.gameTitle}</p>
         </>
     );
 }

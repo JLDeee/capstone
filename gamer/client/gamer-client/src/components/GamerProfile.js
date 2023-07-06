@@ -97,7 +97,7 @@ function GamerProfile() {
             })
             .catch(console.log);
         }
-    }, []); 
+    }, [id]); 
 
     const handleAddMatch = () => {
         console.log("this gamer will be added to the match:");
@@ -192,13 +192,17 @@ function GamerProfile() {
                     <p>SENT GG's FOR:</p>
                     <ul>
                         {gamer.sentMatches.map(match => 
-                            <li key={match.gamerReceiver.gamerId}>{match.gamerReceiver.gamerTag} at {match.dateMatchSent}</li>
+                            <li key={match.gamerReceiver.gamerId}>
+                                <Link to={`/profile/${match.gamerReceiver.gamerId}`}>{match.gamerReceiver.gamerTag}</Link> at {match.dateMatchSent}
+                            </li>
                         )}
                     </ul>
                     <p>GOT GG'd BY:</p>
                     <ul>
                         {gamer.receivedMatches.map(match => 
-                            <li key={match.gamerSender.gamerId}>{match.gamerSender.gamerTag} at {match.dateMatchReceived}</li>
+                            <li key={match.gamerSender.gamerId}>
+                                <Link to={`/profile/${match.gamerSender.gamerId}`}>{match.gamerSender.gamerTag}</Link> at {match.dateMatchReceived}
+                            </li>
                         )}
                     </ul>
                     <ul><FindPostsByGamer currentGamerTag={gamer.gamerTag}/></ul>
@@ -241,6 +245,13 @@ function GamerProfile() {
                                 )}
                             </ul>
                         </div>
+                    )}
+                    {(auth.userGamer.gamerId !== gamer.gamerId) && (
+                        <div className="centerButtonDiv"><Link to="/message">
+                        <button className="button">Send Message
+                        </button>
+                        </Link>
+                    </div>
                     )}
 
                     <div className="centerButtonDiv"><Link to="/gamers">

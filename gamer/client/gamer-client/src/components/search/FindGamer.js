@@ -20,7 +20,7 @@ function FindGamer(props) {
     }, []); // empty dependency array tells react to run once when the component is intially loaded
     return(
         <>
-        <p className="postGamer">{gamer.gamerTag}</p>
+        <p className="postGamer">GT: {gamer.gamerTag}</p>
         </>
     );
 }
