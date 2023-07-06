@@ -84,7 +84,7 @@ function SignUp() {
                         <button className="btn btn-success mr-2" type="submit">
                             Create Account
                         </button>
-                        <Link className="btn btn-warning" type="button" to={"/"}>
+                        <Link className="btn btn-warning" type="button" to={"/login"}>
                             Cancel
                         </Link>
                     </div>
