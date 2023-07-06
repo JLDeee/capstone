@@ -56,11 +56,11 @@ function Login() {
 
     return (
         // container class is for if we use bootstrap. remember to remove bootstrap classes if we're not using them
-        <main className="container">
-            <section id="loginContainer">
-                <h2>Log In</h2>
-                <p>Don't have an account?</p>
-                <Link to="/sign-up">Sign up!</Link>
+        <main className="loginContainerOuter">
+            <section id="loginContainerInner">
+
+                <h2 className="loginH2">Log In</h2>
+                
                 {errors.length > 0 && (
                     <div className="alert alert-danger">
                         <p>The following errors were found:</p>
@@ -73,32 +73,39 @@ function Login() {
                     </div>
                 )}
 
-                <form onSubmit={handleSubmit}>
-                <fieldset className="form-group">
-                        <label htmlFor="username">Username:</label>
-                        <input id="username" 
-                        name="username" 
-                        type="text" 
-                        className="form-control" 
-                        onChange={handleChange}/>
-                    </fieldset>
+                
+                <div className="login">
+                    <form className="loginForm" onSubmit={handleSubmit}>
                     <fieldset className="form-group">
-                        <label htmlFor="password">Password:</label>
-                        <input id="password" 
-                        name="password" 
-                        type="password" 
-                        className="form-control"
-                        onChange={handleChange}/>
-                    </fieldset>
-                    <div className="mt-4">
-                        <button className="btn btn-success mr-2" type="submit">
-                            Login
-                        </button>
-                        <Link className="btn btn-warning" type="button" to={"/"}>
-                            Cancel
-                        </Link>
-                    </div>
-                </form>
+                            <label htmlFor="username">Username:</label>
+                            <input id="username" 
+                            name="username" 
+                            type="text" 
+                            className="form-control" 
+                            onChange={handleChange}/>
+                        </fieldset>
+                        <fieldset className="form-group">
+                            <label htmlFor="password">Password:</label>
+                            <input id="password" 
+                            name="password" 
+                            type="password" 
+                            className="form-control"
+                            onChange={handleChange}/>
+                        </fieldset>
+                        <div className="buttons">
+                            <button className="btn btn-success mr-2 button loginButton" type="submit">
+                                Login
+                            </button>
+                            <Link to={"/"}><button className="btn btn-warning button loginButton" type="button">
+                                Cancel
+                            </button></Link>
+                        </div>
+                    </form>
+                </div>
+                <div className="signup">
+                    <p>Don't have an account?</p>
+                    <Link to="/sign-up"><button className="btn btn-warning button loginButton signupButton" type="button">Sign up!</button></Link>
+                </div>
             </section>
         </main>
     )

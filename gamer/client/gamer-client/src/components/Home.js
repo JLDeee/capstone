@@ -49,7 +49,9 @@ function Home(){
             <img className='secondDraw' src={SecondImage} alt="arcade floor" width="900" height="700"/>
         </div>
 
+        <h2 className='homeH2'>See what our gamers have to say</h2>
         <div className='successStories'>
+            
        <div className="successStory successStory1">
         <p><i>I really love Animal Crossing! Since I started using Gamers' Guild, 
             I've been able to meet a lot of cool people and visit so many fun and interesting villages! 
