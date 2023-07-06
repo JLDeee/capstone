@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import AuthContext from '../context/AuthContext';
+import GGLogo from '../images/gg_logo_chill.png'
 
 function Navbar(){
     const auth = useContext(AuthContext);
@@ -15,8 +16,11 @@ function Navbar(){
     return(<>
         <nav>
             <ul>
-                <li className='logo'><Link to={'/'}>Logo</Link></li>
-
+            <li>
+                <Link to={'/'}>
+                <img src={GGLogo} alt="The Gamers' Guild logo: A 3D cube"/>
+                </Link>
+            </li>
                 <li><Link to={'/'}>Home</Link></li>
                 <li><Link to={'/about'}>About</Link></li>
 
@@ -43,12 +47,12 @@ function Navbar(){
                     <li><button type="button" onClick={handleLogOut}>
                         Log Out
                     </button></li>)}
-                    
-                <p>{auth.user.username && (`USER: ${auth.user.username} `)}
-                    {auth.userGamer.gamerTag && (`/ GT: ${auth.userGamer.gamerTag}`)}
-                    {(!auth.userGamer.gamerTag && auth.user.username) && (`(Create your profile!)`)} 
-                </p>
-
+                {auth.user.username && (
+                    <p>{auth.user.username && (`USER: ${auth.user.username} `)}
+                        {auth.userGamer.gamerTag && (`/ GT: ${auth.userGamer.gamerTag}`)}
+                        {(!auth.userGamer.gamerTag && auth.user.username) && (`(Create your profile!)`)} 
+                    </p>
+                )}
             </ul>
         </nav>
     </>)

@@ -1,13 +1,228 @@
-body {
+*{
+    box-sizing: border-box;
+    padding: 0;
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-      sans-serif;
+    max-width:100%;
+}
+body, html {
+    margin: 0;
+    font-family: 'Raleway', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-  }
+    background-color:black;
+    
+}
   
-  code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-      monospace;
-  }
+h1, h2 {
+    font-family: 'Fredoka', sans-serif;
+    text-transform: capitalize;
+}
+
+section {
+    margin:3% 0;
+    padding:0 5%;
+}
+
+.container {
+    max-width: 70%;
+    margin: 7vh auto;
+    background-color: #4E6C70;
+    color:cornsilk;
+}
+
+.splashImage{
+    height: 80vh;
+    background-image: url("./images/gg_arcadefloor.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.splashImage img{
+    width:80%;
+    max-width: 600px;
+    margin-bottom: 5%;
+}
+
+.ggPromo{
+    text-align: center;
+}
+
+.boldBlue {
+    color:#49ADB6 ;
+}
+
+.boldPink{
+    color:#E164B3 ;
+}
+
+.boldYellow{
+    color:#C4C64E ;
+}
+
+.promoImg{
+    width: 80%;
+    max-width: 500px;
+}
+
+.aboutImg {
+    width:50%;
+    max-width: 200px;
+}
+
+.successStory{
+    background-color: #C4C64E;
+    color: black;
+    margin:3% 5%;
+    padding:20px;
+    border-radius: 10px;
+    box-shadow: 10px 10px #49ADB6;
+}
+
+nav{
+    width: 100%;
+    top: 0;
+    position:fixed;
+    height: 7vh;
+    background-color: #4E6C70;
+    z-index: 2;
+}
+
+nav ul{
+    list-style-type: none;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+nav li{
+    margin:0 2%;
+}
+
+nav img {
+    height: 7vh;
+    padding: 10px 0;
+    /* margin: 10px 0 ; */
+}
+
+nav ul li a{
+    text-decoration: none;
+    color:cornsilk;
+}
+
+nav a:hover {
+    text-decoration: none;
+    color: #49ADB6;
+}
+
+/*===================================================BUTTON STYLING*/
+.button {
+    width: 100px;
+    height: 30px;
+    border: 2px, solid, black;
+    outline: none;
+    color: cornsilk;
+    background: black;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+    font-family: 'Raleway', sans-serif;
+}
+
+.buttonLg {
+    font-family: 'Fredoka', sans-serif;
+    width: 250px;
+    height: 50px;
+    z-index: 1;
+    border-radius: 10px;
+    font-size: 1.8rem;
+}
+
+.button:before {
+    content: '';
+    background: linear-gradient(45deg, #a1175c, #a05111, #C4C64E, #17978d, #208d7b, #343644, #49ADB6, #E164B3, #921855);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.button:active {
+    color: #000
+}
+
+.button:active:after {
+    background: transparent;
+}
+
+.button:hover:before {
+    opacity: 1;
+}
+
+.button:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: black;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
+
+/* FOOTER */
+footer {
+    background-color: black;
+    display:flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    color: cornsilk;
+}
+
+/* FORM */
+
+#loginContainer {
+    /* background-color: pink; */
+    margin:3% 0;
+    padding:5%;
+}
+
+form {
+    margin: 10px 0;
+    border-style: none;
+    /* background-color: cornsilk; */
+    /* padding: 10px; */
+}
+fieldset {
+    border-style: none;
+    margin-bottom: 10px;
+}
+
+form input {
+    width: 100%;
+}
+
+.centerButtonDiv {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}

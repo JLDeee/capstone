@@ -167,6 +167,8 @@ nav a:hover {
 /*===========================================HOMEPAGE STYLING*/
 .splashImage{
     width: 100%;
+    background-image: url("./images/gg_arcadefloor.png");
+    
 }
 
 .homeInfo {

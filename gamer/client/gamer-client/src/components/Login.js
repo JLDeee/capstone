@@ -60,7 +60,7 @@ function Login() {
             <section id="loginContainer">
                 <h2>Log In</h2>
                 <p>Don't have an account?</p>
-                <Link to="/sign-up">Sign up!</Link>
+                <Link to="/sign-up"><button className="button" type="button">Sign up!</button></Link>
                 {errors.length > 0 && (
                     <div className="alert alert-danger">
                         <p>The following errors were found:</p>
@@ -90,12 +90,17 @@ function Login() {
                         className="form-control"
                         onChange={handleChange}/>
                     </fieldset>
-                    <div className="mt-4">
-                        <button className="btn btn-success mr-2" type="submit">
+                    <div className="centerButtonDiv">
+                        <button className="button" type="submit">
                             Login
                         </button>
-                        <Link className="btn btn-warning" type="button" to={"/"}>
+                        {/* <Link className="button" type="button" to={"/"}>
                             Cancel
+                        </Link> */}
+                        <Link to={"/"}>
+                            <button className="button" type="button">
+                                Cancel
+                            </button>
                         </Link>
                     </div>
                 </form>
