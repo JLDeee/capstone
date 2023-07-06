@@ -22,8 +22,8 @@ function Community() {
 
 
     return(<>
-        <section className="about">
-            <div>
+        <section className="community">
+            <div className="searchBarContainer">
                 <Searchbar setResults={setResults}/>
             </div>
             <div id="results">
