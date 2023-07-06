@@ -94,10 +94,17 @@ section {
     box-shadow: 10px 10px black;
 }
 
+.alert ul {
+    list-style-type: none;
+}
+
 /* NAV BAR */
 
 nav{
     width: 100%;
+    max-width: 70%;
+    
+    margin: 0 15%;
     top: 0;
     position:fixed;
     height: 50px;
@@ -110,18 +117,16 @@ nav ul{
     list-style-type: none;
     display:flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
     text-align: center;
 }
 nav li{
-    margin:0 2%;
+    padding: 0 10px;
 }
 
 nav img {
-    position:fixed;
-    height: 100px;
-    padding: 10px 10px;
-    /* margin: 10px 0 ; */
+    height: 50px;
+    padding:10px;
 }
 
 nav ul li a{
@@ -141,7 +146,7 @@ nav a:hover {
     padding: 10px 20px;
     margin: 10px;
 
-    font-size: 1rem;
+    font-size: 0.8rem;
     border: 2px, solid, black;
     outline: none;
     color: cornsilk;
@@ -250,11 +255,17 @@ fieldset {
     margin-bottom: 10px;
 }
 
-form input {
+input {
     width: 100%;
     margin: 5px 0;
     padding:5px;
+    font-size: 0.8rem;
     border-style: none;
+}
+
+select {
+    font-size: 0.8rem;
+
 }
 
 .centerButtonDiv {
@@ -282,6 +293,7 @@ form input {
     margin: 0 10px;
     background-color: #49ADB6;
     border-radius: 50px;
+    overflow: visible;
 }
 /* GAMER PROFILE */
 .cardProfile {

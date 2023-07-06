@@ -191,13 +191,16 @@ function GamerForm() {
                     </fieldset>
 
 
-                    <div className="mt-4">
-                        <button className="btn btn-success mr-2" type="submit">
+                    <div className="centerButtonDiv">
+                        <button className="button" type="submit">
                         {id > 0 ? "Save Changes" : "Create Profile!"}
 
                         </button>
-                        <Link className="btn btn-warning" type="button" to={"/profile"}>
+                        
+                        <Link to={auth.userGamer.gamerTag ? ("/profile") : ("/")}>
+                            <button className="button" type="button">
                             Cancel
+                            </button>
                         </Link>
                     </div>
                 </form>

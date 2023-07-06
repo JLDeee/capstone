@@ -154,7 +154,7 @@ function GameList(props) {
     }
 
     return (
-        <main className="container">
+        <div className="container">
             <section id="gameListContainer">
             {errors.length > 0 && (
                 <div className="alert alert-danger">
@@ -181,11 +181,12 @@ function GameList(props) {
             {props.isComponent ? (
                 <div>
                     <p>Don't see your game in the results? Go to Games List and add it!</p>
-                    <Link to="/game">Games List</Link>
+                    <Link to="/game">
+                        <button className="button" type="button">Games List</button></Link>
                 </div>
             ) : (
                 <div>
-                    <button className="btn btn-success mr-2" onClick={handleAdd}>
+                    <button className="button" onClick={handleAdd}>
                     Add game!
                     </button>
                 <p>Don't see your game in the results? Add a game to the list!</p>
@@ -214,9 +215,9 @@ function GameList(props) {
                             <tr key = {game.gameId}>
                                 <td>{game.gameTitle} </td>
                                     {props.isComponent ? (
-                                    <td><button onClick={() => handleAddGamerGame(game.gameId)} type="button">Add Fav Game</button></td>
+                                    <td><button className="button" onClick={() => handleAddGamerGame(game.gameId)} type="button">Add Fav Game</button></td>
                                     ) : (
-                                    <td><button onClick={() => handleDelete(game.gameId)} type="button">Remove Game</button></td>
+                                    <td><button className="button" onClick={() => handleDelete(game.gameId)} type="button">Remove Game</button></td>
                                     )}
                             </tr>
                         ))
@@ -226,9 +227,9 @@ function GameList(props) {
                         <tr key = {foundGame.gameId}>
                             <td><strong>{foundGame.gameTitle}</strong></td>
                             {props.isComponent ? (
-                            <td><button onClick={() => handleAddGamerGame(foundGame.gameId)} type="button">Add Fav Game</button></td>
+                            <td><button className="button" onClick={() => handleAddGamerGame(foundGame.gameId)} type="button">Add Fav Game</button></td>
                             ) : (
-                            <td><button onClick={() => handleDelete(foundGame.gameId)} type="button">Remove Game</button></td>
+                            <td><button className="button" onClick={() => handleDelete(foundGame.gameId)} type="button">Remove Game</button></td>
                             )}
                         </tr>
                     )))}
@@ -237,7 +238,7 @@ function GameList(props) {
         </table>
         </section>
         
-    </main>
+    </div>
     )
 }
 

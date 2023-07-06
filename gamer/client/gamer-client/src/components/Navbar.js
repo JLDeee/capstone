@@ -14,10 +14,10 @@ function Navbar(){
     }
 
     return(<>
-        <nav>
+        <nav className='apartDiv'>
         <Link to={'/'}>
-                <img src={GGLogo} alt="The Gamers' Guild logo: A 3D cube"/>
-                </Link>
+            <img src={GGLogo} alt="The Gamers' Guild logo: A 3D cube"/>
+        </Link>
             <ul>
                 <li><Link to={'/'}>Home</Link></li>
                 {(!auth.user.username) && (

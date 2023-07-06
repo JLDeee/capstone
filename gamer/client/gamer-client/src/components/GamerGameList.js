@@ -51,8 +51,9 @@ function GamerGameList() {
         });
     }
 
-    return (
-        <div>
+    return (<>
+        <main className="container">
+            <section id="gamerGameListContainer">
             <h2>{auth.userGamer.gamerTag}'s Fav Games:</h2>
             {errors.length > 0 && (
                     <div className="alert alert-danger">
@@ -76,14 +77,17 @@ function GamerGameList() {
                         {gamerGames.map(gamerGame => (
                         <tr key={gamerGame.game.gameId}>
                             <td>{gamerGame.game.gameTitle} </td>
-                            <td><button onClick={() => handleRemoveGamerGame(gamerGame.game)} type="button">Remove Fav Game</button></td>
+                            <td><button className="button" onClick={() => handleRemoveGamerGame(gamerGame.game)} type="button">Remove Fav Game</button></td>
                         </tr>
                         ))}
                     </tbody>
                 </table>
                 ) : (<p>None so far!</p>)}
-                <GameList isComponent={true} />                
-        </div>
+                </section>        
+
+        </main>
+        <GameList isComponent={true} />  
+        </>
     );
 }
 

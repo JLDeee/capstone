@@ -226,8 +226,9 @@ function GamerProfile() {
                         "You can't give yourself a GG, sorry.")
                         ) : (
                         <div>
-                            <p>create a profile to send a GG!</p>
-                            <Link to="/profile/form">Create a Profile</Link>
+                            <p>Create a profile to send a GG!</p>
+                            <Link to="/profile/form">
+                                <button className="button" type="button">Create Profile</button></Link>
                         </div>)
                     }
 

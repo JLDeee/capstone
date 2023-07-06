@@ -80,12 +80,14 @@ function SignUp() {
                         className="form-control"
                         onChange={handleChange}/>
                     </fieldset>
-                    <div className="mt-4">
-                        <button className="btn btn-success mr-2" type="submit">
+                    <div className="centerButtonDiv">
+                        <button className="button" type="submit">
                             Create Account
                         </button>
-                        <Link className="btn btn-warning" type="button" to={"/login"}>
+                        <Link to={"/login"}>
+                            <button className="button" type="button">
                             Cancel
+                            </button>
                         </Link>
                     </div>
                 </form>
