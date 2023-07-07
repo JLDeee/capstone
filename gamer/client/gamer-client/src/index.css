@@ -21,7 +21,7 @@ h1, h2 {
 
 section {
     /* margin:3% 0; */
-    padding:3%;
+    padding:20px;
     min-height: 250px;
 }
 
@@ -98,10 +98,21 @@ section {
 .alert{
     background-color: #E164B3;
     color: black;
-    margin:3% 5%;
+    margin:3% 10%;
     padding:20px;
     border-radius: 10px;
     box-shadow: 10px 10px black;
+    text-align: center;
+}
+
+.info {
+  background-color: #49ADB6;
+  color: black;
+  margin:3% 10%;
+  padding:20px;
+  border-radius: 10px;
+  box-shadow: 10px 10px #1d2139;
+  text-align: center;
 }
 
 .alert ul {
@@ -274,10 +285,6 @@ footer li{
 
 /* FORM */
 
-#loginContainer, #successContainer, #gamerProfileContainer, #gamersList {
-
-}
-
 form {
     margin: 10px 0;
     border-style: none;
@@ -305,7 +312,7 @@ input, select {
   display: block;
   padding: 10px;
   margin: 5px 0;
-  color:black;
+  color:#1d2139;
   font-size:18px;
   height: fit-content;
   
@@ -334,6 +341,9 @@ select {
     align-items: center;
 }
 
+.centerThis{
+  text-align: center;
+}
 
 /* icon */
 .ggIcon {
@@ -352,26 +362,35 @@ select {
     border-radius: 50px;
     overflow: visible;
     box-shadow: 10px 10px #E164B3;
+}
+
+.ggProfile {
+  height: 4rem;
+  margin: 0 auto;
+  display: flex;
 
 }
 /* GAMER PROFILE */
 .cardProfile {
     aspect-ratio: 1 / 1.2;
-    background-color: black;
+    background-color: #1d2139;
     width: 50%;
     padding: 5%;
     border: 1rem solid #C4C64E;
     border-radius: 10px;
-    margin: 10px auto;
+    margin: 20px auto;
     max-width: 50cap;
     min-width: 400px;
     box-shadow: 10px 10px black;
 }
 
 .cardProfile:hover {
-    border-color: #49ADB6;
-    box-shadow: 10px 10px #E164B3;
+    transition: 0.2s ease-in-out;
 
+    border-style: solid;
+    background: linear-gradient(#1d2139, #1d2139) padding-box, linear-gradient(45deg, #a1175c, #a05111, #C4C64E, #17978d, #208d7b, #343644, #49ADB6, #E164B3, #921855) border-box ;
+    border-radius: 10px;
+    border: 1rem solid transparent;
 }
 
 .cardProfile img {
@@ -386,11 +405,46 @@ select {
 .cardProfile ul {
     margin-left:25px;
     margin-bottom: 10px;
+    list-style-type: none;
+}
+
+.cardProfile li a {
+  text-decoration: none;
+  color: cornsilk;
+}
+
+.cardProfile li a:hover {
+  color: #49ADB6;
+}
+
+table, tr, td, th {
+  border: none;
+  border-collapse: collapse;
 }
 
 table {
-  /* background-color: pink; */
-  min-width: 500px;
-  margin: 0 auto;
+  background-color: cornsilk;
+  /* min-width: 500px; */
+  overflow: hidden;
+  margin: 10px auto;
+  border-radius: 10px;
+  box-shadow: 10px 10px #E164B3;
+  
+}
+
+th{
+  background-color: black;
+  text-align: left;
+  padding: 10px 20px;  
+
+}
+
+td {
+  color: black;
+  padding: 0 20px;
+}
+
+tr:hover {
+  background-color: #49ADB6;
   
 }

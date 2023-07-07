@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import AuthContext from "../context/AuthContext";
 import { useParams, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import GGIconProfile from "../images/gg_icon_profile.png";
 
 function GamerForm() {
 
@@ -131,7 +132,11 @@ function GamerForm() {
     return(
         <main className="container">
             <section id="gamerProfileForm">
-                <h2>{id > 0 ? `Edit ${gamer.gamerTag}'s Profile` : "Create your Profile!"}</h2>
+
+                <div className="ggIcon">
+                    <img src={GGIconProfile} alt="A graphic showing a card and some video game console buttons"/>
+                    <h2>{id > 0 ? `Edit ${gamer.gamerTag}'s Profile` : "Create your Profile!"}</h2>
+                </div>
                 {errors.length > 0 && (
                     <div className="alert alert-danger">
                         <p>The following errors were found:</p>
@@ -154,16 +159,6 @@ function GamerForm() {
                     </fieldset>
 
                     <fieldset className="form-group">
-                        <label htmlFor="birthDate">Birthday:</label>
-                        <input id="birthDate" 
-                        name="birthDate" 
-                        type="date" 
-                        className="form-control"
-                        value={gamer.birthDate}
-                        onChange={handleChange}/>
-                    </fieldset>
-
-                    <fieldset className="form-group">
                         <label htmlFor="genderType">Gender:</label>
                         <select 
                         name="genderType" 
@@ -181,7 +176,17 @@ function GamerForm() {
                     </fieldset>
 
                     <fieldset className="form-group">
-                        <label htmlFor="bio">About me:</label>
+                        <label htmlFor="birthDate">Birthday:</label>
+                        <input id="birthDate" 
+                        name="birthDate" 
+                        type="date" 
+                        className="form-control"
+                        value={gamer.birthDate}
+                        onChange={handleChange}/>
+                    </fieldset>
+
+                    <fieldset className="form-group">
+                        <label htmlFor="bio">Bio (about):</label>
                         <input id="bio" 
                         name="bio" 
                         type="textarea" 

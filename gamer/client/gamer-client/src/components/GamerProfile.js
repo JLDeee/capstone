@@ -7,6 +7,10 @@ import GGIconProfile from "../images/gg_icon_profile.png";
 import GGProfileIcon from "../images/gg_profile_icon.png";
 
 
+import GGSentYes from "../images/gg_gg_hover.png";
+import GGSentNo from "../images/gg_gg.png";
+
+
 function GamerProfile() {
     const auth = useContext(AuthContext);
     
@@ -155,6 +159,7 @@ function GamerProfile() {
         })
         .catch(console.log);
     }
+    console.log(auth.userGamer.sentMatches.filter(match => match.gamerReceiver.gamerId === gamer.gamerId).length > 0);
 
     return(
         <>
@@ -186,23 +191,27 @@ function GamerProfile() {
                         {(gamer.games.length > 0) ? (gamer.games.map(game => 
                             <li key={game.game.gameId}>{game.game.gameTitle}</li>
                         )) : (
-                            <p>None yet! Edit your profile to add some!</p>
+                            <p>None yet!</p>
                         )}
                     </ul>
                     <p>SENT GG's FOR:</p>
                     <ul>
-                        {gamer.sentMatches.map(match => 
+                        {(gamer.sentMatches.length > 0) ? (gamer.sentMatches.map(match => 
                             <li key={match.gamerReceiver.gamerId}>
                                 <Link to={`/profile/${match.gamerReceiver.gamerId}`}>{match.gamerReceiver.gamerTag}</Link> at {match.dateMatchSent}
                             </li>
+                        )) : (
+                            <p>None yet!</p>
                         )}
                     </ul>
                     <p>GOT GG'd BY:</p>
                     <ul>
-                        {gamer.receivedMatches.map(match => 
+                        {(gamer.receivedMatches.length > 0) ? (gamer.receivedMatches.map(match => 
                             <li key={match.gamerSender.gamerId}>
                                 <Link to={`/profile/${match.gamerSender.gamerId}`}>{match.gamerSender.gamerTag}</Link> at {match.dateMatchReceived}
                             </li>
+                        )) : (
+                            <p>None yet!</p>
                         )}
                     </ul>
                     <ul><FindPostsByGamer currentGamerTag={gamer.gamerTag}/></ul>
@@ -221,23 +230,40 @@ function GamerProfile() {
                             </Link>
                         </div>) : ("")}
                     {/* <p>TODO: make this button only appear if this is someone ELSE'S profile</p> */}
+                    
                     {(auth.userGamer.gamerTag) ? (
                         (auth.userGamer.gamerId !== gamer.gamerId) ? (
-                        <div className="centerButtonDiv">
-                            <button className="button" type="button" onClick={handleAddMatch}>Send a GG!</button>
-                            <button className="button" type="button" onClick={handleRemoveMatch}>Remove GG</button>
-                        </div>) : (
-                        "")
+                            <div>
+                                {(gamer.receivedMatches.filter(
+                                    match => match.gamerSender.gamerId === auth.userGamer.gamerId).length > 0) ? (
+                                        <img className="ggProfile" src={GGSentYes}/>
+                                    ) : (
+                                        <img className="ggProfile" src={GGSentNo}/>
+                                        
+                                    )}
+                                <div className="centerButtonDiv">
+                                    <button className="button" type="button" onClick={handleAddMatch}>Send a GG!</button>
+                                    <button className="button" type="button" onClick={handleRemoveMatch}>Remove GG</button>
+                                    
+                                </div>
+
+                            </div>
+                            ) : (
+                            "")
                         ) : (
-                        <div>
-                            <p>Create a profile to send a GG!</p>
-                            <Link to="/profile/form">
-                                <button className="button" type="button">Create Profile</button></Link>
-                        </div>)
+                            <>
+                            <div className="alert">Create a profile to send a GG!
+                                <div className="centerButtonDiv">
+                                    <Link to="/profile/form">
+                                        <button className="button" type="button">Create Profile</button></Link>
+                                </div>
+                            </div>
+
+                        </>)
                     }
 
                     {errors.length > 0 && (
-                        <div className="alert alert-danger">
+                        <div className="alert">
                             <p>The following errors were found:</p>
                             <ul>
                                 {errors.map(error => 
@@ -246,9 +272,9 @@ function GamerProfile() {
                             </ul>
                         </div>
                     )}
-                    {(auth.userGamer.gamerId !== gamer.gamerId) && (
+                    {(auth.userGamer.gamerTag && (auth.userGamer.gamerId !== gamer.gamerId)) && (
                         <div className="centerButtonDiv"><Link to="/message">
-                        <button className="button">Send Message
+                        <button className="button">Send Message (WIP)
                         </button>
                         </Link>
                     </div>

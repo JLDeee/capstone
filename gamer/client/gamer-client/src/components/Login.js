@@ -102,12 +102,13 @@ function Login() {
                         </Link>
                     </div>
                 </form>
-                <p>Don't have an account?</p>
+                <div className="centerThis">Don't have an account?</div>
                 <div className="centerButtonDiv">
-                <Link to="/sign-up">
-                    <button className="button" type="button">Sign up!</button>
-                </Link>
+                    <Link to="/sign-up">
+                        <button className="button" type="button">Sign up!</button>
+                    </Link>
                 </div>
+
             </section>
         </main>
     )
