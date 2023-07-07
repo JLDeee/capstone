@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import AuthContext from "../context/AuthContext";
 import { Link } from "react-router-dom";
 import GGIconGame from "../images/gg_icon_game.png";
+import { gsap } from "gsap";
 
 
 const BLANK_GAME= {
@@ -10,6 +11,65 @@ const BLANK_GAME= {
 }
 
 function GameList(props) {
+    useEffect(() => {
+         
+        /*Image Animations*/
+        gsap.set(".gList", {
+            autoAlpha: 0,
+            x: -1000,
+            
+
+        })
+
+        gsap.to(".gList", {
+            duration: 1,
+            autoAlpha: 1,
+            stagger: 0.2,
+            x: 0
+        })
+
+        gsap.set("#favButton", {
+            autoAlpha: 0,
+            x: -1000,
+            
+
+        })
+
+        gsap.to("#favButton", {
+            duration: 1,
+            autoAlpha: 1,
+            stagger: 0.2,
+            x: 0
+        })
+
+        gsap.set("#removeButton", {
+            autoAlpha: 0,
+            x: -1000,
+            
+
+        })
+
+        gsap.to("#removeButton", {
+            duration: 1,
+            autoAlpha: 1,
+            stagger: 0.2,
+            x: 0
+        })
+
+        gsap.set(".gameListIcon", {
+            autoAlpha: 0,
+            scale:0
+        })
+
+        gsap.to(".gameListIcon", {
+            duration: 1,
+            autoAlpha: 1,
+            rotate: 360,
+            scale: 1
+            
+        })
+    })
+
     const auth = useContext(AuthContext);
 
     const [games, setGames] = useState([]);
@@ -156,7 +216,7 @@ function GameList(props) {
         <div className="container">
             <section id="gameListContainer">
             <div className="ggIcon">
-                <img src={GGIconGame} alt="A graphic showing a game controller"/>
+                <img className="gameListIcon" src={GGIconGame} alt="A graphic showing a game controller"/>
                 <h2>Search for a game?</h2>
             </div>
             {errors.length > 0 && (
@@ -217,11 +277,11 @@ function GameList(props) {
                     ) : (
                         games.map(game => (
                             <tr key = {game.gameId}>
-                                <td>{game.gameTitle} </td>
+                                <td className="gList">{game.gameTitle} </td>
                                     {props.isComponent ? (
-                                    <td><button className="button" onClick={() => handleAddGamerGame(game.gameId)} type="button">Add Fav Game</button></td>
+                                    <td><button id="favButton" className="button" onClick={() => handleAddGamerGame(game.gameId)} type="button">Add Fav Game</button></td>
                                     ) : (
-                                    <td><button className="button" onClick={() => handleDelete(game.gameId)} type="button">Remove Game</button></td>
+                                    <td><button id="removeButton" className="button" onClick={() => handleDelete(game.gameId)} type="button">Remove Game</button></td>
                                     )}
                             </tr>
                         ))

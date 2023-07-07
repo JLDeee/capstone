@@ -5,9 +5,29 @@ import FindPostsByGamer from "./FindPostsByGamer";
 
 import GGIconProfile from "../images/gg_icon_profile.png";
 import GGProfileIcon from "../images/gg_profile_icon.png";
+import { gsap } from "gsap";
 
 
 function GamerProfile() {
+    
+    useEffect(() => {
+         
+        /*Image Animations*/
+        gsap.set("#gamerProfileContainer", {
+            autoAlpha: 0,
+            scale: 0,
+            y:-1000
+        })
+
+        gsap.to("#gamerProfileContainer", {
+            duration: 0.5,
+            rotation: 360,
+            autoAlpha: 1,
+            scale: 1,
+            y:0
+        })
+    })
+
     const auth = useContext(AuthContext);
     
     const BLANK_GAMER_PROFILE = {
