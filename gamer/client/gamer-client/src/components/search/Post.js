@@ -109,7 +109,12 @@ const Post = () => {
                         Delete Post
                     </button>
                 </div>
-            ) : ("CAN'T EDIT/DELETE OTHER POSTS")}
+            ) : ("")}
+            <div className="centerButtonDiv"><Link to="/community">
+                <button className="button">Community
+                </button>
+                </Link>
+            </div>
         </section>
         </main>
     );
