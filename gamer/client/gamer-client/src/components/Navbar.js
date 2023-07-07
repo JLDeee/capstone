@@ -2,8 +2,32 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import AuthContext from '../context/AuthContext';
 import GGLogo from '../images/gg_logo_chill.png'
+import { gsap } from 'gsap';
+import { useEffect } from 'react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger)
 
 function Navbar(){
+
+    useEffect(() => {
+ /*Image Animations*/
+ gsap.set(".logo", {
+    autoAlpha: 1,
+    rotation: 720
+})
+
+gsap.from(".logo", {
+    scrollTrigger: {
+        trigger: ".logo",
+            start: "top top",
+            end: "+= 10",
+            scrub: 1
+        },
+    duration: 0.5,
+    rotation: 720
+})
+    })
+
     const auth = useContext(AuthContext);
     const navigate = useNavigate();
 
@@ -16,7 +40,7 @@ function Navbar(){
     return(<>
         <nav className='apartDiv'>
         <Link to={'/'}>
-            <img src={GGLogo} alt="The Gamers' Guild logo: A 3D cube"/>
+            <img className='logo' src={GGLogo} alt="The Gamers' Guild logo: A 3D cube"/>
         </Link>
             <ul>
                 <li><Link to={'/'}>Home</Link></li>

@@ -3,9 +3,38 @@ import { Link, useNavigate } from "react-router-dom";
 import FindPostsByGamer from "./FindPostsByGamer";
 import GGIconDuo from "../images/gg_icon_duo.png";
 import GGProfileIcon from "../images/gg_profile_icon.png";
-
+import { gsap } from "gsap";
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger)
 
 function GamerList() {
+
+    useEffect(() => {
+     /*Image Animations*/
+     gsap.set(".cardProfile", {
+        autoAlpha: 0,
+         y:-1000
+    })
+
+    gsap.to(".cardProfile", {
+            stagger: 0.2,
+        duration: 1,
+        autoAlpha: 1,
+        y: 0
+    })
+
+    gsap.set(".gamerIcon", {
+        autoAlpha: 0,
+        y:-1400
+    })
+
+    gsap.to(".gamerIcon", {
+        duration: 1,
+        autoAlpha: 1,
+        y: 0
+    })
+})
+
     const [gamers, setGamers] = useState([]);
     const url = "http://localhost:8080/gamer";
     const navigate = useNavigate();
@@ -32,7 +61,7 @@ function GamerList() {
         <main className="container">
             <section id="gamersList">
                 <div className="ggIcon">
-                        <img src={GGIconDuo} alt="A graphic showing two cartoonish people talking"/>
+                        <img className="gamerIcon" src={GGIconDuo} alt="A graphic showing two cartoonish people talking"/>
                         <h2>Gamers List</h2>
                 </div>
 

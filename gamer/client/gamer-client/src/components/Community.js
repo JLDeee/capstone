@@ -4,9 +4,41 @@ import AllPosts from "./search/AllPosts";
 import { useState } from "react";
 import { Link } from 'react-router-dom';
 import GGIconCommunity from "../images/gg_icon_community.png";
-
+import { gsap } from "gsap";
+import { useEffect } from "react";
 
 function Community() {
+
+    useEffect(() => {
+         
+        /*Image Animations*/
+        gsap.set(".communityBody", {
+            autoAlpha: 0,
+            x:1500,
+            stagger: 0.5
+        })
+
+        gsap.to(".communityBody", {
+            duration: 1,
+            autoAlpha: 1,
+            x: 0
+        })
+
+        gsap.set(".communityIcon", {
+            autoAlpha: 0,
+            y:-400,
+        })
+
+        gsap.to(".communityIcon", {
+            duration: 1,
+            autoAlpha: 1,
+            y: 0,
+            yoyo: true,
+            ease: "bounce.out"
+            
+        })
+    })
+
     const [results, setResults] = useState([]);
     const [active, setActive] = useState(false);
     const [currentGameId, setCurrentGameId] = useState([]);
@@ -26,7 +58,7 @@ function Community() {
         <main className="container">
         <section className="about">
             <div className="ggIcon">
-                <img src={GGIconCommunity} alt="A graphic showing a game controller"/>
+                <img className="communityIcon" src={GGIconCommunity} alt="A graphic showing a game controller"/>
                 <h2>Community</h2>
             </div>
             <div className="centerButtonDiv">
