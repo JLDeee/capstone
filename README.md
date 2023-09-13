@@ -30,7 +30,7 @@ We all had an interest in gaming and we thought the idea of a gaming partner / g
 # Project Plan (WIP)
 
 ## Set Up
-* Create detailed schema diagram with tables and their relationships
+* [x] Create detailed schema diagram with tables and their relationships
     * Tables:
         * game
         * matches
@@ -39,14 +39,14 @@ We all had an interest in gaming and we thought the idea of a gaming partner / g
     * Relationships:
         * app_user-game = Many-Many
         * app_user-match = One-Many
-* Create file tree diagram with classes and methods that we might need
-* Create Maven Project and set up pom.xml
-* Create basic packages following 3-layer architecture
+* [x] Create file tree diagram with classes and methods that we might need
+* [x] Create Maven Project and set up pom.xml
+* [x] Create basic packages following 3-layer architecture
 * Determine components needed for React app on client side
 
 ## Database
 ### MySQL
-* Create database and tables for Production and Test
+* [x] Create database and tables for Production and Test
 
     * app_user (2-3 hours)
         * pk app_user_id (int)
@@ -101,7 +101,7 @@ We all had an interest in gaming and we thought the idea of a gaming partner / g
 * (optional?) Create queries to test tables (1-2 hours)
 
 ### IntelliJ
-* Create Models and Enums
+* [x] Create Models and Enums
     * AppUser (2-3 hours)
         * int AppUserId 
         * String email
@@ -133,10 +133,10 @@ We all had an interest in gaming and we thought the idea of a gaming partner / g
         * String header
         * String description
 
-* REFERENCE PACKAGE
+* [x] REFERENCE PACKAGE
     * add application properties file (double check name?) for environmental variables
 
-* DATA LAYER:
+* [x] DATA LAYER:
     * Create repositories (jdbc template repository) and interfaces
     * Add custom DataAccessException class
         * (check to see if necessary?)
@@ -168,19 +168,19 @@ We all had an interest in gaming and we thought the idea of a gaming partner / g
             * delete
     * Create data tests for each repository and test CRUD methods along the way
 
-* DOMAIN LAYER
+* [x] DOMAIN LAYER
     * Add Validation API (2-3 hours)
     * Create Result class with generic type and a ResultType enum (1-2 hours)
     * Create Service classes for AppUser, Game, Posting, Match (2-3 hours)
     * Create service tests and test methods as you go (2-3 hours)
         * utilize the Validation API (2-3 hours)
 
-* CONTROLLERS PACKAGE
+* [x] CONTROLLERS PACKAGE
     * create Controllers (2-3 hours)
     * ErrorResponse enum
     * GlobalExceptionHandler
 
-* SECURITY PACKAGE (3-4 hours)
+* [x] SECURITY PACKAGE (3-4 hours)
     * AuthController in controllers package
     * AppUser 
         * (should already exist in models package)
@@ -192,14 +192,14 @@ We all had an interest in gaming and we thought the idea of a gaming partner / g
     * AppConfig outside of securities package
 
 ### React 
-* Use npm to create react app/install node modules (30 min)
-* Install react-router-dom@6 in preparation for client based routing 
-* Remove extra stuff in react app except for:
+* [x] Use npm to create react app/install node modules (30 min)
+* [x] Install react-router-dom@6 in preparation for client based routing 
+* [x] Remove extra stuff in react app except for:
     * index.html
     * index.js
     * index.css
     * App.js
-* Create basic UI components: (1-2 hours)
+* [x] Create basic UI components: (1-2 hours)
     * Home
     * About
     * Contact
@@ -208,23 +208,28 @@ We all had an interest in gaming and we thought the idea of a gaming partner / g
     * Error
     * Confirmation / Success
 * Create specific components for our app: (2-3 hours)
-    * UserProfile
+    * [X]Match
+        * 
+    * [x] UserProfile
         * (loads any user's information, including user currently logged in. perhaps the UI could be more shiny to distinguish "you" and other users)
-    * EditProfile
+    * [-]EditProfile
         * (only available for your own profile)
         * (a form that lets you edit and delete YOUR user info)
-    * UserList 
+        * Add unknown games to database
+    * [x]UserList 
         * (list of users, can sort by games maybe)
-    * Postings
+    * [X]Postings
         * (list of postings)
         * (if logged in, can make a posting, edit your own postings, and delete your own postings)
-    * MakePosting
+    * [-]MakePosting
         * (form to add a posting if logged in)
-    * Login
+        * CRUD
+        * Add unknown games to database
+    * [X]Login
         * (form for authentiacting user)
-    * Register
+    * [X]Register
         * (form to create a new user)
-    * AuthContext 
+    * [x]AuthContext 
         * (for useContext later...)
 * Update App.js with client-based routing (30 min)
 * Update index.css with basic page styling

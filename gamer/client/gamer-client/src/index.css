@@ -1,0 +1,450 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    max-width:100%;
+}
+body, html {
+    margin: 0;
+    font-family: 'Raleway', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color:black;
+    color: cornsilk;
+    font-size: 20px;
+}
+  
+h1, h2 {
+    font-family: 'Fredoka', sans-serif;
+    text-transform: capitalize;
+}
+
+section {
+    /* margin:3% 0; */
+    padding:20px;
+    min-height: 250px;
+}
+
+.container {
+    max-width: 70%;
+    margin: 50px auto;
+    background-color: #4E6C70;
+    color:cornsilk;
+}
+
+.splashImage{
+    height: 80vh;
+    background-image: url("./images/gg_arcadefloor.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.splashImage img{
+    width:80%;
+    max-width: 600px;
+    margin-bottom: 5%;
+}
+
+.ggPromo{
+    text-align: center;
+}
+
+.boldBlue {
+    color:#49ADB6 ;
+}
+
+.boldPink{
+    color:#E164B3 ;
+}
+
+.boldYellow{
+    color:#C4C64E ;
+}
+
+.promoImg{
+    width: 80%;
+    max-width: 500px;
+}
+
+.aboutImg {
+    width:50%;
+    max-width: 200px;
+}
+
+.successStory, .post{
+    background-color: #C4C64E;
+    color: black;
+    margin:3% 5%;
+    padding:20px;
+    border-radius: 10px;
+    box-shadow: 10px 10px #49ADB6;
+}
+
+.post a{
+  text-decoration: none;
+  color: black;
+}
+
+.post a:hover{
+  color: cornsilk;
+
+}
+
+.alert{
+    background-color: #E164B3;
+    color: black;
+    margin:3% 10%;
+    padding:20px;
+    border-radius: 10px;
+    box-shadow: 10px 10px black;
+    text-align: center;
+}
+
+.info {
+  background-color: #49ADB6;
+  color: black;
+  margin:3% 10%;
+  padding:20px;
+  border-radius: 10px;
+  box-shadow: 10px 10px #1d2139;
+  text-align: center;
+}
+
+.alert ul {
+    list-style-type: none;
+}
+
+/* NAV BAR */
+
+nav{
+    width: 100%;
+    max-width: 70%;
+    
+    margin: 0 15%;
+    top: 0;
+    position:fixed;
+    height: 50px;
+    background-color: black;
+    z-index: 2;
+}
+
+nav ul{
+    height: 50px;
+    list-style-type: none;
+    display:flex;
+    align-items: center;
+    justify-content: space-evenly;
+    text-align: center;
+}
+nav li{
+    padding: 0 10px;
+}
+
+nav img {
+    height: 50px;
+    padding:10px;
+}
+
+nav ul li a{
+    text-decoration: none;
+    color:cornsilk;
+}
+
+nav a:hover {
+    text-decoration: none;
+    color: #49ADB6;
+}
+
+/*===================================================BUTTON STYLING*/
+.button {
+    width: fit-content;
+    height: fit-content;
+    padding: 10px 20px;
+    margin: 10px;
+
+    font-size: 0.8rem;
+    border: 2px, solid, black;
+    outline: none;
+    color: cornsilk;
+    background: black;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+    font-family: 'Raleway', sans-serif;
+}
+
+.buttonLg {
+    font-family: 'Fredoka', sans-serif;
+    width: fit-content;
+    height: fit-content;
+    padding: 10px 20px;
+    margin: 10px;
+    z-index: 1;
+    border-radius: 10px;
+    font-size: 1.8rem;
+}
+
+.button:before {
+    content: '';
+    background: linear-gradient(45deg, #a1175c, #a05111, #C4C64E, #17978d, #208d7b, #343644, #49ADB6, #E164B3, #921855);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.button:active {
+    color: #000
+}
+
+.button:active:after {
+    background: transparent;
+}
+
+.button:hover:before {
+    opacity: 1;
+}
+
+.button:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: black;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+.boringButton {
+    text-decoration: none;
+    border: none;
+    background-color: black;
+    color:cornsilk;
+    font-size: 1rem;
+}
+
+.boringButton:hover {
+    text-decoration: none;
+    color: #49ADB6;
+    cursor: pointer;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
+
+/* FOOTER */
+footer {
+    width: 100%;
+    max-width: 70%;
+    margin: 0 15%;
+    z-index: 2;
+    background-color: black;
+    color: cornsilk;
+}
+footer ul {
+  list-style-type: none;
+  display:flex;
+  align-items: center;
+  justify-content: space-evenly;
+  text-align: center;
+}
+
+footer ul li a {
+  text-decoration: none;
+  color:cornsilk;
+}
+
+footer a:hover {
+  text-decoration: none;
+  color: #49ADB6;
+}
+
+footer li{
+  padding: 0 10px;
+}
+
+
+/* FORM */
+
+form {
+    margin: 10px 0;
+    border-style: none;
+}
+
+fieldset {
+    border-style: none;
+    margin-bottom: 10px;
+}
+
+/* input {
+    width: 100%;
+    margin: 5px 0;
+    padding:5px;
+    font-size: 0.8rem;
+    border-style: none;
+} */
+
+
+input, select {
+  border-style: none;
+  width: 100%;  
+  border-radius: 10px;
+  background: rgba(255,255,255,.2);
+  display: block;
+  padding: 10px;
+  margin: 5px 0;
+  color:#1d2139;
+  font-size:18px;
+  height: fit-content;
+  
+}
+
+input:focus, select:focus {
+  outline-color: rgba(0,0,0,0);
+  background: rgba(255,255,255,.95);
+  color: #4E6C70;
+}
+
+select {
+    font-size: 0.8rem;
+}
+
+.centerButtonDiv {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+}
+
+.apartDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.centerThis{
+  text-align: center;
+}
+
+/* icon */
+.ggIcon {
+    /* width: 50px; */
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    margin-bottom: 20px;
+    flex-direction: column;
+    
+}
+.ggIcon img{
+    height: 4rem;
+    margin: 0 10px 10px 10px;
+    background-color: #49ADB6;
+    border-radius: 50px;
+    overflow: visible;
+    box-shadow: 10px 10px #E164B3;
+}
+
+.ggProfile {
+  height: 4rem;
+  margin: 0 auto;
+  display: flex;
+
+}
+/* GAMER PROFILE */
+.cardProfile {
+    aspect-ratio: 1 / 1.2;
+    background-color: #1d2139;
+    width: 50%;
+    padding: 5%;
+    border: 1rem solid #C4C64E;
+    border-radius: 10px;
+    margin: 20px auto;
+    max-width: 50cap;
+    min-width: 400px;
+    box-shadow: 10px 10px black;
+}
+
+.cardProfile:hover {
+    transition: 0.2s ease-in-out;
+
+    border-style: solid;
+    background: linear-gradient(#1d2139, #1d2139) padding-box, linear-gradient(45deg, #a1175c, #a05111, #C4C64E, #17978d, #208d7b, #343644, #49ADB6, #E164B3, #921855) border-box ;
+    border-radius: 10px;
+    border: 1rem solid transparent;
+}
+
+.cardProfile img {
+    width: 100%;
+    padding: 10% 20%;
+}
+
+.cardProfile p {
+    margin-bottom: 10px;
+}
+
+.cardProfile ul {
+    margin-left:25px;
+    margin-bottom: 10px;
+    list-style-type: none;
+}
+
+.cardProfile li a {
+  text-decoration: none;
+  color: cornsilk;
+}
+
+.cardProfile li a:hover {
+  color: #49ADB6;
+}
+
+table, tr, td, th {
+  border: none;
+  border-collapse: collapse;
+}
+
+table {
+  background-color: cornsilk;
+  /* min-width: 500px; */
+  overflow: hidden;
+  margin: 10px auto;
+  border-radius: 10px;
+  box-shadow: 10px 10px #E164B3;
+  
+}
+
+th{
+  background-color: black;
+  text-align: left;
+  padding: 10px 20px;  
+
+}
+
+td {
+  color: black;
+  padding: 0 20px;
+}
+
+tr:hover {
+  background-color: #49ADB6;
+  
+}
